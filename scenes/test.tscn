@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqn1xjv0o33es"]
+
+[ext_resource type="PackedScene" uid="uid://cx85n6svnhppy" path="res://scenes/objects/player.tscn" id="1_e3cb5"]
+[ext_resource type="PackedScene" uid="uid://d36bd6cref07y" path="res://scenes/objects/food.tscn" id="2_wg3qj"]
+[ext_resource type="Environment" uid="uid://dxxprnd84je6j" path="res://scenes/world_env.tres" id="3_622nf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cm4bw"]
+size = Vector3(21, 1, 12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fgp64"]
+size = Vector3(21, 1, 12)
+
+[node name="test" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("1_e3cb5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="food_root" parent="." instance=ExtResource("2_wg3qj")]
+transform = Transform3D(1, 0, 0, 0, 0.999082, -0.0428347, 0, 0.0428347, 0.999082, 0, 0.542834, 3.38168)
+
+[node name="food_root2" parent="." instance=ExtResource("2_wg3qj")]
+transform = Transform3D(0.999999, 4.70992e-05, 0.00109855, 0, 0.999082, -0.0428347, -0.00109956, 0.0428347, 0.999082, 3.59462, 0.542834, 3.38168)
+
+[node name="food_root3" parent="." instance=ExtResource("2_wg3qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65282, 0.760663, 0)
+
+[node name="food_root4" parent="." instance=ExtResource("2_wg3qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.28905, 0.860086, 0)
+
+[node name="food_root5" parent="." instance=ExtResource("2_wg3qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77961, 0.860086, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_622nf")
+
+[node name="Floor2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47813, 1.17399)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
+shape = SubResource("BoxShape3D_cm4bw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2"]
+mesh = SubResource("BoxMesh_fgp64")
+skeleton = NodePath("../../Floor2")

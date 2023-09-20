@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bcdfts6v2s2rl"]
+
+[ext_resource type="Shader" path="res://shaders/exposure.gdshader" id="1_1wfw2"]
+
+[resource]
+shader = ExtResource("1_1wfw2")
+shader_parameter/exposure = 2.2
+shader_parameter/enabled = true

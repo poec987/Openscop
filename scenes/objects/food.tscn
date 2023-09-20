@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://d36bd6cref07y"]
+
+[ext_resource type="Script" path="res://scripts/food.gd" id="1_e4jq1"]
+[ext_resource type="Material" uid="uid://ciwnwu31s2lhi" path="res://graphics/3d/mat/tex_food_snack.tres" id="2_prbfe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j08bd"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_w5efj"]
+
+[node name="food_root" type="Node3D"]
+script = ExtResource("1_e4jq1")
+
+[node name="food_child" type="Area3D" parent="."]
+
+[node name="food_collision" type="CollisionShape3D" parent="food_child"]
+shape = SubResource("BoxShape3D_j08bd")
+
+[node name="food_sprite" type="MeshInstance3D" parent="food_child/food_collision"]
+visibility_range_fade_mode = 2
+mesh = SubResource("QuadMesh_w5efj")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_prbfe")
+
+[connection signal="body_entered" from="food_child" to="." method="_on_food_child_body_entered"]
+[connection signal="child_entered_tree" from="food_child/food_collision/food_sprite" to="." method="_on_food_sprite_child_entered_tree"]

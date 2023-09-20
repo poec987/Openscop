@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://h2u2hqby5g8x"]
+
+[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/beholder.png" id="1_20dif"]
+
+[resource]
+transparency = 1
+shading_mode = 2
+albedo_texture = ExtResource("1_20dif")
+uv1_scale = Vector3(0.26, 0.2, 0.26)
+texture_filter = 0
+billboard_mode = 1
+billboard_keep_scale = true
+grow_amount = 3.171
