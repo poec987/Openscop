@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 # MOVEMENT VARIABLES
 
-const MOVEMENT_SPEED = 2.5
+const MOVEMENT_SPEED = 5
 const ACCELERATION = 10
 var is_walking = false
 
@@ -22,9 +22,7 @@ var current_frame = 0
 
 func _physics_process(delta):
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
-	update_position(delta)
-	
-func update_position(delta):
+
 	var v = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
 	var h = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	
@@ -42,42 +40,23 @@ func update_position(delta):
 	velocity.z = lerp(velocity.z,v*MOVEMENT_SPEED,(delta)*ACCELERATION)
 	
 	#LEFT
-	if v==1.0 && h==0:
+	if h > 0:
+		animation_direction=0
+	elif h < 0:
+		animation_direction=3
+	if v > 0:
 		animation_direction=2
-	if v==1.0 && h==1.0:
-		animation_direction=0
-	if v==1.0 && h==-1.0:
-		animation_direction=3
-	
-	#RIGHT
-	if v==-1.0 && h==0.0:
+	elif v < 0:
 		animation_direction=1
-	if v==-1.0 && h==1.0:
-		animation_direction=1
-	if v==-1.0 && h==-1.0:
-		animation_direction=3
 		
-	#FRONT
-	if v==0.0 && h==1.0:
-		animation_direction=0
-		
-	#BACK
-	if v==0.0 && h==-1.0:
-		animation_direction=3
-	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		
-	# Handle Jump.
-	#if Input.is_action_just_pressed("pressed_action") and is_on_floor():
-	#	velocity.y = JUMP_VELOCITY
 
 	move_and_slide()
 
-	if is_walking!=false:
-		current_frame+=0.2
+	if is_walking==false:
+		material.uv1_offset = Vector3((animation_direction*(1.00/SPRITESHEET_COLUMNS)), (0*(1.00/SPRITESHEET_ROWS)), 0)
 	if is_walking:
+		current_frame+=0.2
 		material.uv1_offset = Vector3((animation_direction*(1.00/SPRITESHEET_COLUMNS)), (floor(current_frame)*(1.00/SPRITESHEET_ROWS-1)+1), 0)
-	else:
-		current_frame=0
