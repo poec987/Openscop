@@ -58,5 +58,5 @@ func _physics_process(delta):
 	if is_walking==false:
 		material.uv1_offset = Vector3((animation_direction*(1.00/SPRITESHEET_COLUMNS)), (0*(1.00/SPRITESHEET_ROWS)), 0)
 	if is_walking:
-		current_frame+=0.2
+		current_frame+=ANIMATION_SPEED*delta
 		material.uv1_offset = Vector3((animation_direction*(1.00/SPRITESHEET_COLUMNS)), (floor(current_frame)*(1.00/SPRITESHEET_ROWS-1)+1), 0)
