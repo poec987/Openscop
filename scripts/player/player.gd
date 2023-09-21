@@ -13,9 +13,9 @@ const SPRITESHEET_ROWS = 5 # animations
 const SPRITESHEET_COLUMNS = 4 # frames per animation
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 0.1
-var ANIMATION_DIRECTION = 0
+var animation_direction = 0
 
-var ANIM_FRAME = 0
+var current_frame = 0
 
 @onready var material = get_node("sprite").get_surface_override_material(0)
 @onready var collision_box = get_node("collision")
@@ -27,11 +27,8 @@ func _physics_process(delta):
 func update_position(delta):
 	var v = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
 	var h = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-
-	velocity.x = lerp(velocity.x,h*MOVEMENT_SPEED,(delta)*ACCELERATION)
-	velocity.z = lerp(velocity.z,v*MOVEMENT_SPEED,(delta)*ACCELERATION)
 	
-	if velocity.x>ANIMATION_THRESHOLD || velocity.z>ANIMATION_THRESHOLD || velocity.x>ANIMATION_THRESHOLD && velocity.z>ANIMATION_THRESHOLD:
+	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
 		is_walking=true
 	else:
 		is_walking=false
@@ -40,30 +37,33 @@ func update_position(delta):
 	if magnitude > 1:
 		h /= magnitude
 		v /= magnitude
+		
+	velocity.x = lerp(velocity.x,h*MOVEMENT_SPEED,(delta)*ACCELERATION)
+	velocity.z = lerp(velocity.z,v*MOVEMENT_SPEED,(delta)*ACCELERATION)
 	
 	#LEFT
 	if v==1.0 && h==0:
-		ANIMATION_DIRECTION=2
+		animation_direction=2
 	if v==1.0 && h==1.0:
-		ANIMATION_DIRECTION=0
+		animation_direction=0
 	if v==1.0 && h==-1.0:
-		ANIMATION_DIRECTION=3
+		animation_direction=3
 	
 	#RIGHT
 	if v==-1.0 && h==0.0:
-		ANIMATION_DIRECTION=1
+		animation_direction=1
 	if v==-1.0 && h==1.0:
-		ANIMATION_DIRECTION=1
+		animation_direction=1
 	if v==-1.0 && h==-1.0:
-		ANIMATION_DIRECTION=3
+		animation_direction=3
 		
 	#FRONT
 	if v==0.0 && h==1.0:
-		ANIMATION_DIRECTION=0
+		animation_direction=0
 		
 	#BACK
 	if v==0.0 && h==-1.0:
-		ANIMATION_DIRECTION=3
+		animation_direction=3
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -76,11 +76,8 @@ func update_position(delta):
 	move_and_slide()
 
 	if is_walking!=false:
-		ANIM_FRAME+=0.2
-		if ANIM_FRAME>SPRITESHEET_ROWS:
-			ANIM_FRAME=1
-	if is_walking==false:
-		ANIM_FRAME=0
-	print(is_walking)
+		current_frame+=0.2
 	if is_walking:
-		material.uv1_offset = Vector3((ANIMATION_DIRECTION*(1.00/SPRITESHEET_COLUMNS)), (floor(ANIM_FRAME)*(1.00/SPRITESHEET_ROWS)), 0)
+		material.uv1_offset = Vector3((animation_direction*(1.00/SPRITESHEET_COLUMNS)), (floor(current_frame)*(1.00/SPRITESHEET_ROWS-1)+1), 0)
+	else:
+		current_frame=0
