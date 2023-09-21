@@ -2,17 +2,19 @@ extends CharacterBody3D
 
 # MOVEMENT VARIABLES
 
-const MOVEMENT_SPEED = 150.0
-const JUMP_VELOCITY = 4.5
+const MOVEMENT_SPEED = 500
+const ACCELERATION = 8
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var movement_direction = Vector3.ZERO
 var last_movement_direction = Vector3.ZERO
+
 # ANIMATION VARIABLES
 const SPRITESHEET_ROWS = 5 # animations
 const SPRITESHEET_COLUMNS = 4 # frames per animation
-const ANIMATION_SPEED = 0.046 /4
+const ANIMATION_SPEED = 1.5
+var animationThreshold = 0.1
 
 var anim_progress = 0
 var animation_nr = 0
@@ -26,14 +28,16 @@ func _physics_process(delta):
 	last_movement_direction = movement_direction
 	movement_direction = Vector3(input_direction.y, 0, input_direction.x).normalized()
 	movement_direction *= delta * MOVEMENT_SPEED
-	
 	update_position(delta)
 	update_animation(delta)
 	rotate_collision_box()
 	
 func update_position(delta):
-	velocity.x = movement_direction.x
-	velocity.z = movement_direction.z
+	var v = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
+	var h = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+
+	velocity.x = lerp(velocity.x,h,delta*ACCELERATION)
+	velocity.z = lerp(velocity.z,v,delta*ACCELERATION)
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -44,25 +48,26 @@ func update_position(delta):
 	#	velocity.y = JUMP_VELOCITY
 
 	move_and_slide()
+
 	
 func get_anim_nr():
 
 	# Make sure the animation is different then before when the direction changes
-	if velocity.x != 0 && velocity.z != 0:
+	if velocity.x>animationThreshold && velocity.z>animationThreshold:
 		if last_movement_direction != movement_direction:
-			if velocity.x > 0:
-				if velocity.z > 0:
+			if velocity.x>animationThreshold:
+				if velocity.z>animationThreshold:
 					animation_nr = 0 if animation_nr == 2 else 2
 				else:
 					animation_nr = 0 if animation_nr == 1 else 1
 			else:
-				if velocity.z > 0:
+				if velocity.z>animationThreshold:
 					animation_nr = 3 if animation_nr == 2 else 2
 				else:
 					animation_nr = 3 if animation_nr == 1 else 1
-	elif velocity.x != 0:
+	elif velocity.x>animationThreshold:
 		animation_nr = 0 if velocity.x > velocity.z else 3
-	elif velocity.z != 0:
+	elif velocity.z>animationThreshold:
 		animation_nr = 1 if velocity.z < velocity.x else 2
 
 	return animation_nr
@@ -70,9 +75,10 @@ func get_anim_nr():
 func update_animation(delta):
 	var sprite_x = get_anim_nr() / float(SPRITESHEET_COLUMNS)
 	var sprite_y = 0
+	print(get_anim_nr())
 	
-	if velocity != Vector3.ZERO:
-		anim_progress += (MOVEMENT_SPEED * ANIMATION_SPEED * delta)
+	if velocity>Vector3(animationThreshold,0,animationThreshold):
+		anim_progress += (ANIMATION_SPEED * delta)
 		anim_progress -= floor(anim_progress)
 			
 		is_walking = true
