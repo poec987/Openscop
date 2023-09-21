@@ -59,4 +59,4 @@ func _physics_process(delta):
 		current_frame+=ANIMATION_SPEED*delta
 		if current_frame>SPRITESHEET_ROWS:
 			current_frame=1
-		material.uv1_offset = Vector3((animation_direction*(1.00/SPRITESHEET_COLUMNS)), (floor(current_frame)*((1.00/SPRITESHEET_ROWS))), 0)
+		material.uv1_offset = Vector3((animation_direction*(1.00/SPRITESHEET_COLUMNS)), (floor(current_frame)*(1.00/SPRITESHEET_ROWS)), 0)
