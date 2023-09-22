@@ -27,6 +27,5 @@ func _process(delta):
 		
 func _on_food_child_body_entered(_body):
 	collected = true
-	Global.food_counter += 1
 	sprite.visible = false
 	queue_free()
