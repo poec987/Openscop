@@ -58,7 +58,8 @@ func _physics_process(delta):
 		
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y -= gravity * delta
+		if	position.y>0+(get_node("collision").shape.size.y/2):
+			velocity.y -= gravity * delta
 
 	move_and_slide()
 
