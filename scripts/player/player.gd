@@ -5,7 +5,6 @@ extends CharacterBody3D
 const MOVEMENT_SPEED = 5
 const ACCELERATION = 8
 var is_walking = false
-var player_scale = float(1.0)
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -29,8 +28,6 @@ var current_frame = 0
 	
 func _ready():
 	OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
-	scale=Vector3(player_scale,player_scale,player_scale)
-	#DETECT SPRITESHEET SIZE AUTOMATICALLY
 	
 	if !directory.dir_exists("sheets"):
 		directory.make_dir("sheets")
@@ -123,8 +120,14 @@ func _on_open_sheets_file_selected(path):
 	var settings = ""
 	if sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
 		settings = FileAccess.get_file_as_string(ProjectSettings.globalize_path(path).replace(".png",".txt"))
-		spritesheet_columns = int(settings[0])
-		spritesheet_rows = int(settings[1])
+		spritesheet_columns = int(settings.get_slice("/", 0))
+		spritesheet_rows = int(settings.get_slice("/", 1))
 		get_node("sprite").get_surface_override_material(0).uv1_scale.x = 1.00/spritesheet_columns
 		get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
-		disable_first_frame = bool(int(settings[2]))
+		disable_first_frame = bool(int(settings.get_slice("/", 2)))
+		var player_scale = float(settings.get_slice("/", 3))
+		scale=Vector3(player_scale,player_scale,player_scale)
+	else:
+		spritesheet_columns = 4
+		spritesheet_rows = 5
+		scale=Vector3(1.0,1.0,1.0)
