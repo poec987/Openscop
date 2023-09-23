@@ -66,7 +66,7 @@ func _physics_process(delta):
 	else:
 		current_frame+=ANIMATION_SPEED*delta
 		if current_frame>spritesheet_rows:
-			if !disable_first_frame:
+			if disable_first_frame:
 				current_frame=1
 			else:
 				current_frame=0
