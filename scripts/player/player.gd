@@ -38,8 +38,8 @@ func _physics_process(delta):
 	
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
 
-	var v = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
-	var h = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	var v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
+	var h = Input.get_action_strength("pressed_up") - Input.get_action_strength("pressed_down")
 	
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
 		is_walking=true
@@ -102,4 +102,4 @@ func _physics_process(delta):
 			else:
 				current_frame=0
 
-		material.uv1_offset = Vector3((animation_direction * (1.00 / spritesheet_columns)), (floor(current_frame) * (1.00 / spritesheet_rows)), 0
+		material.uv1_offset = Vector3((animation_direction * (1.00 / spritesheet_columns)), (floor(current_frame) * (1.00 / spritesheet_rows)), 0)
