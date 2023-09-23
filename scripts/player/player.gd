@@ -10,7 +10,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # ANIMATION VARIABLES
 @onready var spritesheet_columns = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x) # frames per animation
-@onready var spritesheet_rows = 5 # animations
+@onready var spritesheet_rows = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns) # animations
 
 var disable_first_frame = true
 const ANIMATION_SPEED = 8
@@ -22,7 +22,7 @@ var current_frame = 0
 @onready var material = get_node("sprite").get_surface_override_material(0)
 	
 func _physics_process(delta):
-	print(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns))
+	#print(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns))
 	#DETECT SPRITESHEET SIZE AUTOMATICALLY
 	if spritesheet_columns%4==0:
 		spritesheet_columns = 4
@@ -65,10 +65,14 @@ func _physics_process(delta):
 	if is_walking==false:
 		material.uv1_offset = Vector3((animation_direction*(1.00/spritesheet_columns)), (0*(1.00/spritesheet_rows)), 0)
 	else:
+		spritesheet_rows = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns) # animations
 		current_frame+=ANIMATION_SPEED*delta
 		if current_frame>spritesheet_rows:
 			if disable_first_frame:
 				current_frame=1
 			else:
 				current_frame=0
-		material.uv1_offset = Vector3((animation_direction*(1.00/spritesheet_columns)), (floor(current_frame)*(1.00/spritesheet_rows)), 0)
+	
+		#print(floor(current_frame) * (1.00 / spritesheet_rows))
+		#print(floor(current_frame) * (1.00 / 5))
+		material.uv1_offset = Vector3((animation_direction * (1.00 / spritesheet_columns)), (floor(current_frame) * (1.00 / spritesheet_rows)), 0)
