@@ -9,8 +9,8 @@ var is_walking = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # ANIMATION VARIABLES
-var spritesheet_columns = 4 # frames per animation
-@onready var spritesheet_rows = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns) # animations
+@onready var spritesheet_columns = 8 # frames per animation
+@onready var spritesheet_rows = 5 # animations
 
 var disable_first_frame = true
 const ANIMATION_SPEED = 8
@@ -28,11 +28,14 @@ func _ready():
 	#DETECT SPRITESHEET SIZE AUTOMATICALLY
 	if spritesheet_columns!=1 && spritesheet_columns!=2 && spritesheet_columns!=4 && spritesheet_columns!=8:
 		print("INVALID NAULSHEET!")
-		
+	
+	get_node("sprite").get_surface_override_material(0).albedo_texture  = load("res://graphics/sprites/player/mario.png")
 	get_node("sprite").get_surface_override_material(0).uv1_scale.x = 1.00/spritesheet_columns
 	get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
+	
 
 func _physics_process(delta):
+	
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
 
 	var v = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
@@ -56,19 +59,30 @@ func _physics_process(delta):
 			animation_direction=0
 		elif h < 0:
 			animation_direction=3
+		
 		if v > 0:
 			animation_direction=2
 		elif v < 0:
 			animation_direction=1
 	else:
-		if h > 0:
+		if h > 0 && v==0:
 			animation_direction=0
-		elif h < 0:
-			animation_direction=3
-		if v > 0:
-			animation_direction=2
-		elif v < 0:
+		elif h < 0 && v==0:
+			animation_direction=4
+		elif h > 0 && v > 0:
+			animation_direction=7
+		elif h < 0 && v > 0:
+			animation_direction=5
+		elif v < 0 && h > 0:
 			animation_direction=1
+		elif v < 0 && h < 0:
+			animation_direction=3
+		elif v < 0 && h < 0:
+			animation_direction=7
+		elif v > 0 && h==0:
+			animation_direction=6
+		elif v < 0 && h==0:
+			animation_direction=2
 		
 	# Add the gravity.
 	if not is_on_floor():
@@ -88,4 +102,4 @@ func _physics_process(delta):
 			else:
 				current_frame=0
 
-		material.uv1_offset = Vector3((animation_direction * (1.00 / spritesheet_columns)), (floor(current_frame) * (1.00 / spritesheet_rows)), 0)
+		material.uv1_offset = Vector3((animation_direction * (1.00 / spritesheet_columns)), (floor(current_frame) * (1.00 / spritesheet_rows)), 0
