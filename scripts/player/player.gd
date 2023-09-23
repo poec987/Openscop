@@ -130,4 +130,6 @@ func _on_open_sheets_file_selected(path):
 	else:
 		spritesheet_columns = 4
 		spritesheet_rows = 5
+		get_node("sprite").get_surface_override_material(0).uv1_scale.x = 1.00/spritesheet_columns
+		get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
 		scale=Vector3(1.0,1.0,1.0)
