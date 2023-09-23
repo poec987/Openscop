@@ -16,19 +16,22 @@ var disable_first_frame = true
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 2
 var animation_direction = 0
+var player_scale = float(1)
+
 
 var current_frame = 0
 
 @onready var material = get_node("sprite").get_surface_override_material(0)
 	
-func _physics_process(delta):
-	#print(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns))
+func _ready():
+	scale=Vector3(player_scale,player_scale,player_scale)
 	#DETECT SPRITESHEET SIZE AUTOMATICALLY
 	if spritesheet_columns%4==0:
 		spritesheet_columns = 4
 	else:
 		spritesheet_columns = 8
 
+func _physics_process(delta):
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
 
 	var v = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
