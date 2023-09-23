@@ -16,7 +16,7 @@ var disable_first_frame = true
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 2
 var animation_direction = 0
-var player_scale = float(1)
+var player_scale = float(1.0)
 
 
 var current_frame = 0
