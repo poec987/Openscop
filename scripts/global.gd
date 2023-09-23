@@ -10,3 +10,7 @@ var camera_dist_ver = 2.6
 var camera_move_hor = true
 var camera_move_ver = true
 
+#GAME
+var control_mode = 0
+var current_character = "guardian"
+

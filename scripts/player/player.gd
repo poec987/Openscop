@@ -5,19 +5,23 @@ extends CharacterBody3D
 const MOVEMENT_SPEED = 5
 const ACCELERATION = 8
 var is_walking = false
+var player_scale = float(1.0)
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # ANIMATION VARIABLES
-@onready var spritesheet_columns = 8 # frames per animation
+@onready var spritesheet_columns = 4 # frames per animation
 @onready var spritesheet_rows = 5 # animations
 
+#ANIMATION PROPERTIES
 var disable_first_frame = true
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 2
 var animation_direction = 0
-var player_scale = float(1.0)
 
+#GAME MANAGEMENT
+var directory = DirAccess.open("user://")
+var sheets = DirAccess.open("user://sheets")
 
 var current_frame = 0
 
@@ -26,20 +30,20 @@ var current_frame = 0
 func _ready():
 	scale=Vector3(player_scale,player_scale,player_scale)
 	#DETECT SPRITESHEET SIZE AUTOMATICALLY
-	if spritesheet_columns!=1 && spritesheet_columns!=2 && spritesheet_columns!=4 && spritesheet_columns!=8:
-		print("INVALID NAULSHEET!")
 	
-	get_node("sprite").get_surface_override_material(0).albedo_texture  = load("res://graphics/sprites/player/mario.png")
+	if !directory.dir_exists("sheets"):
+		directory.make_dir("sheets")
+	
 	get_node("sprite").get_surface_override_material(0).uv1_scale.x = 1.00/spritesheet_columns
 	get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
-	
 
 func _physics_process(delta):
-	
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
-
+	
+	if Input.is_action_just_released("sheet_hotkey"):
+		get_node("../OpenSheets").show()
 	var v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
-	var h = Input.get_action_strength("pressed_up") - Input.get_action_strength("pressed_down")
+	var h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
 	
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
 		is_walking=true
@@ -50,11 +54,12 @@ func _physics_process(delta):
 	if magnitude > 1:
 		h /= magnitude
 		v /= magnitude
-		
-	velocity.x = lerp(velocity.x,h*MOVEMENT_SPEED,(delta)*ACCELERATION)
-	velocity.z = lerp(velocity.z,v*MOVEMENT_SPEED,(delta)*ACCELERATION)
 	
-	if spritesheet_columns==4:
+	if Global.control_mode==0:
+		velocity.x = lerp(velocity.x,h*MOVEMENT_SPEED,(delta)*ACCELERATION)
+		velocity.z = lerp(velocity.z,v*MOVEMENT_SPEED,(delta)*ACCELERATION)
+	
+	if spritesheet_columns==4 && Global.control_mode==0:
 		if h > 0:
 			animation_direction=0
 		elif h < 0:
@@ -65,24 +70,25 @@ func _physics_process(delta):
 		elif v < 0:
 			animation_direction=1
 	else:
-		if h > 0 && v==0:
-			animation_direction=0
-		elif h < 0 && v==0:
-			animation_direction=4
-		elif h > 0 && v > 0:
-			animation_direction=7
-		elif h < 0 && v > 0:
-			animation_direction=5
-		elif v < 0 && h > 0:
-			animation_direction=1
-		elif v < 0 && h < 0:
-			animation_direction=3
-		elif v < 0 && h < 0:
-			animation_direction=7
-		elif v > 0 && h==0:
-			animation_direction=6
-		elif v < 0 && h==0:
-			animation_direction=2
+		if Global.control_mode==0:
+			if h > 0 && v==0:
+				animation_direction=0
+			elif h < 0 && v==0:
+				animation_direction=4
+			elif h > 0 && v > 0:
+				animation_direction=7
+			elif h < 0 && v > 0:
+				animation_direction=5
+			elif v < 0 && h > 0:
+				animation_direction=1
+			elif v < 0 && h < 0:
+				animation_direction=3
+			elif v < 0 && h < 0:
+				animation_direction=7
+			elif v > 0 && h==0:
+				animation_direction=6
+			elif v < 0 && h==0:
+				animation_direction=2
 		
 	# Add the gravity.
 	if not is_on_floor():
@@ -103,3 +109,18 @@ func _physics_process(delta):
 				current_frame=0
 
 		material.uv1_offset = Vector3((animation_direction * (1.00 / spritesheet_columns)), (floor(current_frame) * (1.00 / spritesheet_rows)), 0)
+
+func _on_open_sheets_file_selected(path):
+	var image_path = path
+	var image = Image.new()
+	image.load(image_path)
+	
+	var image_texture = ImageTexture.new()
+	image_texture.set_image(image)
+	get_node("sprite").get_surface_override_material(0).albedo_texture = image_texture
+	
+	var settings = ""
+	if sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
+		settings = FileAccess.get_file_as_string(ProjectSettings.globalize_path(path).replace(".png",".txt"))
+		spritesheet_columns = int(settings[0])
+		spritesheet_rows = int(settings[1])
