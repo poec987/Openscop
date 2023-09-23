@@ -6,7 +6,7 @@
 transparency = 1
 shading_mode = 2
 albedo_texture = ExtResource("1_hinga")
-uv1_scale = Vector3(0.26, 0.2, 0.26)
+uv1_scale = Vector3(0.25, 0.2, 0.25)
 texture_filter = 0
 billboard_mode = 1
 billboard_keep_scale = true

@@ -9,7 +9,7 @@ var is_walking = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # ANIMATION VARIABLES
-@onready var spritesheet_columns = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x) # frames per animation
+var spritesheet_columns = 4 # frames per animation
 @onready var spritesheet_rows = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns) # animations
 
 var disable_first_frame = true
@@ -26,10 +26,11 @@ var current_frame = 0
 func _ready():
 	scale=Vector3(player_scale,player_scale,player_scale)
 	#DETECT SPRITESHEET SIZE AUTOMATICALLY
-	if spritesheet_columns%4==0:
-		spritesheet_columns = 4
-	else:
-		spritesheet_columns = 8
+	if spritesheet_columns!=1 && spritesheet_columns!=2 && spritesheet_columns!=4 && spritesheet_columns!=8:
+		print("INVALID NAULSHEET!")
+		
+	get_node("sprite").get_surface_override_material(0).uv1_scale.x = 1.00/spritesheet_columns
+	get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
 
 func _physics_process(delta):
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
@@ -50,14 +51,24 @@ func _physics_process(delta):
 	velocity.x = lerp(velocity.x,h*MOVEMENT_SPEED,(delta)*ACCELERATION)
 	velocity.z = lerp(velocity.z,v*MOVEMENT_SPEED,(delta)*ACCELERATION)
 	
-	if h > 0:
-		animation_direction=0
-	elif h < 0:
-		animation_direction=3
-	if v > 0:
-		animation_direction=2
-	elif v < 0:
-		animation_direction=1
+	if spritesheet_columns==4:
+		if h > 0:
+			animation_direction=0
+		elif h < 0:
+			animation_direction=3
+		if v > 0:
+			animation_direction=2
+		elif v < 0:
+			animation_direction=1
+	else:
+		if h > 0:
+			animation_direction=0
+		elif h < 0:
+			animation_direction=3
+		if v > 0:
+			animation_direction=2
+		elif v < 0:
+			animation_direction=1
 		
 	# Add the gravity.
 	if not is_on_floor():
@@ -76,7 +87,5 @@ func _physics_process(delta):
 				current_frame=1
 			else:
 				current_frame=0
-	
-		#print(floor(current_frame) * (1.00 / spritesheet_rows))
-		#print(floor(current_frame) * (1.00 / 5))
+
 		material.uv1_offset = Vector3((animation_direction * (1.00 / spritesheet_columns)), (floor(current_frame) * (1.00 / spritesheet_rows)), 0)
