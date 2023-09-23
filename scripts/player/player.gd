@@ -9,9 +9,10 @@ var is_walking = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # ANIMATION VARIABLES
-@onready var spritesheet_rows = 5 # animations
 @onready var spritesheet_columns = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x) # frames per animation
-var disable_first_frame = false
+@onready var spritesheet_rows = 5 # animations
+
+var disable_first_frame = true
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 2
 var animation_direction = 0
@@ -19,9 +20,9 @@ var animation_direction = 0
 var current_frame = 0
 
 @onready var material = get_node("sprite").get_surface_override_material(0)
-
-func _physics_process(delta):
 	
+func _physics_process(delta):
+	print(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns))
 	#DETECT SPRITESHEET SIZE AUTOMATICALLY
 	if spritesheet_columns%4==0:
 		spritesheet_columns = 4
