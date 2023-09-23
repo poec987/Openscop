@@ -28,6 +28,7 @@ var current_frame = 0
 @onready var material = get_node("sprite").get_surface_override_material(0)
 	
 func _ready():
+	OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 	scale=Vector3(player_scale,player_scale,player_scale)
 	#DETECT SPRITESHEET SIZE AUTOMATICALLY
 	
@@ -124,3 +125,6 @@ func _on_open_sheets_file_selected(path):
 		settings = FileAccess.get_file_as_string(ProjectSettings.globalize_path(path).replace(".png",".txt"))
 		spritesheet_columns = int(settings[0])
 		spritesheet_rows = int(settings[1])
+		get_node("sprite").get_surface_override_material(0).uv1_scale.x = 1.00/spritesheet_columns
+		get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
+		disable_first_frame = bool(int(settings[2]))
