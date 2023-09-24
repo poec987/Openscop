@@ -27,7 +27,6 @@ var current_frame = 0
 @onready var material = get_node("sprite").get_surface_override_material(0)
 	
 func _ready():
-	OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 	
 	if !directory.dir_exists("sheets"):
 		directory.make_dir("sheets")
@@ -36,6 +35,8 @@ func _ready():
 	get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("open_sheet_folder"):
+		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
 	
 	if Input.is_action_just_released("sheet_hotkey"):
