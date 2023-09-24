@@ -36,9 +36,6 @@ func _ready():
 
 func _physics_process(delta):
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
-	
-	if Input.is_action_just_released("sheet_hotkey"):
-		get_node("../OpenSheets").show()
 	var v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
 	var h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
 	
@@ -91,11 +88,16 @@ func _physics_process(delta):
 	if not is_on_floor():
 		if	position.y>0+(get_node("collision").shape.size.y/2):
 			velocity.y -= gravity * delta
+			
 
+	if Input.is_action_just_released("sheet_hotkey"):
+		get_node("../OpenSheets").show()
 	if Input.is_action_just_pressed("oeptos") && spritesheet_columns%2!=0 || spritesheet_columns==2:
 		animation_direction = spritesheet_columns-1
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
+	if Input.is_action_just_pressed("default_char"):
+		reset_sheet()
 
 	move_and_slide()
 	if is_walking==false:
@@ -112,6 +114,8 @@ func _physics_process(delta):
 
 		material.uv1_offset = Vector3((animation_direction * (1.00 / spritesheet_columns)), (floor(current_frame) * (1.00 / spritesheet_rows)), 0)
 
+
+
 func _on_open_sheets_file_selected(path):
 	var image = Image.new()
 	image.load(path)
@@ -119,7 +123,6 @@ func _on_open_sheets_file_selected(path):
 	var image_texture = ImageTexture.new()
 	image_texture.set_image(image)
 	material.albedo_texture = image_texture
-	
 	var settings = ""
 	if sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
 		settings = FileAccess.get_file_as_string(ProjectSettings.globalize_path(path).replace(".png",".txt"))
@@ -136,3 +139,23 @@ func _on_open_sheets_file_selected(path):
 		material.uv1_scale.x = 1.00/spritesheet_columns
 		material.uv1_scale.y = 1.00/spritesheet_rows
 		scale=Vector3(1.0,1.0,1.0)
+		
+	if spritesheet_columns==3 || spritesheet_columns==6 || spritesheet_columns==7 || spritesheet_columns>9:
+		reset_sheet()
+		OS.alert("This sheet has the wrong amount of columns.")
+	
+	if int(material.albedo_texture.get_size().x)%2!=0 || int(material.albedo_texture.get_size().y)%2!=0: 
+		reset_sheet()
+		OS.alert("This sheet has an uneven resolution.")
+	
+	if int(material.albedo_texture.get_size().x)>576 && int(material.albedo_texture.get_size().y)>576:
+		reset_sheet()
+		OS.alert("Sheet resolution is too big.")
+	
+func reset_sheet():
+	material.albedo_texture = load("res://graphics/sprites/player/guardian.png")
+	spritesheet_columns = int(material.albedo_texture.get_size().x)/64
+	spritesheet_rows = int(material.albedo_texture.get_size().y)/64
+	material.uv1_scale.x = 1.00/spritesheet_columns
+	material.uv1_scale.y = 1.00/spritesheet_rows
+	scale=Vector3(1.0,1.0,1.0)
