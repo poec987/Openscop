@@ -96,7 +96,12 @@ func _physics_process(delta):
 	move_and_slide()
 
 	if is_walking==false:
+		if disable_first_frame:
+			current_frame = 0
+		else:
+			current_frame = 1
 		material.uv1_offset = Vector3((animation_direction*(1.00/spritesheet_columns)), (0*(1.00/spritesheet_rows)), 0)
+		current_frame=1
 	else:
 		spritesheet_rows = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns) # animations
 		current_frame+=ANIMATION_SPEED*delta
