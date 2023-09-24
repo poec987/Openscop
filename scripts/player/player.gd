@@ -13,7 +13,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var spritesheet_rows = 5 # animations
 
 #ANIMATION PROPERTIES
-var disable_first_frame = true
+var first_frame = false
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 2
 var animation_direction = 0
@@ -31,14 +31,10 @@ func _ready():
 	if !directory.dir_exists("sheets"):
 		directory.make_dir("sheets")
 	
-	get_node("sprite").get_surface_override_material(0).uv1_scale.x = 1.00/spritesheet_columns
-	get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
+	material.uv1_scale.x = 1.00/spritesheet_columns
+	material.uv1_scale.y = 1.00/spritesheet_rows
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("oeptos"):
-		material.uv1_offset = Vector3((spritesheet_columns*(1.00/spritesheet_columns)), (0*(1.00/spritesheet_rows)), 0)
-	if Input.is_action_just_pressed("open_sheet_folder"):
-		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
 	
 	if Input.is_action_just_released("sheet_hotkey"):
@@ -89,26 +85,27 @@ func _physics_process(delta):
 			animation_direction=6
 		elif v < 0 && h==0:
 			animation_direction=2
-		
+	elif spritesheet_columns==1 || spritesheet_columns==2 && Global.control_mode==0:
+			animation_direction=0
 	# Add the gravity.
 	if not is_on_floor():
 		if	position.y>0+(get_node("collision").shape.size.y/2):
 			velocity.y -= gravity * delta
 
-	move_and_slide()
+	if Input.is_action_just_pressed("oeptos") && spritesheet_columns%2!=0 || spritesheet_columns==2:
+		animation_direction = spritesheet_columns-1
+	if Input.is_action_just_pressed("open_sheet_folder"):
+		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 
+	move_and_slide()
 	if is_walking==false:
-		if disable_first_frame:
-			current_frame = 0
-		else:
-			current_frame = 1
 		material.uv1_offset = Vector3((animation_direction*(1.00/spritesheet_columns)), (0*(1.00/spritesheet_rows)), 0)
 		current_frame=1
 	else:
-		spritesheet_rows = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/(int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/spritesheet_columns) # animations
+		spritesheet_rows = int(material.albedo_texture.get_size().y)/(int(material.albedo_texture.get_size().x)/spritesheet_columns) # animations
 		current_frame+=ANIMATION_SPEED*delta
 		if current_frame>spritesheet_rows:
-			if disable_first_frame:
+			if !first_frame:
 				current_frame=1
 			else:
 				current_frame=0
@@ -116,27 +113,26 @@ func _physics_process(delta):
 		material.uv1_offset = Vector3((animation_direction * (1.00 / spritesheet_columns)), (floor(current_frame) * (1.00 / spritesheet_rows)), 0)
 
 func _on_open_sheets_file_selected(path):
-	var image_path = path
 	var image = Image.new()
-	image.load(image_path)
+	image.load(path)
 	
 	var image_texture = ImageTexture.new()
 	image_texture.set_image(image)
-	get_node("sprite").get_surface_override_material(0).albedo_texture = image_texture
+	material.albedo_texture = image_texture
 	
 	var settings = ""
 	if sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
 		settings = FileAccess.get_file_as_string(ProjectSettings.globalize_path(path).replace(".png",".txt"))
-		spritesheet_columns = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/(int(settings.get_slice("/", 0)))
-		spritesheet_rows = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/(int(settings.get_slice("/", 0)))
-		get_node("sprite").get_surface_override_material(0).uv1_scale.x = 1.00/spritesheet_columns
-		get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
-		disable_first_frame = bool(int(settings.get_slice("/", 1)))
+		spritesheet_columns = int(material.albedo_texture.get_size().x)/(int(settings.get_slice("/", 0)))
+		spritesheet_rows = int(material.albedo_texture.get_size().y)/(int(settings.get_slice("/", 0)))
+		material.uv1_scale.x = 1.00/spritesheet_columns
+		material.uv1_scale.y = 1.00/spritesheet_rows
+		first_frame = bool(int(settings.get_slice("/", 1)))
 		var player_scale = float(settings.get_slice("/", 2))
 		scale=Vector3(player_scale,player_scale,player_scale)
 	else:
-		spritesheet_columns = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().x)/64
-		spritesheet_rows = int(get_node("sprite").get_surface_override_material(0).albedo_texture.get_size().y)/64
-		get_node("sprite").get_surface_override_material(0).uv1_scale.x = 1.00/spritesheet_columns
-		get_node("sprite").get_surface_override_material(0).uv1_scale.y = 1.00/spritesheet_rows
+		spritesheet_columns = int(material.albedo_texture.get_size().x)/64
+		spritesheet_rows = int(material.albedo_texture.get_size().y)/64
+		material.uv1_scale.x = 1.00/spritesheet_columns
+		material.uv1_scale.y = 1.00/spritesheet_rows
 		scale=Vector3(1.0,1.0,1.0)
