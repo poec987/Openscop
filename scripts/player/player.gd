@@ -122,6 +122,7 @@ func _on_open_sheets_file_selected(path):
 	
 	var image_texture = ImageTexture.new()
 	image_texture.set_image(image)
+	animation_direction=0
 	material.albedo_texture = image_texture
 	var settings = ""
 	if sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
@@ -153,6 +154,7 @@ func _on_open_sheets_file_selected(path):
 		OS.alert("Sheet resolution is too big.")
 	
 func reset_sheet():
+	animation_direction=0
 	material.albedo_texture = load("res://graphics/sprites/player/guardian.png")
 	spritesheet_columns = int(material.albedo_texture.get_size().x)/64
 	spritesheet_rows = int(material.albedo_texture.get_size().y)/64
