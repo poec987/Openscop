@@ -94,13 +94,12 @@ func _physics_process(delta):
 	
 	# Add the gravity.
 	if not is_on_floor():
-		if	get_node("collision").position.y<0+(get_node("collision").shape.size.y/2):
-			get_node("collision").velocity.y -= gravity * delta
+		get_node("collision").velocity.y -= gravity * delta
 			
 
 	if Input.is_action_just_released("sheet_hotkey"):
 		get_node("../OpenSheets").show()
-	if Input.is_action_just_pressed ("oeptos") && spritesheet_columns%2.0!=0 || spritesheet_columns==2:
+	if Input.is_action_just_pressed ("oeptos") && int(spritesheet_columns)%2.0!=0 || spritesheet_columns==2:
 		animation_direction = spritesheet_columns-1
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
