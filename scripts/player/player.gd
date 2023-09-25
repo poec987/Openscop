@@ -9,8 +9,8 @@ var is_walking = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # ANIMATION VARIABLES
-@onready var spritesheet_columns = 4 # frames per animation
-@onready var spritesheet_rows = 5 # animations
+@onready var spritesheet_columns = material.albedo_texture.get_size().x/64 # frames per animation
+@onready var spritesheet_rows = material.albedo_texture.get_size().y/64 # animations
 
 #ANIMATION PROPERTIES
 var first_frame = false
