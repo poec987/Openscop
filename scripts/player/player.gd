@@ -26,8 +26,11 @@ var current_frame = 0
 
 @onready var material = get_node("sprite").get_surface_override_material(0)
 	
-func _ready():
 	
+func _ready():
+	#set_multiplayer_authority(str(name).to_int())
+	#if not is_multiplayer_authority():return
+	#get_camera.current=true
 	if !directory.dir_exists("sheets"):
 		directory.make_dir("sheets")
 	
@@ -35,6 +38,7 @@ func _ready():
 	material.uv1_scale.y = 1.00/spritesheet_rows
 
 func _physics_process(delta):
+	if not is_multiplayer_authority():return
 	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
 	var v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
 	var h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
@@ -85,13 +89,13 @@ func _physics_process(delta):
 	elif spritesheet_columns==1 || spritesheet_columns==2 && Global.control_mode==0:
 			animation_direction=0
 			
-	if	position.y<0+(get_node("collision").shape.size.y/2):
-			position.y = 0+(get_node("collision").shape.size.y/2)
+	if	get_node("collision").position.y<0+(get_node("collision").shape.size.y/2):
+			get_node("collision").position.y = 0+(get_node("collision").shape.size.y/2)
 	
 	# Add the gravity.
 	if not is_on_floor():
-		if	position.y<0+(get_node("collision").shape.size.y/2):
-			velocity.y -= gravity * delta
+		if	get_node("collision").position.y<0+(get_node("collision").shape.size.y/2):
+			get_node("collision").velocity.y -= gravity * delta
 			
 
 	if Input.is_action_just_released("sheet_hotkey"):
