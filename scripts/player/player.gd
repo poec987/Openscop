@@ -7,7 +7,7 @@ const ACCELERATION = 8
 var is_walking = false
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
+@onready var material = get_node("sprite").get_surface_override_material(0)
 # ANIMATION VARIABLES
 @onready var spritesheet_columns = material.albedo_texture.get_size().x/64 # frames per animation
 @onready var spritesheet_rows = material.albedo_texture.get_size().y/64 # animations
@@ -23,8 +23,6 @@ var directory = DirAccess.open("user://")
 var sheets = DirAccess.open("user://sheets")
 
 var current_frame = 0
-
-@onready var material = get_node("sprite").get_surface_override_material(0)
 	
 func _ready():
 	
