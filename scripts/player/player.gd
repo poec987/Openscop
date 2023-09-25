@@ -94,7 +94,7 @@ func _physics_process(delta):
 	
 	# Add the gravity.
 	if not is_on_floor():
-		get_node("collision").velocity.y -= gravity * delta
+		velocity.y -= gravity * delta
 
 
 	if Input.is_action_just_released("sheet_hotkey"):
