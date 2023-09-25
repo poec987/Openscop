@@ -84,9 +84,13 @@ func _physics_process(delta):
 			animation_direction=2
 	elif spritesheet_columns==1 || spritesheet_columns==2 && Global.control_mode==0:
 			animation_direction=0
+			
+	if	position.y<0+(get_node("collision").shape.size.y/2):
+			position.y = 0+(get_node("collision").shape.size.y/2)
+	
 	# Add the gravity.
 	if not is_on_floor():
-		if	position.y>0+(get_node("collision").shape.size.y/2):
+		if	position.y<0+(get_node("collision").shape.size.y/2):
 			velocity.y -= gravity * delta
 			
 
