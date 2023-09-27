@@ -13,7 +13,6 @@ size = Vector3(21, 1, 12)
 [node name="test" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_e3cb5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="food_root" parent="." instance=ExtResource("2_wg3qj")]
 transform = Transform3D(1, 0, 0, 0, 0.999082, -0.0428347, 0, 0.0428347, 0.999082, 0, 0.542834, 3.38168)
@@ -34,7 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77961, 0.860086, 0)
 environment = ExtResource("3_622nf")
 
 [node name="Floor2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47813, 1.17399)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
 shape = SubResource("BoxShape3D_cm4bw")

@@ -95,8 +95,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
-
+	
 	if Input.is_action_just_released("sheet_hotkey"):
 		get_node("../OpenSheets").show()
 	if Input.is_action_just_pressed ("oeptos") && int(spritesheet_columns)%2!=0 || spritesheet_columns==2:
@@ -108,6 +107,10 @@ func _physics_process(delta):
 		reset_sheet()
 
 	move_and_slide()
+	if position.y <= 0:
+		velocity.y = 0
+		position.y = 0.01
+		
 	if is_walking==false:
 		material.uv1_offset = Vector3((animation_direction*(1.00/spritesheet_columns)), (0*(1.00/spritesheet_rows)), 0)
 		current_frame=1
