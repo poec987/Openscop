@@ -1,12 +1,8 @@
 [gd_resource type="Environment" format=3 uid="uid://dxxprnd84je6j"]
 
 [resource]
-background_mode = 1
-background_color = Color(0.509804, 0.509804, 0.509804, 1)
-background_energy_multiplier = 0.22
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 0.85098)
-ambient_light_energy = 0.18
 reflected_light_source = 1
 fog_light_color = Color(0.764706, 0.745098, 0.776471, 1)
 fog_density = 0.05

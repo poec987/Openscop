@@ -1,17 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctkho615wl6qe"]
+[gd_scene load_steps=6 format=3 uid="uid://ctkho615wl6qe"]
 
 [ext_resource type="PackedScene" uid="uid://bqn1xjv0o33es" path="res://scenes/test.tscn" id="1_ly0xw"]
-[ext_resource type="Shader" path="res://shaders/post_process_blur.gdshader" id="1_xfv0d"]
-[ext_resource type="Material" uid="uid://bni0eo5gi5ho4" path="res://post_process/lcd-overlay_mat.tres" id="2_mriid"]
+[ext_resource type="Shader" path="res://shaders/ntsc.gdshader" id="1_ubixl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="3_ltksg"]
-[ext_resource type="Material" uid="uid://bcdfts6v2s2rl" path="res://post_process/exposure.tres" id="4_6dql4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3sh0w"]
-shader = ExtResource("1_xfv0d")
-shader_parameter/blur_scale = Vector2(0.35, 0.35)
-shader_parameter/blur_samples = 20.0
-shader_parameter/blur_brightness = 1.5
-shader_parameter/enabled = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pciew"]
+shader = ExtResource("1_ubixl")
+shader_parameter/effect = 0.043
+shader_parameter/enabled = true
 
 [node name="Node" type="Node"]
 
@@ -37,7 +35,7 @@ size = Vector2i(960, 720)
 render_target_update_mode = 4
 
 [node name="LCDOverlay" type="SubViewportContainer" parent="PSXLayer/BlurPostProcess/Viewport"]
-material = ExtResource("2_mriid")
+material = SubResource("ShaderMaterial_pciew")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -73,23 +71,4 @@ audio_listener_enable_3d = true
 size = Vector2i(320, 240)
 render_target_update_mode = 4
 
-[node name="Exposure" type="SubViewportContainer" parent="PSXLayer/BlurPostProcess/Viewport/LCDOverlay/Viewport/DitherBanding/Viewport"]
-material = ExtResource("4_6dql4")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-stretch = true
-
-[node name="Viewport" type="SubViewport" parent="PSXLayer/BlurPostProcess/Viewport/LCDOverlay/Viewport/DitherBanding/Viewport/Exposure"]
-handle_input_locally = false
-canvas_item_default_texture_filter = 0
-canvas_item_default_texture_repeat = 1
-audio_listener_enable_2d = true
-audio_listener_enable_3d = true
-size = Vector2i(320, 240)
-render_target_update_mode = 4
-
-[node name="World" parent="PSXLayer/BlurPostProcess/Viewport/LCDOverlay/Viewport/DitherBanding/Viewport/Exposure/Viewport" instance=ExtResource("1_ly0xw")]
+[node name="World" parent="PSXLayer/BlurPostProcess/Viewport/LCDOverlay/Viewport/DitherBanding/Viewport" instance=ExtResource("1_ly0xw")]
