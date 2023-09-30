@@ -1,15 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://cx85n6svnhppy"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_l7eau"]
-[ext_resource type="Material" uid="uid://h2u2hqby5g8x" path="res://graphics/3d/mat/tex_player.tres" id="2_ehtkq"]
+[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="2_a2356"]
+[ext_resource type="Texture2D" uid="uid://tto7x3eghbjr" path="res://graphics/sprites/player/none.png" id="3_0l6ym"]
 [ext_resource type="Script" path="res://scripts/player/camera_root.gd" id="3_eo5w1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s8dso"]
 resource_name = "player_collision"
 size = Vector3(1, 1.4, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_8n0y3"]
-center_offset = Vector3(0, 0.5, 0)
 
 [node name="player_root" type="Node3D"]
 
@@ -21,10 +19,23 @@ script = ExtResource("1_l7eau")
 transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 1.42109e-14, 0, 1, 0, 0.7, 0)
 shape = SubResource("BoxShape3D_s8dso")
 
-[node name="sprite" type="MeshInstance3D" parent="player"]
+[node name="sprite" type="Sprite3D" parent="player"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.03, 0)
-mesh = SubResource("QuadMesh_8n0y3")
-surface_material_override/0 = ExtResource("2_ehtkq")
+offset = Vector2(0, 32)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_a2356")
+hframes = 5
+vframes = 5
+
+[node name="sprite2" type="Sprite3D" parent="player"]
+transform = Transform3D(-3.25842e-07, 0, -2, 0, 2, 0, 2, 0, -3.25842e-07, 0, -0.03, 0)
+offset = Vector2(0, 40)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_0l6ym")
+hframes = 5
+vframes = 5
 
 [node name="camera_root" type="Node3D" parent="."]
 script = ExtResource("3_eo5w1")

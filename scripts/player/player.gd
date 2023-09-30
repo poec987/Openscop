@@ -21,7 +21,7 @@ var sheets = DirAccess.open("user://sheets")
 var current_frame = 0
 
 @onready var material = get_node("sprite")
-	
+@onready var head_sprite = get_node("head")	
 	
 func _ready():
 	# ANIMATION VARIABLES
