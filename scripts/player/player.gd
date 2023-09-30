@@ -142,17 +142,10 @@ func _on_open_sheets_file_selected(path):
 	else:
 		material.hframes = int(material.texture.get_size().x)/64
 		material.vframes = int(material.texture.get_size().y)/64
-		material.uv1_scale.x = 1.00/material.hframes
-		material.uv1_scale.y = 1.00/material.vframes
 		scale=Vector3(1.0,1.0,1.0)
-		
-	if material.hframes==3 || material.hframes==6 || material.hframes==7 || material.hframes>9:
-		reset_sheet()
-		OS.alert("This sheet has the wrong amount of columns.")
-	
-	if int(material.texture.get_size().x)%2!=0 || int(material.texture.get_size().y)%2!=0: 
-		reset_sheet()
-		OS.alert("This sheet has an uneven resolution.")
+		if int(material.texture.get_size().y)%64!=0: 
+			reset_sheet()
+			OS.alert("This sheet has an uneven resolution.")
 	
 	if int(material.texture.get_size().x)>576 && int(material.texture.get_size().y)>576:
 		reset_sheet()
