@@ -31,7 +31,7 @@ vframes = 5
 
 [node name="head" type="Sprite3D" parent="player"]
 transform = Transform3D(-3.25842e-07, 0, -2, 0, 2, 0, 2, 0, -3.25842e-07, 0, -0.03, 0)
-offset = Vector2(0, 40)
+offset = Vector2(0, 35)
 pixel_size = 0.015
 billboard = 1
 texture_filter = 0

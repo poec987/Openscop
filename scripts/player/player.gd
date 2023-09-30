@@ -88,6 +88,18 @@ func _physics_process(delta):
 	if	get_node("collision").position.y<0+(get_node("collision").shape.size.y/2):
 			get_node("collision").position.y = 0+(get_node("collision").shape.size.y/2)
 	
+	if material.frame_coords.y==2 || material.frame_coords.y==4:
+		head.offset.y=39
+	else:
+		head.offset.y=35
+	if animation_direction==4:
+		head.offset.y=36
+	if animation_direction==2 || animation_direction==3:
+		head.flip_h=true
+	else:
+		head.flip_h=false
+
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -160,6 +172,7 @@ func _on_open_sheets_file_selected(path):
 func reset_sheet():
 	animation_direction=0
 	material.texture = load("res://graphics/sprites/player/guardian.png")
+	head.texture = load("res://graphics/sprites/player/none.png")
 	material.hframes = int(material.texture.get_size().x)/64
 	material.vframes = int(material.texture.get_size().y)/64
 	scale=Vector3(1.0,1.0,1.0)
