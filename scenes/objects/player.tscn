@@ -22,6 +22,7 @@ shape = SubResource("BoxShape3D_s8dso")
 [node name="sprite" type="Sprite3D" parent="player"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.03, 0)
 offset = Vector2(0, 32)
+pixel_size = 0.015
 billboard = 1
 texture_filter = 0
 texture = ExtResource("2_a2356")
@@ -31,6 +32,7 @@ vframes = 5
 [node name="sprite2" type="Sprite3D" parent="player"]
 transform = Transform3D(-3.25842e-07, 0, -2, 0, 2, 0, 2, 0, -3.25842e-07, 0, -0.03, 0)
 offset = Vector2(0, 40)
+pixel_size = 0.015
 billboard = 1
 texture_filter = 0
 texture = ExtResource("3_0l6ym")
