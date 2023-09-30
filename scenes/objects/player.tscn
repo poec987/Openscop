@@ -29,15 +29,13 @@ texture = ExtResource("2_a2356")
 hframes = 5
 vframes = 5
 
-[node name="sprite2" type="Sprite3D" parent="player"]
+[node name="head" type="Sprite3D" parent="player"]
 transform = Transform3D(-3.25842e-07, 0, -2, 0, 2, 0, 2, 0, -3.25842e-07, 0, -0.03, 0)
 offset = Vector2(0, 40)
 pixel_size = 0.015
 billboard = 1
 texture_filter = 0
 texture = ExtResource("3_0l6ym")
-hframes = 5
-vframes = 5
 
 [node name="camera_root" type="Node3D" parent="."]
 script = ExtResource("3_eo5w1")

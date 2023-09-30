@@ -21,7 +21,7 @@ var sheets = DirAccess.open("user://sheets")
 var current_frame = 0
 
 @onready var material = get_node("sprite")
-@onready var head_sprite = get_node("head")	
+@onready var head = get_node("head")	
 	
 func _ready():
 	# ANIMATION VARIABLES
@@ -130,22 +130,28 @@ func _on_open_sheets_file_selected(path):
 	var image_texture = ImageTexture.new()
 	image_texture.set_image(image)
 	animation_direction=0
-	material.texture = image_texture
 	var settings = ""
-	if sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
-		settings = FileAccess.get_file_as_string(ProjectSettings.globalize_path(path).replace(".png",".txt"))
-		material.hframes = int(material.texture.get_size().x)/(int(settings.get_slice("/", 0)))
-		material.vframes = int(material.texture.get_size().y)/(int(settings.get_slice("/", 0)))
-		first_frame = bool(int(settings.get_slice("/", 1)))
-		var player_scale = float(settings.get_slice("/", 2))
-		scale=Vector3(player_scale,player_scale,player_scale)
-	else:
-		material.hframes = int(material.texture.get_size().x)/64
-		material.vframes = int(material.texture.get_size().y)/64
-		scale=Vector3(1.0,1.0,1.0)
-		if int(material.texture.get_size().y)%64!=0: 
-			reset_sheet()
-			OS.alert("This sheet has an uneven resolution.")
+	if int(image_texture.get_size().x)%64!=0 || int(image_texture.get_size().y)%64!=0 || int(image_texture.get_size().x)%2!=0 || int(image_texture.get_size().y)%2!=0: 
+		reset_sheet()
+		OS.alert("This sheet has an uneven resolution.")
+	else: 
+		if "head_.png" in path:
+			head.texture = image_texture
+			material.texture = load("res://graphics/sprites/player/headless.png")
+		else:
+			head.texture = load("res://graphics/sprites/player/none.png")
+			if sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
+				settings = FileAccess.get_file_as_string(ProjectSettings.globalize_path(path).replace(".png",".txt"))
+				material.hframes = int(image_texture.get_size().x)/(int(settings.get_slice("/", 0)))
+				material.vframes = int(image_texture.get_size().y)/(int(settings.get_slice("/", 0)))
+				first_frame = bool(int(settings.get_slice("/", 1)))
+				var player_scale = float(settings.get_slice("/", 2))
+				scale=Vector3(player_scale,player_scale,player_scale)
+			else:
+				material.hframes = int(image_texture.get_size().x)/64
+				material.vframes = int(image_texture.get_size().y)/64
+				scale=Vector3(1.0,1.0,1.0)
+			material.texture = image_texture
 	
 	if int(material.texture.get_size().x)>576 && int(material.texture.get_size().y)>576:
 		reset_sheet()
