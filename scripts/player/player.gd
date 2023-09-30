@@ -35,7 +35,6 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_multiplayer_authority():return
-	var input_direction = Input.get_vector("pressed_right", "pressed_left", "pressed_up", "pressed_down")
 	var v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
 	var h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
 	
@@ -154,14 +153,14 @@ func _on_open_sheets_file_selected(path):
 			head.texture = load("res://graphics/sprites/player/none.png")
 			if sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
 				settings = FileAccess.get_file_as_string(ProjectSettings.globalize_path(path).replace(".png",".txt"))
-				material.hframes = int(image_texture.get_size().x)/(int(settings.get_slice("/", 0)))
-				material.vframes = int(image_texture.get_size().y)/(int(settings.get_slice("/", 0)))
+				material.hframes = image_texture.get_size().x/(int(settings.get_slice("/", 0)))
+				material.vframes = image_texture.get_size().y/(int(settings.get_slice("/", 0)))
 				first_frame = bool(int(settings.get_slice("/", 1)))
 				var player_scale = float(settings.get_slice("/", 2))
 				scale=Vector3(player_scale,player_scale,player_scale)
 			else:
-				material.hframes = int(image_texture.get_size().x)/64
-				material.vframes = int(image_texture.get_size().y)/64
+				material.hframes = image_texture.get_size().x/64
+				material.vframes = image_texture.get_size().y/64
 				scale=Vector3(1.0,1.0,1.0)
 			material.texture = image_texture
 	
@@ -173,6 +172,6 @@ func reset_sheet():
 	animation_direction=0
 	material.texture = load("res://graphics/sprites/player/guardian.png")
 	head.texture = load("res://graphics/sprites/player/none.png")
-	material.hframes = int(material.texture.get_size().x)/64
-	material.vframes = int(material.texture.get_size().y)/64
+	material.hframes = material.texture.get_size().x/64
+	material.vframes = material.texture.get_size().y/64
 	scale=Vector3(1.0,1.0,1.0)

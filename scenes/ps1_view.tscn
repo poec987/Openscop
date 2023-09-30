@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctkho615wl6qe"]
+[gd_scene load_steps=5 format=3 uid="uid://ctkho615wl6qe"]
 
 [ext_resource type="PackedScene" uid="uid://bqn1xjv0o33es" path="res://scenes/test.tscn" id="1_ly0xw"]
 [ext_resource type="Shader" path="res://shaders/ntsc.gdshader" id="1_ubixl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="3_ltksg"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3sh0w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pciew"]
 shader = ExtResource("1_ubixl")
@@ -16,7 +14,6 @@ shader_parameter/enabled = true
 [node name="PSXLayer" type="CanvasLayer" parent="."]
 
 [node name="BlurPostProcess" type="SubViewportContainer" parent="PSXLayer"]
-material = SubResource("ShaderMaterial_3sh0w")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
