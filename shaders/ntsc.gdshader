@@ -110,7 +110,7 @@ const float chroma_filter[34] = {
    0.031134640,
    0.031420995,
    0.031517031,
-   0.20
+   0.15
 };
 // end ntsc-decode-filter-3phase
 
@@ -124,8 +124,8 @@ void fragment()
 	float offset = 0.;
 	vec3 sums = vec3(0.,0.,0.);
 
-	#define macro_loopz(c) offset = float(c) - 0.0; \
-		sums = fetch_offset(offset - 26., one_x) + fetch_offset(29.26 - offset, one_x); \
+	#define macro_loopz(c) offset = float(c) - 1.0; \
+		sums = fetch_offset(offset - 26., one_x) + fetch_offset(32. - offset, one_x); \
 		signal += sums * vec3(luma_filter[c], chroma_filter[c], chroma_filter[c]);
 	
 	macro_loopz(1)
