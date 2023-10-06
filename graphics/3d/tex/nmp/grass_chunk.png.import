@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tto7x3eghbjr"
-path.s3tc="res://.godot/imported/none.png-64bd927df7a183c4098832aee226408b.s3tc.ctex"
+uid="uid://cw25er4sarftn"
+path.s3tc="res://.godot/imported/grass_chunk.png-c24eaecb00fd6780383312202f9064c2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://graphics/sprites/player/none.png"
-dest_files=["res://.godot/imported/none.png-64bd927df7a183c4098832aee226408b.s3tc.ctex"]
+source_file="res://graphics/3d/tex/nmp/grass_chunk.png"
+dest_files=["res://.godot/imported/grass_chunk.png-c24eaecb00fd6780383312202f9064c2.s3tc.ctex"]
 
 [params]
 

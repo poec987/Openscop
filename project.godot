@@ -97,7 +97,11 @@ shading/overrides/force_vertex_shading=true
 
 [shader_globals]
 
+allow_animation={
+"type": "bool",
+"value": true
+}
 precision_multiplier={
 "type": "float",
-"value": 0.0
+"value": 1.0
 }

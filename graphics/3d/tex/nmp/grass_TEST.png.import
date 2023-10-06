@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tto7x3eghbjr"
-path.s3tc="res://.godot/imported/none.png-64bd927df7a183c4098832aee226408b.s3tc.ctex"
+uid="uid://2rcuht7e4mhh"
+path.s3tc="res://.godot/imported/grass_TEST.png-5aa57d141cf53b4e2a0a0bc6a25055e1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://graphics/sprites/player/none.png"
-dest_files=["res://.godot/imported/none.png-64bd927df7a183c4098832aee226408b.s3tc.ctex"]
+source_file="res://graphics/3d/tex/nmp/grass_TEST.png"
+dest_files=["res://.godot/imported/grass_TEST.png-5aa57d141cf53b4e2a0a0bc6a25055e1.s3tc.ctex"]
 
 [params]
 

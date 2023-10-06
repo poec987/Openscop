@@ -29,3 +29,7 @@ func _on_food_child_body_entered(_body):
 	collected = true
 	sprite.visible = false
 	queue_free()
+
+
+func _on_node_3d_tree_entered():
+	pass # Replace with function body.

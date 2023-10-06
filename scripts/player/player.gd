@@ -137,6 +137,7 @@ func _physics_process(delta):
 func _on_open_sheets_file_selected(path):
 	var image = Image.new()
 	image.load(path)
+	image.get_image()          
 	
 	var image_texture = ImageTexture.new()
 	image_texture.set_image(image)
