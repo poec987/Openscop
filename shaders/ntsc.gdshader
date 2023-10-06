@@ -117,7 +117,7 @@ const float chroma_filter[34] = {
 void fragment()
 {
 // begin ntsc-pass2-decode
-	float one_x = effect / 80.;
+	float one_x = effect / 100.;
 	vec3 signal = vec3(0.0);
 
 
@@ -125,7 +125,7 @@ void fragment()
 	vec3 sums = vec3(0.,0.,0.);
 
 	#define macro_loopz(c) offset = float(c) - 0.0; \
-		sums = fetch_offset(offset - 26., one_x) + fetch_offset(30. - offset, one_x); \
+		sums = fetch_offset(offset - 26., one_x) + fetch_offset(29.26 - offset, one_x); \
 		signal += sums * vec3(luma_filter[c], chroma_filter[c], chroma_filter[c]);
 	
 	macro_loopz(1)
