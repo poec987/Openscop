@@ -15,8 +15,7 @@ const ANIMATION_THRESHOLD = 2
 var animation_direction = 0
 
 #GAME MANAGEMENT
-var directory = DirAccess.open("user://")
-var sheets = DirAccess.open("user://sheets")
+
 
 var current_frame = 0
 
@@ -27,11 +26,6 @@ func _ready():
 	# ANIMATION VARIABLES
 	material.hframes = get_node("sprite").texture.get_size().x/64 # frames per ani mation
 	material.vframes = get_node("sprite").texture.get_size().y/64 # animations
-	#set_multiplayer_authority(str(name).to_int())
-	#if not is_multiplayer_authority():return
-	#get_camera.current=true
-	if !directory.dir_exists("sheets"):
-		directory.make_dir("sheets")
 
 func _physics_process(delta):
 	if not is_multiplayer_authority():return
@@ -108,8 +102,6 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed ("oeptos") && int(material.hframes)%2!=0 || material.hframes==2:
 		current_frame=0
 		animation_direction = material.hframes-1
-	if Input.is_action_just_pressed("open_sheet_folder"):
-		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 	if Input.is_action_just_pressed("default_char"):
 		reset_sheet()
 
@@ -150,7 +142,7 @@ func _on_open_sheets_file_selected(path):
 			material.texture = load("res://graphics/sprites/player/headless.png")
 		else:
 			head.texture = load("res://graphics/sprites/player/none.png")
-			if sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
+			if Global.sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
 				settings = FileAccess.get_file_as_string(ProjectSettings.globalize_path(path).replace(".png",".txt"))
 				material.hframes = image_texture.get_size().x/(int(settings.get_slice("/", 0)))
 				material.vframes = image_texture.get_size().y/(int(settings.get_slice("/", 0)))

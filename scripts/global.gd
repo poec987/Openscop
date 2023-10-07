@@ -17,3 +17,15 @@ var camera_root_dist_ver = 0.0
 var control_mode = 0
 var current_character = "guardian"
 
+#MANAGEMENT
+var directory = DirAccess.open("user://")
+var sheets = DirAccess.open("user://sheets")
+
+
+func _ready():
+	if !directory.dir_exists("sheets"):
+		directory.make_dir("sheets")
+
+func _process(delta):
+	if Input.is_action_just_pressed("open_sheet_folder"):
+		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
