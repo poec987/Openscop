@@ -137,10 +137,8 @@ func _physics_process(delta):
 func _on_open_sheets_file_selected(path):
 	var image = Image.new()
 	image.load(path)
-	image.get_image()          
-	
 	var image_texture = ImageTexture.new()
-	image_texture.set_image(image)
+	image_texture.set_image(remove_transparency(image))
 	animation_direction=0
 	var settings = ""
 	if int(image_texture.get_size().x)%64!=0 || int(image_texture.get_size().y)%64!=0 || int(image_texture.get_size().x)%2!=0 || int(image_texture.get_size().y)%2!=0: 
@@ -176,3 +174,10 @@ func reset_sheet():
 	material.hframes = material.texture.get_size().x/64
 	material.vframes = material.texture.get_size().y/64
 	scale=Vector3(1.0,1.0,1.0)
+	
+func remove_transparency(image):
+	for pixel_y in image.get_height():
+		for pixel_x in image.get_width():
+			if image.get_pixel(pixel_x,pixel_y)==Color("#FF00FF"):
+				image.set_pixel(pixel_x,pixel_y, Color("#FF00FF",0.0))
+	return image
