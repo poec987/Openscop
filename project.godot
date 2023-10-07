@@ -21,6 +21,7 @@ config/icon="res://gift.png"
 [autoload]
 
 Global="*res://scripts/global.gd"
+Network="*res://scripts/network.gd"
 
 [display]
 
