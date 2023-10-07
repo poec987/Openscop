@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://cx85n6svnhppy" path="res://scenes/objects/player.tscn" id="1_e3cb5"]
 [ext_resource type="Script" path="res://scripts/player/grass.gd" id="2_q3i23"]
 [ext_resource type="PackedScene" uid="uid://d36bd6cref07y" path="res://scenes/objects/food.tscn" id="2_wg3qj"]
-[ext_resource type="Environment" uid="uid://dxxprnd84je6j" path="res://scenes/world_env.tres" id="3_622nf"]
 [ext_resource type="PackedScene" uid="uid://dgoxysshxruys" path="res://scenes/objects/grass.tscn" id="3_qmd8q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cm4bw"]
@@ -14,6 +13,14 @@ size = Vector3(21, 1, 12)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4nty"]
 albedo_color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[sub_resource type="Environment" id="Environment_xgynn"]
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 2.9
+fog_density = 0.1114
+fog_height = -621.91
+fog_height_density = 7.3717
 
 [node name="test" type="Node3D"]
 
@@ -26,42 +33,33 @@ script = ExtResource("2_q3i23")
 
 [node name="MeshInstance3D4" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, 0)
-visibility_range_end = 49.95
 
 [node name="MeshInstance3D5" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, 29)
-visibility_range_end = 49.95
 
 [node name="MeshInstance3D6" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, -29)
-visibility_range_end = 49.95
 skeleton = NodePath("")
 
 [node name="MeshInstance3D7" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, 0)
-visibility_range_end = 49.95
 
 [node name="MeshInstance3D8" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, 29)
-visibility_range_end = 49.95
 
 [node name="MeshInstance3D9" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, -29)
-visibility_range_end = 49.95
 skeleton = NodePath("")
 
 [node name="MeshInstance3D" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
-visibility_range_end = 49.95
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D2" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29)
-visibility_range_end = 49.95
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D3" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29)
-visibility_range_end = 49.95
 skeleton = NodePath("../MeshInstance3D2")
 
 [node name="food_root" parent="." instance=ExtResource("2_wg3qj")]
@@ -79,9 +77,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.28905, 0.860086, 0)
 [node name="food_root5" parent="." instance=ExtResource("2_wg3qj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77961, 0.860086, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("3_622nf")
-
 [node name="Floor2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
 
@@ -93,3 +88,6 @@ visible = false
 mesh = SubResource("BoxMesh_fgp64")
 skeleton = NodePath("../../Floor2")
 surface_material_override/0 = SubResource("StandardMaterial3D_g4nty")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xgynn")
