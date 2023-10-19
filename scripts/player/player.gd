@@ -75,8 +75,6 @@ func _physics_process(delta):
 			animation_direction=6
 		elif v < 0 && h==0:
 			animation_direction=2
-	elif material.hframes==1 || material.hframes==2 && Global.control_mode==0:
-			animation_direction=0
 			
 	if	get_node("collision").position.y<0+(get_node("collision").shape.size.y/2):
 			get_node("collision").position.y = 0+(get_node("collision").shape.size.y/2)
@@ -99,12 +97,16 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_released("sheet_hotkey"):
 		get_node("../OpenSheets").show()
-	if Input.is_action_just_pressed ("oeptos") && int(material.hframes)%2!=0 && is_walking==false || material.hframes==2 && is_walking==false:
-		current_frame=0
-		animation_direction = material.hframes-1
-		head.frame_coords= Vector2(1,0)
 	if Input.is_action_just_pressed("default_char"):
 		reset_sheet()
+	if Input.is_action_just_pressed("oeptos") && !is_walking:
+		current_frame=0
+		if material.hframes>2:
+			animation_direction = material.hframes-1
+		elif material.hframes>1:
+			animation_direction = 1
+		if head.hframes!=1:
+			head.frame_coords= Vector2(1,0)
 
 	move_and_slide()
 	if position.y <= 0:
@@ -113,8 +115,10 @@ func _physics_process(delta):
 		
 	if is_walking==false:
 		material.frame_coords = Vector2(animation_direction, 0)
-		current_frame=1 
+		current_frame=1
 	else:
+		if material.hframes==1 || material.hframes==2 && Global.control_mode==0:
+				animation_direction=0
 		head.frame_coords= Vector2(0,0)
 		material.vframes = int(material.texture.get_size().y)/(int(material.texture.get_size().x)/material.hframes) # animations
 		current_frame+=ANIMATION_SPEED*delta
@@ -131,14 +135,14 @@ func _physics_process(delta):
 func _on_open_sheets_file_selected(path):
 	var image = Image.new()
 	image.load(path)
+	remove_transparency(image)
 	var image_texture = ImageTexture.new()
 	image_texture.set_image(remove_transparency(image))
-	animation_direction=0
 	var settings = ""
 	if int(image_texture.get_size().x)%64!=0 || int(image_texture.get_size().y)%64!=0 || int(image_texture.get_size().x)%2!=0 || int(image_texture.get_size().y)%2!=0: 
 		reset_sheet()
 		OS.alert("This sheet has an uneven resolution.")
-	else: 
+	else:
 		if "head_.png" in path:
 			head.texture = image_texture
 			if image_texture.get_size().x==image_texture.get_size().y*2:
@@ -146,6 +150,8 @@ func _on_open_sheets_file_selected(path):
 			else:
 				head.hframes=1
 			material.texture = load("res://graphics/sprites/player/headless.png")
+			material.hframes = 5
+			material.vframes = 5
 		else:
 			head.texture = load("res://graphics/sprites/player/none.png")
 			if Global.sheets.file_exists(ProjectSettings.globalize_path(path).replace(".png",".txt")):
@@ -160,6 +166,7 @@ func _on_open_sheets_file_selected(path):
 				material.vframes = image_texture.get_size().y/64
 				scale=Vector3(1.0,1.0,1.0)
 			material.texture = image_texture
+		material.frame_coords = Vector2(0,0)
 	
 	if int(material.texture.get_size().x)>576 && int(material.texture.get_size().y)>576:
 		reset_sheet()
@@ -169,8 +176,8 @@ func reset_sheet():
 	animation_direction=0
 	material.texture = load("res://graphics/sprites/player/guardian.png")
 	head.texture = load("res://graphics/sprites/player/none.png")
-	material.hframes = material.texture.get_size().x/64
-	material.vframes = material.texture.get_size().y/64
+	material.hframes = 5
+	material.vframes = 5
 	scale=Vector3(1.0,1.0,1.0)
 	
 func remove_transparency(image):
