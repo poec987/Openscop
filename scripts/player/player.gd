@@ -15,8 +15,6 @@ const ANIMATION_THRESHOLD = 2
 var animation_direction = 0
 
 #GAME MANAGEMENT
-
-
 var current_frame = 0
 
 @onready var material = get_node("sprite")
@@ -89,7 +87,6 @@ func _physics_process(delta):
 		head.flip_h=true
 	else:
 		head.flip_h=false
-
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -129,7 +126,6 @@ func _physics_process(delta):
 				current_frame=0
 
 		material.frame_coords = Vector2(animation_direction, floor(current_frame))
-
 
 
 func _on_open_sheets_file_selected(path):
