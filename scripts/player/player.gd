@@ -99,9 +99,10 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_released("sheet_hotkey"):
 		get_node("../OpenSheets").show()
-	if Input.is_action_just_pressed ("oeptos") && int(material.hframes)%2!=0 || material.hframes==2:
+	if Input.is_action_just_pressed ("oeptos") && int(material.hframes)%2!=0 && is_walking==false || material.hframes==2 && is_walking==false:
 		current_frame=0
 		animation_direction = material.hframes-1
+		head.frame_coords= Vector2(1,0)
 	if Input.is_action_just_pressed("default_char"):
 		reset_sheet()
 
@@ -114,6 +115,7 @@ func _physics_process(delta):
 		material.frame_coords = Vector2(animation_direction, 0)
 		current_frame=1 
 	else:
+		head.frame_coords= Vector2(0,0)
 		material.vframes = int(material.texture.get_size().y)/(int(material.texture.get_size().x)/material.hframes) # animations
 		current_frame+=ANIMATION_SPEED*delta
 		if current_frame>material.vframes:
@@ -139,6 +141,10 @@ func _on_open_sheets_file_selected(path):
 	else: 
 		if "head_.png" in path:
 			head.texture = image_texture
+			if image_texture.get_size().x==image_texture.get_size().y*2:
+				head.hframes=2
+			else:
+				head.hframes=1
 			material.texture = load("res://graphics/sprites/player/headless.png")
 		else:
 			head.texture = load("res://graphics/sprites/player/none.png")
