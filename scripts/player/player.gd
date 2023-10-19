@@ -120,7 +120,7 @@ func _physics_process(delta):
 		material.vframes = int(material.texture.get_size().y)/(int(material.texture.get_size().x)/material.hframes) # animations
 		current_frame+=ANIMATION_SPEED*delta
 		if current_frame>material.vframes:
-			if !first_frame:
+			if !first_frame && material.vframes>1:
 				current_frame=1
 			else:
 				current_frame=0
