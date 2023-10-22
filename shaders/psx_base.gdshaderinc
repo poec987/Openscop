@@ -2,6 +2,7 @@ render_mode LIT, CULL, shadows_disabled, DEPTH, BLEND;
 
 global uniform float precision_multiplier : hint_range(0.0, 1.0) = 1.0;
 uniform vec4 modulate_color : source_color = vec4(1.0);
+uniform vec4 alpha_color : source_color = vec4(0.52,0.34,0.84,1);
 
 #ifndef NO_TEXTURE
 uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
@@ -74,7 +75,7 @@ void fragment()
 #endif
 
 	vec4 color_base = COLOR * modulate_color;
-
+	
 #ifdef NO_TEXTURE
 	ALBEDO = color_base.rgb;
 #else
@@ -85,7 +86,10 @@ void fragment()
 #ifdef LIGHT_VOLUME
 	ALPHA = 1.0 - UV.y;
 #elif defined(ALPHA_BLEND) || defined(ALPHA_SCISSOR)
-	ALPHA = texture_color.a * color_base.a;
+	if (length(texture_color-alpha_color) < 0.01)
+		ALPHA = 0.0;
+	else
+		ALPHA = texture_color.a * color_base.a;
 #endif
 
 #ifdef ALPHA_SCISSOR

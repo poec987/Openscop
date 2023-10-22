@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctkho615wl6qe"]
 
-[ext_resource type="PackedScene" uid="uid://bqn1xjv0o33es" path="res://scenes/test.tscn" id="1_ly0xw"]
+[ext_resource type="PackedScene" uid="uid://bs5ur4bnh0has" path="res://scenes/test.tscn" id="1_ly0xw"]
 [ext_resource type="Shader" path="res://shaders/ntsc.gdshader" id="1_ubixl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="3_ltksg"]
 
