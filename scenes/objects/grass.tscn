@@ -15,5 +15,6 @@ shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/albedoTex = ExtResource("3_v2ty4")
 
 [node name="MeshInstance3D" type="MeshInstance3D"]
+visibility_range_end = 50.0
 mesh = ExtResource("1_2v4pc")
 surface_material_override/0 = SubResource("ShaderMaterial_ci4t5")

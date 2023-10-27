@@ -21,6 +21,7 @@ shape = SubResource("BoxShape3D_s8dso")
 
 [node name="sprite" type="Sprite3D" parent="player"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.03, 0)
+cast_shadow = 0
 offset = Vector2(0, 32)
 pixel_size = 0.015
 billboard = 1
