@@ -20,7 +20,7 @@ uniform float alpha_scissor : hint_range(0, 1) = 0.1;
 #endif
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
 uniform bool fog = false;
-uniform vec4 _color : source_color;
+uniform vec4 fog_color : source_color;
 uniform float sphere_size = 3.0;
 global uniform vec3 player_pos; 
 
@@ -43,7 +43,8 @@ void vertex()
 if (fog==true) {
 	world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	float min_dist = length(player_pos - world_vertex);
-	float fog_func = clamp(sphere_size - min_dist, 0.0, 1.0);
+	//float fog_func = clamp(pow((sphere_size - min_dist), 0.5), 0.0, 1.0);
+	float fog_func = (0.85 - clamp(min_dist/sphere_size, 0.0, 1.0));
 	COLOR = vec4( fog_func, fog_func, fog_func, 1.0);
 }
 #if !defined(NO_TEXTURE) && !defined(METAL)  // METAL doesn't use UV, so no need to pan UVs
@@ -80,22 +81,18 @@ if (fog==true) {
 void fragment()
 {
 	ALBEDO = COLOR.rgb;
-
 #ifdef METAL
 	vec2 texture_uv = vec2(NORMAL.x / 2.0 + 0.5, (-NORMAL.y) / 2.0 + 0.5);  // Special thanks to Adam McLaughlan
 #elif !defined(NO_TEXTURE)
 	vec2 texture_uv = UV;
 #endif
-
-	vec4 color_base = COLOR * modulate_color;
-	
+	vec4 color_base = mix(fog_color , modulate_color, COLOR.r);
 #ifdef NO_TEXTURE
 	ALBEDO = color_base.rgb;
 #else
 	vec4 texture_color = texture(albedoTex, texture_uv);
-	ALBEDO = (color_base * texture_color).rgb;
+	ALBEDO = mix(fog_color,(modulate_color * texture_color), COLOR.r).rgb;
 #endif
-
 #ifdef LIGHT_VOLUME
 	ALPHA = 1.0 - UV.y;
 #elif defined(ALPHA_BLEND) || defined(ALPHA_SCISSOR)
@@ -104,7 +101,6 @@ void fragment()
 	else
 		ALPHA = texture_color.a * color_base.a;
 #endif
-
 #ifdef ALPHA_SCISSOR
 	ALPHA_SCISSOR_THRESHOLD = alpha_scissor;
 #endif
