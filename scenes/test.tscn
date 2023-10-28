@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs5ur4bnh0has"]
+[gd_scene load_steps=6 format=3 uid="uid://bs5ur4bnh0has"]
 
 [ext_resource type="PackedScene" uid="uid://cx85n6svnhppy" path="res://scenes/objects/player.tscn" id="1_e3cb5"]
 [ext_resource type="Script" path="res://scripts/player/grass.gd" id="2_q3i23"]
 [ext_resource type="PackedScene" uid="uid://d36bd6cref07y" path="res://scenes/objects/food.tscn" id="2_wg3qj"]
 [ext_resource type="PackedScene" uid="uid://dgoxysshxruys" path="res://scenes/objects/grass.tscn" id="3_qmd8q"]
 [ext_resource type="Environment" uid="uid://dxxprnd84je6j" path="res://scenes/world_env.tres" id="5_q5f7d"]
-[ext_resource type="Script" path="res://scripts/bulb.gd" id="6_njrgw"]
 
 [node name="test" type="Node3D"]
 
@@ -65,11 +64,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77961, 0.860086, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("5_q5f7d")
-
-[node name="bulb" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-script = ExtResource("6_njrgw")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="bulb"]
-light_energy = 0.5
-light_specular = 0.0

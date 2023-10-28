@@ -14,7 +14,7 @@ shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/fog = true
 shader_parameter/_color = Color(0, 0, 0, 1)
-shader_parameter/sphere_size = 2.0
+shader_parameter/sphere_size = 10.025
 shader_parameter/albedoTex = ExtResource("3_mnsgi")
 
 [node name="MeshInstance3D" type="MeshInstance3D"]
