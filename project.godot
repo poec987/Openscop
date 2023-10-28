@@ -120,3 +120,7 @@ player_pos={
 "type": "vec3",
 "value": Vector3(0, 0, 0)
 }
+sphere_size={
+"type": "float",
+"value": 13.5
+}

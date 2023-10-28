@@ -13,11 +13,12 @@ shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/fog = true
-shader_parameter/fog_color = Color(0, 0.721569, 1, 1)
-shader_parameter/sphere_size = 16.0
+shader_parameter/fog_color = Color(0, 0, 0, 1)
+shader_parameter/sphere_size = 13.5
 shader_parameter/albedoTex = ExtResource("3_mnsgi")
 
 [node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73535, 0, 1.45486)
 visibility_range_end = 50.0
 mesh = ExtResource("1_2v4pc")
 surface_material_override/0 = SubResource("ShaderMaterial_ci4t5")
