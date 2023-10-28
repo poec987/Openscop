@@ -116,3 +116,7 @@ precision_multiplier={
 "type": "float",
 "value": 1.0
 }
+player_pos={
+"type": "vec3",
+"value": Vector3(0, 0, 0)
+}

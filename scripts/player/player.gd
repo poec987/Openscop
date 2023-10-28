@@ -26,6 +26,7 @@ func _ready():
 	material.vframes = get_node("sprite").texture.get_size().y/64 # animations
 
 func _physics_process(delta):
+	RenderingServer.global_shader_parameter_set("player_pos", position)
 	if not is_multiplayer_authority():return
 	var v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
 	var h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")

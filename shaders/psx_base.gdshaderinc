@@ -18,8 +18,14 @@ uniform bool billboard = false;
 uniform bool y_billboard = false;
 uniform float alpha_scissor : hint_range(0, 1) = 0.1;
 #endif
-
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
+uniform bool fog = false;
+uniform vec4 _color : source_color;
+uniform float sphere_size = 3.0;
+global uniform vec3 player_pos; 
+
+varying vec3 world_vertex;
+
 const vec2 base_snap_res = vec2(160.0, 120.0);
 vec4 get_snapped_pos(vec4 base_pos)
 {
@@ -34,6 +40,11 @@ vec4 get_snapped_pos(vec4 base_pos)
 
 void vertex()
 {
+if (fog==true) {
+	world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	float min_dist = min(length(player_pos - world_vertex), sphere_size);
+	COLOR = vec4(vec3(clamp(sphere_size - min_dist, 0.0, 1.0)), 1.0);
+}
 #if !defined(NO_TEXTURE) && !defined(METAL)  // METAL doesn't use UV, so no need to pan UVs
 	UV = UV * uv_scale + uv_offset;
 	UV += uv_pan_velocity * TIME;
@@ -67,6 +78,8 @@ void vertex()
 
 void fragment()
 {
+	ALBEDO = COLOR.rgb;
+
 #ifdef METAL
 	vec2 texture_uv = vec2(NORMAL.x / 2.0 + 0.5, (-NORMAL.y) / 2.0 + 0.5);  // Special thanks to Adam McLaughlan
 #elif !defined(NO_TEXTURE)
