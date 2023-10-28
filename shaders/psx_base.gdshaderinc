@@ -21,7 +21,7 @@ uniform float alpha_scissor : hint_range(0, 1) = 0.1;
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
 uniform bool fog = false;
 uniform vec4 fog_color : source_color;
-uniform float sphere_size = 3.0;
+global uniform float sphere_size;
 global uniform vec3 player_pos; 
 
 varying vec3 world_vertex;
