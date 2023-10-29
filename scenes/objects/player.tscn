@@ -1,13 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://cx85n6svnhppy"]
+[gd_scene load_steps=9 format=3 uid="uid://cx85n6svnhppy"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_l7eau"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="2_a2356"]
+[ext_resource type="Shader" path="res://shaders/player.gdshader" id="2_trmqd"]
 [ext_resource type="Texture2D" uid="uid://tto7x3eghbjr" path="res://graphics/sprites/player/none.png" id="3_0l6ym"]
 [ext_resource type="Script" path="res://scripts/player/camera_root.gd" id="3_eo5w1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s8dso"]
 resource_name = "player_collision"
 size = Vector3(1, 1.4, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fpn34"]
+render_priority = 0
+shader = ExtResource("2_trmqd")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("2_a2356")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y38ro"]
+render_priority = 0
+shader = ExtResource("2_trmqd")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_0l6ym")
 
 [node name="player_root" type="Node3D"]
 
@@ -21,6 +36,7 @@ shape = SubResource("BoxShape3D_s8dso")
 
 [node name="sprite" type="Sprite3D" parent="player"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.03, 0)
+material_override = SubResource("ShaderMaterial_fpn34")
 cast_shadow = 0
 offset = Vector2(0, 32)
 pixel_size = 0.015
@@ -33,6 +49,7 @@ vframes = 5
 
 [node name="head" type="Sprite3D" parent="player"]
 transform = Transform3D(-3.25842e-07, 0, -2, 0, 2, 0, 2, 0, -3.25842e-07, 0, -0.03, 0)
+material_override = SubResource("ShaderMaterial_y38ro")
 offset = Vector2(0, 35)
 pixel_size = 0.015
 billboard = 1

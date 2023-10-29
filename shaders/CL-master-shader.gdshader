@@ -10,6 +10,13 @@ uniform sampler2D color_texture : source_color, filter_nearest, repeat_enable;
 uniform vec4 transparent_color : source_color = vec4(1.0,0.0,1.0,1.0);
 uniform vec4 tint_color : source_color = vec4(1.0,1.0,1.0,1.0);
 
+
+uniform bool fog = false;
+global uniform vec4 fog_color;
+global uniform float sphere_size;
+global uniform vec3 player_pos; 
+
+
 group_uniforms spritesheet;
 
 	uniform bool is_spritesheet = false;
