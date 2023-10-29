@@ -124,3 +124,7 @@ sphere_size={
 "type": "float",
 "value": 13.5
 }
+fog_color={
+"type": "vec4",
+"value": Vector4(0, 0, 0, 0)
+}
