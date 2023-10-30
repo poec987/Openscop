@@ -141,11 +141,13 @@ func _on_open_sheets_file_selected(path):
 	else:
 		if "head_.png" in path:
 			head.texture = image_texture
+			head.get_material_override().set_shader_parameter("albedoTex", head.texture)
 			if image_texture.get_size().x==image_texture.get_size().y*2:
 				head.hframes=2
 			else:
 				head.hframes=1
 			material.texture = load("res://graphics/sprites/player/headless.png")
+			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 			material.hframes = 5
 			material.vframes = 5
 		else:
