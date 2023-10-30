@@ -46,7 +46,7 @@ func _physics_process(delta):
 		is_walking=false
 	
 	if Vector3(velocity.x,0,velocity.z).length()>0.1:
-		 if !footstep_sound.playing:
+		if !footstep_sound.playing:
 			footstep_sound.play()
 	
 	var magnitude = sqrt(h*h + v*v)
