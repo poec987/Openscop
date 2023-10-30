@@ -19,6 +19,8 @@ var current_character = "guardian"
 
 #MANAGEMENT
 var directory = DirAccess.open("user://")
+var widescreen = false
+var fulscreen = false
 var sheets = DirAccess.open("user://sheets")
 
 
@@ -30,3 +32,12 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
+	if Input.is_action_just_pressed("widescreen"):
+		widescreen = !widescreen
+		if !widescreen:
+			get_viewport().content_scale_size = Vector2(320,240)
+		if widescreen:
+			if !get_window().mode==Window.MODE_FULLSCREEN:
+				get_viewport().content_scale_size = Vector2(426,240)
+			else:
+				get_viewport().content_scale_size = Vector2(426,240)
