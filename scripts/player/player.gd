@@ -174,6 +174,8 @@ func reset_sheet():
 	animation_direction=0
 	material.texture = load("res://graphics/sprites/player/guardian.png")
 	head.texture = load("res://graphics/sprites/player/none.png")
+	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+	head.get_material_override().set_shader_parameter("albedoTex", head.texture)
 	material.hframes = 5
 	material.vframes = 5
 	scale=Vector3(1.0,1.0,1.0)
