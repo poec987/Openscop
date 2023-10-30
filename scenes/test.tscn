@@ -23,7 +23,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, 28.5)
 
 [node name="MeshInstance3D6" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, -29.5)
-skeleton = NodePath("")
 
 [node name="MeshInstance3D7" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, -0.5)
@@ -33,19 +32,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, 28.5)
 
 [node name="MeshInstance3D9" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0, -29.5)
-skeleton = NodePath("")
 
 [node name="MeshInstance3D" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -0.5)
-skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D2" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 28.5)
-skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D3" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -29.5)
-skeleton = NodePath("../MeshInstance3D2")
 
 [node name="food_root" parent="." instance=ExtResource("2_wg3qj")]
 transform = Transform3D(1, 0, 0, 0, 0.999082, -0.0428347, 0, 0.0428347, 0.999082, 0, 0.542834, 3.38168)

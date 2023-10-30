@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgoxysshxruys"]
+[gd_scene load_steps=6 format=3 uid="uid://dgoxysshxruys"]
 
 [ext_resource type="ArrayMesh" uid="uid://cl41u4kw68uyn" path="res://graphics/3d/models/grass.obj" id="1_2v4pc"]
 [ext_resource type="Shader" path="res://shaders/psx_lit.gdshader" id="2_j1fnc"]
@@ -15,8 +15,17 @@ shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/fog = true
 shader_parameter/albedoTex = ExtResource("3_mnsgi")
 
-[node name="MeshInstance3D" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73535, 0, 1.45486)
+[sub_resource type="BoxShape3D" id="BoxShape3D_x1xgp"]
+size = Vector3(29, 0, 29)
+
+[node name="grass" type="Node3D"]
+
+[node name="grass_mesh" type="MeshInstance3D" parent="." groups=["grass"]]
 visibility_range_end = 50.0
 mesh = ExtResource("1_2v4pc")
 surface_material_override/0 = SubResource("ShaderMaterial_ci4t5")
+
+[node name="grass" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="grass"]
+shape = SubResource("BoxShape3D_x1xgp")

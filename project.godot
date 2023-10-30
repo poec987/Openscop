@@ -28,8 +28,8 @@ SceneManager="*res://scenes/ps1_view.tscn"
 
 window/size/viewport_width=960
 window/size/viewport_height=720
-window/size/window_width_override=320
-window/size/window_height_override=240
+window/size/window_width_override=800
+window/size/window_height_override=600
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 

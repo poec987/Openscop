@@ -41,16 +41,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("widescreen"):
 		widescreen = !widescreen
 		if !widescreen:
-			#if upscale:
 			get_viewport().content_scale_size = Vector2(960,720)
-			#else:
-				#get_viewport().content_scale_size = Vector2(320,240)
 		else:
 			adjust_resolution()
-			#if fullscreen:
-				#get_viewport().content_scale_size = Vector2((DisplayServer.screen_get_size()).x/1.5,720)
-			#else:
-				#get_viewport().content_scale_size = Vector2(((DisplayServer.screen_get_size()).x+120)/1.5,720)
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreen = !fullscreen
 		adjust_resolution()

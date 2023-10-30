@@ -19,12 +19,18 @@ var current_frame = 0
 
 @onready var material = get_node("sprite")
 @onready var head = get_node("head")
+@onready var footstep_controller=get_node("footstep_controller")
+@onready var footstep_sound=get_node("footstep")
 
 func _ready():
 	# ANIMATION VARIABLES
 	material.hframes = get_node("sprite").texture.get_size().x/64 # frames per ani mation
 	material.vframes = get_node("sprite").texture.get_size().y/64 # animations
-	
+
+func change_sound(sound):
+
+	if str(footstep_sound.stream.get_path())!=sound:
+		footstep_sound.stream = load("res://sfx/walk_even_care.mp3")
 func _physics_process(delta):
 	RenderingServer.global_shader_parameter_set("player_pos", position)
 	if not is_multiplayer_authority():return
@@ -33,8 +39,15 @@ func _physics_process(delta):
 	
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
 		is_walking=true
+		if is_on_floor() || position.y<0.2:
+			if str(footstep_controller.get_collider()).get_slice(":", 0)=="grass":
+				change_sound("res://sfx/walk_even_care.mp3")
 	else:
 		is_walking=false
+	
+	if Vector3(velocity.x,0,velocity.z).length()>0.1:
+		if !footstep_sound.playing:
+			footstep_sound.play()
 	
 	var magnitude = sqrt(h*h + v*v)
 	if magnitude > 1:
@@ -114,6 +127,7 @@ func _physics_process(delta):
 	if is_walking==false:
 		material.frame_coords = Vector2(animation_direction, 0)
 		current_frame=1
+		footstep_sound.stop()
 	else:
 		if material.hframes==1 || material.hframes==2 && Global.control_mode==0:
 				animation_direction=0
