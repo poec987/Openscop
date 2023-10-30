@@ -20,7 +20,8 @@ var current_character = "guardian"
 #MANAGEMENT
 var directory = DirAccess.open("user://")
 var widescreen = false
-var fulscreen = false
+var fullscreen = false
+var upscale = false
 var sheets = DirAccess.open("user://sheets")
 
 
@@ -28,16 +29,29 @@ func _ready():
 	if !directory.dir_exists("sheets"):
 		directory.make_dir("sheets")
 	SceneManager.change_scene("res://scenes/test.tscn")
-
+func adjust_resolution():
+	if widescreen:
+		if fullscreen:
+			get_viewport().content_scale_size = Vector2((DisplayServer.screen_get_size()).x/1.5,720)
+		else:
+			get_viewport().content_scale_size = Vector2(((DisplayServer.screen_get_size()).x+120)/1.5,720)
 func _process(delta):
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 	if Input.is_action_just_pressed("widescreen"):
 		widescreen = !widescreen
 		if !widescreen:
-			get_viewport().content_scale_size = Vector2(320,240)
-		if widescreen:
-			if !get_window().mode==Window.MODE_FULLSCREEN:
-				get_viewport().content_scale_size = Vector2(426,240)
-			else:
-				get_viewport().content_scale_size = Vector2(426,240)
+			#if upscale:
+			get_viewport().content_scale_size = Vector2(960,720)
+			#else:
+				#get_viewport().content_scale_size = Vector2(320,240)
+		else:
+			adjust_resolution()
+			#if fullscreen:
+				#get_viewport().content_scale_size = Vector2((DisplayServer.screen_get_size()).x/1.5,720)
+			#else:
+				#get_viewport().content_scale_size = Vector2(((DisplayServer.screen_get_size()).x+120)/1.5,720)
+	if Input.is_action_just_pressed("fullscreen"):
+		fullscreen = !fullscreen
+		adjust_resolution()
+		DisplayServer.window_set_mode((DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED))
