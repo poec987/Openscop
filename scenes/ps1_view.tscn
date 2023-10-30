@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8lsh4x501wbr"]
+[gd_scene load_steps=6 format=3 uid="uid://b8lsh4x501wbr"]
 
 [ext_resource type="Shader" path="res://shaders/ntsc.gdshader" id="1_ubixl"]
 [ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_ywao1"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="3_ltksg"]
+[ext_resource type="PackedScene" uid="uid://bs5ur4bnh0has" path="res://scenes/test.tscn" id="4_3hkrx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pciew"]
 shader = ExtResource("1_ubixl")
 shader_parameter/effect = null
-shader_parameter/ntsc_enable = null
+shader_parameter/ntsc_enable = true
 
 [node name="Node" type="Node"]
 script = ExtResource("1_ywao1")
@@ -51,4 +52,4 @@ audio_listener_enable_3d = true
 size = Vector2i(320, 240)
 render_target_update_mode = 4
 
-[node name="Node" type="Node" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+[node name="test" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view" instance=ExtResource("4_3hkrx")]

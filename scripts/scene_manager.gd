@@ -9,8 +9,6 @@ func change_scene(scene):
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("ntsc"):
-		RenderingServer.global_shader_parameter_set("ntsc_enable", !RenderingServer.global_shader_parameter_get("ntsc_enable"))
-	if Input.is_action_just_pressed("posterize"):
-		RenderingServer.global_shader_parameter_set("posterize", !RenderingServer.global_shader_parameter_get("posterize"))
+		get_node("PSXLayer/NTSC").get_material().set_shader_parameter("shader_enable", !get_node("PSXLayer/NTSC").get_material().get_shader_parameter("shader_enable"))
 	if Input.is_action_just_pressed("dither"):
-		RenderingServer.global_shader_parameter_set("dither_banding", !RenderingServer.global_shader_parameter_get("dither_banding"))
+		get_node("PSXLayer/NTSC/NTSC_viewport/Dither").get_material().set_shader_parameter("dither_banding", !get_node("PSXLayer/NTSC/NTSC_viewport/Dither").get_material().get_shader_parameter("dither_banding"))

@@ -108,11 +108,6 @@ dither={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":50,"key_label":0,"unicode":50,"echo":false,"script":null)
 ]
 }
-posterize={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":51,"key_label":0,"unicode":51,"echo":false,"script":null)
-]
-}
 
 [physics]
 
@@ -143,16 +138,4 @@ sphere_size={
 fog_color={
 "type": "vec4",
 "value": Vector4(0, 0, 0, 0)
-}
-dither_banding={
-"type": "bool",
-"value": true
-}
-ntsc_enable={
-"type": "bool",
-"value": true
-}
-posterize={
-"type": "bool",
-"value": true
 }
