@@ -25,6 +25,7 @@ var sheets = DirAccess.open("user://sheets")
 func _ready():
 	if !directory.dir_exists("sheets"):
 		directory.make_dir("sheets")
+	SceneManager.change_scene("res://scenes/test.tscn")
 
 func _process(delta):
 	if Input.is_action_just_pressed("open_sheet_folder"):

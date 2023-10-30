@@ -5,6 +5,7 @@ extends Node3D
 func _ready():
 	camera.position.x = Global.camera_dist_hor
 	camera.position.y = Global.camera_dist_ver
+	camera.rotation.x = -0.18*2
 	
 func _process(delta):		
 	if (abs(position.x-player.position.x) > Global.camera_limit_x) && Global.camera_move_x:

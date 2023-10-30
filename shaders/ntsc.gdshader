@@ -7,7 +7,7 @@ shader_type canvas_item;
    texture(TEXTURE, SCREEN_UV + vec2((offset) * (one_x), 0.0)).xyz
 
 uniform float effect;
-uniform bool enabled;
+uniform bool ntsc_enable;
 
 #define outsize vec4(OutputSize, 1.0 / OutputSize)
 
@@ -166,7 +166,7 @@ void fragment()
 
 	vec3 rgb = signal * 0.85;//yiq2rgb(signal);
 
-	if (enabled)
+	if (ntsc_enable)
 		COLOR = vec4(pow(rgb, vec3(NTSC_CRT_GAMMA / NTSC_MONITOR_GAMMA)), 1.0);
 	else
 		COLOR = COLOR;
