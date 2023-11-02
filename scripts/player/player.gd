@@ -44,6 +44,14 @@ func _physics_process(delta):
 				change_sound("res://sfx/grass.wav")
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="evencare":
 				change_sound("res://sfx/ec_steps.wav")
+			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement":
+				change_sound("res://sfx/cement.wav")
+			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement2":
+				change_sound("res://sfx/cement2.wav")
+			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement3":
+				change_sound("res://sfx/cement3.wav")
+			if str(footstep_controller.get_collider()).get_slice(":", 0)=="school":
+				change_sound("res://sfx/school_steps.wav")
 	else:
 		is_walking=false
 	
