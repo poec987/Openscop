@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://shaders/player.gdshader" id="2_trmqd"]
 [ext_resource type="Texture2D" uid="uid://tto7x3eghbjr" path="res://graphics/sprites/player/none.png" id="3_0l6ym"]
 [ext_resource type="Script" path="res://scripts/player/camera_root.gd" id="3_eo5w1"]
-[ext_resource type="AudioStream" uid="uid://csk7ibmcfkcr8" path="res://sfx/walk_even_care.mp3" id="5_dsemi"]
+[ext_resource type="AudioStream" uid="uid://dt0stqsgjaixf" path="res://sfx/grass.wav" id="5_lkjlo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s8dso"]
 resource_name = "player_collision"
@@ -64,7 +64,7 @@ collide_with_areas = true
 debug_shape_thickness = 5
 
 [node name="footstep" type="AudioStreamPlayer3D" parent="player"]
-stream = ExtResource("5_dsemi")
+stream = ExtResource("5_lkjlo")
 attenuation_model = 3
 volume_db = 2.0
 

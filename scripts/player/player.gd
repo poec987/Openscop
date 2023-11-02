@@ -30,7 +30,7 @@ func _ready():
 func change_sound(sound):
 
 	if str(footstep_sound.stream.get_path())!=sound:
-		footstep_sound.stream = load("res://sfx/walk_even_care.mp3")
+		footstep_sound.stream = load(sound)
 func _physics_process(delta):
 	RenderingServer.global_shader_parameter_set("player_pos", position)
 	if not is_multiplayer_authority():return
@@ -41,7 +41,9 @@ func _physics_process(delta):
 		is_walking=true
 		if is_on_floor() || position.y<0.2:
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="grass":
-				change_sound("res://sfx/walk_even_care.mp3")
+				change_sound("res://sfx/grass.wav")
+			if str(footstep_controller.get_collider()).get_slice(":", 0)=="evencare":
+				change_sound("res://sfx/ec_steps.wav")
 	else:
 		is_walking=false
 	
