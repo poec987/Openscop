@@ -1,55 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8lsh4x501wbr"]
+[gd_scene load_steps=2 format=3 uid="uid://b8lsh4x501wbr"]
 
-[ext_resource type="Shader" path="res://shaders/ntsc.gdshader" id="1_ubixl"]
 [ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_ywao1"]
-[ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="3_ltksg"]
-[ext_resource type="PackedScene" uid="uid://bs5ur4bnh0has" path="res://scenes/test.tscn" id="4_3hkrx"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pciew"]
-shader = ExtResource("1_ubixl")
-shader_parameter/effect = null
-shader_parameter/ntsc_enable = true
 
 [node name="Node" type="Node"]
 script = ExtResource("1_ywao1")
-
-[node name="PSXLayer" type="CanvasLayer" parent="."]
-
-[node name="NTSC" type="SubViewportContainer" parent="PSXLayer"]
-material = SubResource("ShaderMaterial_pciew")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-stretch = true
-
-[node name="NTSC_viewport" type="SubViewport" parent="PSXLayer/NTSC"]
-handle_input_locally = false
-canvas_item_default_texture_filter = 0
-audio_listener_enable_2d = true
-audio_listener_enable_3d = true
-size = Vector2i(960, 720)
-render_target_update_mode = 4
-
-[node name="Dither" type="SubViewportContainer" parent="PSXLayer/NTSC/NTSC_viewport"]
-material = ExtResource("3_ltksg")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-stretch = true
-stretch_shrink = 3
-
-[node name="dither_view" type="SubViewport" parent="PSXLayer/NTSC/NTSC_viewport/Dither"]
-handle_input_locally = false
-canvas_item_default_texture_filter = 0
-audio_listener_enable_2d = true
-audio_listener_enable_3d = true
-size = Vector2i(320, 240)
-render_target_update_mode = 4
-
-[node name="test" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view" instance=ExtResource("4_3hkrx")]
