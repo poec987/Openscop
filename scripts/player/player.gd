@@ -159,7 +159,7 @@ func _on_open_sheets_file_selected(path):
 	var image_texture = ImageTexture.new()
 	image_texture.set_image(image)
 	var settings = ""
-	if int(image_texture.get_size().x)%64!=0 || int(image_texture.get_size().y)%64!=0 || int(image_texture.get_size().x)%2!=0 || int(image_texture.get_size().y)%2!=0: 
+	if int(image_texture.get_size().x)%2!=0 || int(image_texture.get_size().y)%2!=0: 
 		reset_sheet()
 		OS.alert("This sheet has an uneven resolution.")
 	else:
@@ -183,6 +183,8 @@ func _on_open_sheets_file_selected(path):
 				first_frame = bool(int(settings.get_slice("/", 1)))
 				var player_scale = float(settings.get_slice("/", 2))
 				scale=Vector3(player_scale,player_scale,player_scale)
+				material.pixel_size = 0.015/ (int(settings.get_slice("/", 0))/64)
+				material.offset.y = (int(settings.get_slice("/", 0)))/2
 			else:
 				material.hframes = image_texture.get_size().x/64
 				material.vframes = image_texture.get_size().y/64
@@ -192,7 +194,7 @@ func _on_open_sheets_file_selected(path):
 			head.get_material_override().set_shader_parameter("albedoTex", head.texture)
 		material.frame_coords = Vector2(0,0)
 	
-	if int(material.texture.get_size().x)>576 && int(material.texture.get_size().y)>576:
+	if int(material.texture.get_size().x)>640 && int(material.texture.get_size().y)>640:
 		reset_sheet()
 		OS.alert("Sheet resolution is too big.")
 	
@@ -204,4 +206,6 @@ func reset_sheet():
 	head.get_material_override().set_shader_parameter("albedoTex", head.texture)
 	material.hframes = 5
 	material.vframes = 5
+	material.offset.y = 32
+	material.pixel_size = 0.015
 	scale=Vector3(1.0,1.0,1.0)
