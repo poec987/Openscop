@@ -1,11 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://ciyscr1kgpgnf"]
 
-[ext_resource type="Shader" path="res://shaders/ntsc.gdshader" id="1_antav"]
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
+[ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="2_ise61"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
-shader = ExtResource("1_antav")
+shader = ExtResource("2_55hn4")
+shader_parameter/effect = null
+shader_parameter/ntsc_enable = null
 
 [node name="PSXLayer" type="CanvasLayer"]
 script = ExtResource("1_fp4cd")

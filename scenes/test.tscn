@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs5ur4bnh0has"]
+[gd_scene load_steps=5 format=3 uid="uid://bs5ur4bnh0has"]
 
-[ext_resource type="PackedScene" uid="uid://cx85n6svnhppy" path="res://scenes/objects/player.tscn" id="1_e3cb5"]
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/player.tscn" id="1_e3cb5"]
 [ext_resource type="Script" path="res://scripts/player/grass.gd" id="2_q3i23"]
-[ext_resource type="PackedScene" uid="uid://d36bd6cref07y" path="res://scenes/objects/food.tscn" id="2_wg3qj"]
 [ext_resource type="PackedScene" uid="uid://dgoxysshxruys" path="res://scenes/objects/grass.tscn" id="3_qmd8q"]
 [ext_resource type="Environment" uid="uid://dxxprnd84je6j" path="res://scenes/world_env.tres" id="5_q5f7d"]
 
@@ -41,21 +40,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 28.5)
 
 [node name="MeshInstance3D3" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -29.5)
-
-[node name="food_root" parent="." instance=ExtResource("2_wg3qj")]
-transform = Transform3D(1, 0, 0, 0, 0.999082, -0.0428347, 0, 0.0428347, 0.999082, 0, 0.542834, 3.38168)
-
-[node name="food_root2" parent="." instance=ExtResource("2_wg3qj")]
-transform = Transform3D(0.999999, 4.70992e-05, 0.00109855, 0, 0.999082, -0.0428347, -0.00109956, 0.0428347, 0.999082, 3.59462, 0.542834, 3.38168)
-
-[node name="food_root3" parent="." instance=ExtResource("2_wg3qj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65282, 0.760663, 0)
-
-[node name="food_root4" parent="." instance=ExtResource("2_wg3qj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.28905, 0.860086, 0)
-
-[node name="food_root5" parent="." instance=ExtResource("2_wg3qj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77961, 0.860086, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("5_q5f7d")
