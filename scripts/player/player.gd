@@ -28,10 +28,13 @@ func change_sound(sound):
 		footstep_sound.stream = load(sound)
 func _physics_process(delta):
 	RenderingServer.global_shader_parameter_set("player_pos", position)
-	if not is_multiplayer_authority():return
-	var v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
-	var h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
-	
+
+	var v = 0.0
+	var h = 0.0
+	if Global.control_mode==0:
+		v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
+		h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
+
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
 		is_walking=true
 		if is_on_floor() || position.y<0.2:
@@ -59,19 +62,17 @@ func _physics_process(delta):
 		h /= magnitude
 		v /= magnitude
 	
-	if Global.control_mode==0:
-		velocity.x = lerp(velocity.x,h*MOVEMENT_SPEED,(delta)*ACCELERATION)
-		velocity.z = lerp(velocity.z,v*MOVEMENT_SPEED,(delta)*ACCELERATION)
+	velocity.x = lerp(velocity.x,h*MOVEMENT_SPEED,(delta)*ACCELERATION)
+	velocity.z = lerp(velocity.z,v*MOVEMENT_SPEED,(delta)*ACCELERATION)
 	
-	if Global.control_mode==0:
-		if h > 0:
-			animation_direction=0
-		elif h < 0:
-			animation_direction=3
-		if v > 0:
-			animation_direction=2
-		elif v < 0:
-			animation_direction=1
+	if h > 0:
+		animation_direction=0
+	elif h < 0:
+		animation_direction=3
+	if v > 0:
+		animation_direction=2
+	elif v < 0:
+		animation_direction=1
 			
 	if	get_node("collision").position.y<0+(get_node("collision").shape.size.y/2):
 			get_node("collision").position.y = 0+(get_node("collision").shape.size.y/2)
@@ -97,8 +98,11 @@ func _physics_process(delta):
 		reset_sheet()
 	if Input.is_action_just_pressed("oeptos") && !is_walking:
 		animation_direction=4
-
+		
+		
 	move_and_slide()
+		
+	
 	if position.y <= 0:
 		velocity.y = 0
 		position.y = 0.01

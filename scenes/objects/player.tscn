@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dng2iqsytyb72"]
+[gd_scene load_steps=12 format=3 uid="uid://dng2iqsytyb72"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_l7eau"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="2_a2356"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://tto7x3eghbjr" path="res://graphics/sprites/player/none.png" id="3_0l6ym"]
 [ext_resource type="Script" path="res://scripts/player/camera_root.gd" id="3_eo5w1"]
 [ext_resource type="AudioStream" uid="uid://dvip8isc7rg2n" path="res://sfx/ec_steps.wav" id="5_o8tug"]
+[ext_resource type="FontFile" uid="uid://0p4r1h52icbk" path="res://graphics/sprites/ui/p2totalk.fnt" id="6_q7wbx"]
 [ext_resource type="PackedScene" uid="uid://ciyscr1kgpgnf" path="res://scenes/objects/cam_setup.tscn" id="7_wt3nb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s8dso"]
@@ -68,6 +69,15 @@ debug_shape_thickness = 5
 stream = ExtResource("5_o8tug")
 attenuation_model = 3
 volume_db = 2.0
+
+[node name="Label3D" type="Label3D" parent="player"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.97, 0)
+pixel_size = 0.0126
+offset = Vector2(0, 5)
+billboard = 1
+texture_filter = 0
+text = "1@8347"
+font = ExtResource("6_q7wbx")
 
 [node name="camera_root" type="Node3D" parent="."]
 script = ExtResource("3_eo5w1")

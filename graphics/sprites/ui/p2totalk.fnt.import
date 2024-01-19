@@ -1,0 +1,16 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://0p4r1h52icbk"
+path="res://.godot/imported/p2totalk.fnt-4254942d68fd72b574fc947bda47fa68.fontdata"
+
+[deps]
+
+source_file="res://graphics/sprites/ui/p2totalk.fnt"
+dest_files=["res://.godot/imported/p2totalk.fnt-4254942d68fd72b574fc947bda47fa68.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true

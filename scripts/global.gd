@@ -42,3 +42,9 @@ func _process(delta):
 		fullscreen = !fullscreen
 		adjust_resolution()
 		DisplayServer.window_set_mode((DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED))
+	if Input.is_action_just_pressed("change_mode"):
+		if Global.control_mode<2:
+			Global.control_mode+=1
+		else:
+			Global.control_mode=0
+		
