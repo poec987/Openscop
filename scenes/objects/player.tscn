@@ -76,7 +76,6 @@ pixel_size = 0.0126
 offset = Vector2(0, 5)
 billboard = 1
 texture_filter = 0
-text = "1@8347"
 font = ExtResource("6_q7wbx")
 
 [node name="camera_root" type="Node3D" parent="."]

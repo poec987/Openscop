@@ -17,6 +17,10 @@ var animation_direction = 0
 #GAME MANAGEMENT
 var current_frame = 0
 
+#P2TOTALK
+var word = ""
+var last_press = ""
+
 @onready var material = get_node("sprite")
 @onready var head = get_node("head")
 @onready var footstep_controller = get_node("footstep_controller")
@@ -97,8 +101,8 @@ func _physics_process(delta):
 		get_node("../OpenSheets").show()
 	if Input.is_action_just_pressed("default_char"):
 		reset_sheet()
-	if Input.is_action_just_pressed("oeptos") && !is_walking:
-		animation_direction=4
+	#if Input.is_action_just_pressed("oeptos") && !is_walking:
+		#animation_direction=4
 		
 		
 	move_and_slide()
@@ -120,7 +124,131 @@ func _physics_process(delta):
 			current_frame=1
 
 		material.frame_coords = Vector2(animation_direction, floor(current_frame))
-
+		
+		
+		
+	if Global.control_mode==1:
+		if Input.is_action_just_pressed("pressed_action"):
+			p2_talk.text+="5"
+			if last_press=="L1":
+				word+="S "
+			elif last_press=="L2":
+				word+="M "
+			elif last_press=="R1":
+				word+="EY "
+			elif last_press=="R2":
+				word+="UW "
+			else:
+				word+="AA "
+			last_press = ""
+		if Input.is_action_just_pressed("pressed_triangle"):
+			p2_talk.text+="8"
+			if last_press=="L1":
+				word+="SH "
+			elif last_press=="L2":
+				word+="L "
+			elif last_press=="R1":
+				word+="IH "
+			elif last_press=="R2":
+				word+="B "
+			else:
+				word+="AO "
+			last_press = ""
+		if Input.is_action_just_pressed("pressed_circle"):
+			p2_talk.text+="7"
+			if last_press=="L1":
+				word+="ZH "
+			elif last_press=="L2":
+				word+="R "
+			elif last_press=="R1":
+				word+="IY "
+			elif last_press=="R2":
+				word+="T "
+			else:
+				word+="AW "
+			last_press = ""
+		if Input.is_action_just_pressed("pressed_square"):
+			p2_talk.text+="6"
+			if last_press=="L1":
+				word+="Z "
+			elif last_press=="L2":
+				word+="N "
+			elif last_press=="R2":
+				word+="P "
+			else:
+				word+="AE "
+			last_press = ""
+		if Input.is_action_just_pressed("pressed_up"):
+			p2_talk.text+="@"
+			if last_press=="L1":
+				word+="JH "
+			elif last_press=="L2":
+				word+="Y "
+			elif last_press=="R1":
+				word+="OW "
+			elif last_press=="R2":
+				word+="F "
+			else:
+				word+="AY "
+			last_press = ""
+		if Input.is_action_just_pressed("pressed_down"):
+			p2_talk.text+="#"
+			if last_press=="L1":
+				word+="K "
+			elif last_press=="L2":
+				word+="HH "
+			elif last_press=="R1":
+				word+="OY "
+			elif last_press=="R2":
+				word+="V "
+			else:
+				word+="AE "
+			last_press = ""
+		if Input.is_action_just_pressed("pressed_left"):
+			p2_talk.text+="9"
+			if last_press=="L1":
+				word+="NG "
+			elif last_press=="L2":
+				word+="UH "
+			elif last_press=="R2":
+				word+="TH "
+			else:
+				word+="EH "
+			last_press = ""
+		if Input.is_action_just_pressed("pressed_right"):
+			p2_talk.text+="!"
+			if last_press=="L1":
+				word+="G "
+			elif last_press=="R1":
+				word+="UH "
+			elif last_press=="R2":
+				word+="DH "
+			else:
+				word+="ER "
+			last_press = ""
+		if Input.is_action_just_pressed("pressed_l1"):
+			p2_talk.text+="4"
+			last_press="L1"
+		if Input.is_action_just_pressed("pressed_l2"):
+			p2_talk.text+="3"
+			last_press="L2"
+		if Input.is_action_just_pressed("pressed_r1"):
+			p2_talk.text+="2"
+			last_press="R1"
+		if Input.is_action_just_pressed("pressed_r2"):
+			p2_talk.text+="1"
+			last_press="R2"
+		if Input.is_action_just_pressed("pressed_start"):
+			p2_talk.text+="$"
+			if last_press=="L1":
+				word+="CH "
+			elif last_press=="L2":
+				word+="W "
+			elif last_press=="R2":
+				word+="D "
+			else:
+				word+="AH "
+			last_press = ""
 
 func _on_open_sheets_file_selected(path):
 	var image = Image.new()
