@@ -70,7 +70,7 @@ stream = ExtResource("5_o8tug")
 attenuation_model = 3
 volume_db = 2.0
 
-[node name="Label3D" type="Label3D" parent="player"]
+[node name="p2_talk_buttons" type="Label3D" parent="player"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.97, 0)
 pixel_size = 0.0126
 offset = Vector2(0, 5)

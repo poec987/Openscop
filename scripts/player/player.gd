@@ -19,8 +19,9 @@ var current_frame = 0
 
 @onready var material = get_node("sprite")
 @onready var head = get_node("head")
-@onready var footstep_controller=get_node("footstep_controller")
-@onready var footstep_sound=get_node("footstep")
+@onready var footstep_controller = get_node("footstep_controller")
+@onready var footstep_sound = get_node("footstep")
+@onready var p2_talk = get_node("p2_talk_buttons")
 
 func change_sound(sound):
 
