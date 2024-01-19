@@ -38,12 +38,6 @@ func adjust_resolution():
 func _process(delta):
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
-	if Input.is_action_just_pressed("widescreen"):
-		widescreen = !widescreen
-		if !widescreen:
-			get_viewport().content_scale_size = Vector2(960,720)
-		else:
-			adjust_resolution()
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreen = !fullscreen
 		adjust_resolution()

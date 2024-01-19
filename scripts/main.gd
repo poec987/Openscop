@@ -1,8 +1,10 @@
+#BY EONORANGE/tam6879 AND CHEDDAR/TechMan06
 extends Node3D
 const PORT = 7777
 @onready var test_level = "res://scenes/test.tscn"
 @onready var level_holder = $level
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
 	load_level()
 
