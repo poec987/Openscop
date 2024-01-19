@@ -96,7 +96,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("default_char"):
 		reset_sheet()
 	if Input.is_action_just_pressed("oeptos") && !is_walking:
-		current_frame=0
+		animation_direction=4
 
 	move_and_slide()
 	if position.y <= 0:
