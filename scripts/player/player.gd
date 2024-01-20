@@ -267,8 +267,9 @@ func _physics_process(delta):
 				word+="AH "
 			last_press = ""
 			get_node("button_press").play()
-		if Input.is_action_just_pressed("pressed_select") && word!="" && can_submit:
-			word = word.erase(word.length()-1,1)
+		if Input.is_action_just_pressed("pressed_select") && p2_talk.text!="" && can_submit:
+			if word!="":
+				word = word.erase(word.length()-1,1)
 			create_word()
 			word = ""
 			last_press = ""
