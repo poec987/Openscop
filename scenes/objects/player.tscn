@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dng2iqsytyb72"]
+[gd_scene load_steps=13 format=3 uid="uid://dng2iqsytyb72"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_l7eau"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="2_a2356"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/player/camera_root.gd" id="3_eo5w1"]
 [ext_resource type="AudioStream" uid="uid://dvip8isc7rg2n" path="res://sfx/ec_steps.wav" id="5_o8tug"]
 [ext_resource type="FontFile" uid="uid://0p4r1h52icbk" path="res://graphics/sprites/ui/p2totalk.fnt" id="6_q7wbx"]
+[ext_resource type="AudioStream" uid="uid://bt6ioueosnk6j" path="res://sfx/p2button.wav" id="7_3u8g8"]
 [ext_resource type="PackedScene" uid="uid://ciyscr1kgpgnf" path="res://scenes/objects/cam_setup.tscn" id="7_wt3nb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s8dso"]
@@ -71,12 +72,23 @@ attenuation_model = 3
 volume_db = 2.0
 
 [node name="p2_talk_buttons" type="Label3D" parent="player"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.97, 0)
-pixel_size = 0.0126
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.8, 0)
 offset = Vector2(0, 5)
 billboard = 1
+fixed_size = true
 texture_filter = 0
+text = "!!!!!"
 font = ExtResource("6_q7wbx")
+font_size = 1
+outline_size = 0
+uppercase = true
+
+[node name="P2_talk" type="Node3D" parent="player/p2_talk_buttons"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
+
+[node name="button_press" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("7_3u8g8")
+volume_db = 10.0
 
 [node name="camera_root" type="Node3D" parent="."]
 script = ExtResource("3_eo5w1")

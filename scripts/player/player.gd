@@ -20,12 +20,17 @@ var current_frame = 0
 #P2TOTALK
 var word = ""
 var last_press = ""
+var can_submit = true
 
 @onready var material = get_node("sprite")
 @onready var head = get_node("head")
 @onready var footstep_controller = get_node("footstep_controller")
 @onready var footstep_sound = get_node("footstep")
 @onready var p2_talk = get_node("p2_talk_buttons")
+@onready var p2_talk_word = preload("res://scenes/objects/p2_talk_word.tscn")
+
+func allow_typing():
+	can_submit=true
 
 func change_sound(sound):
 
@@ -141,6 +146,7 @@ func _physics_process(delta):
 			else:
 				word+="AA "
 			last_press = ""
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_triangle"):
 			p2_talk.text+="8"
 			if last_press=="L1":
@@ -154,6 +160,7 @@ func _physics_process(delta):
 			else:
 				word+="AO "
 			last_press = ""
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_circle"):
 			p2_talk.text+="7"
 			if last_press=="L1":
@@ -167,6 +174,7 @@ func _physics_process(delta):
 			else:
 				word+="AW "
 			last_press = ""
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_square"):
 			p2_talk.text+="6"
 			if last_press=="L1":
@@ -178,6 +186,7 @@ func _physics_process(delta):
 			else:
 				word+="AE "
 			last_press = ""
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_up"):
 			p2_talk.text+="@"
 			if last_press=="L1":
@@ -191,6 +200,7 @@ func _physics_process(delta):
 			else:
 				word+="AY "
 			last_press = ""
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_down"):
 			p2_talk.text+="#"
 			if last_press=="L1":
@@ -204,6 +214,7 @@ func _physics_process(delta):
 			else:
 				word+="AE "
 			last_press = ""
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_left"):
 			p2_talk.text+="9"
 			if last_press=="L1":
@@ -215,6 +226,7 @@ func _physics_process(delta):
 			else:
 				word+="EH "
 			last_press = ""
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_right"):
 			p2_talk.text+="!"
 			if last_press=="L1":
@@ -226,18 +238,23 @@ func _physics_process(delta):
 			else:
 				word+="ER "
 			last_press = ""
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_l1"):
 			p2_talk.text+="4"
 			last_press="L1"
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_l2"):
 			p2_talk.text+="3"
 			last_press="L2"
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_r1"):
 			p2_talk.text+="2"
 			last_press="R1"
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_r2"):
 			p2_talk.text+="1"
 			last_press="R2"
+			get_node("button_press").play()
 		if Input.is_action_just_pressed("pressed_start"):
 			p2_talk.text+="$"
 			if last_press=="L1":
@@ -249,6 +266,27 @@ func _physics_process(delta):
 			else:
 				word+="AH "
 			last_press = ""
+			get_node("button_press").play()
+		if Input.is_action_just_pressed("pressed_select") && word!="" && can_submit:
+			create_word()
+			word = ""
+			last_press = ""
+			p2_talk.text = ""
+			can_submit = false
+
+func create_word():
+	var word_instance = p2_talk_word.instantiate()
+	word_instance.text = word
+	get_node("p2_talk_buttons/P2_talk").add_child(word_instance)
+	var child_index = 0
+	for word in get_node("p2_talk_buttons/P2_talk").get_children():
+		if child_index!=get_node("p2_talk_buttons/P2_talk").get_child_count()-1:
+			create_tween().tween_property(word, "position", Vector3(0, 0.5, 0), 1.0).set_trans(Tween.TRANS_SINE).as_relative()
+		else:
+			var tween = create_tween()
+			tween.tween_property(word, "position", Vector3(0, 1.0, 0), 1.0).set_trans(Tween.TRANS_SINE).as_relative()
+			tween.tween_callback(allow_typing)
+		child_index+=1
 
 func _on_open_sheets_file_selected(path):
 	var image = Image.new()
