@@ -77,7 +77,6 @@ offset = Vector2(0, 5)
 billboard = 1
 fixed_size = true
 texture_filter = 0
-text = "!!!!!"
 font = ExtResource("6_q7wbx")
 font_size = 1
 outline_size = 0
