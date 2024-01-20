@@ -21,7 +21,7 @@ var current_frame = 0
 var word = ""
 var last_press = ""
 var can_submit = true
-
+var p2talk_data = {}
 @onready var material = get_node("sprite")
 @onready var head = get_node("head")
 @onready var footstep_controller = get_node("footstep_controller")
@@ -278,7 +278,7 @@ func _physics_process(delta):
 
 func create_word():
 	var word_instance = p2_talk_word.instantiate()
-	word_instance.text = word
+	word_instance.text = Global.get_p2_word(word)
 	get_node("p2_talk_buttons/P2_talk").add_child(word_instance)
 	var child_index = 0
 	for word in get_node("p2_talk_buttons/P2_talk").get_children():

@@ -23,11 +23,12 @@ var widescreen = false
 var fullscreen = false
 var upscale = false
 var sheets = DirAccess.open("user://sheets")
-
+var p2talkdict = {}
 
 func _ready():
 	if !directory.dir_exists("sheets"):
 		directory.make_dir("sheets")
+	p2talkdict = JSON.parse_string((FileAccess.open("res://scripts/p2_talk_data.json", FileAccess.READ)).get_as_text())
 	# SceneManager.change_scene("res://scenes/test.tscn")
 func adjust_resolution():
 	if widescreen:
@@ -47,4 +48,10 @@ func _process(delta):
 			Global.control_mode+=1
 		else:
 			Global.control_mode=0
+			
+func get_p2_word(word):
+	if p2talkdict.find_key(word)!=null:
+		return str(p2talkdict.find_key(word)).to_lower().capitalize()
+	else:
+		return "Not in Table"
 		
