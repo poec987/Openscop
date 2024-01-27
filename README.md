@@ -23,3 +23,6 @@ TechMan06
 
 **Sound:**
 Taken from "Petscop Soundtrack" by Anthony Domenico (https://petscop.bandcamp.com/album/petscop-soundtrack)
+**Ripped by**:
+BrowserTG5
+Lewgus
