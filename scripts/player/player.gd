@@ -286,12 +286,12 @@ func create_word():
 	word_instance.text = Global.get_p2_word(word)
 	get_node("p2_talk_buttons/P2_talk").add_child(word_instance)
 	var child_index = 0
-	for word in get_node("p2_talk_buttons/P2_talk").get_children():
+	for words in get_node("p2_talk_buttons/P2_talk").get_children():
 		if child_index!=get_node("p2_talk_buttons/P2_talk").get_child_count()-1:
-			create_tween().tween_property(word, "position", Vector3(0, 0.5, 0), 1.0).set_trans(Tween.TRANS_SINE).as_relative()
+			create_tween().tween_property(words, "position", Vector3(0, 0.5, 0), 1.0).set_trans(Tween.TRANS_SINE).as_relative()
 		else:
 			var tween = create_tween()
-			tween.tween_property(word, "position", Vector3(0, 1.0, 0), 1.0).set_trans(Tween.TRANS_SINE).as_relative()
+			tween.tween_property(words, "position", Vector3(0, 1.0, 0), 1.0).set_trans(Tween.TRANS_SINE).as_relative()
 			tween.tween_callback(allow_typing)
 		child_index+=1
 

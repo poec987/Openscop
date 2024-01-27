@@ -42,7 +42,7 @@ func adjust_resolution():
 			get_viewport().content_scale_size = Vector2((DisplayServer.screen_get_size()).x/1.5,720)
 		else:
 			get_viewport().content_scale_size = Vector2(((DisplayServer.screen_get_size()).x+120)/1.5,720)
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 	if Input.is_action_just_pressed("fullscreen"):
