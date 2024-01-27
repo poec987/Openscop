@@ -10,6 +10,7 @@ Newmaker Plane Grass: Giftscop
 P2toTalk buttons: Giftscop
 
 **Programming**
+EonOrange
 TechMan06
 
 **Sound:**
