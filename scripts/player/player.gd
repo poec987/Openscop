@@ -2,52 +2,71 @@ extends CharacterBody3D
 
 # MOVEMENT VARIABLES
 
-const MOVEMENT_SPEED = 5
+var movement_speed = 5
 const ACCELERATION = 8
 var is_walking = false
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+#GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP
+#var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #ANIMATION PROPERTIES
 var first_frame = false
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 2
 var animation_direction = 0
-
-#GAME MANAGEMENT
 var current_frame = 0
 
-#P2TOTALK
+#P2TOTALK RELATED VARIABLES AND OBJECTS
 var word = ""
 var last_press = ""
 var can_submit = true
-var p2talk_data = {}
-@onready var material = get_node("sprite")
-@onready var head = get_node("head")
-@onready var footstep_controller = get_node("footstep_controller")
-@onready var footstep_sound = get_node("footstep")
 @onready var p2_talk = get_node("p2_talk_buttons")
 @onready var p2_talk_word = preload("res://scenes/objects/setup/player/p2_talk_word.tscn")
+
+
+#PLAYER SPRITE RELATED OBJECTS
+@onready var material = get_node("sprite")
+@onready var head = get_node("head")
+
+#FOOTSTEP RELATED OBJECTS
+@onready var footstep_controller = get_node("footstep_controller")
+@onready var footstep_sound = get_node("footstep")
 
 func allow_typing():
 	can_submit=true
 
+#CODE THAT CHANGES FOOTSTEP SOUND
 func change_sound(sound):
 
 	if str(footstep_sound.stream.get_path())!=sound:
 		footstep_sound.stream = load(sound)
+		
+#PHYSICS PROCESS
+#TO-DO: ORGANIZE PROPERLY
 func _physics_process(delta):
+	
+	#VARIABLE DEFINES IF FOG SHOULD FOLLOW PLAYER OR NOT
+	#WILL BE USED LATER ON FOR THINGS LIKE WINDMILL EVENT AND BASEMENT MACHINE
+	#USELESS FOR NOW
 	if Global.fog_focus==0:
 		RenderingServer.global_shader_parameter_set("player_pos", position)
 	var v = 0.0
 	var h = 0.0
+	
+	#CONTROL MODE 0: CONTROL PLAYER NORMALLY
 	if Global.control_mode==0:
+		#CREATES MOVEMENT VECTORS
 		v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
 		h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
 
+	#DETECTS IF PLAYER IS WALKING BEFORE ANIMATING AND MAKE FOOTSTEP SOUND
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
+		if !footstep_sound.playing:
+			footstep_sound.play()
 		is_walking=true
-		if is_on_floor() || position.y<0.2:
+		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
+		if is_on_floor() || position.y==0.0:
+			#CHECKS IF BELOW PLAYER THERE'S MESH WITH THESE NAMES
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="grass":
 				change_sound("res://sfx/player/grass.wav")
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="evencare":
@@ -61,20 +80,20 @@ func _physics_process(delta):
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="school":
 				change_sound("res://sfx/player/school_steps.wav")
 	else:
+		#IF SPEED NOT FASTER THAN 0.2, DISABLE WALKING ANIM
 		is_walking=false
-	
-	if Vector3(velocity.x,0,velocity.z).length()>0.1:
-		if !footstep_sound.playing:
-			footstep_sound.play()
-	
+		
+	#REGULATES PLAYER SPEED SO IT DOESNT GO FASTER WHEN WALKING ON DIAGONALS
 	var magnitude = sqrt(h*h + v*v)
 	if magnitude > 1:
 		h /= magnitude
 		v /= magnitude
 	
-	velocity.x = lerp(velocity.x,h*MOVEMENT_SPEED,(delta)*ACCELERATION)
-	velocity.z = lerp(velocity.z,v*MOVEMENT_SPEED,(delta)*ACCELERATION)
+	#SETS PLAYER VELOCITY ACCORDING TO VECTOR
+	velocity.x = lerp(velocity.x,h*movement_speed,(delta)*ACCELERATION)
+	velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
 	
+	#CHANGES PLAYER SPRITE DEPENDING ON DIRECTION
 	if h > 0:
 		animation_direction=0
 	elif h < 0:
@@ -84,9 +103,8 @@ func _physics_process(delta):
 	elif v < 0:
 		animation_direction=1
 			
-	if	get_node("collision").position.y<0+(get_node("collision").shape.size.y/2):
-			get_node("collision").position.y = 0+(get_node("collision").shape.size.y/2)
 	
+	#DOES HEAD BOPPING
 	if material.frame_coords.y==2 || material.frame_coords.y==4:
 		head.offset.y=39
 	else:
@@ -98,10 +116,11 @@ func _physics_process(delta):
 	else:
 		head.flip_h=false
 	
-	# Add the gravity.
+#GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP
 	#if not is_on_floor():
 		#velocity.y -= gravity * delta
 	
+#HANDLES A BUNCH OF KEYBOARD SHORTCUTS
 	if Input.is_action_just_released("sheet_hotkey"):
 		get_node("../OpenSheets").show()
 	if Input.is_action_just_pressed("default_char"):
@@ -114,6 +133,7 @@ func _physics_process(delta):
 		if Global.control_mode==1:
 			get_node("mode_change").stop()
 			get_node("mode_change").play()
+#SUBMIT P2TOTALK WORD
 	if Input.is_action_just_pressed("pressed_select") && p2_talk.text!="" && can_submit:
 		if word!="":
 			word = word.erase(word.length()-1,1)
@@ -122,30 +142,34 @@ func _physics_process(delta):
 		last_press = ""
 		p2_talk.text = ""
 		can_submit = false
-		
+
+#MOVES THE PLAYER
 	move_and_slide()
 		
-	
+#GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP	
 	#if position.y <= 0:
 		#velocity.y = 0
 		#position.y = 0.01
-		
+
+#IF PLAYER IS NOT WALKING
 	if is_walking==false:
 		material.frame_coords = Vector2(animation_direction, 0)
 		current_frame=1
 		footstep_sound.stop()
 	else:
+		#IF PLAYER IS WALKING
 		head.frame_coords= Vector2(0,0)
 		material.vframes = int(material.texture.get_size().y)/(int(material.texture.get_size().x)/material.hframes) # animations
 		current_frame+=ANIMATION_SPEED*delta
 		if current_frame>material.vframes:
 			current_frame=1
-
+	#UPDATE FRAMES
 		material.frame_coords = Vector2(animation_direction, floor(current_frame))
 		
 		
-		
+#IF PLAYER IS ON P2TOTALK MODE
 	if Global.control_mode==1:
+	#CONVERTS INPUTS TO PHONETICS
 		if Input.is_action_just_pressed("pressed_action"):
 			p2_talk.text+="5"
 			if last_press=="L1":
@@ -281,6 +305,7 @@ func _physics_process(delta):
 			last_press = ""
 			get_node("button_press").play()
 
+#PROCESSES INPUTS SUBMITTED, CHECKS TABLE, AND SPAWNS FLOATING WORD
 func create_word():
 	var word_instance = p2_talk_word.instantiate()
 	word_instance.text = Global.get_p2_word(word)
@@ -295,11 +320,14 @@ func create_word():
 			tween.tween_callback(allow_typing)
 		child_index+=1
 
+#LOADS CUTSOM SHEETS
 func _on_open_sheets_file_selected(path):
+	#PNG HAS TO BE TURNED INTO TEXTURE AND LOADED INTO VRAM BEFORE BEING APPLIED
 	var image = Image.new()
 	image.load(path)
 	var image_texture = ImageTexture.new()
 	image_texture.set_image(image)
+	#CHECK IF HEADSHEET, OR ELSE ITS PLAYER HEADSHEET
 	if "head_.png" in path:
 		head.texture = image_texture
 		head.get_material_override().set_shader_parameter("albedoTex", head.texture)
@@ -310,7 +338,8 @@ func _on_open_sheets_file_selected(path):
 		material.texture = image_texture
 		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 		head.get_material_override().set_shader_parameter("albedoTex", head.texture)
-	
+
+#RESETS CHARACTER
 func reset_sheet():
 	material.texture = load("res://graphics/sprites/player/guardian.png")
 	head.texture = load("res://graphics/sprites/player/none.png")
