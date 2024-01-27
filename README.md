@@ -7,6 +7,7 @@ The project runs on a modified version of MMOscop's source code with most sheet-
 
 
 ### Credits:
+
 **Sprites:**
 
 Guardian: Giftscop
@@ -17,12 +18,18 @@ P2toTalk buttons: Giftscop
 
 
 **Programming**
+
 EonOrange
+
 TechMan06
 
 
 **Sound:**
+
 Taken from "Petscop Soundtrack" by Anthony Domenico (https://petscop.bandcamp.com/album/petscop-soundtrack)
+
 **Ripped by**:
+
 BrowserTG5
+
 Lewgus
