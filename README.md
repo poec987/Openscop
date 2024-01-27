@@ -5,8 +5,11 @@ The project runs on a modified version of MMOscop's source code with most sheet-
 
 ### Credits:
 **Sprites:**
+
 Guardian: Giftscop
+
 Newmaker Plane Grass: Giftscop
+
 P2toTalk buttons: Giftscop
 
 **Programming**
