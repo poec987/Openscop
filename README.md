@@ -3,6 +3,9 @@ This project, which has the name inspired and taken from the "Godotscop" project
 
 The project runs on a modified version of MMOscop's source code with most sheet-related features removed, and no networking related code.
 
+
+
+
 ### Credits:
 **Sprites:**
 
@@ -12,9 +15,11 @@ Newmaker Plane Grass: Giftscop
 
 P2toTalk buttons: Giftscop
 
+
 **Programming**
 EonOrange
 TechMan06
+
 
 **Sound:**
 Taken from "Petscop Soundtrack" by Anthony Domenico (https://petscop.bandcamp.com/album/petscop-soundtrack)
