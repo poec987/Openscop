@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://b5bb2msxew5n"
-path="res://.godot/imported/cement.wav-484bc32082fe35c8120da54692a77c6e.sample"
+uid="uid://bt6ioueosnk6j"
+path="res://.godot/imported/p2button.wav-46945337d2b11bb271e7ea823c901f29.sample"
 
 [deps]
 
-source_file="res://sfx/cement.wav"
-dest_files=["res://.godot/imported/cement.wav-484bc32082fe35c8120da54692a77c6e.sample"]
+source_file="res://sfx/player/p2talk/p2button.wav"
+dest_files=["res://.godot/imported/p2button.wav-46945337d2b11bb271e7ea823c901f29.sample"]
 
 [params]
 

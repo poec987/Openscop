@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
 shader_parameter/effect = null
-shader_parameter/ntsc_enable = true
+shader_parameter/ntsc_enable = false
 
 [node name="PSXLayer" type="CanvasLayer"]
 script = ExtResource("1_fp4cd")

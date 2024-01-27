@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dvip8isc7rg2n"
-path="res://.godot/imported/ec_steps.wav-8c19502ef1a387be5c1641e3dcd2e979.sample"
+uid="uid://wtrluuy8i0ms"
+path="res://.godot/imported/p2paul.wav-3e91fecda351805c9ca18b8e13a27214.sample"
 
 [deps]
 
-source_file="res://sfx/ec_steps.wav"
-dest_files=["res://.godot/imported/ec_steps.wav-8c19502ef1a387be5c1641e3dcd2e979.sample"]
+source_file="res://sfx/player/p2talk/p2paul.wav"
+dest_files=["res://.godot/imported/p2paul.wav-3e91fecda351805c9ca18b8e13a27214.sample"]
 
 [params]
 

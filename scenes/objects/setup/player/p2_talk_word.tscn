@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://u4jooo2vriyg"]
+[gd_scene load_steps=4 format=3 uid="uid://x6r0qg4ucbhy"]
 
-[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="1_571nv"]
-[ext_resource type="AudioStream" uid="uid://wtrluuy8i0ms" path="res://sfx/p2paul.wav" id="2_yn6k8"]
+[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="1_1sff2"]
+[ext_resource type="AudioStream" uid="uid://wtrluuy8i0ms" path="res://sfx/player/p2talk/p2paul.wav" id="2_nu0o6"]
 
 [sub_resource type="GDScript" id="GDScript_smphi"]
 script/source = "extends Label3D
@@ -25,12 +25,12 @@ double_sided = false
 fixed_size = true
 texture_filter = 0
 text = "word"
-font = ExtResource("1_571nv")
+font = ExtResource("1_1sff2")
 font_size = 16
 outline_size = 0
 script = SubResource("GDScript_smphi")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_yn6k8")
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_nu0o6")
 volume_db = 10.0
 autoplay = true

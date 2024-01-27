@@ -27,7 +27,7 @@ var p2talk_data = {}
 @onready var footstep_controller = get_node("footstep_controller")
 @onready var footstep_sound = get_node("footstep")
 @onready var p2_talk = get_node("p2_talk_buttons")
-@onready var p2_talk_word = preload("res://scenes/objects/p2_talk_word.tscn")
+@onready var p2_talk_word = preload("res://scenes/objects/setup/player/p2_talk_word.tscn")
 
 func allow_typing():
 	can_submit=true
@@ -37,8 +37,8 @@ func change_sound(sound):
 	if str(footstep_sound.stream.get_path())!=sound:
 		footstep_sound.stream = load(sound)
 func _physics_process(delta):
-	RenderingServer.global_shader_parameter_set("player_pos", position)
-
+	if Global.fog_focus==0:
+		RenderingServer.global_shader_parameter_set("player_pos", position)
 	var v = 0.0
 	var h = 0.0
 	if Global.control_mode==0:
@@ -49,17 +49,17 @@ func _physics_process(delta):
 		is_walking=true
 		if is_on_floor() || position.y<0.2:
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="grass":
-				change_sound("res://sfx/grass.wav")
+				change_sound("res://sfx/player/grass.wav")
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="evencare":
-				change_sound("res://sfx/ec_steps.wav")
+				change_sound("res://sfx/player/ec_steps.wav")
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement":
-				change_sound("res://sfx/cement.wav")
+				change_sound("res://sfx/player/cement.wav")
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement2":
-				change_sound("res://sfx/cement2.wav")
+				change_sound("res://sfx/player/cement2.wav")
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement3":
-				change_sound("res://sfx/cement3.wav")
+				change_sound("res://sfx/player/cement3.wav")
 			if str(footstep_controller.get_collider()).get_slice(":", 0)=="school":
-				change_sound("res://sfx/school_steps.wav")
+				change_sound("res://sfx/player/school_steps.wav")
 	else:
 		is_walking=false
 	
@@ -99,23 +99,36 @@ func _physics_process(delta):
 		head.flip_h=false
 	
 	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+	#if not is_on_floor():
+		#velocity.y -= gravity * delta
 	
 	if Input.is_action_just_released("sheet_hotkey"):
 		get_node("../OpenSheets").show()
 	if Input.is_action_just_pressed("default_char"):
 		reset_sheet()
-	#if Input.is_action_just_pressed("oeptos") && !is_walking:
-		#animation_direction=4
-		
+	if Input.is_action_just_pressed("change_mode"):
+		if Global.control_mode<1:
+			Global.control_mode+=1
+		else:
+			Global.control_mode=0
+		if Global.control_mode==1:
+			get_node("mode_change").stop()
+			get_node("mode_change").play()
+	if Input.is_action_just_pressed("pressed_select") && p2_talk.text!="" && can_submit:
+		if word!="":
+			word = word.erase(word.length()-1,1)
+		create_word()
+		word = ""
+		last_press = ""
+		p2_talk.text = ""
+		can_submit = false
 		
 	move_and_slide()
 		
 	
-	if position.y <= 0:
-		velocity.y = 0
-		position.y = 0.01
+	#if position.y <= 0:
+		#velocity.y = 0
+		#position.y = 0.01
 		
 	if is_walking==false:
 		material.frame_coords = Vector2(animation_direction, 0)
@@ -267,14 +280,6 @@ func _physics_process(delta):
 				word+="AH "
 			last_press = ""
 			get_node("button_press").play()
-		if Input.is_action_just_pressed("pressed_select") && p2_talk.text!="" && can_submit:
-			if word!="":
-				word = word.erase(word.length()-1,1)
-			create_word()
-			word = ""
-			last_press = ""
-			p2_talk.text = ""
-			can_submit = false
 
 func create_word():
 	var word_instance = p2_talk_word.instantiate()

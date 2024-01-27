@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cwgnjb3ja474p"
-path="res://.godot/imported/school_steps.wav-7203da30421b78a31f3d6c954dbf55ac.sample"
+uid="uid://dvip8isc7rg2n"
+path="res://.godot/imported/ec_steps.wav-00a67a5fa885cbbf2bc46744110020f6.sample"
 
 [deps]
 
-source_file="res://sfx/school_steps.wav"
-dest_files=["res://.godot/imported/school_steps.wav-7203da30421b78a31f3d6c954dbf55ac.sample"]
+source_file="res://sfx/player/ec_steps.wav"
+dest_files=["res://.godot/imported/ec_steps.wav-00a67a5fa885cbbf2bc46744110020f6.sample"]
 
 [params]
 

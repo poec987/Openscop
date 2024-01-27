@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://dng2iqsytyb72"]
+[gd_scene load_steps=14 format=3 uid="uid://dng2iqsytyb72"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_l7eau"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="2_a2356"]
 [ext_resource type="Shader" path="res://shaders/fog shaders/player_fog.gdshader" id="2_xxbks"]
 [ext_resource type="Texture2D" uid="uid://tto7x3eghbjr" path="res://graphics/sprites/player/none.png" id="3_0l6ym"]
 [ext_resource type="Script" path="res://scripts/player/camera_root.gd" id="3_eo5w1"]
-[ext_resource type="AudioStream" uid="uid://dvip8isc7rg2n" path="res://sfx/ec_steps.wav" id="5_o8tug"]
+[ext_resource type="AudioStream" uid="uid://dvip8isc7rg2n" path="res://sfx/player/ec_steps.wav" id="5_nm087"]
 [ext_resource type="FontFile" uid="uid://0p4r1h52icbk" path="res://graphics/sprites/ui/p2totalk.fnt" id="6_q7wbx"]
-[ext_resource type="AudioStream" uid="uid://bt6ioueosnk6j" path="res://sfx/p2button.wav" id="7_3u8g8"]
-[ext_resource type="PackedScene" uid="uid://ciyscr1kgpgnf" path="res://scenes/objects/cam_setup.tscn" id="7_wt3nb"]
+[ext_resource type="AudioStream" uid="uid://bt6ioueosnk6j" path="res://sfx/player/p2talk/p2button.wav" id="7_5mgkc"]
+[ext_resource type="PackedScene" uid="uid://ciyscr1kgpgnf" path="res://scenes/objects/setup/cam_setup.tscn" id="7_wt3nb"]
+[ext_resource type="AudioStream" uid="uid://cak5q10c7t4y1" path="res://sfx/player/p2talk/p2initialize.wav" id="8_tern7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s8dso"]
 resource_name = "player_collision"
@@ -67,7 +68,7 @@ collide_with_areas = true
 debug_shape_thickness = 5
 
 [node name="footstep" type="AudioStreamPlayer3D" parent="player"]
-stream = ExtResource("5_o8tug")
+stream = ExtResource("5_nm087")
 attenuation_model = 3
 volume_db = 2.0
 
@@ -85,8 +86,12 @@ uppercase = true
 [node name="P2_talk" type="Node3D" parent="player/p2_talk_buttons"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
 
-[node name="button_press" type="AudioStreamPlayer2D" parent="player"]
-stream = ExtResource("7_3u8g8")
+[node name="button_press" type="AudioStreamPlayer3D" parent="player"]
+stream = ExtResource("7_5mgkc")
+volume_db = 10.0
+
+[node name="mode_change" type="AudioStreamPlayer3D" parent="player"]
+stream = ExtResource("8_tern7")
 volume_db = 10.0
 
 [node name="camera_root" type="Node3D" parent="."]
