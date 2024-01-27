@@ -29,4 +29,4 @@ func _process(delta):
 		if (abs(position.z-player.position.z) > Global.camera_limit_y) && Global.camera_move_y:
 			position.y -= ((((position.y-player.position.y) / abs(position.z-player.position.y)))) * delta * abs(player.velocity.y)
 		# set the pos and rot of the camera to follow the cam anchor
-		cam.set_cam_pos(cam_anchor.global_position, cam_anchor.global_rotation)
+	cam.set_cam_pos(cam_anchor.global_position, cam_anchor.global_rotation)
