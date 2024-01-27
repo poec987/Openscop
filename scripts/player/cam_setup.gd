@@ -1,5 +1,5 @@
 extends CanvasLayer
-
+#THIS PART WAS PROGRAMMED BY EONORANGE, I DO NOT KNOW HOW IT WORKS ~~~TECHMAN06/CHEDDAR1460
 @onready var camera = $NTSC/NTSC_viewport/Dither/dither_view/player_camera
 # this just returns the camera object
 func get_cam() -> Camera3D: return camera

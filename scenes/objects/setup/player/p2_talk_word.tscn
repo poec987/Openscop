@@ -7,12 +7,17 @@
 script/source = "extends Label3D
 var fade = 0.0
 
+#YOU CANNOT TWEEN THE \"MODULATE\" PROPERTY OF A LABEL3D, SO A \"FADE\" VARIABLE WAS CREATED.
+# AND THEN THE MODULATE VALUE IS SET TO THIS VARIABLE EVERY FRAME
+#THIS ANIMATES THE WORD'S FADE-IN AND FADE-OUT
 func _ready():
 	var tween = create_tween()
 	tween.tween_property(self, \"fade\", 1.0,0.5)
 	tween.tween_interval(2)
 	tween.tween_property(self, \"fade\", 0.0,1)
 	tween.tween_callback(queue_free)
+	
+
 func _process(_delta):
 	set_modulate(Color(1,1,1,fade))	
 	fade = snapped(fade,0.01)

@@ -307,9 +307,16 @@ func _physics_process(delta):
 
 #PROCESSES INPUTS SUBMITTED, CHECKS TABLE, AND SPAWNS FLOATING WORD
 func create_word():
+	#CREATES OBJECT OF FLOATING WORD
 	var word_instance = p2_talk_word.instantiate()
+	#CHECKS P2TOTALK TABLE AND SETS THE TEXT OF FLOATING WORD TO VALUE RETURNED
+	#BY FUNCTION
 	word_instance.text = Global.get_p2_word(word)
+	#SPAWNS P2TOTALK WORD
 	get_node("p2_talk_buttons/P2_talk").add_child(word_instance)
+	
+	#RESPONSIBLE FOR "CASCADE" EFFECT WHEN THERES MORE THAN 1 P2TALKWORD
+	#ALSO RESPONSIBLE FOR ANIMATING THEM RISING
 	var child_index = 0
 	for words in get_node("p2_talk_buttons/P2_talk").get_children():
 		if child_index!=get_node("p2_talk_buttons/P2_talk").get_child_count()-1:
