@@ -24,10 +24,8 @@ Global="*res://scripts/global.gd"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=720
-window/size/window_width_override=800
-window/size/window_height_override=600
+window/size/viewport_width=320
+window/size/viewport_height=240
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
