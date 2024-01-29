@@ -58,14 +58,12 @@ render_target_update_mode = 4
 [node name="dialogue_box" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD"]
 
 [node name="background" type="ColorRect" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
-visible = false
 offset_left = 30.0
 offset_top = 140.0
 offset_right = 290.0
 offset_bottom = 210.0
 
 [node name="Label" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
-visible = false
 offset_left = 40.0
 offset_top = 150.0
 offset_right = 280.0
