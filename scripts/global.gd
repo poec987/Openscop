@@ -36,6 +36,9 @@ var sheets = DirAccess.open("user://sheets")
 #P2TALKDICT
 var p2talkdict = {}
 
+#DIALOGUE
+var dialogue = {}
+
 func _ready():
 	#GAME BOOTUP
 	#CHECKS IF CUSTOM SHEETS DIRECTORY DOESNT EXIST SO IT CAN CREATE IT
@@ -43,6 +46,8 @@ func _ready():
 		directory.make_dir("sheets")
 	#LOADS P2TOTALK DICTIONARY
 	p2talkdict = JSON.parse_string((FileAccess.open("res://scripts/p2_talk_data.json", FileAccess.READ)).get_as_text())
+	dialogue = JSON.parse_string((FileAccess.open("res://scripts/dialogue.json", FileAccess.READ)).get_as_text())
+	
 	#SceneManager.change_scene("res://scenes/test.tscn")
 
 func _process(_delta):

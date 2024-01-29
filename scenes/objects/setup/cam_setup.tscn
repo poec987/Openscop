@@ -1,18 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciyscr1kgpgnf"]
+[gd_scene load_steps=10 format=3 uid="uid://ciyscr1kgpgnf"]
 
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="2_ise61"]
-[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="4_ow1v4"]
+[ext_resource type="Texture2D" uid="uid://dev6aqyw05g37" path="res://graphics/sprites/ui/textbox.png" id="4_4yi63"]
+[ext_resource type="Script" path="res://scripts/ui/dialogue_box.gd" id="4_yklfu"]
+[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="5_sfmbh"]
+[ext_resource type="Shader" path="res://scenes/objects/setup/text.gdshader" id="6_1xb5e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
 shader_parameter/effect = null
 shader_parameter/ntsc_enable = false
 
-[sub_resource type="LabelSettings" id="LabelSettings_aandb"]
-font = ExtResource("4_ow1v4")
-font_color = Color(0, 0, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3i2a"]
+shader = ExtResource("6_1xb5e")
+shader_parameter/gradient_power = 18.0
+shader_parameter/offset = -0.26
 
 [node name="PSXLayer" type="CanvasLayer"]
 script = ExtResource("1_fp4cd")
@@ -55,23 +59,40 @@ render_target_update_mode = 4
 
 [node name="HUD" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view"]
 
-[node name="dialogue_box" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD"]
+[node name="dialogue_box" type="Control" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_yklfu")
 
-[node name="background" type="ColorRect" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
-offset_left = 30.0
-offset_top = 140.0
-offset_right = 290.0
-offset_bottom = 210.0
+[node name="background" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
+position = Vector2(160, 175)
+texture = ExtResource("4_4yi63")
+hframes = 3
+frame = 1
 
-[node name="Label" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
-offset_left = 40.0
-offset_top = 150.0
-offset_right = 280.0
-offset_bottom = 200.0
-text = "This is a single line
-This is a single, but very long line of text. TEST ~~Rainer"
-label_settings = SubResource("LabelSettings_aandb")
+[node name="Timer" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
+material = SubResource("ShaderMaterial_c3i2a")
+layout_mode = 0
+offset_left = 39.0
+offset_top = 149.0
+offset_right = 279.0
+offset_bottom = 649.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/line_separation = 0
+theme_override_fonts/normal_font = ExtResource("5_sfmbh")
+bbcode_enabled = true
+text = "[color=yellow]GRAD![]_\\\"Áá^Ââ|yYgGjJçÇ
+GRAD![]_\\\"Áá^Ââ|yYgGjJçÇ"
+scroll_active = false
 autowrap_mode = 1
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
 
 [node name="player_camera" type="Camera3D" parent="NTSC/NTSC_viewport/Dither/dither_view"]
 transform = Transform3D(-4.37114e-08, -0.309017, 0.951057, 0, 0.951057, 0.309017, -1, 1.35076e-08, -4.1572e-08, 8, 2.62875, 0)
