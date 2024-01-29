@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciyscr1kgpgnf"]
+[gd_scene load_steps=7 format=3 uid="uid://ciyscr1kgpgnf"]
 
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="2_ise61"]
+[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="4_ow1v4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
 shader_parameter/effect = null
 shader_parameter/ntsc_enable = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_aandb"]
+font = ExtResource("4_ow1v4")
+font_color = Color(0, 0, 0, 1)
 
 [node name="PSXLayer" type="CanvasLayer"]
 script = ExtResource("1_fp4cd")
@@ -39,7 +44,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-stretch = true
 
 [node name="dither_view" type="SubViewport" parent="NTSC/NTSC_viewport/Dither"]
 handle_input_locally = false
@@ -53,15 +57,23 @@ render_target_update_mode = 4
 
 [node name="dialogue_box" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD"]
 
-[node name="ColorRect" type="ColorRect" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
+[node name="background" type="ColorRect" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
 visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -100.0
-offset_right = 220.0
-offset_bottom = 70.0
-grow_horizontal = 2
+offset_left = 30.0
+offset_top = 140.0
+offset_right = 290.0
+offset_bottom = 210.0
+
+[node name="Label" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
+visible = false
+offset_left = 40.0
+offset_top = 150.0
+offset_right = 280.0
+offset_bottom = 200.0
+text = "This is a single line
+This is a single, but very long line of text. TEST ~~Rainer"
+label_settings = SubResource("LabelSettings_aandb")
+autowrap_mode = 1
 
 [node name="player_camera" type="Camera3D" parent="NTSC/NTSC_viewport/Dither/dither_view"]
 transform = Transform3D(-4.37114e-08, -0.309017, 0.951057, 0, 0.951057, 0.309017, -1, 1.35076e-08, -4.1572e-08, 8, 2.62875, 0)
