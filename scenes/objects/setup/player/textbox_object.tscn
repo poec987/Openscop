@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://muq2byrrpgml"]
+[gd_scene load_steps=9 format=3 uid="uid://muq2byrrpgml"]
 
 [ext_resource type="Script" path="res://scripts/ui/dialogue_box.gd" id="1_lx88y"]
 [ext_resource type="AudioStream" uid="uid://cfvj02c2hfhq3" path="res://sfx/textbox/textboxcontinue.wav" id="2_xqh1c"]
@@ -8,14 +8,10 @@
 [ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="7_xsko6"]
 [ext_resource type="Texture2D" uid="uid://bc7wq6drabu2j" path="res://graphics/sprites/ui/textbox_arrow.png" id="8_tb0rh"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_68qc2"]
-load_path = "res://.godot/imported/gradient.png-e498213b6af78655395165a0f186bf61.ctex"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c3i2a"]
 shader = ExtResource("5_ffyw4")
 shader_parameter/gradient_power = 15.0
 shader_parameter/offset = 0.89
-shader_parameter/gradient = SubResource("CompressedTexture2D_68qc2")
 
 [node name="textbox_object" type="Node2D"]
 script = ExtResource("1_lx88y")
