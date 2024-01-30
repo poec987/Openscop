@@ -15,8 +15,8 @@ shader_parameter/ntsc_enable = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c3i2a"]
 shader = ExtResource("6_1xb5e")
-shader_parameter/gradient_power = 18.0
-shader_parameter/offset = -0.26
+shader_parameter/gradient_power = 16.0
+shader_parameter/offset = 0.0
 
 [node name="PSXLayer" type="CanvasLayer"]
 script = ExtResource("1_fp4cd")
@@ -59,30 +59,27 @@ render_target_update_mode = 4
 
 [node name="HUD" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view"]
 
-[node name="dialogue_box" type="Control" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="textbox_object" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD"]
 script = ExtResource("4_yklfu")
 
-[node name="background" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
+[node name="textbox_background" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/textbox_object"]
 position = Vector2(160, 175)
 texture = ExtResource("4_4yi63")
 hframes = 3
 frame = 1
 
-[node name="Timer" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
+[node name="textbox_timer" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/textbox_object"]
+process_callback = 0
+wait_time = 0.5
+autostart = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/dialogue_box"]
+[node name="textbox_text" type="RichTextLabel" parent="NTSC/NTSC_viewport/Dither/dither_view/HUD/textbox_object"]
 material = SubResource("ShaderMaterial_c3i2a")
-layout_mode = 0
+clip_contents = false
 offset_left = 39.0
 offset_top = 149.0
 offset_right = 279.0
-offset_bottom = 649.0
+offset_bottom = 651.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_constants/line_separation = 0
 theme_override_fonts/normal_font = ExtResource("5_sfmbh")
@@ -98,3 +95,5 @@ deselect_on_focus_loss_enabled = false
 transform = Transform3D(-4.37114e-08, -0.309017, 0.951057, 0, 0.951057, 0.309017, -1, 1.35076e-08, -4.1572e-08, 8, 2.62875, 0)
 current = true
 fov = 35.0
+
+[connection signal="timeout" from="NTSC/NTSC_viewport/Dither/dither_view/HUD/textbox_object/textbox_timer" to="NTSC/NTSC_viewport/Dither/dither_view/HUD/textbox_object" method="_on_textbox_timer_timeout"]
