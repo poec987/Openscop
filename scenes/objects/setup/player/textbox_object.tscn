@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://muq2byrrpgml"]
+
+[ext_resource type="Script" path="res://scripts/ui/dialogue_box.gd" id="1_lx88y"]
+[ext_resource type="AudioStream" uid="uid://cfvj02c2hfhq3" path="res://sfx/textbox/textboxcontinue.wav" id="2_xqh1c"]
+[ext_resource type="AudioStream" uid="uid://dbduxs125j23m" path="res://sfx/textbox/textboxdialogue.wav" id="3_xusrt"]
+[ext_resource type="Texture2D" uid="uid://dev6aqyw05g37" path="res://graphics/sprites/ui/textbox.png" id="4_i4xvn"]
+[ext_resource type="Shader" path="res://scenes/objects/setup/text.gdshader" id="5_ffyw4"]
+[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="7_xsko6"]
+[ext_resource type="Texture2D" uid="uid://bc7wq6drabu2j" path="res://graphics/sprites/ui/textbox_arrow.png" id="8_tb0rh"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_68qc2"]
+load_path = "res://.godot/imported/gradient.png-e498213b6af78655395165a0f186bf61.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3i2a"]
+shader = ExtResource("5_ffyw4")
+shader_parameter/gradient_power = 15.0
+shader_parameter/offset = 0.89
+shader_parameter/gradient = SubResource("CompressedTexture2D_68qc2")
+
+[node name="textbox_object" type="Node2D"]
+script = ExtResource("1_lx88y")
+background = 2
+
+[node name="dialogue_change" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xqh1c")
+volume_db = 10.0
+
+[node name="dialogue_typing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xusrt")
+volume_db = 10.0
+autoplay = true
+
+[node name="textbox_background" type="Sprite2D" parent="."]
+position = Vector2(160, 175)
+texture = ExtResource("4_i4xvn")
+hframes = 3
+
+[node name="arrow_timer" type="Timer" parent="."]
+
+[node name="textbox_timer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="textbox_text" type="RichTextLabel" parent="."]
+material = SubResource("ShaderMaterial_c3i2a")
+clip_contents = false
+offset_left = 39.0
+offset_top = 149.0
+offset_right = 279.0
+offset_bottom = 651.0
+theme_override_fonts/normal_font = ExtResource("7_xsko6")
+bbcode_enabled = true
+text = "AAAAA"
+scroll_active = false
+autowrap_mode = 1
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="textbox_arrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(268, 194)
+texture = ExtResource("8_tb0rh")
+hframes = 2
+
+[connection signal="timeout" from="arrow_timer" to="." method="_on_arrow_timer_timeout"]
+[connection signal="timeout" from="textbox_timer" to="." method="_on_textbox_timer_timeout"]

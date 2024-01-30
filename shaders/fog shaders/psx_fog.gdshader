@@ -44,7 +44,7 @@ void vertex()
 if (fog==true) {
 	world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	float min_dist = length(player_pos - world_vertex);
-	float fog_func = ( 0.8 - clamp(min_dist/sphere_size, 0.0, 1.0) );
+	float fog_func = ( 0.5 - clamp((min_dist/1.5)/sphere_size, 0.0, 1.0) );
 	COLOR = vec4( fog_func, fog_func, fog_func, 1.0);
 }
 #if !defined(NO_TEXTURE) && !defined(METAL)  // METAL doesn't use UV, so no need to pan UVs

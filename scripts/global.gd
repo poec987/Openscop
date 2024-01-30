@@ -70,3 +70,11 @@ func get_p2_word(word):
 	else:
 		return "Not in Table"
 		
+var textbox_scene = preload("res://scenes/objects/setup/player/textbox_object.tscn")
+
+func create_textbox(background,text):
+	var textbox_scene = preload("res://scenes/objects/setup/player/textbox_object.tscn")
+	var dialogue_instance = textbox_scene.instantiate()
+	dialogue_instance.background = background
+	dialogue_instance.text = text
+	get_tree().get_first_node_in_group("HUD").get_child(0).add_child(dialogue_instance)
