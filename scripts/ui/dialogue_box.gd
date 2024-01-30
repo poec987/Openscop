@@ -34,7 +34,7 @@ func _ready():
 	$dialogue_change.play()
 	
 
-func _process(delta):
+func _process(_delta):
 	if textbox>text.size()-1:
 		textbox = 0
 		get_node("../../dialogue_close").playing=true

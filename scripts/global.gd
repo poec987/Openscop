@@ -70,8 +70,6 @@ func get_p2_word(word):
 	else:
 		return "Not in Table"
 		
-var textbox_scene = preload("res://scenes/objects/setup/player/textbox_object.tscn")
-
 func create_textbox(background,text):
 	var textbox_scene = preload("res://scenes/objects/setup/player/textbox_object.tscn")
 	var dialogue_instance = textbox_scene.instantiate()
