@@ -23,9 +23,11 @@ volume_db = 5.0
 
 [node name="dialogue_typing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xusrt")
-volume_db = 5.0
+volume_db = -80.0
+autoplay = true
 
 [node name="textbox_background" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(160, 175)
 texture = ExtResource("4_i4xvn")
 hframes = 3

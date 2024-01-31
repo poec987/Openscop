@@ -2,9 +2,10 @@ extends Node2D
 #TEXTBOX OBJECT
 
 #TYPEWRITER SPEEDS
-const DEFAULT_WAIT = 0.05
+const DEFAULT_WAIT = 0.025
 const PUNCTUATION_WAIT = 0.50
-
+const TYPING_SOUND_FADE_IN_TIME = 0.25
+const TYPING_SOUND_VOLUME = 5.0
 #CUSTOMIZABLE VARIABLES
 @export var background = 0
 @export var text = []
@@ -14,7 +15,7 @@ var chars = 0
 var textbox = 0
 
 #CHARACTERS THAT MAKE TYPEWRITER SLOWER
-var slowchars="!."
+var slowchars="!.?;"
 
 #CHECK IF IS READY TO SKIP.
 var textbox_stage = 0
@@ -29,12 +30,18 @@ func _ready():
 	$textbox_text.visible_characters=0
 	check_character()
 	$textbox_timer.start()
-		
 	$textbox_background.frame_coords.x = background
 	$dialogue_change.play()
+	create_tween().tween_property($dialogue_typing,"volume_db",TYPING_SOUND_VOLUME,TYPING_SOUND_FADE_IN_TIME)
 	
 
 func _process(_delta):
+	if $textbox_timer.get_time_left()<$textbox_timer.wait_time/2.0:
+		$textbox_background.visible=true
+	if $textbox_text.visible_characters==0 && $textbox_timer.get_time_left()<$textbox_timer.wait_time/2.0:
+		$textbox_text.visible_characters=1
+	
+	$textbox_background.visible=true
 	if textbox>text.size()-1:
 		textbox = 0
 		get_node("../../dialogue_close").playing=true
@@ -76,21 +83,24 @@ func _process(_delta):
 			$dialogue_change.play()
 		$textbox_timer.start()
 		
-	if $textbox_text.visible_characters==1:
-		$dialogue_typing.playing = true
-		
 		
 func check_character():
 	if slowchars.find($textbox_text.text[$textbox_text.visible_characters])==-1:
 		$textbox_timer.wait_time = DEFAULT_WAIT
+		if !$dialogue_typing.playing:
+			$dialogue_typing.playing=true
+			create_tween().tween_property($dialogue_typing,"volume_db",TYPING_SOUND_VOLUME,TYPING_SOUND_FADE_IN_TIME)
 	else:
-		$textbox_timer.wait_time = PUNCTUATION_WAIT	
+		$textbox_timer.wait_time = PUNCTUATION_WAIT
+		$dialogue_typing.playing=false
+		$dialogue_typing.volume_db=-80.
 
 func _on_textbox_timer_timeout():
-	if chars<text[textbox].length():
+	if chars<text[textbox].length() && textbox<=text.size()-1:
 		chars+=1
 		check_character()
 		$textbox_timer.start()
+		
 
 
 func _on_arrow_timer_timeout():
