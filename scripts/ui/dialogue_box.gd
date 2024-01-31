@@ -28,11 +28,13 @@ func _ready():
 		$textbox_text["theme_override_colors/default_color"] = Color(1.0,1.0,1.0,1.0)
 		$textbox_arrow.frame_coords.x = 0
 	$textbox_text.visible_characters=0
-	check_character()
-	$textbox_timer.start()
 	$textbox_background.frame_coords.x = background
 	$dialogue_change.play()
 	create_tween().tween_property($dialogue_typing,"volume_db",TYPING_SOUND_VOLUME,TYPING_SOUND_FADE_IN_TIME)
+	check_character()
+	$textbox_timer.set_wait_time($textbox_timer.wait_time/5)
+	$textbox_timer.start()
+	
 	
 
 func _process(_delta):

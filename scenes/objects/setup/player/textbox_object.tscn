@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/ui/dialogue_box.gd" id="1_lx88y"]
 [ext_resource type="AudioStream" uid="uid://cfvj02c2hfhq3" path="res://sfx/textbox/textboxcontinue.wav" id="2_xqh1c"]
 [ext_resource type="AudioStream" uid="uid://dbduxs125j23m" path="res://sfx/textbox/textboxdialogue.wav" id="3_xusrt"]
-[ext_resource type="Texture2D" path="res://graphics/sprites/ui/textbox.png" id="4_i4xvn"]
+[ext_resource type="Texture2D" uid="uid://dev6aqyw05g37" path="res://graphics/sprites/ui/textbox.png" id="4_i4xvn"]
 [ext_resource type="Shader" path="res://scenes/objects/setup/text.gdshader" id="5_ffyw4"]
 [ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="7_xsko6"]
-[ext_resource type="Texture2D" path="res://graphics/sprites/ui/textbox_arrow.png" id="8_tb0rh"]
+[ext_resource type="Texture2D" uid="uid://bc7wq6drabu2j" path="res://graphics/sprites/ui/textbox_arrow.png" id="8_tb0rh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c3i2a"]
 shader = ExtResource("5_ffyw4")
