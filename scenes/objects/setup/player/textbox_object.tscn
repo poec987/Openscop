@@ -45,9 +45,7 @@ offset_right = 279.0
 offset_bottom = 651.0
 theme_override_fonts/normal_font = ExtResource("7_xsko6")
 bbcode_enabled = true
-text = "AAAAA"
 scroll_active = false
-autowrap_mode = 1
 shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
 
