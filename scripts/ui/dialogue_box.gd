@@ -68,6 +68,8 @@ func _process(_delta):
 		if textbox<text.size():
 			$dialogue_change.play()
 		$textbox_timer.start()
+		
+	if $textbox_text.visible_characters==1:
 		$dialogue_typing.playing = true
 		
 		

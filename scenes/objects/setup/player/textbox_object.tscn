@@ -24,7 +24,6 @@ volume_db = 10.0
 [node name="dialogue_typing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xusrt")
 volume_db = 10.0
-autoplay = true
 
 [node name="textbox_background" type="Sprite2D" parent="."]
 position = Vector2(160, 175)
@@ -45,6 +44,7 @@ offset_right = 279.0
 offset_bottom = 651.0
 theme_override_fonts/normal_font = ExtResource("7_xsko6")
 bbcode_enabled = true
+text = "."
 scroll_active = false
 shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
