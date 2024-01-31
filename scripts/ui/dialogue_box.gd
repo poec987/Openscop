@@ -96,10 +96,11 @@ func check_character():
 		$dialogue_typing.volume_db=-80.
 
 func _on_textbox_timer_timeout():
-	if chars<text[textbox].length() && textbox<=text.size()-1:
-		chars+=1
-		check_character()
-		$textbox_timer.start()
+	if textbox<=text.size()-1:
+		if chars<text[textbox].length():
+			chars+=1
+			check_character()
+			$textbox_timer.start()
 		
 
 
