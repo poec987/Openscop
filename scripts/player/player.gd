@@ -56,8 +56,8 @@ func _physics_process(delta):
 	#CONTROL MODE 0: CONTROL PLAYER NORMALLY
 	if Global.control_mode==0:
 		#CREATES MOVEMENT VECTORS
-		v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
-		h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
+		v = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
+		h = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
 
 	#DETECTS IF PLAYER IS WALKING BEFORE ANIMATING AND MAKE FOOTSTEP SOUND
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
@@ -94,13 +94,13 @@ func _physics_process(delta):
 	velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
 	
 	#CHANGES PLAYER SPRITE DEPENDING ON DIRECTION
-	if h > 0:
-		animation_direction=0
-	elif h < 0:
-		animation_direction=3
 	if v > 0:
-		animation_direction=2
+		animation_direction=0
 	elif v < 0:
+		animation_direction=3
+	if h < 0:
+		animation_direction=2
+	elif h > 0:
 		animation_direction=1
 			
 	

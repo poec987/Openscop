@@ -11,7 +11,7 @@ func _ready():
 func _setup():
 	#SETS UP CAMERA ACCORDING TO ROOM, SPECIFIED PROPERTIES
 	if Global.camera_mode==0:
-		cam_anchor.position.x = Global.camera_dist_hor
+		cam_anchor.position.z = Global.camera_dist_hor
 		cam_anchor.position.y = Global.camera_dist_ver
 		cam_anchor.rotation.x = -0.18*2
 	#print_debug("cam_pos: ", cam_anchor.global_position)
