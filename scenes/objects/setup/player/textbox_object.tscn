@@ -27,10 +27,10 @@ volume_db = -80.0
 autoplay = true
 
 [node name="textbox_background" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(160, 175)
 texture = ExtResource("4_i4xvn")
 hframes = 3
+frame = 1
 
 [node name="arrow_timer" type="Timer" parent="."]
 
@@ -48,6 +48,7 @@ theme_override_fonts/normal_font = ExtResource("7_xsko6")
 bbcode_enabled = true
 text = "."
 scroll_active = false
+autowrap_mode = 1
 shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
 
