@@ -19,11 +19,11 @@ background = 2
 
 [node name="dialogue_change" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_xqh1c")
-volume_db = 10.0
+volume_db = 5.0
 
 [node name="dialogue_typing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xusrt")
-volume_db = 10.0
+volume_db = 5.0
 
 [node name="textbox_background" type="Sprite2D" parent="."]
 position = Vector2(160, 175)

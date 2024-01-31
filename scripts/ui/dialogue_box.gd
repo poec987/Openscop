@@ -50,13 +50,20 @@ func _process(_delta):
 		$textbox_text.visible_ratio = 1.0
 		textbox_stage=1
 		$arrow_timer.start()
-		$textbox_arrow.visible = true
-	
+		
+	if $textbox_text.visible_ratio==1.0:
+		if $arrow_timer.is_stopped():
+			$arrow_timer.start()
 	if $textbox_text.visible_ratio==1.0 && !Input.is_action_pressed("pressed_action"):
 		textbox_stage=2
+		
+		
+		
 	
 	if Input.is_action_just_released("pressed_action") && textbox_stage==1:
 		textbox_stage=2
+		$arrow_timer.start()
+		
 	
 	if Input.is_action_just_pressed("pressed_action") && textbox_stage==2:
 		textbox_stage=0
