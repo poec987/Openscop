@@ -17,8 +17,6 @@ shader_parameter/albedoTex = ExtResource("2_6yoqe")
 
 [node name="interaction" type="Node3D"]
 script = ExtResource("1_d3jj7")
-dialogue_id = "textbox_1"
-textbox_background = 1
 
 [node name="height_offset" type="Node3D" parent="."]
 
