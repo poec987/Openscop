@@ -78,4 +78,5 @@ func create_textbox(background,text):
 	var dialogue_instance = textbox_scene.instantiate()
 	dialogue_instance.background = background
 	dialogue_instance.text = text
-	get_tree().get_first_node_in_group("HUD").get_child(0).add_child(dialogue_instance)
+	if get_tree().get_first_node_in_group("HUD").get_child_count()>0:
+		get_tree().get_first_node_in_group("HUD").get_child(0).add_child(dialogue_instance)

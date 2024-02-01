@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs5ur4bnh0has"]
+[gd_scene load_steps=6 format=3 uid="uid://bs5ur4bnh0has"]
 
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="1_e3cb5"]
 [ext_resource type="Script" path="res://scripts/player/grass.gd" id="2_q3i23"]
 [ext_resource type="PackedScene" uid="uid://dgoxysshxruys" path="res://scenes/objects/grass.tscn" id="3_qmd8q"]
+[ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/interaction_symbol.tscn" id="5_c3btb"]
 [ext_resource type="Environment" uid="uid://dxxprnd84je6j" path="res://scenes/world_env.tres" id="5_q5f7d"]
 
 [node name="test" type="Node3D"]
@@ -43,3 +44,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -29.5)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("5_q5f7d")
+
+[node name="interaction" parent="." instance=ExtResource("5_c3btb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 0)

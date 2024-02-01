@@ -31,7 +31,7 @@ shader_parameter/albedoTex = ExtResource("3_0l6ym")
 
 [node name="player_root" type="Node3D"]
 
-[node name="player" type="CharacterBody3D" parent="."]
+[node name="player" type="CharacterBody3D" parent="." groups=["Player"]]
 transform = Transform3D(-1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, 0)
 script = ExtResource("1_l7eau")
 

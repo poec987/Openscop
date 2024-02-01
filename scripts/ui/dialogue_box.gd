@@ -21,6 +21,8 @@ var slowchars="!.?;"
 var textbox_stage = 0
 
 func _ready():
+	
+	#SETS UP THE TEXTBOX BACKGROUND
 	if background==0:
 		$textbox_text["theme_override_colors/default_color"] = Color(0.0,0.0,0.0,1.0)
 		$textbox_arrow.frame_coords.x = 1
@@ -29,51 +31,64 @@ func _ready():
 		$textbox_arrow.frame_coords.x = 0
 	$textbox_text.visible_characters=0
 	$textbox_background.frame_coords.x = background
+	#PLAY TEXTBOX SOUND
 	$dialogue_change.play()
+	#TYPING SOUND IS ON AUTO-PLAY BUT MUTE, THIS DOES THE FADE-IN
 	create_tween().tween_property($dialogue_typing,"volume_db",TYPING_SOUND_VOLUME,TYPING_SOUND_FADE_IN_TIME)
+	#CHECKS WHETHER TO START WITH SLOW (if the text starts with a special character) OR FAST TYPING SPEED
 	check_character()
+	#MAKES WAIT TIME SMALL SO TEXT APPEARS AS SOON AS TEXTBOX STARTS
 	$textbox_timer.set_wait_time($textbox_timer.wait_time/5)
+	#STARTS THE TIMER
 	$textbox_timer.start()
 	
 	
 
 func _process(_delta):
+	#WAITS UNTIL HALF THE TIME HAS BEEN COMPLETED TO SHOW THE TEXTBOX BACKGROUND.
 	if $textbox_timer.get_time_left()<$textbox_timer.wait_time/2.0:
 		$textbox_background.visible=true
+		
+	#STARTS SHOWING TEXT IMMEDIATELY IF NO TEXT HAS APPEARED YET
 	if $textbox_text.visible_characters==0 && $textbox_timer.get_time_left()<$textbox_timer.wait_time/2.0:
 		$textbox_text.visible_characters=1
 	
-	$textbox_background.visible=true
+	#CHECKS IF TEXT HAS ENDED, IF IT DID, PLAY CLOSE SOUND AND DELETE TEXTBOX
 	if textbox>text.size()-1:
 		textbox = 0
 		get_node("../../dialogue_close").playing=true
 		queue_free()
+		
+	#SETS THE TEXT OF THE TEXTBOX
 	$textbox_text.text = text[textbox]
+	
+	#IF DIDN'T FINISH TYPING EVERYTHING, KEEP TYPING, IF IT DID, STOP PLAYING TYPING SOUND
 	if $textbox_text.visible_ratio != 1.0:
 		$textbox_text.visible_characters = chars
 	else:
+		if $arrow_timer.is_stopped():
+			$arrow_timer.start()
 		$dialogue_typing.playing = false
 	
+	#ALLOWS YOU TO SKIP TEXTBOX WHEN YOU PRESS ACTION, SHOWS FULL TEST AND DISPLAYS "NEXT" ARROW.
 	if Input.is_action_just_pressed("pressed_action") && textbox_stage==0:
 		$textbox_timer.stop()
 		$textbox_text.visible_ratio = 1.0
 		textbox_stage=1
 		$arrow_timer.start()
-		
-	if $textbox_text.visible_ratio==1.0:
-		if $arrow_timer.is_stopped():
-			$arrow_timer.start()
+	
+	#IF FINISHED TYPING, AND YOU ARE NOT PRESSING ANY BUTTON, ALLOW YOU TO PROCCEED BY PRESSING X
 	if $textbox_text.visible_ratio==1.0 && !Input.is_action_pressed("pressed_action"):
 		textbox_stage=2
 		
 		
 		
-	
+	#IF YOU SKIPPED TEXTBOX, ALLOWS YOU TO PROCEED ONLY AFTER YOU STOP HOLDING ACTION.
 	if Input.is_action_just_released("pressed_action") && textbox_stage==1:
 		textbox_stage=2
 		$arrow_timer.start()
 		
-	
+	#GOES TO NEXT TEXTBOX, IF THERE'S ANY
 	if Input.is_action_just_pressed("pressed_action") && textbox_stage==2:
 		textbox_stage=0
 		textbox+=1
@@ -85,8 +100,14 @@ func _process(_delta):
 			$dialogue_change.play()
 		$textbox_timer.start()
 		
+	
+	#STARTS TO DISPLAY ARROW AS SOON AS TEXT IS OVER
+	if $arrow_timer.time_left==$arrow_timer.wait_time:
+		$textbox_arrow.visible = true
+		
 		
 func check_character():
+	#CHECKS IF CHARACATER IS NORMAL OR SPECIAL CHARACTER, WHICH IS TYPED SLOWER ON PETSCOP
 	if slowchars.find($textbox_text.text[$textbox_text.visible_characters])==-1:
 		$textbox_timer.wait_time = DEFAULT_WAIT
 		if !$dialogue_typing.playing:
@@ -97,6 +118,7 @@ func check_character():
 		$dialogue_typing.playing=false
 		$dialogue_typing.volume_db=-80.
 
+#TEXT TIMER STUFF
 func _on_textbox_timer_timeout():
 	if textbox<=text.size()-1:
 		if chars<text[textbox].length():
@@ -105,6 +127,6 @@ func _on_textbox_timer_timeout():
 			$textbox_timer.start()
 		
 
-
+#ARROW TIMER STUFF
 func _on_arrow_timer_timeout():
 	$textbox_arrow.visible = !$textbox_arrow.visible

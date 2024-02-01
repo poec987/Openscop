@@ -3,7 +3,7 @@ render_mode unshaded, shadows_disabled, depth_draw_opaque;
 
 global uniform float precision_multiplier : hint_range(0.0, 1.0) = 1.0;
 uniform vec4 modulate_color : source_color = vec4(1.0);
-uniform vec4 alpha_color : source_color = vec4(0.52,0.34,0.84,1);
+uniform vec4 alpha_color : source_color = vec4(0.0,0.0,0.0,1);
 #ifndef NO_TEXTURE
 uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
 #endif
@@ -81,28 +81,9 @@ if (fog==true) {
 void fragment()
 {
 	ALBEDO = COLOR.rgb;
-#ifdef METAL
-	vec2 texture_uv = vec2(NORMAL.x / 2.0 + 0.5, (-NORMAL.y) / 2.0 + 0.5);  // Special thanks to Adam McLaughlan
-#elif !defined(NO_TEXTURE)
 	vec2 texture_uv = UV;
-#endif
 	vec4 color_base = mix(fog_color , modulate_color, COLOR.r);
-#ifdef NO_TEXTURE
-	ALBEDO = color_base.rgb;
-#else
 	vec4 texture_color = texture(albedoTex, texture_uv);
 	ALBEDO = mix(fog_color,(modulate_color * texture_color), COLOR.r).rgb;
-#endif
-#ifdef LIGHT_VOLUME
-	ALPHA = 1.0 - UV.y;
-#elif defined(ALPHA_BLEND) || defined(ALPHA_SCISSOR)
-	if (length(texture_color-alpha_color) < 0.01)
-		ALPHA = 0.0;
-	else
-		ALPHA = texture_color.a * color_base.a;
-#endif
-#ifdef ALPHA_SCISSOR
-	ALPHA_SCISSOR_THRESHOLD = alpha_scissor;
-#endif
 }
 
