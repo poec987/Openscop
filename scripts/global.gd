@@ -58,9 +58,6 @@ func _process(_delta):
 		fullscreen = !fullscreen
 		DisplayServer.window_set_mode((DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED))
 	
-	if Input.is_action_just_pressed("ui_end"):
-		create_textbox(0,dialogue["textbox_1"])
-	
 	#SETS FOG COLOR AND FOG RADIUS AS GAME RUNS
 	RenderingServer.global_shader_parameter_set("fog_color", fog_color)
 	RenderingServer.global_shader_parameter_set("sphere_size", fog_radius)
