@@ -3,7 +3,7 @@ extends Node2D
 
 #TYPEWRITER SPEEDS
 const DEFAULT_WAIT = 0.025
-const PUNCTUATION_WAIT = 0.50
+const PUNCTUATION_WAIT = 0.075
 const TYPING_SOUND_FADE_IN_TIME = 0.25
 const TYPING_SOUND_VOLUME = 5.0
 #CUSTOMIZABLE VARIABLES
@@ -15,7 +15,7 @@ var chars = 0
 var textbox = 0
 
 #CHARACTERS THAT MAKE TYPEWRITER SLOWER
-var slowchars="!.?;"
+var slowchars="!.?,;"
 
 #CHECK IF IS READY TO SKIP.
 var textbox_stage = 0
