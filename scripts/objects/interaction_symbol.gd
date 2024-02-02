@@ -22,7 +22,7 @@ var origin = 0.0
 var player_inside_zone = false
 
 #ANIMATION VARIABLES
-const HEIGHT_LIMIT = 0.55
+const HEIGHT_LIMIT = 0.65
 const HEIGHT_ANIM_SPEED = 0.65
 const ROTATION_LIMIT = 0.25
 const ROTATION_ANIM_SPEED = 1.5
