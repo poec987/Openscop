@@ -105,7 +105,7 @@ transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 
 [node name="OpenSheets" type="FileDialog" parent="."]
 title = "Load Sheet"
 initial_position = 1
-size = Vector2i(312, 400)
+size = Vector2i(275, 220)
 always_on_top = true
 extend_to_title = true
 ok_button_text = "Open"
