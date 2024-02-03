@@ -70,8 +70,10 @@ func _physics_process(delta):
 			if footstep_controller.get_collider()!=null:
 				if str(footstep_controller.get_collider().name)=="grass":
 					change_sound("res://sfx/player/grass.wav")
+					#footstep_sound.volume_db = 10.0
 				if str(footstep_controller.get_collider().name)=="evencare":
 					change_sound("res://sfx/player/ec_steps.wav")
+					#footstep_sound.volume_db = 10.0
 				if str(footstep_controller.get_collider().name)=="cement":
 					change_sound("res://sfx/player/cement.wav")
 				if str(footstep_controller.get_collider().name)=="cement2":
