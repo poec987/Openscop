@@ -21,7 +21,10 @@ var camera_root_dist_ver = 0.0
 
 #GAME
 var control_mode = 0
+
+#SAVEDATA
 var current_character = 0
+var pieces_amount = [0,0]
 # 0 = guardian
 var fog_focus = 0
 #0 = follow player
@@ -38,6 +41,23 @@ var p2talkdict = {}
 
 #DIALOGUE
 var dialogue = {}
+
+#PIECE_ARRAY
+var pieces = [0,1,2,3,4,
+			4,0,2,1,3,
+			4,2,3,1,0,
+			2,3,1,4,0,
+			1,4,3,0,2,
+			1,0,3,2,4,
+			2,3,1,0,4,
+			2,1,0,3,4,
+			3,1,0,4,2,
+			1,0,4,2,3]
+#0 = CONE
+#1 = TORUS
+#2 = GREEN "SPHERE"
+#3 = TRIANGLE
+#4 = PINK PIECE
 
 func _ready():
 	#GAME BOOTUP
@@ -75,5 +95,5 @@ func create_textbox(background,text):
 	var dialogue_instance = textbox_scene.instantiate()
 	dialogue_instance.background = background
 	dialogue_instance.text = text
-	if get_tree().get_first_node_in_group("HUD").get_child_count()>0:
-		get_tree().get_first_node_in_group("HUD").get_child(0).add_child(dialogue_instance)
+	if get_tree().get_nodes_in_group("HUD")[0].get_child_count()<2:
+		get_tree().get_nodes_in_group("HUD")[0].get_child(0).add_child(dialogue_instance)

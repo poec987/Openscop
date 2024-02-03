@@ -67,18 +67,19 @@ func _physics_process(delta):
 		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
 		if is_on_floor() || position.y==0.0:
 			#CHECKS IF BELOW PLAYER THERE'S MESH WITH THESE NAMES
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="grass":
-				change_sound("res://sfx/player/grass.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="evencare":
-				change_sound("res://sfx/player/ec_steps.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement":
-				change_sound("res://sfx/player/cement.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement2":
-				change_sound("res://sfx/player/cement2.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement3":
-				change_sound("res://sfx/player/cement3.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="school":
-				change_sound("res://sfx/player/school_steps.wav")
+			if footstep_controller.get_collider()!=null:
+				if str(footstep_controller.get_collider().name)=="grass":
+					change_sound("res://sfx/player/grass.wav")
+				if str(footstep_controller.get_collider().name)=="evencare":
+					change_sound("res://sfx/player/ec_steps.wav")
+				if str(footstep_controller.get_collider().name)=="cement":
+					change_sound("res://sfx/player/cement.wav")
+				if str(footstep_controller.get_collider().name)=="cement2":
+					change_sound("res://sfx/player/cement2.wav")
+				if str(footstep_controller.get_collider().name)=="cement3":
+					change_sound("res://sfx/player/cement3.wav")
+				if str(footstep_controller.get_collider().name)=="school":
+					change_sound("res://sfx/player/school_steps.wav")
 	else:
 		#IF SPEED NOT FASTER THAN 0.2, DISABLE WALKING ANIM
 		is_walking=false
