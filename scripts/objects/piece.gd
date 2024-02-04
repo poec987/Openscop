@@ -29,7 +29,6 @@ func _on_piece_area_body_entered(body):
 		collected=true
 		random_sound = randi_range(0,2)
 		Global.pieces_amount[Global.current_character]+=1
-		#get_tree().get_nodes_in_group("HUD")[1].called=true
 		if random_sound==0:
 			$piece_sound1.play()
 		if random_sound==1:

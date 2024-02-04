@@ -21,6 +21,7 @@ var camera_root_dist_ver = 0.0
 
 #GAME
 var control_mode = 0
+var game_paused = false
 
 #SAVEDATA
 var current_character = 0
@@ -71,6 +72,8 @@ func _ready():
 	#SceneManager.change_scene("res://scenes/test.tscn")
 
 func _process(_delta):
+	if Input.is_action_just_pressed("ui_end"):
+		game_paused=!game_paused
 	#CHECKS INPUTS FOR SHEET FOLDER HOTKEY AND FULLSCREEN BUTTON
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
@@ -82,6 +85,10 @@ func _process(_delta):
 	RenderingServer.global_shader_parameter_set("fog_color", fog_color)
 	RenderingServer.global_shader_parameter_set("sphere_size", fog_radius)
 
+func find_node_in_group( group, name ):
+	for node in group:
+		if node.name == name:
+			return node
 
 #FUNCTION THAT CHECKS P2TOTALK DICTIONARY TABLE, CALLED EVERY TIME P2TOTALK IS USED
 func get_p2_word(word):
@@ -95,5 +102,5 @@ func create_textbox(background,text):
 	var dialogue_instance = textbox_scene.instantiate()
 	dialogue_instance.background = background
 	dialogue_instance.text = text
-	if get_tree().get_nodes_in_group("HUD")[0].get_child_count()<2:
-		get_tree().get_nodes_in_group("HUD")[0].get_child(0).add_child(dialogue_instance)
+	if get_tree().get_first_node_in_group("HUD_textboxes").get_child_count()<2:
+		get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).add_child(dialogue_instance)

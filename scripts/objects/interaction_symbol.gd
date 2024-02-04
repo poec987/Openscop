@@ -43,7 +43,7 @@ func _process(delta):
 		
 		if show_dialogue:
 			if Input.is_action_just_pressed("pressed_action") && Global.control_mode==0:
-				if get_tree().get_first_node_in_group("HUD").get_child(0).get_child_count()==0:
+				if get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).get_child_count()==0:
 					if Global.dialogue.has(dialogue_id):
 						Global.create_textbox(textbox_background,Global.dialogue[dialogue_id])
 					elif dialogue_id=="":

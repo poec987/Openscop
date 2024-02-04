@@ -73,13 +73,13 @@ ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="test-plane" type="Node3D"]
 
+[node name="player_root" parent="." instance=ExtResource("2_a0geb")]
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_ukff2")
 volume_db = 0.1
 pitch_scale = 0.95
 autoplay = true
-
-[node name="player_root" parent="AudioStreamPlayer" instance=ExtResource("2_a0geb")]
 
 [node name="grass" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
