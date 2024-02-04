@@ -35,7 +35,7 @@ func _ready():
 	animate()
 	
 func _process(delta):
-	if position.distance_to(get_tree().get_first_node_in_group("Player").position)<min_distance:
+	if position.distance_to(get_tree().get_first_node_in_group("Player").global_position)<min_distance:
 		if !player_inside_zone:
 			$interaction_sound.play()
 			create_tween().tween_property(interaction_mesh,"scale",Vector3(1.,1.,1.),GROW_ANIMATION_SPEED)

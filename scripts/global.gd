@@ -72,8 +72,8 @@ func _ready():
 	#SceneManager.change_scene("res://scenes/test.tscn")
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_end"):
-		game_paused=!game_paused
+	if Input.is_action_just_pressed("pressed_start") && Global.control_mode==0:
+		Global.game_paused=!Global.game_paused
 	#CHECKS INPUTS FOR SHEET FOLDER HOTKEY AND FULLSCREEN BUTTON
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
@@ -84,11 +84,6 @@ func _process(_delta):
 	#SETS FOG COLOR AND FOG RADIUS AS GAME RUNS
 	RenderingServer.global_shader_parameter_set("fog_color", fog_color)
 	RenderingServer.global_shader_parameter_set("sphere_size", fog_radius)
-
-func find_node_in_group( group, name ):
-	for node in group:
-		if node.name == name:
-			return node
 
 #FUNCTION THAT CHECKS P2TOTALK DICTIONARY TABLE, CALLED EVERY TIME P2TOTALK IS USED
 func get_p2_word(word):
