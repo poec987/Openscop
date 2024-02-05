@@ -31,6 +31,7 @@ func _process(_delta):
 		else:
 			can_unpause=true
 			screenshotted=false
+			$screen_sprite.set_texture(null)
 		if $screen_sprite.scale.x<0.48:
 			var pauser_tween = create_tween()
 			pauser_tween.tween_property($screen_sprite,"scale",Vector2(1.,1.),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_LINEAR)
