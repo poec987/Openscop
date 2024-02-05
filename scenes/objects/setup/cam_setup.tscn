@@ -117,12 +117,12 @@ label_settings = SubResource("LabelSettings_4cmbp")
 wait_time = 5.0
 one_shot = true
 
-[node name="pause_menu" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD"]
+[node name="pause_menu" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD" groups=["HUD_pausemenu"]]
 process_mode = 3
 script = ExtResource("6_rn2rq")
-can_unpause = false
 
 [node name="screen_sprite" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
+z_index = 10
 centered = false
 
 [node name="player_camera" type="Camera3D" parent="NTSC/NTSC_viewport/Dither/dither_view"]

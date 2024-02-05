@@ -72,7 +72,7 @@ func _ready():
 	#SceneManager.change_scene("res://scenes/test.tscn")
 
 func _process(_delta):
-	if Input.is_action_just_pressed("pressed_start") && Global.control_mode==0:
+	if Input.is_action_just_pressed("pressed_start") && Global.control_mode==0 && get_tree().get_first_node_in_group("HUD_pausemenu").can_unpause:
 		Global.game_paused=!Global.game_paused
 	#CHECKS INPUTS FOR SHEET FOLDER HOTKEY AND FULLSCREEN BUTTON
 	if Input.is_action_just_pressed("open_sheet_folder"):
