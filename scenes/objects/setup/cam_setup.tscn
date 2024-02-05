@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ciyscr1kgpgnf"]
+[gd_scene load_steps=18 format=3 uid="uid://ciyscr1kgpgnf"]
 
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://r7ggvn12fjys" path="res://graphics/sprites/ui/pausemenu_buttons.png" id="9_yo6lc"]
 [ext_resource type="AudioStream" uid="uid://clt2bm20cpgtp" path="res://sfx/pause/select1.wav" id="10_jtm0y"]
 [ext_resource type="AudioStream" uid="uid://b16qbsmkn67wh" path="res://sfx/pause/select2.wav" id="11_8ia7v"]
+[ext_resource type="Texture2D" uid="uid://cgug7tu2or80t" path="res://graphics/sprites/ui/pausemenu_overlay.png" id="14_cvfsw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
@@ -202,6 +203,12 @@ centered = false
 hframes = 2
 vframes = 5
 frame = 8
+
+[node name="overlay" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
+visible = false
+texture = ExtResource("14_cvfsw")
+centered = false
+hframes = 5
 
 [node name="player_camera" type="Camera3D" parent="NTSC/NTSC_viewport/Dither/dither_view"]
 transform = Transform3D(-4.37114e-08, -0.309017, 0.951057, 0, 0.951057, 0.309017, -1, 1.35076e-08, -4.1572e-08, 8, 2.62875, 0)
