@@ -72,15 +72,12 @@ func _ready():
 	#SceneManager.change_scene("res://scenes/test.tscn")
 
 func _process(_delta):
-	if Input.is_action_just_pressed("pressed_start") && Global.control_mode==0 && get_tree().get_first_node_in_group("HUD_pausemenu").can_unpause:
-		Global.game_paused=!Global.game_paused
 	#CHECKS INPUTS FOR SHEET FOLDER HOTKEY AND FULLSCREEN BUTTON
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreen = !fullscreen
 		DisplayServer.window_set_mode((DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED))
-	
 	#SETS FOG COLOR AND FOG RADIUS AS GAME RUNS
 	RenderingServer.global_shader_parameter_set("fog_color", fog_color)
 	RenderingServer.global_shader_parameter_set("sphere_size", fog_radius)
