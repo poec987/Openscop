@@ -1,0 +1,202 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxifwmxqngahm"]
+
+[ext_resource type="Texture2D" uid="uid://cgnewqsmopsp5" path="res://graphics/sprites/ui/pausemenu_quit.png" id="1_k78xr"]
+[ext_resource type="Texture2D" uid="uid://cgug7tu2or80t" path="res://graphics/sprites/ui/pausemenu_overlay.png" id="2_7ssm6"]
+[ext_resource type="AudioStream" uid="uid://clt2bm20cpgtp" path="res://sfx/pause/select1.wav" id="3_fu8ut"]
+[ext_resource type="AudioStream" uid="uid://b16qbsmkn67wh" path="res://sfx/pause/select2.wav" id="4_h25di"]
+[ext_resource type="AudioStream" uid="uid://bcjxtfy57n1mq" path="res://sfx/pause/selected.wav" id="5_shpjg"]
+[ext_resource type="Texture2D" uid="uid://8ah1shkdhlyp" path="res://graphics/sprites/ui/pausemenu_bg3.png" id="6_jg520"]
+
+[sub_resource type="GDScript" id="GDScript_05udf"]
+script/source = "extends Node2D
+
+const BUTTON_ANIM_SPEED = 1
+
+var fade = 0.0
+var selected_option = 0
+var just_quit = false
+var just_quit_step = 0
+func selection_sound(variable):
+	if variable%2!=0:
+		$select_up.play()
+	else:
+		$select_down.play()
+
+func _process(_delta):
+	if Input.is_action_just_pressed(\"pressed_triangle\") && !$just_quit_menu.visible:
+		queue_free()
+	
+	if Input.is_action_just_pressed(\"pressed_start\"):
+		queue_free()
+		Global.game_paused=false
+	
+	if !$just_quit_menu.visible:
+		if Input.is_action_just_pressed(\"pressed_up\") && selected_option!=0:
+			selected_option-=1
+			selection_sound(selected_option)
+			
+		if Input.is_action_just_pressed(\"pressed_down\") && selected_option!=2:
+			selected_option+=1
+			selection_sound(selected_option)
+
+	if Input.is_action_just_pressed(\"pressed_action\"):
+		if selected_option==0:
+			queue_free()
+		if selected_option==1:
+			$selected.play()
+			$overlay.frame_coords.x=selected_option
+			create_tween().tween_property(self,\"fade\",1.1,0.5)
+		if selected_option==2:
+			$selected2.play()
+			$just_quit_menu.visible = true
+			$buttons.visible=false
+	
+	for buttons in $buttons.get_children():
+		if buttons.name!=\"selected2\" && buttons.name!=\"pink_fade\" && buttons.name!=\"just_quit_menu\" && buttons.name!=\"select_up\" && buttons.name!=\"select_down\" && buttons.name!=\"selected\"  && buttons.name!=\"bg\":
+			if $buttons.get_child(selected_option)!=buttons:
+				buttons.frame_coords.x=0
+				if buttons.position.x>0:
+					buttons.position.x-=BUTTON_ANIM_SPEED
+			else:
+				buttons.frame_coords.x=1
+				if buttons.position.x<10:
+					buttons.position.x+=BUTTON_ANIM_SPEED
+	
+	if $just_quit_menu.visible:
+		if !just_quit:
+			$just_quit_menu/yes.frame_coords.x=0
+			if $just_quit_menu/yes.position.x>0:
+				$just_quit_menu/yes.position.x-=BUTTON_ANIM_SPEED
+			$just_quit_menu/no.frame_coords.x=1
+			if $just_quit_menu/no.position.x<10:
+				$just_quit_menu/no.position.x+=BUTTON_ANIM_SPEED
+		if just_quit:
+			$just_quit_menu/no.frame_coords.x=0
+			if $just_quit_menu/no.position.x>0:
+				$just_quit_menu/no.position.x-=BUTTON_ANIM_SPEED
+			$just_quit_menu/yes.frame_coords.x=1
+			if $just_quit_menu/yes.position.x<10:
+				$just_quit_menu/yes.position.x+=BUTTON_ANIM_SPEED
+			
+		if Input.is_action_just_pressed(\"pressed_up\") && just_quit:
+			just_quit=false
+			$select_down.play()
+		if Input.is_action_just_pressed(\"pressed_down\") && !just_quit:
+			just_quit=true
+			$select_up.play()
+			
+		if Input.is_action_just_pressed(\"pressed_triangle\"):
+			just_quit_step=0
+			just_quit=false
+			$just_quit_menu.visible=false
+			$buttons.visible=true
+		
+		if Input.is_action_just_pressed(\"pressed_action\") && !just_quit:
+			just_quit_step+=1
+			if Input.is_action_just_released(\"pressed_action\"):
+				just_quit_step+=1
+			if just_quit_step==2:
+				just_quit_step=0
+				just_quit=false
+				$just_quit_menu.visible=false
+				$buttons.visible=true
+		
+"
+
+[node name="quit_button" type="Node2D"]
+position = Vector2(18, 171)
+script = SubResource("GDScript_05udf")
+
+[node name="buttons" type="Node2D" parent="."]
+
+[node name="dont_quit" type="Sprite2D" parent="buttons"]
+z_index = 1
+position = Vector2(10, 0)
+texture = ExtResource("1_k78xr")
+centered = false
+hframes = 2
+vframes = 3
+frame = 1
+
+[node name="save_quit" type="Sprite2D" parent="buttons"]
+z_index = 1
+position = Vector2(0, 17)
+texture = ExtResource("1_k78xr")
+centered = false
+hframes = 2
+vframes = 3
+frame = 2
+
+[node name="just_quit" type="Sprite2D" parent="buttons"]
+z_index = 1
+position = Vector2(0, 34)
+texture = ExtResource("1_k78xr")
+centered = false
+hframes = 2
+vframes = 3
+frame = 4
+
+[node name="overlay" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+texture = ExtResource("2_7ssm6")
+centered = false
+hframes = 5
+
+[node name="pink_fade" type="ColorRect" parent="."]
+z_index = 3
+offset_left = -18.0
+offset_top = -171.0
+offset_right = 302.0
+offset_bottom = 69.0
+color = Color(0.996078, 0.847059, 0.996078, 0)
+
+[node name="select_up" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fu8ut")
+volume_db = 10.0
+
+[node name="select_down" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_h25di")
+volume_db = 10.0
+
+[node name="selected" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_shpjg")
+volume_db = 10.0
+
+[node name="selected2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_shpjg")
+volume_db = 10.0
+
+[node name="just_quit_menu" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 69)
+
+[node name="no" type="Sprite2D" parent="just_quit_menu"]
+z_index = 1
+position = Vector2(10, -52)
+texture = ExtResource("1_k78xr")
+centered = false
+hframes = 2
+vframes = 3
+frame = 1
+
+[node name="yes" type="Sprite2D" parent="just_quit_menu"]
+z_index = 1
+position = Vector2(10, -35)
+texture = ExtResource("1_k78xr")
+centered = false
+hframes = 2
+vframes = 3
+frame = 4
+
+[node name="bg" type="TextureRect" parent="."]
+anchors_preset = -1
+offset_left = 172.0
+offset_top = 69.0
+offset_right = 362.0
+offset_bottom = 179.0
+rotation = -3.14159
+texture = ExtResource("6_jg520")
+expand_mode = 1
+stretch_mode = 1
+flip_h = true

@@ -143,12 +143,13 @@ hframes = 21
 process_mode = 3
 script = ExtResource("6_rn2rq")
 
-[node name="current_menu" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
-z_index = 1
-
 [node name="screen_sprite" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
+z_index = 1
 texture_filter = 1
 centered = false
+
+[node name="current_menu" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
+z_index = 1
 
 [node name="pause_sound" type="AudioStreamPlayer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
 process_mode = 3
@@ -224,6 +225,8 @@ centered = false
 hframes = 2
 vframes = 5
 frame = 8
+
+[node name="buttons_quit" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu/main_pausemenu"]
 
 [node name="overlay" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
 modulate = Color(1, 1, 1, 0)

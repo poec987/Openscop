@@ -38,10 +38,10 @@ func _ready():
 func _process(delta):
 	
 	if !reading_bio:
-		if Input.is_action_just_pressed(\"pressed_up\") && selected_option!=0:
+		if Input.is_action_just_pressed(\"pressed_up\") && selected_option>1:
 			selected_option-=2
 			$cursor_move.play()
-		if Input.is_action_just_pressed(\"pressed_down\") && selected_option!=pet_dictionary_keys.size()-1:
+		if Input.is_action_just_pressed(\"pressed_down\") && selected_option<pet_dictionary_keys.size()-2:
 			selected_option+=2
 			$cursor_move.play()
 		if Input.is_action_just_pressed(\"pressed_left\") && selected_option!=0:
@@ -50,7 +50,6 @@ func _process(delta):
 		if Input.is_action_just_pressed(\"pressed_right\") && selected_option!=pet_dictionary_keys.size()-1:
 			selected_option+=1
 			$cursor_move.play()
-	
 	selected_option=clamp(selected_option,0,pet_dictionary_keys.size()-1)
 	for buttons in get_node(\"pet_buttons\").get_children():
 		if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
@@ -120,7 +119,8 @@ func _process(delta):
 						create_tween().tween_property(buttons,\"position\",Vector2(original_button_pos),1.0).set_trans(Tween.TRANS_SINE)
 			$action_input_cap.start()
 			animated = true
-
+			reading_bio=false
+			
 func _on_leave_timer_timeout():
 	queue_free()
 "
