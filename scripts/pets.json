@@ -1,0 +1,18 @@
+{
+    "amber": {
+        "nameboard_file":"amber_name",
+        "icon_file":"amber",
+        "description":[
+            "This is a Textbox!",
+            "This is another textbox!"
+        ]
+    },
+    "randice": {
+        "nameboard_file":"randice_name",
+        "icon_file":"randice",
+        "description":[
+            "This is a Textbox!",
+            "This is another textbox!"
+        ]
+    },
+}

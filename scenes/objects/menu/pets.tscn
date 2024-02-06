@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn13e2prkg6p1"]
+
+[ext_resource type="Texture2D" uid="uid://7syw6v78cnat" path="res://graphics/sprites/ui/pausemenu_bg2.png" id="1_ors88"]
+
+[sub_resource type="GDScript" id="GDScript_6g10t"]
+script/source = "extends Node2D
+
+var button_amount = 0
+var row = 0
+
+var selected_option=0
+func _ready():
+	create_tween().tween_property($pink_fade,\"color:a\",0.0,0.25)
+	var pet_dictionary = {}
+	pet_dictionary = JSON.parse_string((FileAccess.open(\"res://scripts/pets.json\", FileAccess.READ)).get_as_text())
+	var pet_dictionary_keys = pet_dictionary.keys()
+	for key in pet_dictionary:
+		var pet_button = preload(\"res://scenes/objects/menu/pet_button.tscn\")
+		var pet_button_instance = pet_button.instantiate()
+		pet_button_instance.get_child(0).get_child(0).texture = load(\"res://graphics/sprites/ui/pets_menu/\"+pet_dictionary[pet_dictionary_keys[button_amount]][\"icon_file\"]+\".png\")
+		pet_button_instance.get_child(1).texture = load(\"res://graphics/sprites/ui/pets_menu/\"+pet_dictionary[pet_dictionary_keys[button_amount]][\"nameboard_file\"]+\".png\")
+		pet_button_instance.position.x = $pet_buttons.position.x+(button_amount%2)*132
+		pet_button_instance.position.y = $pet_buttons.position.y+(int(str(row)[0]))*56
+		get_child(1).add_child(pet_button_instance)
+		button_amount+=1
+		row+=0.5
+func _process(_delta):
+	if Input.is_action_just_pressed(\"pressed_up\"):
+		selected_option+=2
+	if Input.is_action_just_pressed(\"pressed_down\"):
+		selected_option-=2
+	if Input.is_action_just_pressed(\"pressed_left\"):
+		selected_option-=1
+	if Input.is_action_just_pressed(\"pressed_right\"):
+		selected_option+=1
+	#selected_option=clamp(selected_option,0,pet_dictionary_keys.length())
+"
+
+[node name="options" type="Node2D"]
+script = SubResource("GDScript_6g10t")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("1_ors88")
+stretch_mode = 1
+
+[node name="pink_fade" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(0.996078, 0.847059, 0.996078, 1)
+
+[node name="pet_buttons" type="Node2D" parent="."]
+position = Vector2(26, 36)

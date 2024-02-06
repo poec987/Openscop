@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://e8poffx3ndw4"]
+
+[ext_resource type="Texture2D" uid="uid://7syw6v78cnat" path="res://graphics/sprites/ui/pausemenu_bg2.png" id="1_0gh05"]
+
+[sub_resource type="GDScript" id="GDScript_6g10t"]
+script/source = "extends Node2D
+
+#func _ready():
+	#create_tween().tween_property($pink_fade,\"color:a\",0.0,0.25)
+"
+
+[node name="options" type="Node2D"]
+script = SubResource("GDScript_6g10t")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("1_0gh05")
+stretch_mode = 1
+
+[node name="pink_fade" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(0.996078, 0.847059, 0.996078, 1)

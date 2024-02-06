@@ -4,20 +4,18 @@ var screenshotted = false
 var paused = false
 @export var can_unpause = true
 
+var fade = 0.0
 const SCREEN_ANIM_TIME = 1.0
 const BUTTON_ANIM_SPEED = 1
 const MINI_SCREEN_SIZE = 0.5
 var unpause_anim = false
-var menus = [false,false,false,false,false]
 var selected_option = 0
 
 func get_screen():
 	var viewport_feed: Viewport =  get_tree().root.get_viewport()
 	var screen_texture: Texture2D = viewport_feed.get_texture()
 	var screen_image: Image = screen_texture.get_image()
-	#var static_image: ImageTexture = ImageTexture.create_from_image(screen_image)
 	var screen: Texture2D = ImageTexture.create_from_image(screen_image)
-	#screen_image.save_png("user://sheets/screen.png")
 	return screen
 
 
@@ -31,7 +29,7 @@ func selection_sound(variable):
 func _process(_delta):
 
 	if Input.is_action_just_pressed("pressed_start") && Global.control_mode==0 && get_tree().get_first_node_in_group("HUD_pausemenu").can_unpause:
-		if menus.find(true)==-1:
+		if $current_menu.get_child_count()==0:
 			Global.game_paused=!Global.game_paused
 	
 	
@@ -79,17 +77,32 @@ func _process(_delta):
 			$screen_sprite.z_index=1
 			create_tween().tween_property($screen_sprite,"scale",Vector2(1.,1.),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_SINE)
 
-	if can_unpause && Global.game_paused && menus.find(true)==-1:
-		if Input.is_action_just_pressed("pressed_up") && selected_option!=0:
-			selected_option-=1
-			selection_sound(selected_option)
-			
-		if Input.is_action_just_pressed("pressed_down") && selected_option!=4:
-			selected_option+=1
-			selection_sound(selected_option)
+	if can_unpause && Global.game_paused && $current_menu.get_child_count()==0:
+		if fade==0.0:
+			if Input.is_action_just_pressed("pressed_up") && selected_option!=0:
+				selected_option-=1
+				selection_sound(selected_option)
+				
+			if Input.is_action_just_pressed("pressed_down") && selected_option!=4:
+				selected_option+=1
+				selection_sound(selected_option)
 		
+		$overlay.set_modulate(Color(1,1,1,fade))
+		
+		if fade>1.0:
+			create_tween().tween_property($pink_fade,"color:a",1.0,0.25)
+			if $pink_fade.color.a>0.9:
+				if selected_option==2:
+					$current_menu.add_child(preload("res://scenes/objects/menu/pets.tscn").instantiate())
+			
 		if Input.is_action_just_pressed("pressed_action"):
-			menus[selected_option]=true
+			if selected_option!=0:
+				if fade==0.0 && $current_menu.get_child_count()==0:
+					$selected.play()
+				$overlay.frame_coords.x=selected_option
+				create_tween().tween_property(self,"fade",1.1,0.5)
+			else:
+				Global.game_paused=false
 		
 		for buttons in get_node("main_pausemenu/buttons").get_children():
 			if get_node("main_pausemenu/buttons").get_child(selected_option)!=buttons:
