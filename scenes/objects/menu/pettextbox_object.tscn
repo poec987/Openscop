@@ -1,0 +1,151 @@
+[gd_scene load_steps=6 format=3 uid="uid://6eqne5e1pb62"]
+
+[ext_resource type="Texture2D" uid="uid://y128fohh0gh1" path="res://graphics/sprites/ui/pet_textbox.png" id="1_f1ejn"]
+[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="6_fmibv"]
+[ext_resource type="Texture2D" uid="uid://bc7wq6drabu2j" path="res://graphics/sprites/ui/textbox_arrow.png" id="7_xvinu"]
+
+[sub_resource type="GDScript" id="GDScript_cps00"]
+script/source = "extends Node2D
+#TEXTBOX OBJECT
+
+#TYPEWRITER SPEEDS
+const DEFAULT_WAIT = 0.025
+const PUNCTUATION_WAIT = 0.075
+#CUSTOMIZABLE VARIABLES
+@export var text = []
+
+#AMOUNT OF CHARS ON DISPLAY, PAGE OF TEXTBOX.
+var chars = 0
+@export var textbox = 0
+
+#CHARACTERS THAT MAKE TYPEWRITER SLOWER
+var slowchars=\"!.?,;\"
+
+#CHECK IF IS READY TO SKIP.
+var textbox_stage = 0
+
+func _ready():
+	$textbox_text.visible_characters=0
+	#CHECKS WHETHER TO START WITH SLOW (if the text starts with a special character) OR FAST TYPING SPEED
+	check_character()
+	#MAKES WAIT TIME SMALL SO TEXT APPEARS AS SOON AS TEXTBOX STARTS
+	$textbox_timer.set_wait_time($textbox_timer.wait_time/5)
+	#STARTS THE TIMER
+	$textbox_timer.start()
+	
+	
+
+func _process(_delta):
+	#WAITS UNTIL HALF THE TIME HAS BEEN COMPLETED TO SHOW THE TEXTBOX BACKGROUND.
+	if $textbox_timer.get_time_left()<$textbox_timer.wait_time/2.0:
+		$textbox_background.visible=true
+		
+	#STARTS SHOWING TEXT IMMEDIATELY IF NO TEXT HAS APPEARED YET
+	if $textbox_text.visible_characters==0 && $textbox_timer.get_time_left()<$textbox_timer.wait_time/2.0:
+		$textbox_text.visible_characters=1
+	
+	#CHECKS IF TEXT HAS ENDED, IF IT DID, PLAY CLOSE SOUND AND DELETE TEXTBOX
+	if textbox>text.size()-1:
+		textbox = 0
+		queue_free()
+		
+	#SETS THE TEXT OF THE TEXTBOX
+	$textbox_text.text = text[textbox]
+	
+	#IF DIDN'T FINISH TYPING EVERYTHING, KEEP TYPING, IF IT DID, STOP PLAYING TYPING SOUND
+	if $textbox_text.visible_ratio != 1.0:
+		$textbox_text.visible_characters = chars
+	else:
+		if $arrow_timer.is_stopped():
+			$arrow_timer.start()
+	
+	#ALLOWS YOU TO SKIP TEXTBOX WHEN YOU PRESS ACTION, SHOWS FULL TEST AND DISPLAYS \"NEXT\" ARROW.
+	if Input.is_action_just_pressed(\"pressed_action\") && textbox_stage==0:
+		$textbox_timer.stop()
+		$textbox_text.visible_ratio = 1.0
+		textbox_stage=1
+		$arrow_timer.start()
+	
+	#IF FINISHED TYPING, AND YOU ARE NOT PRESSING ANY BUTTON, ALLOW YOU TO PROCCEED BY PRESSING X
+	if $textbox_text.visible_ratio==1.0 && !Input.is_action_pressed(\"pressed_action\"):
+		textbox_stage=2
+		
+		
+		
+	#IF YOU SKIPPED TEXTBOX, ALLOWS YOU TO PROCEED ONLY AFTER YOU STOP HOLDING ACTION.
+	if Input.is_action_just_released(\"pressed_action\") && textbox_stage==1:
+		textbox_stage=2
+		$arrow_timer.start()
+		
+	#GOES TO NEXT TEXTBOX, IF THERE'S ANY
+	if Input.is_action_just_pressed(\"pressed_action\") && textbox_stage==2:
+		textbox_stage=0
+		textbox+=1
+		chars = 0
+		$arrow_timer.stop()
+		$textbox_arrow.visible = false
+		$textbox_text.visible_ratio = 0.0
+		$textbox_timer.start()
+		
+	
+	#STARTS TO DISPLAY ARROW AS SOON AS TEXT IS OVER
+	if $arrow_timer.time_left==$arrow_timer.wait_time:
+		$textbox_arrow.visible = true
+		
+		
+func check_character():
+	#CHECKS IF CHARACATER IS NORMAL OR SPECIAL CHARACTER, WHICH IS TYPED SLOWER ON PETSCOP
+	if slowchars.find($textbox_text.text[$textbox_text.visible_characters])==-1:
+		$textbox_timer.wait_time = DEFAULT_WAIT
+	else:
+		$textbox_timer.wait_time = PUNCTUATION_WAIT
+
+#TEXT TIMER STUFF
+func _on_textbox_timer_timeout():
+	if textbox<=text.size()-1:
+		if chars<text[textbox].length():
+			chars+=1
+			check_character()
+			$textbox_timer.start()
+		
+
+#ARROW TIMER STUFF
+func _on_arrow_timer_timeout():
+	$textbox_arrow.visible = !$textbox_arrow.visible
+
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_nfg32"]
+font = ExtResource("6_fmibv")
+font_color = Color(0, 0, 0, 1)
+
+[node name="textbox_object" type="Node2D"]
+script = SubResource("GDScript_cps00")
+
+[node name="textbox_background" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(160, 136)
+texture = ExtResource("1_f1ejn")
+
+[node name="arrow_timer" type="Timer" parent="."]
+
+[node name="textbox_timer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="textbox_text" type="Label" parent="."]
+offset_left = 39.0
+offset_top = 96.0
+offset_right = 279.0
+offset_bottom = 598.0
+text = "A"
+label_settings = SubResource("LabelSettings_nfg32")
+autowrap_mode = 1
+
+[node name="textbox_arrow" type="Sprite2D" parent="."]
+position = Vector2(268, 169)
+texture = ExtResource("7_xvinu")
+hframes = 2
+frame = 1
+
+[connection signal="timeout" from="arrow_timer" to="." method="_on_arrow_timer_timeout"]
+[connection signal="timeout" from="textbox_timer" to="." method="_on_textbox_timer_timeout"]

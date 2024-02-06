@@ -14,5 +14,21 @@
             "This is a Textbox!",
             "This is another textbox!"
         ]
+    },
+    "roneth": {
+        "nameboard_file":"randice_name",
+        "icon_file":"randice",
+        "description":[
+            "This is a Textbox!",
+            "This is another textbox!"
+        ]
+    },
+    "toneth": {
+        "nameboard_file":"randice_name",
+        "icon_file":"randice",
+        "description":[
+            "This is a Textbox!",
+            "This is another textbox!"
+        ]
     }
 }

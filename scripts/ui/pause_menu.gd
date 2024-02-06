@@ -10,6 +10,8 @@ const BUTTON_ANIM_SPEED = 1
 const MINI_SCREEN_SIZE = 0.5
 var unpause_anim = false
 var selected_option = 0
+var active_menu = [false,false,false,false,false]
+var spawned_menu = false
 
 func get_screen():
 	var viewport_feed: Viewport =  get_tree().root.get_viewport()
@@ -88,13 +90,13 @@ func _process(_delta):
 				selection_sound(selected_option)
 		
 		$overlay.set_modulate(Color(1,1,1,fade))
-		
 		if fade>1.0:
 			create_tween().tween_property($pink_fade,"color:a",1.0,0.25)
-			if $pink_fade.color.a>0.9:
+			if $pink_fade.color.a>0.9 && active_menu[selected_option]==false:
 				if selected_option==2:
 					$current_menu.add_child(preload("res://scenes/objects/menu/pets.tscn").instantiate())
-			
+					active_menu[selected_option]=true
+
 		if Input.is_action_just_pressed("pressed_action"):
 			if selected_option!=0:
 				if fade==0.0 && $current_menu.get_child_count()==0:

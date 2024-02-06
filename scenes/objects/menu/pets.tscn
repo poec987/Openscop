@@ -1,19 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn13e2prkg6p1"]
+[gd_scene load_steps=5 format=3 uid="uid://dn13e2prkg6p1"]
 
 [ext_resource type="Texture2D" uid="uid://7syw6v78cnat" path="res://graphics/sprites/ui/pausemenu_bg2.png" id="1_ors88"]
+[ext_resource type="AudioStream" uid="uid://icvrkxfnaa1q" path="res://sfx/pause/petselect.wav" id="2_8qcp6"]
+[ext_resource type="AudioStream" uid="uid://doub7apu77mdt" path="res://sfx/pause/petselected.wav" id="2_u5cd3"]
 
 [sub_resource type="GDScript" id="GDScript_6g10t"]
 script/source = "extends Node2D
 
 var button_amount = 0
 var row = 0
-
+var pet_dictionary = {}
 var selected_option=0
+var pet_dictionary_keys = []
+var reading_bio=false
+
+var spawned_textbox = false
+var animated = false
+
+var original_button_pos = Vector2.ZERO
+
 func _ready():
 	create_tween().tween_property($pink_fade,\"color:a\",0.0,0.25)
-	var pet_dictionary = {}
 	pet_dictionary = JSON.parse_string((FileAccess.open(\"res://scripts/pets.json\", FileAccess.READ)).get_as_text())
-	var pet_dictionary_keys = pet_dictionary.keys()
+	pet_dictionary_keys = pet_dictionary.keys()
 	for key in pet_dictionary:
 		var pet_button = preload(\"res://scenes/objects/menu/pet_button.tscn\")
 		var pet_button_instance = pet_button.instantiate()
@@ -21,19 +30,99 @@ func _ready():
 		pet_button_instance.get_child(1).texture = load(\"res://graphics/sprites/ui/pets_menu/\"+pet_dictionary[pet_dictionary_keys[button_amount]][\"nameboard_file\"]+\".png\")
 		pet_button_instance.position.x = $pet_buttons.position.x+(button_amount%2)*132
 		pet_button_instance.position.y = $pet_buttons.position.y+(int(str(row)[0]))*56
-		get_child(1).add_child(pet_button_instance)
+		get_child(2).add_child(pet_button_instance)
 		button_amount+=1
 		row+=0.5
-func _process(_delta):
-	if Input.is_action_just_pressed(\"pressed_up\"):
-		selected_option+=2
-	if Input.is_action_just_pressed(\"pressed_down\"):
-		selected_option-=2
-	if Input.is_action_just_pressed(\"pressed_left\"):
-		selected_option-=1
-	if Input.is_action_just_pressed(\"pressed_right\"):
-		selected_option+=1
-	#selected_option=clamp(selected_option,0,pet_dictionary_keys.length())
+		
+		
+func _process(delta):
+	
+	if !reading_bio:
+		if Input.is_action_just_pressed(\"pressed_up\") && selected_option!=0:
+			selected_option-=2
+			$cursor_move.play()
+		if Input.is_action_just_pressed(\"pressed_down\") && selected_option!=pet_dictionary_keys.size()-1:
+			selected_option+=2
+			$cursor_move.play()
+		if Input.is_action_just_pressed(\"pressed_left\") && selected_option!=0:
+			selected_option-=1
+			$cursor_move.play()
+		if Input.is_action_just_pressed(\"pressed_right\") && selected_option!=pet_dictionary_keys.size()-1:
+			selected_option+=1
+			$cursor_move.play()
+	
+	selected_option=clamp(selected_option,0,pet_dictionary_keys.size()-1)
+	for buttons in get_node(\"pet_buttons\").get_children():
+		if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
+			buttons.get_child(1).offset=Vector2.ZERO
+			buttons.get_child(0).get_child(0).offset=Vector2.ZERO
+			buttons.get_child(2).play(\"RESET\")
+		else:
+			buttons.get_child(1).offset=Vector2(-4,-3)
+			buttons.get_child(0).get_child(0).offset=Vector2(-4,-3)
+			buttons.get_child(2).play(\"selected\")
+	
+	if Input.is_action_just_pressed(\"pressed_triangle\") && !reading_bio && $action_input_cap.time_left<1.0:
+		create_tween().tween_property($pink_fade,\"color:a\",1.0,0.25)
+		$leave_timer.start()
+	if Input.is_action_just_pressed(\"pressed_action\") && !reading_bio && $action_input_cap.time_left<1.0:
+		$action_input_cap.wait_time=2
+		$triangle_input_cap.wait_time=2
+		for buttons in get_node(\"pet_buttons\").get_children():
+			if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
+				if buttons.position.x>100:
+					create_tween().tween_property(buttons,\"position:x\",384,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+				else:
+					create_tween().tween_property(buttons,\"position:x\",-157,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+			else:
+				$triangle_input_cap.start()
+				$pet_selected.play()
+				original_button_pos = buttons.position
+				create_tween().tween_property(buttons,\"position\",Vector2(75.5,16.5),0.5).set_trans(Tween.TRANS_SINE)
+				reading_bio=true
+				animated=false
+				spawned_textbox=false
+	
+	
+	if reading_bio:
+		if get_node(\"pet_buttons\").get_child(selected_option).position.x==75.5:
+			var textbox_scene = preload(\"res://scenes/objects/menu/pettextbox_object.tscn\")
+			var dialogue_instance = textbox_scene.instantiate()
+			dialogue_instance.text = pet_dictionary[pet_dictionary_keys[selected_option]][\"description\"]
+			if get_node(\"pet_textbox\").get_child_count()<2 && !spawned_textbox:
+				get_node(\"pet_textbox\").add_child(dialogue_instance)
+				spawned_textbox=true
+			if !get_node(\"pet_textbox\").get_child(0) && spawned_textbox:
+				for buttons in get_node(\"pet_buttons\").get_children():
+					if !animated:
+						if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
+							if buttons.position.x>100:
+								create_tween().tween_property(buttons,\"position:x\",-384,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+							else:
+								create_tween().tween_property(buttons,\"position:x\",157,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+						if get_node(\"pet_buttons\").get_child(selected_option)==buttons:
+							create_tween().tween_property(buttons,\"position\",Vector2(original_button_pos),1.0).set_trans(Tween.TRANS_SINE)
+				$action_input_cap.start()
+				animated = true
+				reading_bio=false
+			
+	if Input.is_action_just_pressed(\"pressed_triangle\") && $triangle_input_cap.time_left<1.0:
+		if get_node(\"pet_textbox\").get_child_count()!=0 && spawned_textbox:
+			get_node(\"pet_textbox\").get_child(0).queue_free()
+			for buttons in get_node(\"pet_buttons\").get_children():
+				if !animated:
+					if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
+						if buttons.position.x>100:
+							create_tween().tween_property(buttons,\"position:x\",-384,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+						else:
+							create_tween().tween_property(buttons,\"position:x\",157,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+					if get_node(\"pet_buttons\").get_child(selected_option)==buttons:
+						create_tween().tween_property(buttons,\"position\",Vector2(original_button_pos),1.0).set_trans(Tween.TRANS_SINE)
+			$action_input_cap.start()
+			animated = true
+
+func _on_leave_timer_timeout():
+	queue_free()
 "
 
 [node name="options" type="Node2D"]
@@ -46,9 +135,31 @@ texture = ExtResource("1_ors88")
 stretch_mode = 1
 
 [node name="pink_fade" type="ColorRect" parent="."]
+z_index = 1
 offset_right = 320.0
 offset_bottom = 240.0
 color = Color(0.996078, 0.847059, 0.996078, 1)
 
 [node name="pet_buttons" type="Node2D" parent="."]
-position = Vector2(26, 36)
+position = Vector2(13.5, 12.5)
+
+[node name="pet_selected" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_u5cd3")
+volume_db = 5.0
+
+[node name="cursor_move" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8qcp6")
+volume_db = 5.0
+
+[node name="pet_textbox" type="Node2D" parent="."]
+
+[node name="triangle_input_cap" type="Timer" parent="."]
+wait_time = 0.001
+
+[node name="action_input_cap" type="Timer" parent="."]
+wait_time = 0.001
+autostart = true
+
+[node name="leave_timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="leave_timer" to="." method="_on_leave_timer_timeout"]
