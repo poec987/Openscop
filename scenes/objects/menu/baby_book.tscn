@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckyxisu3vqopj"]
+
+[ext_resource type="Texture2D" uid="uid://7syw6v78cnat" path="res://graphics/sprites/ui/pausemenu_bg2.png" id="1_1kcvm"]
+
+[sub_resource type="GDScript" id="GDScript_ipb7m"]
+script/source = "extends Node2D
+
+var button_amount = 0
+var row = 0
+var pet_dictionary = {}
+var selected_option=0
+var pet_dictionary_keys = []
+var reading_bio=false
+
+var spawned_textbox = false
+var animated = false
+
+var original_button_pos = Vector2.ZERO
+
+func _ready():
+	create_tween().tween_property($pink_fade,\"color:a\",0.0,0.25)
+		
+func _process(delta):
+	if Input.is_action_just_pressed(\"pressed_triangle\"):
+		var fade_out = create_tween()
+		fade_out.tween_property($pink_fade,\"color:a\",1.0,0.25)
+		await fade_out.finished
+		queue_free()
+	$credits.position.y+=1*delta
+"
+
+[node name="baby_book" type="Node2D"]
+script = SubResource("GDScript_ipb7m")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("1_1kcvm")
+stretch_mode = 1
+
+[node name="pink_fade" type="ColorRect" parent="."]
+z_index = 1
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(0.996078, 0.847059, 0.996078, 1)
+
+[node name="credits" type="Node2D" parent="."]

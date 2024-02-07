@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ciyscr1kgpgnf"]
+[gd_scene load_steps=23 format=3 uid="uid://ciyscr1kgpgnf"]
 
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://b16qbsmkn67wh" path="res://sfx/pause/select2.wav" id="11_8ia7v"]
 [ext_resource type="AudioStream" uid="uid://bcjxtfy57n1mq" path="res://sfx/pause/selected.wav" id="14_and1a"]
 [ext_resource type="Texture2D" uid="uid://cgug7tu2or80t" path="res://graphics/sprites/ui/pausemenu_overlay.png" id="14_cvfsw"]
+[ext_resource type="FontFile" uid="uid://gsd5w8kh7xxx" path="res://graphics/sprites/ui/pausemenu_numbers.fnt" id="16_gfid7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
@@ -53,6 +54,9 @@ func _on_counter_timer_timeout():
 line_spacing = 16.0
 font = ExtResource("5_5sf62")
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_npv3p"]
+font = ExtResource("16_gfid7")
 
 [node name="PSXLayer" type="CanvasLayer"]
 script = ExtResource("1_fp4cd")
@@ -181,8 +185,26 @@ volume_db = 10.0
 [node name="main_pausemenu" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
 
 [node name="background1" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu/main_pausemenu"]
+z_index = -1
 texture = ExtResource("8_7jqwc")
 centered = false
+
+[node name="visible_group" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu/main_pausemenu"]
+
+[node name="piece" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu/main_pausemenu/visible_group"]
+z_index = -1
+position = Vector2(175, 20)
+texture = ExtResource("7_mrxng")
+centered = false
+hframes = 21
+
+[node name="piece_counter" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu/main_pausemenu/visible_group"]
+offset_left = 199.0
+offset_top = 20.0
+offset_right = 299.0
+offset_bottom = 50.0
+text = "00000"
+label_settings = SubResource("LabelSettings_npv3p")
 
 [node name="buttons" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu/main_pausemenu"]
 

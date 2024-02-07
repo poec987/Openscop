@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://6eqne5e1pb62"]
+[gd_scene load_steps=5 format=3 uid="uid://6eqne5e1pb62"]
 
 [ext_resource type="Texture2D" uid="uid://y128fohh0gh1" path="res://graphics/sprites/ui/pet_textbox.png" id="1_f1ejn"]
 [ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="6_fmibv"]
@@ -10,7 +10,7 @@ script/source = "extends Node2D
 
 #TYPEWRITER SPEEDS
 const DEFAULT_WAIT = 0.025
-const PUNCTUATION_WAIT = 0.075
+const PUNCTUATION_WAIT = 0.150
 #CUSTOMIZABLE VARIABLES
 @export var text = []
 
@@ -115,10 +115,6 @@ func _on_arrow_timer_timeout():
 
 "
 
-[sub_resource type="LabelSettings" id="LabelSettings_nfg32"]
-font = ExtResource("6_fmibv")
-font_color = Color(0, 0, 0, 1)
-
 [node name="textbox_object" type="Node2D"]
 script = SubResource("GDScript_cps00")
 
@@ -128,20 +124,24 @@ position = Vector2(160, 136)
 texture = ExtResource("1_f1ejn")
 
 [node name="arrow_timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="textbox_timer" type="Timer" parent="."]
 process_callback = 0
 
-[node name="textbox_text" type="Label" parent="."]
-offset_left = 39.0
+[node name="textbox_text" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+offset_left = 34.0
 offset_top = 96.0
-offset_right = 279.0
+offset_right = 286.0
 offset_bottom = 598.0
-text = "A"
-label_settings = SubResource("LabelSettings_nfg32")
+theme_override_fonts/normal_font = ExtResource("6_fmibv")
+text = "."
 autowrap_mode = 1
 
 [node name="textbox_arrow" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(268, 169)
 texture = ExtResource("7_xvinu")
 hframes = 2

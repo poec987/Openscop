@@ -34,6 +34,7 @@ hframes = 3
 frame = 1
 
 [node name="arrow_timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="textbox_timer" type="Timer" parent="."]
 process_callback = 0

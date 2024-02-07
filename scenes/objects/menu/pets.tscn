@@ -32,11 +32,17 @@ func _ready():
 		pet_button_instance.position.y = $pet_buttons.position.y+(int(str(row)[0]))*56
 		get_child(2).add_child(pet_button_instance)
 		button_amount+=1
+		if button_amount==6:
+			row+=2
 		row+=0.5
 		
 		
+		
 func _process(delta):
-	
+	if selected_option>5:
+		$pet_buttons.position.y=-267
+	else:
+		$pet_buttons.position.y=12.5
 	if !reading_bio:
 		if Input.is_action_just_pressed(\"pressed_up\") && selected_option>1:
 			selected_option-=2
@@ -75,9 +81,12 @@ func _process(delta):
 					create_tween().tween_property(buttons,\"position:x\",-157,1.0).set_trans(Tween.TRANS_SINE).as_relative()
 			else:
 				$triangle_input_cap.start()
-				$pet_selected.play()
+				#$pet_selected.play()
 				original_button_pos = buttons.position
-				create_tween().tween_property(buttons,\"position\",Vector2(75.5,16.5),0.5).set_trans(Tween.TRANS_SINE)
+				if $pet_buttons.position.y==12.5:
+					create_tween().tween_property(buttons,\"position\",Vector2(75.5,16.5),0.5).set_trans(Tween.TRANS_SINE)
+				else:
+					create_tween().tween_property(buttons,\"position\",Vector2(75.5,296.5),0.5).set_trans(Tween.TRANS_SINE)
 				reading_bio=true
 				animated=false
 				spawned_textbox=false

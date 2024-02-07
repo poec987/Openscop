@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1qwppychbuss"
-path="res://.godot/imported/care_c.png-06356827bcbbc5e9abc2f8ffbfabf8e6.ctex"
+uid="uid://c7juo81o6jtgw"
+path="res://.godot/imported/care_nlm_name.png-bc99897e3a65b1166b316797007ab2e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/sprites/ui/pets_menu/care_c.png"
-dest_files=["res://.godot/imported/care_c.png-06356827bcbbc5e9abc2f8ffbfabf8e6.ctex"]
+source_file="res://graphics/sprites/ui/pets_menu/care_nlm_name.png"
+dest_files=["res://.godot/imported/care_nlm_name.png-bc99897e3a65b1166b316797007ab2e2.ctex"]
 
 [params]
 

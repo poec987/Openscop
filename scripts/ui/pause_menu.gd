@@ -13,7 +13,7 @@ var selected_option = 0
 var active_menu = [false,false,false,false,false]
 var spawned_menu = false
 var inMenu = false
-
+var piece_frame = 0
 func get_screen():
 	var viewport_feed: Viewport =  get_tree().root.get_viewport()
 	var screen_texture: Texture2D = viewport_feed.get_texture()
@@ -29,8 +29,11 @@ func selection_sound(variable):
 		$select_down.play()
 
 
-func _process(_delta):
-	
+func _process(delta):
+	piece_frame+=10.0*delta
+	if piece_frame>20:
+		piece_frame=0
+	$main_pausemenu/visible_group/piece.frame_coords.x = round(piece_frame)
 	if $current_menu.get_child_count()==0 && inMenu == true:
 		create_tween().tween_property(self, "fade", 0.0,0.5)
 		if fade<1.1:
@@ -47,7 +50,8 @@ func _process(_delta):
 	
 	if Global.game_paused:
 		get_tree().paused = true
-		
+		$main_pausemenu/visible_group.visible=true
+		$main_pausemenu/visible_group/piece_counter.text=str(Global.pieces_amount[Global.current_character]).pad_zeros(5)
 		if $screen_sprite.scale.x>MINI_SCREEN_SIZE:
 			can_unpause=false
 			$screen_sprite.z_index=1
@@ -70,7 +74,6 @@ func _process(_delta):
 			screenshotted = true
 			create_tween().tween_property($screen_sprite,"scale",Vector2(MINI_SCREEN_SIZE,MINI_SCREEN_SIZE),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_SINE)
 	else:
-		
 		if $screen_sprite.scale.x<1.:
 			can_unpause=false
 		else:
@@ -88,7 +91,7 @@ func _process(_delta):
 			$main_pausemenu/background1.visible = false
 			$main_pausemenu/buttons.visible = false
 			$screen_sprite.set_texture(null)
-		
+			$main_pausemenu/visible_group.visible=false
 		if $screen_sprite.scale.x==MINI_SCREEN_SIZE:
 			$screen_sprite.z_index=1
 			create_tween().tween_property($screen_sprite,"scale",Vector2(1.,1.),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_SINE)
@@ -111,6 +114,10 @@ func _process(_delta):
 			if $pink_fade.color.a>0.9 && active_menu[selected_option]==false:
 				if selected_option==2:
 					$current_menu.add_child(preload("res://scenes/objects/menu/pets.tscn").instantiate())
+					active_menu[selected_option]=true
+					inMenu = true
+				if selected_option==3:
+					$current_menu.add_child(preload("res://scenes/objects/menu/baby_book.tscn").instantiate())
 					active_menu[selected_option]=true
 					inMenu = true
 

@@ -1,0 +1,16 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://gsd5w8kh7xxx"
+path="res://.godot/imported/pausemenu_numbers.fnt-6d1d68b1ed6dd0358e30a56fb9346b64.fontdata"
+
+[deps]
+
+source_file="res://graphics/sprites/ui/pausemenu_numbers.fnt"
+dest_files=["res://.godot/imported/pausemenu_numbers.fnt-6d1d68b1ed6dd0358e30a56fb9346b64.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true

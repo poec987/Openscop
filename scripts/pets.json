@@ -4,9 +4,9 @@
 		"icon_file":"amber",
 		"description":[
 			"Amber is a young ball.",
-			"She’s afraid to leave home. If her home is good, this is not a problem.",
+			"She's afraid to leave home. If her home is good, this is not a problem.",
 			"She is very heavy, and that makes her life a little harder, as well as yours.",
-			"What’s the safest place you can put her in? You should start thinking about that."
+			"What's the safest place you can \nput her in? You should start \nthinking about that."
 		]
 	},
 	"randice": {
@@ -14,9 +14,9 @@
 		"icon_file":"randice",
 		"description":[
 			"Randice is a flower.",
-			"He does need water, but not as much as he thinks.",
+			"He does need water, but not as \nmuch as he thinks.",
 			"You shouldn't worry.",
-			"If you are considering Randice, you should adopt Wavey as well.",
+			"If you are considering Randice, \nyou should adopt Wavey as well.",
 			"Wavey knows how to trick Randice."
 		]
 	},
@@ -24,10 +24,10 @@
 		"nameboard_file":"roneth_name",
 		"icon_file":"roneth",
 		"description":[
-			"Roneth is Toneth's baby half-brother.",
-			"Because he's younger, he gets to learn from all of Toneth's mistakes.",
-			"That's why he always looks both ways.",
-			"He doesn't get into trouble. You won't have to watch him all the time. He's good."
+			"Roneth is Toneth's baby\nhalf-brother.",
+			"Because he's younger, he gets to \nlearn from all of Toneth's \nmistakes.",
+			"That's why he always looks both \nways.",
+			"He doesn't get into trouble. You \nwon't have to watch him all the time. He's good."
 		]
 	},
 	"toneth": {
@@ -36,13 +36,13 @@
 		"description":[
 			"(Enter a description here)",
 			"---",
-			"- A bird. I think I forgot what birds look like.",
-			"- Funny stupid blob monster says Mike. That's what it is.",
+			"- A bird. I think I forgot what \nbirds look like.",
+			"- \"Funny stupid blob monster\" \nsays Mike. That's what it is.",
 			"- Painter. Painting puzzle",
 			"- Catch Randice first(?)",
-			"- Has broken leg for some reason. I already hung him on a wall, too late to take it back. It makes me think about the dog actually. Because when the car hit him I thought 'at least it will be over soon.' He survived it, and I was the only one who still wanted to put him down. A dog is an innocent",
-			"When that dog wags its tail and it it appears happy, it's not real.",
-			"I guess that's toneth then. toneth toneth toneth toneth toneth toneth toneth toneth toneth toneth toneth toneth toneth toneth toneth toneth toneth. the end. it's yucky outside."
+			"- Has broken leg for some reason. I already hung him on a wall, too \nlate to take it back. It makes me think about the dog actually. \nBecause when the car hit him I \nthought \"at least it will be over \nsoon.\" He survived it, and I was \nthe only one who still wanted to \nput him down. A dog is an innocent",
+			"When that dog wags its tail and it appears happy, it's not real.",
+			"I guess that's toneth then.\ntoneth toneth toneth toneth\ntoneth toneth toneth toneth\ntoneth toneth toneth toneth\ntoneth toneth toneth toneth\ntoneth. the end. it's yucky outside."
 		]
 	},
 	"pen": {
@@ -50,8 +50,8 @@
 		"icon_file":"pen",
 		"description":[
 			"Pen is an aspiring mathematician.",
-			"She's entirely deaf. She doesn't even know what sound is, let alone music.",
-			"I don't know what she's doing here."
+			"She's entirely deaf. She doesn't \neven know what sound is, let alone music.",
+			"I don't know what she's doing \nhere."
 		]
 	},
 	"wavey": {
@@ -59,22 +59,22 @@
 		"icon_file":"wavey",
 		"description":[
 			"Wavey is a cloud.",
-			"He is afraid of everything. He is especially afraid of freezing.",
-			"According to him, he is never the same person for more than a few seconds."
+			"He is afraid of everything. He is \nespecially afraid of freezing.",
+			"According to him, he is never the same person for more than a few \nseconds."
 		]
 	},
 	"care_a": {
 		"nameboard_file":"care_a_name",
 		"icon_file":"care_a",
 		"description":[
-			"When the emergency began, you were all looking for Care A.",
+			"When the emergency began, you \nwere all looking for Care A.",
   			"I told you all, we would never find Care A. When Care A goes missing, she goes missing forever.",
-  			"My brother didn’t want us to find him, because he knew we were all looking for Michael A.",
-  			"I’m back. This is my present for you.",
+  			"My brother didn't want us to find \nhim, because he knew we were all \nlooking for Michael A.",
+  			"I'm back. This is my present for \nyou.",
   			"I started it in 1996, for Marvin.",
-  			"If you think they’re worth any effort, see if you can save Care B, or Care NLM. Care B is in the school, of course.",
-  			"Fuck you all, and fuck me as well. Merry Christmas. Check your bathroom now.",
-  			"- Rainer",
+  			"If you think they're worth any \neffort, see if you can save Care \nB, or Care NLM. Care B is in the \nschool, of course.",
+  			"Fuck you all, and fuck me as well. \nMerry Christmas. Check your \nbathroom now.",
+  			"- Rainer"
 		]
 	},
 	"care_b": {
@@ -82,20 +82,20 @@
 		"icon_file":"care_b",
 		"description":[
 			"Care B is scared and pounding on the door.",
-			"I open it. It's so dark that I can't see her.",
-			"So I pull her out, and the light hits her face.",
-			"And they won't even give me a picture of her now.",
+			"I open it. It's so dark that I \ncan't see her.",
+			"So I pull her out, and the light \nhits her face.",
+			"And they won't even give me a \npicture of her now.",
 			"They're all scattered in graves.",
-			"And I'm a piece of shit. Here I go."
+			"And I'm a piece of shit.\nHere I go."
 		]
 	},
 	"care_nlm": {
-		"nameboard_file":"care_c_name",
-		"icon_file":"care_c",
+		"nameboard_file":"care_nlm_name",
+		"icon_file":"care_nlm",
 		"description":[
-			"Care NLM escaped from the school’s basement and wandered the Newmaker Plane for days.",
+			"Care NLM escaped from the \nschool's basement and wandered the Newmaker Plane for days.",
 			"To catch her, you had to lie, but it may not be a lie forever.",
-			"You’re the Newmaker. You can turn Care NLM into Care A, and close the loop."
+			"You're the Newmaker. You can \nturn Care NLM into Care A, and close the loop."
 		]
 	},
 	"rebirth": {

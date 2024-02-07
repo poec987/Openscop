@@ -190,7 +190,6 @@ vframes = 3
 frame = 4
 
 [node name="bg" type="TextureRect" parent="."]
-anchors_preset = -1
 offset_left = 172.0
 offset_top = 69.0
 offset_right = 362.0

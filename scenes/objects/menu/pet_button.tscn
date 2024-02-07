@@ -10,7 +10,7 @@ script/source = "extends Node2D
 func _process(delta):
 	if get_node(\"AnimationPlayer\").get_current_animation()==\"selected\":
 		if get_node(\"button_face\").frame<15:
-			get_node(\"button_face\").frame+=50.*delta
+			get_node(\"button_face\").frame+=35.*delta
 		else:
 			get_node(\"button_face\").frame=1
 	else:
@@ -100,6 +100,7 @@ position = Vector2(91, 24)
 texture = ExtResource("3_pc3jt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 1.25
 libraries = {
 "": SubResource("AnimationLibrary_3sr8i")
 }

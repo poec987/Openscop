@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7juo81o6jtgw"
-path="res://.godot/imported/care_c_name.png-6dffccae404645bfc14f4b69bd71f3ab.ctex"
+uid="uid://cyfp0pxfgx3p8"
+path="res://.godot/imported/pausemenu_numbers.png-510fedac255f54b0437732124ec8f293.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/sprites/ui/pets_menu/care_c_name.png"
-dest_files=["res://.godot/imported/care_c_name.png-6dffccae404645bfc14f4b69bd71f3ab.ctex"]
+source_file="res://graphics/sprites/ui/pausemenu_numbers.png"
+dest_files=["res://.godot/imported/pausemenu_numbers.png-510fedac255f54b0437732124ec8f293.ctex"]
 
 [params]
 
