@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgugeeeg7p1cs"]
+
+[ext_resource type="Script" path="res://scripts/level_manipulator.gd" id="1_2f3qw"]
+
+[node name="level_manipulator" type="Node"]
+script = ExtResource("1_2f3qw")
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]

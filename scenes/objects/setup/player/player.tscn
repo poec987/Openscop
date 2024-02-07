@@ -95,7 +95,7 @@ volume_db = 10.0
 stream = ExtResource("8_tern7")
 volume_db = 10.0
 
-[node name="camera_root" type="Node3D" parent="."]
+[node name="camera_root" type="Node3D" parent="." groups=["Player_camera"]]
 script = ExtResource("3_eo5w1")
 
 [node name="cam_anchor" type="Node3D" parent="camera_root"]

@@ -128,7 +128,7 @@ text = "00000"
 label_settings = SubResource("LabelSettings_4cmbp")
 
 [node name="counter_timer" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/piece_counter"]
-wait_time = 5.0
+wait_time = 3.0
 one_shot = true
 
 [node name="counter_bg" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/piece_counter"]
