@@ -20,16 +20,17 @@
 			"Wavey knows how to trick Randice."
 		]
 	},
-	"roneth": {
-		"nameboard_file":"roneth_name",
-		"icon_file":"roneth",
+	
+	"pen": {
+		"nameboard_file":"pen_name",
+		"icon_file":"pen",
 		"description":[
-			"Roneth is Toneth's baby\nhalf-brother.",
-			"Because he's younger, he gets to \nlearn from all of Toneth's \nmistakes.",
-			"That's why he always looks both \nways.",
-			"He doesn't get into trouble. You \nwon't have to watch him all the time. He's good."
+			"Pen is an aspiring mathematician.",
+			"She's entirely deaf. She doesn't \neven know what sound is, let alone music.",
+			"I don't know what she's doing \nhere."
 		]
 	},
+
 	"toneth": {
 		"nameboard_file":"toneth_name",
 		"icon_file":"toneth",
@@ -45,15 +46,18 @@
 			"I guess that's toneth then.\ntoneth toneth toneth toneth\ntoneth toneth toneth toneth\ntoneth toneth toneth toneth\ntoneth toneth toneth toneth\ntoneth. the end. it's yucky outside."
 		]
 	},
-	"pen": {
-		"nameboard_file":"pen_name",
-		"icon_file":"pen",
+
+	"roneth": {
+		"nameboard_file":"roneth_name",
+		"icon_file":"roneth",
 		"description":[
-			"Pen is an aspiring mathematician.",
-			"She's entirely deaf. She doesn't \neven know what sound is, let alone music.",
-			"I don't know what she's doing \nhere."
+			"Roneth is Toneth's baby\nhalf-brother.",
+			"Because he's younger, he gets to \nlearn from all of Toneth's \nmistakes.",
+			"That's why he always looks both \nways.",
+			"He doesn't get into trouble. You \nwon't have to watch him all the time. He's good."
 		]
 	},
+
 	"wavey": {
 		"nameboard_file":"wavey_name",
 		"icon_file":"wavey",
