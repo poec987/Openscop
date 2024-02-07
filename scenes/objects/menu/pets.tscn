@@ -81,7 +81,7 @@ func _process(delta):
 					create_tween().tween_property(buttons,\"position:x\",-157,1.0).set_trans(Tween.TRANS_SINE).as_relative()
 			else:
 				$triangle_input_cap.start()
-				#$pet_selected.play()
+				$pet_selected.play()
 				original_button_pos = buttons.position
 				if $pet_buttons.position.y==12.5:
 					create_tween().tween_property(buttons,\"position\",Vector2(75.5,16.5),0.5).set_trans(Tween.TRANS_SINE)
