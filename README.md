@@ -10,17 +10,19 @@ The project runs on a modified version of MMOscop's source code with most sheet-
 
 **Sprites:**
 
-Guardian: Giftscop
+Guardian: Andrewidot
 
-Newmaker Plane Grass: Giftscop
+Newmaker Plane Grass: izzint
 
-P2toTalk buttons: Giftscop
+P2toTalk buttons: Maximilian
 
 PetscopWide font: Giftscop
 
 Textboxes: Anthony Domenico
 
 **Programming**
+
+ACIDULATED
 
 EonOrange
 
