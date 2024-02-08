@@ -80,7 +80,6 @@ loading_preset = "evencare_noload"
 coordinate_and_direction = Vector4(0, 0, 0, 1)
 
 [node name="level_manipulator" parent="." instance=ExtResource("6_vuu81")]
-background_music_id = 1
 fade_color = Color(1, 1, 1, 1)
 level_slogan = "Have you found anything weird lately?**There is much to find in this place."
 horizontal_limit = Vector2(-2, 2)
@@ -98,6 +97,7 @@ environment_darkness = 1.0
 process_mode = 3
 stream = ExtResource("1_ukff2")
 pitch_scale = 0.95
+autoplay = true
 
 [node name="grass" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
