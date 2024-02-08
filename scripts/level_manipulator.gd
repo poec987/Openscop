@@ -2,6 +2,7 @@ extends Node
 @export_subgroup("Level Settings")
 @export var background_music_id = 0
 @export var fade_color: Color
+@export var level_slogan = ""
 @export_subgroup("Limit Camera")
 @export var limit_camera_horizontal = false
 @export var horizontal_limit = Vector2.ZERO
@@ -36,6 +37,7 @@ extends Node
 
 func _ready():
 	get_tree().paused=false
+	get_tree().get_first_node_in_group("level_slogan").text = level_slogan.replace("*","\n")
 	get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=fade_color
 	if Global.camera_dist_ver!=camera_height || camera_height>0.:
 		Global.camera_dist_ver = camera_height
