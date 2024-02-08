@@ -352,11 +352,15 @@ func _on_open_sheets_file_selected(path):
 	else:
 		head.texture = load("res://graphics/sprites/player/none.png")
 		material.texture = image_texture
+		material.hframes = image_texture.get_size().x/64
+		material.vframes = image_texture.get_size().y/64
 		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 		head.get_material_override().set_shader_parameter("albedoTex", head.texture)
 
 #RESETS CHARACTER
 func reset_sheet():
+	material.hframes = 5
+	material.vframes = 5
 	material.texture = load("res://graphics/sprites/player/guardian.png")
 	head.texture = load("res://graphics/sprites/player/none.png")
 	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
