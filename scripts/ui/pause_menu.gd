@@ -85,7 +85,7 @@ func _process(delta):
 				else:
 					buttons.frame_coords.x=1
 					buttons.position.x=28
-			get_tree().paused = false
+			
 			can_unpause=true
 			screenshotted=false
 			$main_pausemenu/background1.visible = false
@@ -94,8 +94,10 @@ func _process(delta):
 			$main_pausemenu/visible_group.visible=false
 		if $screen_sprite.scale.x==MINI_SCREEN_SIZE:
 			$screen_sprite.z_index=1
-			create_tween().tween_property($screen_sprite,"scale",Vector2(1.,1.),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_SINE)
-
+			var screen_scaler = create_tween()
+			screen_scaler.tween_property($screen_sprite,"scale",Vector2(1.,1.),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_SINE)
+			await screen_scaler.finished
+			get_tree().paused = false
 
 	if can_unpause && Global.game_paused && $current_menu.get_child_count()==0 && $main_pausemenu/buttons.visible:
 		if fade==0.0:

@@ -1,6 +1,7 @@
 shader_type spatial;
 global uniform float precision_multiplier : hint_range(0.0, 1.0) = 1.0;
 global uniform vec4 fog_color;
+global uniform bool fog_enable;
 uniform vec4 modulate_color: source_color = vec4(1.0,0.0,1.0,1.0);
 uniform vec4 transparent_color : source_color = vec4(1.0,0.0,1.0,1.0);
 global uniform float sphere_size;
@@ -28,7 +29,11 @@ void vertex() {
 
 void fragment() {
 	vec4 texture_color = texture(albedoTex, UV);
-	ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR.r).rgb;
+	if (fog_enable) {
+		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR.r).rgb;
+	} else {
+		ALBEDO = (texture_color*modulate_color).rgb;
+	}
 	if (length(texture_color - transparent_color) < 0.1)
 		ALPHA = 0.0;
 }

@@ -21,6 +21,7 @@ config/icon="res://gift.png"
 [autoload]
 
 Global="*res://scripts/global.gd"
+bg_music="*res://scenes/objects/setup/bg_music.tscn"
 
 [display]
 
@@ -169,4 +170,8 @@ sphere_size={
 fog_color={
 "type": "vec4",
 "value": Vector4(0, 0, 0, 0)
+}
+fog_enable={
+"type": "bool",
+"value": false
 }

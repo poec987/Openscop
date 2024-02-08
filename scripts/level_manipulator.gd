@@ -1,8 +1,7 @@
 extends Node
 @export_subgroup("Level Settings")
-@export var background_music: AudioStreamMP3
+@export var background_music_id = 0
 @export var fade_color: Color
-@export var fade_speed = 0.5
 @export_subgroup("Limit Camera")
 @export var limit_camera_horizontal = false
 @export var horizontal_limit = Vector2.ZERO
@@ -24,6 +23,7 @@ extends Node
 @export var front_max_limit = 0.
 @export var vertical_max_limit = 0.
 @export_subgroup("Environment")
+@export var enable_fog = false
 @export var fog_color = Vector4.ZERO
 @export var fog_radius = 0.
 @export var ambient_color = Color(0., 0., 0.,1.0)
@@ -35,6 +35,8 @@ extends Node
 #2 = NMP
 
 func _ready():
+	get_tree().paused=false
+	get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=fade_color
 	if Global.camera_dist_ver!=camera_height || camera_height>0.:
 		Global.camera_dist_ver = camera_height
 	if Global.camera_dist_hor!=camera_distance || camera_distance>0.:
@@ -88,17 +90,8 @@ func _ready():
 	else:
 		Global.camera_rot = -18
 		
-	if background_music!=null:
-		$bg_music.stream=background_music
 		
-		
-	if fog_color!=Vector4(0.,0.,0.,0.):
-		#SETS FOG COLOR AND FOG RADIUS AS GAME RUNS
-		RenderingServer.global_shader_parameter_set("fog_color", fog_color)
-		$skybox.get_environment().set_bg_color(Color(fog_color.x,fog_color.y,fog_color.z,fog_color.w))
-	else:
-		RenderingServer.global_shader_parameter_set("fog_color", Vector4.ZERO)
-		$skybox.get_environment().set_bg_color(Color(0.,0.,0.,0.))
+	
 	
 	if ambient_color!=Color(0., 0., 0.,1.0):
 		$skybox.get_environment().set_ambient_light_color(ambient_color)
@@ -109,15 +102,23 @@ func _ready():
 		$skybox.get_environment().ambient_light_energy = environment_darkness
 	else:
 		$skybox.get_environment().ambient_light_energy = 0.73
-		
-	if fog_radius!=0.:
-		RenderingServer.global_shader_parameter_set("sphere_size", fog_radius)
+	
+	if enable_fog:
+		RenderingServer.global_shader_parameter_set("fog_enable", true)
+		if fog_color!=Vector4(0.,0.,0.,0.):
+		#SETS FOG COLOR AND FOG RADIUS AS GAME RUNS
+			RenderingServer.global_shader_parameter_set("fog_color", fog_color)
+			$skybox.get_environment().set_bg_color(Color(fog_color.x,fog_color.y,fog_color.z,fog_color.w))
+		else:
+			RenderingServer.global_shader_parameter_set("fog_color", Vector4.ZERO)
+			$skybox.get_environment().set_bg_color(Color(0.,0.,0.,0.))
+			if fog_radius!=0.:
+				RenderingServer.global_shader_parameter_set("sphere_size", fog_radius)
+			else:
+				RenderingServer.global_shader_parameter_set("sphere_size", 13.5)
 	else:
-		RenderingServer.global_shader_parameter_set("sphere_size", 13.5)
+		RenderingServer.global_shader_parameter_set("fog_enable", false)
 	
+	$skybox.get_environment().set_bg_color(Color(fog_color.x,fog_color.y,fog_color.z,fog_color.w))
+	bg_music.play_track(background_music_id)
 	
-	$bg_music.play()
-	var fade_tween = create_tween()
-	fade_tween.tween_property($fade_out,"color:a",0.0,fade_speed)
-	await fade_tween.finished
-	Global.can_pause = true

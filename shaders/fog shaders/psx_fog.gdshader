@@ -2,6 +2,7 @@ shader_type spatial;
 render_mode unshaded, shadows_disabled, depth_draw_opaque;
 
 global uniform float precision_multiplier : hint_range(0.0, 1.0) = 1.0;
+global uniform bool fog_enable;
 uniform vec4 modulate_color : source_color = vec4(1.0);
 uniform vec4 alpha_color : source_color = vec4(0.0,0.0,0.0,1);
 #ifndef NO_TEXTURE
@@ -52,28 +53,8 @@ if (fog==true) {
 	UV += uv_pan_velocity * TIME;
 #endif
 
-#ifdef ALPHA_SCISSOR
-	if (y_billboard)
-	{
-		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], MODEL_MATRIX[1], vec4(normalize(cross(INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0), MODEL_MATRIX[3]);
-		MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(1.0, 0.0, 0.0, 0.0), vec4(0.0, 1.0 / length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0));
-	}
-	else if (billboard)
-	{
-		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
-	}
-#endif
-
 	POSITION = get_snapped_pos(PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(VERTEX, 1.0));  // snap position to grid
 	POSITION /= abs(POSITION.w);  // discard depth for affine mapping
-
-#ifdef ALPHA_SCISSOR
-	if (y_billboard)
-	{
-		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
-		MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
-	}
-#endif
 
 	VERTEX = VERTEX;  // it breaks without this - not sure why
 }
@@ -84,6 +65,10 @@ void fragment()
 	vec2 texture_uv = UV;
 	vec4 color_base = mix(fog_color , modulate_color, COLOR.r);
 	vec4 texture_color = texture(albedoTex, texture_uv);
-	ALBEDO = mix(fog_color,(modulate_color * texture_color), COLOR.r).rgb;
+	if (fog_enable) {
+		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR.r).rgb;
+	} else {
+		ALBEDO = (texture_color*modulate_color).rgb;
+	}
 }
 

@@ -13,7 +13,7 @@ var is_walking = false
 var first_frame = false
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 2
-var animation_direction = 0
+@export var animation_direction = 0
 var current_frame = 0
 
 #P2TOTALK RELATED VARIABLES AND OBJECTS

@@ -5,6 +5,7 @@ uniform vec4 modulate_color: source_color;
 uniform vec4 transparent_color : source_color = vec4(1.0,0.0,1.0,1.0);
 global uniform float sphere_size;
 global uniform vec3 player_pos;
+global uniform bool fog_enable;
 varying vec3 world_vertex;
 uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
 const vec2 base_snap_res = vec2(160.0, 120.0);
@@ -29,7 +30,11 @@ void vertex() {
 
 void fragment() {
 	vec4 texture_color = texture(albedoTex, UV);
-	ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR.r).rgb;
+	if (fog_enable) {
+		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR.r).rgb;
+	} else {
+		ALBEDO = (texture_color*modulate_color).rgb;
+	}
 	if (length(texture_color - transparent_color) < 0.1)
 		ALPHA = 0.0;
 }
