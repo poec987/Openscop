@@ -111,6 +111,7 @@ render_target_update_mode = 4
 [node name="textboxes" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD" groups=["HUD_textboxes"]]
 
 [node name="dialogue_close" type="AudioStreamPlayer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/textboxes"]
+process_mode = 3
 stream = ExtResource("7_cbawt")
 volume_db = 5.0
 
@@ -260,6 +261,17 @@ hframes = 5
 offset_right = 320.0
 offset_bottom = 240.0
 color = Color(0.996078, 0.847059, 0.996078, 0)
+
+[node name="fade_load" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+
+[node name="loading" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/fade_load"]
+offset_left = 320.0
+offset_top = 240.0
+offset_right = 360.0
+offset_bottom = 280.0
+
+[node name="loading2" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/fade_load"]
+process_mode = 3
 
 [node name="player_camera" type="Camera3D" parent="NTSC/NTSC_viewport/Dither/dither_view"]
 transform = Transform3D(-4.37114e-08, -0.309017, 0.951057, 0, 0.951057, 0.309017, -1, 1.35076e-08, -4.1572e-08, 8, 2.62875, 0)

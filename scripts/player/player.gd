@@ -31,6 +31,7 @@ var can_submit = true
 #FOOTSTEP RELATED OBJECTS
 @onready var footstep_controller = get_node("footstep_controller")
 @onready var footstep_sound = get_node("footstep")
+@onready var player_camera = get_tree().get_first_node_in_group("Player_camera")
 
 func allow_typing():
 	can_submit=true
@@ -42,6 +43,11 @@ func change_sound(sound):
 		footstep_sound.stream = load(sound)
 		
 #PHYSICS PROCESS
+
+func _ready():
+	position = Vector3(Global.player_array.x,Global.player_array.y,Global.player_array.z)
+	player_camera.position=position
+	animation_direction = int(Global.player_array.w)
 #TO-DO: ORGANIZE PROPERLY
 func _physics_process(delta):
 	

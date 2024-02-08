@@ -18,15 +18,21 @@ var camera_move_x = true
 var camera_move_z = true
 var camera_move_y = true
 var camera_root_dist_ver = 0.0
+var cam_move_limit_x = Vector2.ZERO
+var cam_move_limit_y = Vector2.ZERO
+var cam_move_limit_z = Vector2.ZERO
 
 #GAME
 var control_mode = 0
 var game_paused = false
+var can_pause = true
 
 #SAVEDATA
 var current_character = 0
 var pieces_amount = [0,0]
 # 0 = guardian
+var player_array = Vector4(0.,0.,0.,0)
+
 var fog_focus = 0
 #0 = follow player
 #
@@ -42,6 +48,9 @@ var p2talkdict = {}
 
 #DIALOGUE
 var dialogue = {}
+
+#LEVEL LOADING DATA
+var level_data = {}
 
 #PIECE_ARRAY
 var pieces = [0,1,2,3,4,
@@ -68,6 +77,7 @@ func _ready():
 	#LOADS P2TOTALK DICTIONARY
 	p2talkdict = JSON.parse_string((FileAccess.open("res://scripts/p2_talk_data.json", FileAccess.READ)).get_as_text())
 	dialogue = JSON.parse_string((FileAccess.open("res://scripts/dialogue.json", FileAccess.READ)).get_as_text())
+	level_data = JSON.parse_string((FileAccess.open("res://scripts/dialogue.json", FileAccess.READ)).get_as_text())
 	
 	#SceneManager.change_scene("res://scenes/test.tscn")
 
@@ -84,9 +94,6 @@ func _process(_delta):
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreen = !fullscreen
 		DisplayServer.window_set_mode((DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED))
-	#SETS FOG COLOR AND FOG RADIUS AS GAME RUNS
-	RenderingServer.global_shader_parameter_set("fog_color", fog_color)
-	RenderingServer.global_shader_parameter_set("sphere_size", fog_radius)
 
 #FUNCTION THAT CHECKS P2TOTALK DICTIONARY TABLE, CALLED EVERY TIME P2TOTALK IS USED
 func get_p2_word(word):
@@ -102,3 +109,6 @@ func create_textbox(background,text):
 	dialogue_instance.text = text
 	if get_tree().get_first_node_in_group("HUD_textboxes").get_child_count()<2:
 		get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).add_child(dialogue_instance)
+
+func warp(scene,preset,loading = false):
+	can_pause=false

@@ -1,8 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgugeeeg7p1cs"]
+[gd_scene load_steps=3 format=3 uid="uid://cgugeeeg7p1cs"]
 
 [ext_resource type="Script" path="res://scripts/level_manipulator.gd" id="1_2f3qw"]
 
+[sub_resource type="Environment" id="Environment_xnjo4"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.0
+
 [node name="level_manipulator" type="Node"]
+process_mode = 3
 script = ExtResource("1_2f3qw")
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+
+[node name="skybox" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xnjo4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = 11
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="fade_out" type="ColorRect" parent="."]
+z_index = 10
+offset_right = 320.0
+offset_bottom = 240.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=17 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -61,17 +61,11 @@ data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0
 render_priority = 0
 shader = ExtResource("3_mdjse")
 shader_parameter/modulate_color = Color(0.588235, 0.298039, 0.270588, 1)
-shader_parameter/alpha_color = Color(0, 0, 0, 1)
+shader_parameter/alpha_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/fog = false
-
-[sub_resource type="Environment" id="Environment_y16bb"]
-background_mode = 1
-background_color = Color(0.498039, 0.498039, 0.498039, 1)
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
+shader_parameter/fog = true
 
 [node name="test-plane" type="Node3D"]
 
@@ -135,9 +129,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6)
 dialogue_id = "textbox_1"
 textbox_background = 1
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_y16bb")
-
 [node name="pieces" type="Node3D" parent="."]
 
 [node name="piece_root" parent="pieces" instance=ExtResource("4_1gmmf")]
@@ -156,5 +147,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
 
 [node name="level_manipulator" parent="." instance=ExtResource("6_vuu81")]
-limit_camera = true
-horizontal_limit = Vector2(-2, 100)
+loading_timer = 3.0
+fade_color = Color(1, 1, 1, 1)
+horizontal_limit = Vector2(-2, 2)
+front_limit = Vector2(-1, 3)
+camera_height = 4.0
+camera_distance = 12.0
+camera_angle = 1.0
+fog_color = Vector4(1, 1, 1, 0)
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
