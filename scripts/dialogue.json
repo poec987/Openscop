@@ -1,0 +1,17 @@
+{
+    "textbox_1": [
+        "This is the 1st part of this textbox",
+        "This is the 2nd part of this textbox",
+        "This is a short line of text.",
+        "You're reading a very long line of text right now, hello there!",
+        "This is the 1st line of the text.\nThis is the second line of the text.",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis doloremque molestiae voluptates consequatur doloribus molestias quos, obcaecati temporibus quod ducimus facere. Ratione quibusdam eius, aperiam voluptatibus excepturi cumque voluptates aspernatur?"
+    ],
+
+    "dots_test": [
+        "This has a dot in the middle. It should give a brief pause.",
+        "Oh... It worked?",
+        "... Is ... This.... Working.",
+        "Does. This! Work? Now"
+    ]
+}

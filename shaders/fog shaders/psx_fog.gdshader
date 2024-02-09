@@ -2,8 +2,9 @@ shader_type spatial;
 render_mode unshaded, shadows_disabled, depth_draw_opaque;
 
 global uniform float precision_multiplier : hint_range(0.0, 1.0) = 1.0;
+global uniform bool fog_enable;
 uniform vec4 modulate_color : source_color = vec4(1.0);
-uniform vec4 alpha_color : source_color = vec4(0.52,0.34,0.84,1);
+uniform vec4 alpha_color : source_color = vec4(0.0,0.0,0.0,1);
 #ifndef NO_TEXTURE
 uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
 #endif
@@ -44,7 +45,7 @@ void vertex()
 if (fog==true) {
 	world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	float min_dist = length(player_pos - world_vertex);
-	float fog_func = ( 0.8 - clamp(min_dist/sphere_size, 0.0, 1.0) );
+	float fog_func = ( 0.5 - clamp((min_dist/1.5)/sphere_size, 0.0, 1.0) );
 	COLOR = vec4( fog_func, fog_func, fog_func, 1.0);
 }
 #if !defined(NO_TEXTURE) && !defined(METAL)  // METAL doesn't use UV, so no need to pan UVs
@@ -52,28 +53,8 @@ if (fog==true) {
 	UV += uv_pan_velocity * TIME;
 #endif
 
-#ifdef ALPHA_SCISSOR
-	if (y_billboard)
-	{
-		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], MODEL_MATRIX[1], vec4(normalize(cross(INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0), MODEL_MATRIX[3]);
-		MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(1.0, 0.0, 0.0, 0.0), vec4(0.0, 1.0 / length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0));
-	}
-	else if (billboard)
-	{
-		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
-	}
-#endif
-
 	POSITION = get_snapped_pos(PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(VERTEX, 1.0));  // snap position to grid
 	POSITION /= abs(POSITION.w);  // discard depth for affine mapping
-
-#ifdef ALPHA_SCISSOR
-	if (y_billboard)
-	{
-		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
-		MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
-	}
-#endif
 
 	VERTEX = VERTEX;  // it breaks without this - not sure why
 }
@@ -81,28 +62,13 @@ if (fog==true) {
 void fragment()
 {
 	ALBEDO = COLOR.rgb;
-#ifdef METAL
-	vec2 texture_uv = vec2(NORMAL.x / 2.0 + 0.5, (-NORMAL.y) / 2.0 + 0.5);  // Special thanks to Adam McLaughlan
-#elif !defined(NO_TEXTURE)
 	vec2 texture_uv = UV;
-#endif
 	vec4 color_base = mix(fog_color , modulate_color, COLOR.r);
-#ifdef NO_TEXTURE
-	ALBEDO = color_base.rgb;
-#else
 	vec4 texture_color = texture(albedoTex, texture_uv);
-	ALBEDO = mix(fog_color,(modulate_color * texture_color), COLOR.r).rgb;
-#endif
-#ifdef LIGHT_VOLUME
-	ALPHA = 1.0 - UV.y;
-#elif defined(ALPHA_BLEND) || defined(ALPHA_SCISSOR)
-	if (length(texture_color-alpha_color) < 0.01)
-		ALPHA = 0.0;
-	else
-		ALPHA = texture_color.a * color_base.a;
-#endif
-#ifdef ALPHA_SCISSOR
-	ALPHA_SCISSOR_THRESHOLD = alpha_scissor;
-#endif
+	if (fog_enable) {
+		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR.r).rgb;
+	} else {
+		ALBEDO = (texture_color*modulate_color).rgb;
+	}
 }
 

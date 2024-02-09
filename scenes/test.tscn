@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="1_e3cb5"]
 [ext_resource type="Script" path="res://scripts/player/grass.gd" id="2_q3i23"]
-[ext_resource type="PackedScene" uid="uid://dgoxysshxruys" path="res://scenes/objects/grass.tscn" id="3_qmd8q"]
-[ext_resource type="Environment" uid="uid://dxxprnd84je6j" path="res://scenes/world_env.tres" id="5_q5f7d"]
+[ext_resource type="PackedScene" uid="uid://dgoxysshxruys" path="res://scenes/objects/level_objects/nmp/grass.tscn" id="3_qmd8q"]
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="4_bgdvl"]
 
 [node name="test" type="Node3D"]
 
@@ -41,5 +41,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 28.5)
 [node name="MeshInstance3D3" parent="player/Node/Node3D" instance=ExtResource("3_qmd8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -29.5)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("5_q5f7d")
+[node name="level_manipulator" parent="." instance=ExtResource("4_bgdvl")]
+enable_fog = true

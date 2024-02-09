@@ -13,7 +13,7 @@ var is_walking = false
 var first_frame = false
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 2
-var animation_direction = 0
+@export var animation_direction = 0
 var current_frame = 0
 
 #P2TOTALK RELATED VARIABLES AND OBJECTS
@@ -31,6 +31,7 @@ var can_submit = true
 #FOOTSTEP RELATED OBJECTS
 @onready var footstep_controller = get_node("footstep_controller")
 @onready var footstep_sound = get_node("footstep")
+@onready var player_camera = get_tree().get_first_node_in_group("Player_camera")
 
 func allow_typing():
 	can_submit=true
@@ -42,6 +43,12 @@ func change_sound(sound):
 		footstep_sound.stream = load(sound)
 		
 #PHYSICS PROCESS
+
+func _ready():
+	return_character()
+	position = Vector3(Global.player_array.x,Global.player_array.y,Global.player_array.z)
+	player_camera.position=position
+	animation_direction = int(Global.player_array.w)
 #TO-DO: ORGANIZE PROPERLY
 func _physics_process(delta):
 	
@@ -56,8 +63,8 @@ func _physics_process(delta):
 	#CONTROL MODE 0: CONTROL PLAYER NORMALLY
 	if Global.control_mode==0:
 		#CREATES MOVEMENT VECTORS
-		v = Input.get_action_strength("pressed_left") - Input.get_action_strength("pressed_right")
-		h = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
+		v = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
+		h = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
 
 	#DETECTS IF PLAYER IS WALKING BEFORE ANIMATING AND MAKE FOOTSTEP SOUND
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
@@ -67,18 +74,21 @@ func _physics_process(delta):
 		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
 		if is_on_floor() || position.y==0.0:
 			#CHECKS IF BELOW PLAYER THERE'S MESH WITH THESE NAMES
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="grass":
-				change_sound("res://sfx/player/grass.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="evencare":
-				change_sound("res://sfx/player/ec_steps.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement":
-				change_sound("res://sfx/player/cement.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement2":
-				change_sound("res://sfx/player/cement2.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="cement3":
-				change_sound("res://sfx/player/cement3.wav")
-			if str(footstep_controller.get_collider()).get_slice(":", 0)=="school":
-				change_sound("res://sfx/player/school_steps.wav")
+			if footstep_controller.get_collider()!=null:
+				if str(footstep_controller.get_collider().name)=="grass":
+					change_sound("res://sfx/player/grass.wav")
+					#footstep_sound.volume_db = 10.0
+				if str(footstep_controller.get_collider().name)=="evencare":
+					change_sound("res://sfx/player/ec_steps.wav")
+					#footstep_sound.volume_db = 10.0
+				if str(footstep_controller.get_collider().name)=="cement":
+					change_sound("res://sfx/player/cement.wav")
+				if str(footstep_controller.get_collider().name)=="cement2":
+					change_sound("res://sfx/player/cement2.wav")
+				if str(footstep_controller.get_collider().name)=="cement3":
+					change_sound("res://sfx/player/cement3.wav")
+				if str(footstep_controller.get_collider().name)=="school":
+					change_sound("res://sfx/player/school_steps.wav")
 	else:
 		#IF SPEED NOT FASTER THAN 0.2, DISABLE WALKING ANIM
 		is_walking=false
@@ -94,13 +104,13 @@ func _physics_process(delta):
 	velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
 	
 	#CHANGES PLAYER SPRITE DEPENDING ON DIRECTION
-	if h > 0:
-		animation_direction=0
-	elif h < 0:
-		animation_direction=3
 	if v > 0:
-		animation_direction=2
+		animation_direction=0
 	elif v < 0:
+		animation_direction=3
+	if h < 0:
+		animation_direction=2
+	elif h > 0:
 		animation_direction=1
 			
 	
@@ -343,12 +353,20 @@ func _on_open_sheets_file_selected(path):
 	else:
 		head.texture = load("res://graphics/sprites/player/none.png")
 		material.texture = image_texture
+		material.hframes = image_texture.get_size().x/64
+		material.vframes = image_texture.get_size().y/64
 		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 		head.get_material_override().set_shader_parameter("albedoTex", head.texture)
-
+func return_character():
+	if Global.current_character==0:
+		material.texture = load("res://graphics/sprites/player/guardian.png")
+	#if Global.current_character=1:
+		#material.texture = load("res://graphics/sprites/player/guardian.png")
 #RESETS CHARACTER
 func reset_sheet():
-	material.texture = load("res://graphics/sprites/player/guardian.png")
+	material.hframes = 5
+	material.vframes = 5
+	return_character()
 	head.texture = load("res://graphics/sprites/player/none.png")
 	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 	head.get_material_override().set_shader_parameter("albedoTex", head.texture)

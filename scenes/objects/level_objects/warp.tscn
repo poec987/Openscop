@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://0tdm55supfpn"]
+
+[ext_resource type="Script" path="res://scripts/objects/warp.gd" id="1_i7iyg"]
+[ext_resource type="Shader" path="res://shaders/master-shader.gdshader" id="2_nf51y"]
+[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="3_83l72"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8evx7"]
+size = Vector3(2, 2, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4te7"]
+render_priority = 0
+shader = ExtResource("2_nf51y")
+shader_parameter/billboard = true
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(0, 1, 0, 1)
+shader_parameter/fog = false
+shader_parameter/color_texture = ExtResource("3_83l72")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
+[node name="warp" type="Node3D"]
+script = ExtResource("1_i7iyg")
+
+[node name="warp_area" type="Area3D" parent="."]
+
+[node name="warp" type="CollisionShape3D" parent="warp_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_8evx7")
+
+[node name="visual" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+material_override = SubResource("ShaderMaterial_v4te7")
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_83l72")
+hframes = 5
+vframes = 5
+
+[connection signal="body_entered" from="warp_area" to="." method="_on_warp_area_body_entered"]

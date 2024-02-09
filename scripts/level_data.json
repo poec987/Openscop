@@ -1,0 +1,29 @@
+{
+	"evencare": {
+		"loading_file":"evencare_load",
+		"wait_time":"5",
+		"fade_color":[
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"evencare_noload": {
+		"loading_file":null,
+		"wait_time":"0.25",
+		"fade_color":[
+			1.0,
+			1.0,
+			1.0
+		]
+	},
+	"nmp_noload": {
+		"loading_file":null,
+		"wait_time":"0.25",
+		"fade_color":[
+			0.0,
+			0.0,
+			0.0
+		]
+	}
+}
