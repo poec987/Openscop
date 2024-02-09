@@ -93,6 +93,8 @@ loading_preset = "evencare_noload"
 coordinate_and_direction = Vector4(0, 0, 0, 1)
 
 [node name="level_manipulator" parent="." instance=ExtResource("6_vuu81")]
+loading_preset = "evencare_noload"
+background_music_id = 1
 fade_color = Color(1, 1, 1, 1)
 level_slogan = "Have you found anything weird lately?**There is much to find in this place."
 horizontal_limit = Vector2(-2, 2)

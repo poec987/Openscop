@@ -83,7 +83,6 @@ func _ready():
 	p2talkdict = JSON.parse_string((FileAccess.open("res://scripts/p2_talk_data.json", FileAccess.READ)).get_as_text())
 	dialogue = JSON.parse_string((FileAccess.open("res://scripts/dialogue.json", FileAccess.READ)).get_as_text())
 	level_data = JSON.parse_string((FileAccess.open("res://scripts/level_data.json", FileAccess.READ)).get_as_text())
-	
 	#SceneManager.change_scene("res://scenes/test.tscn")
 
 func _process(_delta):
@@ -96,6 +95,9 @@ func _process(_delta):
 	#CHECKS INPUTS FOR SHEET FOLDER HOTKEY AND FULLSCREEN BUTTON
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
+		
+	if Input.is_action_just_pressed("ui_end"):
+		save_game(0)
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreen = !fullscreen
 		DisplayServer.window_set_mode((DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED))
@@ -137,14 +139,14 @@ func save_data():
 		"room": {
 			"room_name":room_name,
 			"loading_preset":loading_preset,
-			"current_room": get_tree().get_current_scene()
+			"current_room": get_tree().get_current_scene().scene_file_path
 		},
 		"game": {
 			"gen": gen,
 			"pets": pets
 		},
 		"player": {
-			"coords":player_array,
+			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction],
 			"pieces":pieces_amount,
 			"character":current_character,
 			"control_mode":control_mode,
@@ -161,7 +163,11 @@ func save_game(slot):
 func load_game(slot):
 	if not FileAccess.file_exists("user://savedata/saveslot"+str(slot)+".save"):
 		return
-		
-	var save_game = FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.READ)
-	
-	while save_game
+	var save_game = JSON.parse_string((FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.READ)).get_as_text())
+	gen = save_game["game"]["gen"]
+	pets = save_game["game"]["pets"]
+	player_array = Vector4(save_game["player"]["coords"][0],save_game["player"]["coords"][1],save_game["player"]["coords"][2],save_game["player"]["coords"][3])
+	pieces_amount = save_game["player"]["pieces"]
+	control_mode = save_game["player"]["control_mode"]
+	key = save_game["player"]["key"]
+	warp_to(save_game["room"]["current_room"],"evencare")
