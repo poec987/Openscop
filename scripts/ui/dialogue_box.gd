@@ -46,6 +46,11 @@ func _ready():
 
 func _process(_delta):
 	#WAITS UNTIL HALF THE TIME HAS BEEN COMPLETED TO SHOW THE TEXTBOX BACKGROUND.
+	if get_tree().paused:
+		$dialogue_typing.set_stream_paused(true)
+	else:
+		$dialogue_typing.set_stream_paused(false)
+		
 	if $textbox_timer.get_time_left()<$textbox_timer.wait_time/2.0:
 		$textbox_background.visible=true
 		
@@ -84,21 +89,22 @@ func _process(_delta):
 		
 		
 	#IF YOU SKIPPED TEXTBOX, ALLOWS YOU TO PROCEED ONLY AFTER YOU STOP HOLDING ACTION.
-	if Input.is_action_just_released("pressed_action") && textbox_stage==1:
-		textbox_stage=2
-		$arrow_timer.start()
-		
-	#GOES TO NEXT TEXTBOX, IF THERE'S ANY
-	if Input.is_action_just_pressed("pressed_action") && textbox_stage==2:
-		textbox_stage=0
-		textbox+=1
-		chars = 0
-		$arrow_timer.stop()
-		$textbox_arrow.visible = false
-		$textbox_text.visible_ratio = 0.0
-		if textbox<text.size():
-			$dialogue_change.play()
-		$textbox_timer.start()
+	if !get_tree().paused:
+		if Input.is_action_just_released("pressed_action") && textbox_stage==1:
+			textbox_stage=2
+			$arrow_timer.start()
+			
+		#GOES TO NEXT TEXTBOX, IF THERE'S ANY
+		if Input.is_action_just_pressed("pressed_action") && textbox_stage==2:
+			textbox_stage=0
+			textbox+=1
+			chars = 0
+			$arrow_timer.stop()
+			$textbox_arrow.visible = false
+			$textbox_text.visible_ratio = 0.0
+			if textbox<text.size():
+				$dialogue_change.play()
+			$textbox_timer.start()
 		
 	
 	#STARTS TO DISPLAY ARROW AS SOON AS TEXT IS OVER
@@ -120,7 +126,7 @@ func check_character():
 
 #TEXT TIMER STUFF
 func _on_textbox_timer_timeout():
-	if textbox<=text.size()-1:
+	if textbox<=text.size()-1 && !get_tree().paused:
 		if chars<text[textbox].length():
 			chars+=1
 			check_character()

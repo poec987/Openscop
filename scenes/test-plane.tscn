@@ -111,7 +111,6 @@ environment_darkness = 1.0
 process_mode = 3
 stream = ExtResource("1_ukff2")
 pitch_scale = 0.95
-autoplay = true
 
 [node name="grass" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)

@@ -31,14 +31,18 @@ var piece_frame = 0
 var tween_called = false
 @export var called = false
 const HUD_SPEED = 0.5
+var loaded = false
 
+func _ready():
+	$counter_text.text = str(Global.pieces_amount[Global.current_character]).pad_zeros(5)
+	loaded = true
 func _process(delta):
 	piece_frame+=10.0*delta
 	if piece_frame>20:
 		piece_frame=0
 	$piece.frame_coords.x = round(piece_frame)
 	
-	if $counter_text.text!=str(Global.pieces_amount[Global.current_character]).pad_zeros(5):
+	if $counter_text.text!=str(Global.pieces_amount[Global.current_character]).pad_zeros(5) && loaded:
 		if !tween_called:
 			create_tween().tween_property(self,\"position:y\",29.,HUD_SPEED).set_trans(Tween.TRANS_LINEAR)
 			tween_called=true
