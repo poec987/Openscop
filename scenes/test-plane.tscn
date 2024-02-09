@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=20 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -68,6 +68,19 @@ shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/fog = true
 
+[sub_resource type="QuadMesh" id="QuadMesh_qxb75"]
+orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7jhc3"]
+render_priority = 0
+shader = ExtResource("3_mdjse")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_color = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/fog = true
+
 [node name="test-plane" type="Node3D"]
 
 [node name="warp" parent="." instance=ExtResource("5_bt3tu")]
@@ -87,7 +100,8 @@ front_limit = Vector2(-1, 3)
 camera_height = 4.0
 camera_distance = 12.0
 camera_angle = 1.0
-fog_color = Vector4(1, 1, 1, 0)
+enable_fog = true
+fog_color = Vector4(0, 0, 1, 0)
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 
@@ -167,3 +181,1285 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
 
 [node name="piece_root4" parent="pieces" instance=ExtResource("4_1gmmf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
+
+[node name="subdivided_planetest" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="plane" type="MeshInstance3D" parent="subdivided_planetest"]
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane2" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane3" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane4" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane5" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane6" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane7" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane8" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane9" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane10" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane11" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane12" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane13" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane14" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane15" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane16" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane17" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane18" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane19" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane20" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane21" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane22" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane23" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane24" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane25" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane26" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane27" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane28" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane29" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane30" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane31" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane32" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane33" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane34" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane35" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane36" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane37" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane38" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane39" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane40" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane41" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane42" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane43" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane44" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane45" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane46" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane47" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane48" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane49" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane50" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane51" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane52" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane53" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane54" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane55" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane56" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane57" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane58" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane59" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane60" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane61" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane62" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane63" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane64" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane65" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane66" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane67" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane68" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane69" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane70" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane71" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane72" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane73" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane74" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane75" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane76" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane77" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane78" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane79" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane80" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane81" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane82" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane83" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane84" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane85" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane86" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane87" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane88" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane89" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane90" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane91" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane92" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane93" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane94" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane95" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane96" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane97" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane98" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane99" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane100" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane101" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane102" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane103" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane104" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane105" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane106" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane107" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane108" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane109" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane110" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane111" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane112" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane113" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane114" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane115" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane116" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane117" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane118" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane119" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane120" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane121" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane122" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane123" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane124" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 3)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane125" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane126" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 2)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane127" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane128" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 1)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane129" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane130" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane131" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane132" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane133" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane134" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane135" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane136" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane137" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane138" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane139" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane140" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane141" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane142" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane143" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane144" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane145" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane146" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane147" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane148" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane149" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane150" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane151" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane152" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane153" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane154" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane155" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane156" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane157" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane158" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane159" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane160" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane161" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane162" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane163" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane164" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane165" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane166" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane167" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane168" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane169" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane170" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane171" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane172" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane173" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane174" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane175" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane176" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane177" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane178" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane179" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane180" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane181" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane182" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane183" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane184" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane185" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane186" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane187" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane188" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane189" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane190" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane191" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane192" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane193" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane194" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane195" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane196" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane197" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane198" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane199" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane200" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane201" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane202" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane203" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane204" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane205" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane206" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane207" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane208" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane209" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane210" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane211" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane212" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane213" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane214" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane215" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane216" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane217" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane218" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -8)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane219" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane220" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -9)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane221" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane222" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -10)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane223" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane224" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -11)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane225" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane226" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane227" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane228" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane229" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane230" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane231" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane232" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane233" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane234" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane235" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane236" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane237" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane238" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane239" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane240" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane241" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane242" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane243" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane244" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane245" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane246" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane247" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane248" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane249" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane250" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -4)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane251" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane252" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -5)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane253" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane254" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -6)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane255" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="plane256" type="MeshInstance3D" parent="subdivided_planetest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -7)
+mesh = SubResource("QuadMesh_qxb75")
+surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
