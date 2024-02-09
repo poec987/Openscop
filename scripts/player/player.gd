@@ -45,6 +45,7 @@ func change_sound(sound):
 #PHYSICS PROCESS
 
 func _ready():
+	return_character()
 	position = Vector3(Global.player_array.x,Global.player_array.y,Global.player_array.z)
 	player_camera.position=position
 	animation_direction = int(Global.player_array.w)
@@ -356,12 +357,16 @@ func _on_open_sheets_file_selected(path):
 		material.vframes = image_texture.get_size().y/64
 		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 		head.get_material_override().set_shader_parameter("albedoTex", head.texture)
-
+func return_character():
+	if Global.current_character==0:
+		material.texture = load("res://graphics/sprites/player/guardian.png")
+	#if Global.current_character=1:
+		#material.texture = load("res://graphics/sprites/player/guardian.png")
 #RESETS CHARACTER
 func reset_sheet():
 	material.hframes = 5
 	material.vframes = 5
-	material.texture = load("res://graphics/sprites/player/guardian.png")
+	return_character()
 	head.texture = load("res://graphics/sprites/player/none.png")
 	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 	head.get_material_override().set_shader_parameter("albedoTex", head.texture)

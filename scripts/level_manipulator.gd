@@ -1,5 +1,7 @@
 extends Node
 @export_subgroup("Level Settings")
+@export var room_name = ""
+@export var loading_preset=""
 @export var background_music_id = 0
 @export var fade_color: Color
 @export var level_slogan = ""
@@ -36,6 +38,8 @@ extends Node
 #2 = NMP
 
 func _ready():
+	Global.room_name = room_name
+	Global.loading_preset = loading_preset
 	get_tree().paused=false
 	get_tree().get_first_node_in_group("level_slogan").text = level_slogan.replace("*","\n")
 	get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=fade_color

@@ -3,6 +3,7 @@ extends Node
 var debug = true
 #ROOM
 var room_name ="test"
+var loading_preset = ""
 var fog_radius = 13.5
 var fog_color = Vector4(0.0,0.0,0.0,0.0)
 
@@ -28,11 +29,13 @@ var game_paused = false
 var can_pause = true
 
 #SAVEDATA
+var gen = 6
+var key = 0
 var current_character = 0
 var pieces_amount = [0,0]
 # 0 = guardian
 var player_array = Vector4(0.,0.,0.,0)
-
+var pets = [false,false,false,false,false,false,false,false,false,false]
 var fog_focus = 0
 #0 = follow player
 #
@@ -126,3 +129,23 @@ func warp_to(scene,preset):
 	get_tree().get_first_node_in_group("loading_overlay").get_child(2).start()
 	await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
 	get_tree().change_scene_to_file(scene)
+	
+func save_data(slot):
+	var save_slot = {
+		"room": {
+			"room_name":room_name,
+			"loading_preset":loading_preset,
+			"current_room": get_tree().get_current_scene()
+		},
+		"game": {
+			"gen": gen,
+			"pets": pets
+		},
+		"player": {
+			"coords":player_array,
+			"pieces":pieces_amount,
+			"character":current_character,
+			"control_mode":control_mode,
+			"key":key
+		}
+	}
