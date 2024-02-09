@@ -77,6 +77,8 @@ func _ready():
 	#CHECKS IF CUSTOM SHEETS DIRECTORY DOESNT EXIST SO IT CAN CREATE IT
 	if !directory.dir_exists("sheets"):
 		directory.make_dir("sheets")
+	if !directory.dir_exists("savedata"):
+		directory.make_dir("savedata")
 	#LOADS P2TOTALK DICTIONARY
 	p2talkdict = JSON.parse_string((FileAccess.open("res://scripts/p2_talk_data.json", FileAccess.READ)).get_as_text())
 	dialogue = JSON.parse_string((FileAccess.open("res://scripts/dialogue.json", FileAccess.READ)).get_as_text())
@@ -130,8 +132,8 @@ func warp_to(scene,preset):
 	await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
 	get_tree().change_scene_to_file(scene)
 	
-func save_data(slot):
-	var save_slot = {
+func save_data():
+	var save_data = {
 		"room": {
 			"room_name":room_name,
 			"loading_preset":loading_preset,
@@ -149,3 +151,17 @@ func save_data(slot):
 			"key":key
 		}
 	}
+	return save_data
+
+func save_game(slot):
+	var save_game = FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.WRITE)
+	var json_data = JSON.stringify(save_data())
+	save_game.store_line(json_data)
+	
+func load_game(slot):
+	if not FileAccess.file_exists("user://savedata/saveslot"+str(slot)+".save"):
+		return
+		
+	var save_game = FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.READ)
+	
+	while save_game
