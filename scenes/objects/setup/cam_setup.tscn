@@ -23,6 +23,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
+shader_parameter/effect = null
+shader_parameter/ntsc_enable = null
 
 [sub_resource type="GDScript" id="GDScript_en8ci"]
 script/source = "extends Node2D
@@ -289,15 +291,19 @@ script = ExtResource("19_r0a67")
 modulate = Color(1, 0, 1, 1)
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Position:"
+text = "Position:
+X:
+Y:
+Z:
+DIR:"
 label_settings = SubResource("LabelSettings_oq0wl")
 text_direction = 1
 
 [node name="playervel" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/debughud"]
 modulate = Color(1, 0, 1, 1)
-offset_top = 16.0
+offset_top = 100.0
 offset_right = 63.0
-offset_bottom = 73.0001
+offset_bottom = 157.0
 text = "Velocity:"
 label_settings = SubResource("LabelSettings_oq0wl")
 text_direction = 1

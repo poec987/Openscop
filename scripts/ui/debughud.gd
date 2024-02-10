@@ -17,8 +17,8 @@ func _ready():
 
 func _process(delta):
 	if isplayer: #IF THERE IS A PLAYER THIS CODE IS RAN
-		$playerpos.text=str("Position:", player.position)
-		$playervel.text=str("Velocity:", player.velocity)
+		$playerpos.text=str("Position:\nX:",player.position.x,"\nY:",player.position.y,"\nZ:",player.position.z,"\nDIR:",player.animation_direction)
+		$playervel.text=str("Velocity:\nX:",player.velocity.x,"\nY:",player.velocity.y,"\nZ:",player.velocity.z)
 	else: #IF THERE IS NO PLAYER THIS CODE IS RAN
 		$playerpos.text="NO PLAYER FOUND!"
 		$playervel.text=" "

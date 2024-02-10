@@ -1,13 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dr52yj2jvqaa7"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dr52yj2jvqaa7"]
 
-[ext_resource type="Shader" path="res://shaders/fog shaders/psx_fog.gdshader" id="1_bgqrg"]
+[ext_resource type="Shader" path="res://shaders/screen/pp_band-dither.gdshader" id="1_x6ksi"]
+[ext_resource type="Texture2D" uid="uid://b0ub3tqjyw46f" path="res://shaders/screen/psxdither.png" id="2_8n4t6"]
 
 [resource]
-render_priority = 0
-shader = ExtResource("1_bgqrg")
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/alpha_color = Color(0.52, 0.34, 0.84, 1)
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/fog = false
+shader = ExtResource("1_x6ksi")
+shader_parameter/col_depth = 15.0
+shader_parameter/dither_banding = true
+shader_parameter/dither_tex = ExtResource("2_8n4t6")

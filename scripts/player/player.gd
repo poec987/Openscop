@@ -103,6 +103,11 @@ func _physics_process(delta):
 	velocity.x = lerp(velocity.x,h*movement_speed,(delta)*ACCELERATION)
 	velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
 	
+	if velocity.x<0.01 && velocity.x>-0.01:
+		velocity.x=0.
+	if velocity.z<0.01 && velocity.z>-0.01:
+		velocity.z=0.
+	
 	#CHANGES PLAYER SPRITE DEPENDING ON DIRECTION
 	if v > 0:
 		animation_direction=0
