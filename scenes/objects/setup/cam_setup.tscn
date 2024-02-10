@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ciyscr1kgpgnf"]
+[gd_scene load_steps=27 format=3 uid="uid://ciyscr1kgpgnf"]
 
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
@@ -19,11 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://cgug7tu2or80t" path="res://graphics/sprites/ui/pausemenu_overlay.png" id="14_cvfsw"]
 [ext_resource type="FontFile" uid="uid://gsd5w8kh7xxx" path="res://graphics/sprites/ui/pausemenu_numbers.fnt" id="16_gfid7"]
 [ext_resource type="Script" path="res://scripts/objects/loading.gd" id="19_8h6l3"]
+[ext_resource type="Script" path="res://scripts/ui/debughud.gd" id="19_r0a67"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
-shader_parameter/effect = null
-shader_parameter/ntsc_enable = false
 
 [sub_resource type="GDScript" id="GDScript_en8ci"]
 script/source = "extends Node2D
@@ -66,6 +65,10 @@ font = ExtResource("16_gfid7")
 [sub_resource type="LabelSettings" id="LabelSettings_rtn8s"]
 font = ExtResource("5_5sf62")
 font_color = Color(0.572549, 0.168627, 0.403922, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oq0wl"]
+font = ExtResource("5_5sf62")
+outline_color = Color(0, 0, 0, 1)
 
 [node name="PSXLayer" type="CanvasLayer"]
 script = ExtResource("1_fp4cd")
@@ -278,6 +281,26 @@ hframes = 5
 offset_right = 320.0
 offset_bottom = 240.0
 color = Color(0.996078, 0.847059, 0.996078, 0)
+
+[node name="debughud" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD"]
+script = ExtResource("19_r0a67")
+
+[node name="playerpos" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/debughud"]
+modulate = Color(1, 0, 1, 1)
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Position:"
+label_settings = SubResource("LabelSettings_oq0wl")
+text_direction = 1
+
+[node name="playervel" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/debughud"]
+modulate = Color(1, 0, 1, 1)
+offset_top = 16.0
+offset_right = 63.0
+offset_bottom = 73.0001
+text = "Velocity:"
+label_settings = SubResource("LabelSettings_oq0wl")
+text_direction = 1
 
 [node name="loading" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["loading_overlay"]]
 process_mode = 3
