@@ -327,6 +327,8 @@ offset_bottom = 40.0
 
 [node name="nifty" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
 
+[node name="keyboard" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["keyboard"]]
+
 [node name="player_camera" type="Camera3D" parent="NTSC/NTSC_viewport/Dither/dither_view"]
 transform = Transform3D(-4.37114e-08, -0.309017, 0.951057, 0, 0.951057, 0.309017, -1, 1.35076e-08, -4.1572e-08, 8, 2.62875, 0)
 current = true
