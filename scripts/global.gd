@@ -1,6 +1,7 @@
 extends Node
 #GLOBAL GAME VARS
 var debug = true
+var keyboard_RAM=""
 #ROOM
 var room_name ="test"
 var loading_preset = ""
@@ -97,7 +98,7 @@ func _process(_delta):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
 		
 	if Input.is_action_just_pressed("ui_end"):
-		save_game(0)
+		create_keyboard(1,true,true)
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreen = !fullscreen
 		DisplayServer.window_set_mode((DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED))
@@ -171,3 +172,13 @@ func load_game(slot):
 	control_mode = save_game["player"]["control_mode"]
 	key = save_game["player"]["key"]
 	warp_to(save_game["room"]["current_room"],"evencare")
+
+func create_keyboard(background,ask,fade):
+	var keyboard_scene = preload("res://scenes/objects/menu/keyboard.tscn")
+	var keyboard_instance = keyboard_scene.instantiate()
+	keyboard_instance.background = background
+	keyboard_instance.ask = ask
+	keyboard_instance.has_fade = fade
+	if get_tree().get_first_node_in_group("HUD_keyboard").get_child_count()<1:
+		get_tree().get_first_node_in_group("HUD_keyboard").add_child(keyboard_instance)
+		can_pause=false
