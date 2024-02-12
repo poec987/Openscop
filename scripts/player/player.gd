@@ -61,7 +61,7 @@ func _physics_process(delta):
 	var h = 0.0
 	
 	#CONTROL MODE 0: CONTROL PLAYER NORMALLY
-	if Global.control_mode==0:
+	if Global.control_mode==0 || Global.control_mode==3:
 		#CREATES MOVEMENT VECTORS
 		v = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
 		h = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
@@ -99,10 +99,14 @@ func _physics_process(delta):
 		h /= magnitude
 		v /= magnitude
 	
-	#SETS PLAYER VELOCITY ACCORDING TO VECTOR
-	velocity.x = lerp(velocity.x,h*movement_speed,(delta)*ACCELERATION)
-	velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
-	
+	if Global.control_mode==0 || Global.control_mode==3:
+		#SETS PLAYER VELOCITY ACCORDING TO VECTOR
+		velocity.x = lerp(velocity.x,h*movement_speed,(delta)*ACCELERATION)
+		velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
+	else:
+		velocity.x = lerp(velocity.x,0.*movement_speed,(delta)*ACCELERATION)
+		velocity.z = lerp(velocity.z,0.*movement_speed,(delta)*ACCELERATION)
+		
 	if velocity.x<0.01 && velocity.x>-0.01:
 		velocity.x=0.
 	if velocity.z<0.01 && velocity.z>-0.01:
