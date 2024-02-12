@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://xc52uj0irva"]
+[gd_scene load_steps=9 format=3 uid="uid://xc52uj0irva"]
 
 [ext_resource type="Script" path="res://scripts/ui/keyboard.gd" id="1_gp5gn"]
 [ext_resource type="Texture2D" uid="uid://dfjssj8y6kkj7" path="res://graphics/sprites/ui/keyboard.png" id="1_leyp3"]
 [ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="2_ravhw"]
 [ext_resource type="Shader" path="res://shaders/screen/keyboard_screen.gdshader" id="3_hca6n"]
 [ext_resource type="Texture2D" uid="uid://c6rd0v7n1amog" path="res://graphics/sprites/ui/keyboard_ui.png" id="4_gkk68"]
+[ext_resource type="AudioStream" uid="uid://b6s0i4dmjd75v" path="res://sfx/keyboardmove.wav" id="6_ekg64"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6o683"]
 font = ExtResource("2_ravhw")
@@ -49,3 +50,7 @@ position = Vector2(8, 34)
 material = SubResource("ShaderMaterial_exkdt")
 offset_right = 16.0
 offset_bottom = 19.0
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ekg64")
+volume_db = 5.0

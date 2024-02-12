@@ -57,12 +57,20 @@ func _process(_delta):
 
 	if Input.is_action_just_pressed("pressed_up"):
 		cursor_pos.y-=1
+		if background==3:
+			$sound.play()
 	if Input.is_action_just_pressed("pressed_down"):
 		cursor_pos.y+=1
+		if background==3:
+			$sound.play()
 	if Input.is_action_just_pressed("pressed_left"):
 		cursor_pos.x-=1
+		if background==3:
+			$sound.play()
 	if Input.is_action_just_pressed("pressed_right"):
 		cursor_pos.x+=1
+		if background==3:
+			$sound.play()
 	if Input.is_action_just_pressed("pressed_action"):
 		if cursor_pos!=Vector2i(11,5):
 			if $keyboard_background/keyboard_string.text.length()<=18:
