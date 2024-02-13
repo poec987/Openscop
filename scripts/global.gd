@@ -25,7 +25,7 @@ var cam_move_limit_y = Vector2.ZERO
 var cam_move_limit_z = Vector2.ZERO
 
 #GAME
-var control_mode = 3
+var control_mode = 0
 var game_paused = false
 var can_pause = true
 

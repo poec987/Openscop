@@ -101,7 +101,8 @@ front_limit = Vector2(-1, 3)
 camera_height = 4.0
 camera_distance = 12.0
 camera_angle = 1.0
-fog_color = Vector4(0, 0, 1, 0)
+enable_fog = true
+sky_and_fog_color = Vector4(0, 0, 1, 0)
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 

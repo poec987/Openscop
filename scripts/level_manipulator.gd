@@ -5,6 +5,7 @@ extends Node
 @export var background_music_id = 0
 @export var fade_color: Color
 @export var level_slogan = ""
+@export var school_preset = false
 @export_subgroup("Limit Camera")
 @export var limit_camera_horizontal = false
 @export var horizontal_limit = Vector2.ZERO
@@ -27,13 +28,14 @@ extends Node
 @export var vertical_max_limit = 0.
 @export_subgroup("Environment")
 @export var enable_fog = false
-@export var fog_color = Vector4.ZERO
+@export var sky_and_fog_color = Vector4.ZERO
 @export var fog_radius = 0.
 @export var ambient_color = Color(0., 0., 0.,1.0)
 @export var environment_darkness = 0.
+@export var set_custom_fog_focus = false
+@export var set_fog_focus = Vector3.ZERO 
 @export_subgroup("Hardcoded Preset")
 @export var preset = 0
-
 #1 = EVENCARE/GIFTPLANE
 #2 = NMP
 
@@ -96,7 +98,12 @@ func _ready():
 	else:
 		Global.camera_rot = -18
 		
+	if school_preset:
+		Global.control_mode=3
 		
+	if set_custom_fog_focus:
+		Global.fog_focus=-1
+		RenderingServer.global_shader_parameter_set("player_pos", set_fog_focus)
 	
 	
 	if ambient_color!=Color(0., 0., 0.,1.0):
@@ -111,10 +118,10 @@ func _ready():
 	
 	if enable_fog:
 		RenderingServer.global_shader_parameter_set("fog_enable", true)
-		if fog_color!=Vector4(0.,0.,0.,0.):
+		if sky_and_fog_color!=Vector4(0.,0.,0.,0.):
 		#SETS FOG COLOR AND FOG RADIUS AS GAME RUNS
-			RenderingServer.global_shader_parameter_set("fog_color", fog_color)
-			$skybox.get_environment().set_bg_color(Color(fog_color.x,fog_color.y,fog_color.z,fog_color.w))
+			RenderingServer.global_shader_parameter_set("fog_color", sky_and_fog_color)
+			$skybox.get_environment().set_bg_color(Color(sky_and_fog_color.x,sky_and_fog_color.y,sky_and_fog_color.z,sky_and_fog_color.w))
 		else:
 			RenderingServer.global_shader_parameter_set("fog_color", Vector4.ZERO)
 			$skybox.get_environment().set_bg_color(Color(0.,0.,0.,0.))
@@ -125,6 +132,6 @@ func _ready():
 	else:
 		RenderingServer.global_shader_parameter_set("fog_enable", false)
 	
-	$skybox.get_environment().set_bg_color(Color(fog_color.x,fog_color.y,fog_color.z,fog_color.w))
+	$skybox.get_environment().set_bg_color(Color(sky_and_fog_color.x,sky_and_fog_color.y,sky_and_fog_color.z,sky_and_fog_color.w))
 	bg_music.play_track(background_music_id)
 	
