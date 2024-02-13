@@ -33,6 +33,9 @@ var can_submit = true
 @onready var footstep_sound = get_node("footstep")
 @onready var player_camera = get_tree().get_first_node_in_group("Player_camera")
 
+@export	var v = 0.0
+@export	var h = 0.0
+
 func allow_typing():
 	can_submit=true
 
@@ -57,8 +60,8 @@ func _physics_process(delta):
 	#USELESS FOR NOW
 	if Global.fog_focus==0:
 		RenderingServer.global_shader_parameter_set("player_pos", position)
-	var v = 0.0
-	var h = 0.0
+
+	var direction = Vector3()
 	
 	#CONTROL MODE 0: CONTROL PLAYER NORMALLY
 	if Global.control_mode==0 || Global.control_mode==3:
@@ -99,7 +102,7 @@ func _physics_process(delta):
 		h /= magnitude
 		v /= magnitude
 	
-	if Global.control_mode==0 || Global.control_mode==3:
+	if Global.control_mode==0:
 		#SETS PLAYER VELOCITY ACCORDING TO VECTOR
 		velocity.x = lerp(velocity.x,h*movement_speed,(delta)*ACCELERATION)
 		velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
@@ -107,6 +110,16 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x,0.*movement_speed,(delta)*ACCELERATION)
 		velocity.z = lerp(velocity.z,0.*movement_speed,(delta)*ACCELERATION)
 		
+	if Global.control_mode==3:
+		rotate_y(deg_to_rad(-h*10))
+		direction.z = v
+		direction = direction.rotated(Vector3(0,1,0),rotation.y)
+		velocity.z = direction.z*(movement_speed*-1)
+		velocity.x = direction.x*(movement_speed*-1)
+		
+	if Global.control_mode!=3:
+		rotation.y=0
+	
 	if velocity.x<0.01 && velocity.x>-0.01:
 		velocity.x=0.
 	if velocity.z<0.01 && velocity.z>-0.01:
@@ -117,6 +130,7 @@ func _physics_process(delta):
 		animation_direction=0
 	elif v < 0:
 		animation_direction=3
+
 	if h < 0:
 		animation_direction=2
 	elif h > 0:

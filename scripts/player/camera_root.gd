@@ -38,4 +38,7 @@ func _process(delta):
 				position.y = clamp(position.y,Global.cam_move_limit_y.x,Global.cam_move_limit_y.y)
 		
 		# set the pos and rot of the camera to follow the cam anchor
-	cam.set_cam_pos(cam_anchor.global_position, cam_anchor.global_rotation)
+	if Global.control_mode!=3:
+		cam.set_cam_pos(cam_anchor.global_position, cam_anchor.global_rotation)
+	else:
+		cam.set_cam_pos(Vector3(get_tree().get_first_node_in_group("Player").global_position.x,1,get_tree().get_first_node_in_group("Player").global_position.z), Vector3(0.,-3.14159+get_tree().get_first_node_in_group("Player").rotation.y,0.))
