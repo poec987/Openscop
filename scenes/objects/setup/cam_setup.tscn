@@ -83,6 +83,7 @@ const ANIMATION_SPEED = 8
 var current_frame = 0
 
 var loaded = false
+	
 func _process(_delta):
 	
 	if Global.control_mode==4 || Global.control_mode==5:
@@ -94,6 +95,7 @@ func _process(_delta):
 		if Global.control_mode==4:
 			if !loaded:
 				$player.texture = get_tree().get_first_node_in_group(\"Player\").get_child(1).texture
+				$player.get_material().set_shader_parameter(\"albedoTex\", $player.texture)
 				$player.hframes = get_tree().get_first_node_in_group(\"Player\").get_child(1).hframes
 				$player.vframes = get_tree().get_first_node_in_group(\"Player\").get_child(1).vframes
 				if get_tree().get_first_node_in_group(\"Player\").get_child(1).frame_coords.x!=1 && get_tree().get_first_node_in_group(\"Player\").get_child(1).frame_coords.x!=2:
