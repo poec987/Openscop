@@ -84,9 +84,14 @@ var current_frame = 0
 
 var loaded = false
 func _process(_delta):
-	self.visible = Global.control_mode==3
+	
+	if Global.control_mode==4 || Global.control_mode==5:
+		self.visible=true
+	else:
+		self.visible=false
+		
 	if get_tree().get_first_node_in_group(\"Player\"):
-		if Global.control_mode==3:
+		if Global.control_mode==4:
 			if !loaded:
 				$player.texture = get_tree().get_first_node_in_group(\"Player\").get_child(1).texture
 				$player.hframes = get_tree().get_first_node_in_group(\"Player\").get_child(1).hframes
@@ -378,6 +383,7 @@ texture = ExtResource("22_rype5")
 offset = Vector2(159, 181)
 hframes = 5
 vframes = 5
+frame = 3
 
 [node name="overlay" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/school"]
 texture = ExtResource("21_lx5qg")

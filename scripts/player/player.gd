@@ -64,7 +64,7 @@ func _physics_process(delta):
 	var direction = Vector3()
 	
 	#CONTROL MODE 0: CONTROL PLAYER NORMALLY
-	if Global.control_mode==0 || Global.control_mode==3:
+	if Global.control_mode==0 || Global.control_mode==4:
 		#CREATES MOVEMENT VECTORS
 		v = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
 		h = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
@@ -110,31 +110,33 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x,0.*movement_speed,(delta)*ACCELERATION)
 		velocity.z = lerp(velocity.z,0.*movement_speed,(delta)*ACCELERATION)
 		
-	if Global.control_mode==3:
+	if Global.control_mode==4:
 		rotate_y(deg_to_rad(-h*10))
-		direction.z = v
+		direction.x = v
 		direction = direction.rotated(Vector3(0,1,0),rotation.y)
 		velocity.z = direction.z*(movement_speed*-1)
 		velocity.x = direction.x*(movement_speed*-1)
 		
-	if Global.control_mode!=3:
+	if Global.control_mode!=4 && Global.control_mode!=5:
 		rotation.y=0
-	
+
+
 	if velocity.x<0.01 && velocity.x>-0.01:
 		velocity.x=0.
 	if velocity.z<0.01 && velocity.z>-0.01:
 		velocity.z=0.
 	
 	#CHANGES PLAYER SPRITE DEPENDING ON DIRECTION
-	if v > 0:
-		animation_direction=0
-	elif v < 0:
-		animation_direction=3
+	if material.hframes>1 && material.vframes>1:
+		if v > 0:
+			animation_direction=0
+		elif v < 0:
+			animation_direction=3
 
-	if h < 0:
-		animation_direction=2
-	elif h > 0:
-		animation_direction=1
+		if h < 0:
+			animation_direction=2
+		elif h > 0:
+			animation_direction=1
 			
 	
 	#DOES HEAD BOPPING
@@ -164,6 +166,7 @@ func _physics_process(delta):
 		else:
 			Global.control_mode-=1
 
+		
 		if Global.control_mode==1:
 			get_node("mode_change").stop()
 			get_node("mode_change").play()
@@ -184,23 +187,24 @@ func _physics_process(delta):
 	#if position.y <= 0:
 		#velocity.y = 0
 		#position.y = 0.01
-
 #IF PLAYER IS NOT WALKING
-	if is_walking==false:
-		material.frame_coords = Vector2(animation_direction, 0)
-		current_frame=1
-		footstep_sound.stop()
-	else:
-		#IF PLAYER IS WALKING
-		head.frame_coords= Vector2(0,0)
-		material.vframes = int(material.texture.get_size().y)/(int(material.texture.get_size().x)/material.hframes) # animations
-		current_frame+=ANIMATION_SPEED*delta
-		if current_frame>material.vframes:
-			current_frame=1
-	#UPDATE FRAMES
+	if material.hframes>1 && material.vframes>1:
+		if is_walking==false:
+			material.frame_coords = Vector2(animation_direction, 0)
+			current_frame=0
+			footstep_sound.stop()
+		else:
+			#IF PLAYER IS WALKING
+			head.frame_coords= Vector2(0,0)
+			material.vframes = int(material.texture.get_size().y)/(int(material.texture.get_size().x)/material.hframes) # animations
+			current_frame+=ANIMATION_SPEED*delta
+			if current_frame>material.vframes:
+				current_frame=1
+		#UPDATE FRAMES
 		material.frame_coords = Vector2(animation_direction, floor(current_frame))
-		
-		
+	else:
+		material.frame_coords = Vector2.ZERO
+	print(material.hframes>0 && material.vframes>0)	
 #IF PLAYER IS ON P2TOTALK MODE
 	if Global.control_mode==1:
 	#CONVERTS INPUTS TO PHONETICS
