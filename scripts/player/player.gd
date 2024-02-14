@@ -59,7 +59,7 @@ func _physics_process(delta):
 	#WILL BE USED LATER ON FOR THINGS LIKE WINDMILL EVENT AND BASEMENT MACHINE
 	#USELESS FOR NOW
 	if Global.fog_focus==0:
-		RenderingServer.global_shader_parameter_set("player_pos", position)
+		RenderingServer.global_shader_parameter_set("player_pos",global_position)
 
 	var direction = Vector3()
 	
@@ -204,7 +204,7 @@ func _physics_process(delta):
 		material.frame_coords = Vector2(animation_direction, floor(current_frame))
 	else:
 		material.frame_coords = Vector2.ZERO
-	print(material.hframes>0 && material.vframes>0)	
+
 #IF PLAYER IS ON P2TOTALK MODE
 	if Global.control_mode==1:
 	#CONVERTS INPUTS TO PHONETICS

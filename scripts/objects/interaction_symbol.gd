@@ -35,23 +35,32 @@ func _ready():
 	animate()
 	
 func _process(delta):
-	if position.distance_to(get_tree().get_first_node_in_group("Player").global_position)<min_distance:
+	if global_position.distance_to(get_tree().get_first_node_in_group("Player").global_position)<min_distance:
 		if !player_inside_zone:
 			$interaction_sound.play()
 			create_tween().tween_property(interaction_mesh,"scale",Vector3(1.,1.,1.),GROW_ANIMATION_SPEED)
 		player_inside_zone = true
 		
 		if show_dialogue:
-			if Input.is_action_just_pressed("pressed_action") && Global.control_mode==0:
-				if get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).get_child_count()==0:
-					if Global.dialogue.has(dialogue_id):
-						Global.create_textbox(textbox_background,Global.dialogue[dialogue_id])
-					elif dialogue_id=="":
-						Global.create_textbox(0,["NO TEXT FOUND!"])
-					else:
-						Global.create_textbox(textbox_background,[dialogue_id])
-					interaction_checks()
-					
+			if Input.is_action_just_pressed("pressed_action"):
+				if Global.control_mode==0 || Global.control_mode==4:
+					if get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).get_child_count()==0:
+						if Global.dialogue.has(dialogue_id):
+							Global.create_textbox(textbox_background,Global.dialogue[dialogue_id])
+						elif dialogue_id=="":
+							Global.create_textbox(0,["NO TEXT FOUND!"])
+						else:
+							Global.create_textbox(textbox_background,[dialogue_id])
+						interaction_checks()
+		else:
+			if behavior==0:
+				if Input.is_action_just_pressed("pressed_action"):
+					if Global.control_mode==0 || Global.control_mode==4:
+						Global.create_keyboard(0,true,true)
+			if behavior==1:
+				if Input.is_action_just_pressed("pressed_action"):
+					if Global.control_mode==0 || Global.control_mode==4:
+						Global.create_keyboard(1,true,true)
 	else:
 		create_tween().tween_property(interaction_mesh,"scale",Vector3(0.,0.,0.),GROW_ANIMATION_SPEED)
 		if player_inside_zone:

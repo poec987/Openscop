@@ -22,14 +22,17 @@ var characters=[
 	]
 	
 func _ready():
-	create_tween().tween_property($fade,"color:a",float(has_fade),APPEAR_ANIM_SPEED)
+	var fade_in = create_tween()
+	fade_in.tween_property($fade,"color:a",float(has_fade),APPEAR_ANIM_SPEED)
+	await fade_in.finished
+	get_tree().paused=true
 	create_tween().tween_property(self,"position:y",0.0,APPEAR_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
-
+	
 func _process(_delta):
 	$keyboard_background.frame_coords.x=background
 	if !loaded:
 		if ask:
-			$keyboard_background/keyboard_string.text="Ask:?"
+			$keyboard_background/keyboard_string.text="Ask: ?"
 		loaded=true
 	if cursor_pos.x>12:
 		if cursor_pos.y!=5:
@@ -71,9 +74,9 @@ func _process(_delta):
 		cursor_pos.x+=1
 		if background==3:
 			$sound.play()
-	if Input.is_action_just_pressed("pressed_action"):
+	if Input.is_action_just_pressed("pressed_action") && cursor_pos.x<13 && cursor_pos.y<6:
 		if cursor_pos!=Vector2i(11,5):
-			if $keyboard_background/keyboard_string.text.length()<=18:
+			if $keyboard_background/keyboard_string.text.length()<=27:
 				if ask:
 					$keyboard_background/keyboard_string.text=$keyboard_background/keyboard_string.text.left(-1)
 					$keyboard_background/keyboard_string.text+=characters[cursor_pos.y][cursor_pos.x][0]
@@ -82,7 +85,7 @@ func _process(_delta):
 					$keyboard_background/keyboard_string.text+=characters[cursor_pos.y][cursor_pos.x][0]
 		else:
 			if ask:
-				if $keyboard_background/keyboard_string.text.length()>5:
+				if $keyboard_background/keyboard_string.text.length()>6:
 					$keyboard_background/keyboard_string.text=$keyboard_background/keyboard_string.text.left(-2)
 					$keyboard_background/keyboard_string.text+="?"
 			else:
@@ -90,12 +93,16 @@ func _process(_delta):
 					$keyboard_background/keyboard_string.text=$keyboard_background/keyboard_string.text.left(-1)
 		
 	if Input.is_action_just_pressed("pressed_start"):
+		
+		#Whenever you use "Global.keyboard_RAM" on any other script
+		#please ALWAYS clean it immediately after using.
 		if Global.keyboard_RAM=="":
 			if !ask:
 				Global.keyboard_RAM=$keyboard_background/keyboard_string.text
 			else:
-				Global.keyboard_RAM=(($keyboard_background/keyboard_string.text).right(-4)).left(-1)
+				Global.keyboard_RAM=(($keyboard_background/keyboard_string.text).right(-5)).left(-1)
 		create_tween().tween_property($fade,"color:a",0.0,APPEAR_ANIM_SPEED)
+		get_tree().paused=false
 		var disappear = create_tween()
 		disappear.tween_property(self,"position:y",240.0,APPEAR_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
 		await disappear.finished

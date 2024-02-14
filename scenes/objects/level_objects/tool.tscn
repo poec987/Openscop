@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6lt1e54fh5bh"]
+
+[ext_resource type="Script" path="res://scripts/objects/level_objects/tool.gd" id="1_0g6cr"]
+[ext_resource type="Shader" path="res://shaders/shadeless.gdshader" id="1_61bx3"]
+[ext_resource type="Texture2D" uid="uid://bdseb85ydo2vl" path="res://graphics/sprites/objects/tool/answer_idontknow.png" id="3_f73ik"]
+[ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="4_887sv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1lmqr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yr8eg"]
+render_priority = 0
+shader = ExtResource("1_61bx3")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/albedoTex = ExtResource("3_f73ik")
+
+[node name="tool" type="Node3D"]
+script = ExtResource("1_0g6cr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, 0.5, 0.5, 0, 1, 0)
+mesh = SubResource("BoxMesh_1lmqr")
+
+[node name="answer_origin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="answer" type="Sprite3D" parent="answer_origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 0)
+material_override = SubResource("ShaderMaterial_yr8eg")
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_f73ik")
+
+[node name="interaction" parent="." instance=ExtResource("4_887sv")]
+height_offset = 1.0
+show_dialogue = false
+
+[node name="answer_wait" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
+
+[connection signal="timeout" from="answer_wait" to="." method="_on_answer_wait_timeout"]

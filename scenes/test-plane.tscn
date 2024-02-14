@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=21 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="4_1gmmf"]
 [ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="5_bt3tu"]
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="6_vuu81"]
+[ext_resource type="PackedScene" uid="uid://c6lt1e54fh5bh" path="res://scenes/objects/level_objects/tool.tscn" id="8_btoou"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_8dcwh"]
 size = Vector2(4, 4)
@@ -16,7 +17,6 @@ orientation = 1
 render_priority = 0
 shader = ExtResource("3_mdjse")
 shader_parameter/modulate_color = Color(0, 0.643137, 0.105882, 1)
-shader_parameter/alpha_color = Color(0, 0, 0, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
@@ -29,7 +29,6 @@ data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0
 render_priority = 0
 shader = ExtResource("3_mdjse")
 shader_parameter/modulate_color = Color(1, 0.572549, 1, 1)
-shader_parameter/alpha_color = Color(0, 0, 0, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
@@ -49,7 +48,6 @@ orientation = 1
 render_priority = 0
 shader = ExtResource("3_mdjse")
 shader_parameter/modulate_color = Color(0.619608, 0.619608, 0.619608, 1)
-shader_parameter/alpha_color = Color(0, 0, 0, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
@@ -62,7 +60,6 @@ data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0
 render_priority = 0
 shader = ExtResource("3_mdjse")
 shader_parameter/modulate_color = Color(0.588235, 0.298039, 0.270588, 1)
-shader_parameter/alpha_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
@@ -75,7 +72,6 @@ orientation = 1
 render_priority = 0
 shader = ExtResource("3_mdjse")
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/alpha_color = Color(0, 0, 0, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
@@ -107,6 +103,7 @@ ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 
 [node name="player_root" parent="." instance=ExtResource("2_a0geb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 0)
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -1463,3 +1460,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -7)
 mesh = SubResource("QuadMesh_qxb75")
 surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
+
+[node name="tool" parent="." instance=ExtResource("8_btoou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, -3)

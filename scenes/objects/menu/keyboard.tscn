@@ -14,6 +14,7 @@ font = ExtResource("2_ravhw")
 shader = ExtResource("3_hca6n")
 
 [node name="keyboard" type="Node2D"]
+process_mode = 3
 position = Vector2(0, 240)
 script = ExtResource("1_gp5gn")
 
