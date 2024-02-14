@@ -4,7 +4,7 @@ extends CharacterBody3D
 
 var movement_speed = 5
 const ACCELERATION = 8
-var is_walking = false
+@export var is_walking = false
 
 #GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP
 #var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -26,7 +26,7 @@ var can_submit = true
 
 #PLAYER SPRITE RELATED OBJECTS
 @onready var material = get_node("sprite")
-@onready var head = get_node("head")
+@onready var head = get_node("sprite/head")
 
 #FOOTSTEP RELATED OBJECTS
 @onready var footstep_controller = get_node("footstep_controller")

@@ -39,7 +39,7 @@ script = ExtResource("1_l7eau")
 transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 1.42109e-14, 0, 1, 0, 0.7, 0)
 shape = SubResource("BoxShape3D_s8dso")
 
-[node name="sprite" type="Sprite3D" parent="player"]
+[node name="sprite" type="Sprite3D" parent="player" groups=["Player_sprite"]]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.03, 0)
 material_override = SubResource("ShaderMaterial_fpn34")
 cast_shadow = 0
@@ -52,8 +52,8 @@ texture = ExtResource("2_a2356")
 hframes = 5
 vframes = 5
 
-[node name="head" type="Sprite3D" parent="player"]
-transform = Transform3D(-3.25842e-07, 0, -2, 0, 2, 0, 2, 0, -3.25842e-07, 0, -0.03, 0)
+[node name="head" type="Sprite3D" parent="player/sprite"]
+transform = Transform3D(-1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_y38ro")
 offset = Vector2(0, 35)
 pixel_size = 0.015

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=22 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="5_bt3tu"]
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="6_vuu81"]
 [ext_resource type="PackedScene" uid="uid://c6lt1e54fh5bh" path="res://scenes/objects/level_objects/tool.tscn" id="8_btoou"]
+[ext_resource type="PackedScene" uid="uid://47e5v5kgyi3b" path="res://scenes/objects/level_objects/slope.tscn" id="8_x40b7"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_8dcwh"]
 size = Vector2(4, 4)
@@ -80,7 +81,7 @@ shader_parameter/fog = true
 [node name="test-plane" type="Node3D"]
 
 [node name="warp" parent="." instance=ExtResource("5_bt3tu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
 diagonal_entrance = null
 directions = null
 warp_direction = 3
@@ -103,7 +104,7 @@ ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 
 [node name="player_root" parent="." instance=ExtResource("2_a0geb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -161,6 +162,13 @@ surface_material_override/0 = SubResource("ShaderMaterial_fwgxa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -6)
 dialogue_id = "textbox_1"
 textbox_background = 1
+
+[node name="slope" parent="." instance=ExtResource("8_x40b7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+slope_length = 2.0
+slope_direction = 3
+slope_up = false
+has_platform_on_end = false
 
 [node name="pieces" type="Node3D" parent="."]
 

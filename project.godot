@@ -175,3 +175,7 @@ fog_enable={
 "type": "bool",
 "value": false
 }
+player_brightness={
+"type": "float",
+"value": 0.0
+}
