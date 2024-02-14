@@ -71,7 +71,7 @@ func _physics_process(delta):
 
 	#DETECTS IF PLAYER IS WALKING BEFORE ANIMATING AND MAKE FOOTSTEP SOUND
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
-		if !footstep_sound.playing:
+		if !footstep_sound.playing && material.hframes>1 && material.vframes>1:
 			footstep_sound.play()
 		is_walking=true
 		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
