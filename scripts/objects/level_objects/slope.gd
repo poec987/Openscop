@@ -35,7 +35,10 @@ func _ready():
 					if change_brightness:
 							Global.player_brightness= clamp(1.0-(($slope_start.global_position.x-get_tree().get_first_node_in_group("Player").global_position.x)-0.25),0.0,1.0)
 					slope_processing_x()
-
+	if !Engine.is_editor_hint():
+		if !Global.debug:
+			$slope_start/visual.visible = false
+			$slope_end/visual2.visible = false
 func _process(_delta):
 	if Engine.is_editor_hint():
 		if slope_direction==0:
