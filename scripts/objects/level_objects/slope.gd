@@ -11,18 +11,18 @@ extends Node3D
 #func _ready():
 func _ready():
 	if slope_direction==0 || slope_direction==3:
-			if get_tree().get_first_node_in_group("Player").global_position.x>=$slope_start.global_position.x-slope_width/2 && get_tree().get_first_node_in_group("Player").global_position.x<=$slope_start.global_position.x+slope_width/2:
-				if slope_direction==0:
-					if get_tree().get_first_node_in_group("Player").global_position.z>=$slope_start.global_position.z && get_tree().get_first_node_in_group("Player").global_position.z<=$slope_end.global_position.z:
-						if change_brightness:
-							Global.player_brightness= clamp(1.0-((get_tree().get_first_node_in_group("Player").global_position.z-$slope_start.global_position.z)-0.25),0.0,1.0)
-						slope_processing_z()
-				
-				if slope_direction==3:
-					if get_tree().get_first_node_in_group("Player").global_position.z<=$slope_start.global_position.z && get_tree().get_first_node_in_group("Player").global_position.z>=$slope_end.global_position.z:
-						if change_brightness:
-							Global.player_brightness= clamp(1.0-(($slope_start.global_position.z-get_tree().get_first_node_in_group("Player").global_position.z)-0.25),0.0,1.0)
-						slope_processing_z()
+		if get_tree().get_first_node_in_group("Player").global_position.x>=$slope_start.global_position.x-slope_width/2 && get_tree().get_first_node_in_group("Player").global_position.x<=$slope_start.global_position.x+slope_width/2:
+			if slope_direction==0:
+				if get_tree().get_first_node_in_group("Player").global_position.z>=$slope_start.global_position.z && get_tree().get_first_node_in_group("Player").global_position.z<=$slope_end.global_position.z:
+					if change_brightness:
+						Global.player_brightness= clamp(1.0-((get_tree().get_first_node_in_group("Player").global_position.z-$slope_start.global_position.z)-0.25),0.0,1.0)
+					slope_processing_z()
+			
+			if slope_direction==3:
+				if get_tree().get_first_node_in_group("Player").global_position.z<=$slope_start.global_position.z && get_tree().get_first_node_in_group("Player").global_position.z>=$slope_end.global_position.z:
+					if change_brightness:
+						Global.player_brightness= clamp(1.0-(($slope_start.global_position.z-get_tree().get_first_node_in_group("Player").global_position.z)-0.25),0.0,1.0)
+					slope_processing_z()
 	elif slope_direction==1 || slope_direction==2:
 		if get_tree().get_first_node_in_group("Player").global_position.z>=$slope_start.global_position.z-slope_width/2 && get_tree().get_first_node_in_group("Player").global_position.z<=$slope_start.global_position.z+slope_width/2:
 			if slope_direction==1:
