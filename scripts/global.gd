@@ -36,6 +36,7 @@ var current_character = 0
 var pieces_amount = [0,0]
 # 0 = guardian
 var player_array = Vector4(0.,0.,0.,0)
+var player_brightness = 1.0
 var pets = [false,false,false,false,false,false,false,false,false,false]
 var fog_focus = 0
 #0 = follow player

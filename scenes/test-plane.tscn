@@ -164,11 +164,11 @@ dialogue_id = "textbox_1"
 textbox_background = 1
 
 [node name="slope" parent="." instance=ExtResource("8_x40b7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 slope_length = 2.0
-slope_direction = 3
+slope_direction = 1
 slope_up = false
-has_platform_on_end = false
+change_brightness = true
 
 [node name="pieces" type="Node3D" parent="."]
 

@@ -55,6 +55,7 @@ func _ready():
 #TO-DO: ORGANIZE PROPERLY
 func _physics_process(delta):
 	
+	material.get_material_override().set_shader_parameter("modulate_color",Vector4(Global.player_brightness,Global.player_brightness,Global.player_brightness,1.0))
 	#VARIABLE DEFINES IF FOG SHOULD FOLLOW PLAYER OR NOT
 	#WILL BE USED LATER ON FOR THINGS LIKE WINDMILL EVENT AND BASEMENT MACHINE
 	#USELESS FOR NOW
