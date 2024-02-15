@@ -5,6 +5,9 @@ extends CharacterBody3D
 var movement_speed = 5
 const ACCELERATION = 8
 @export var is_walking = false
+@export	var v = 0.0
+@export	var h = 0.0
+
 
 #GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP
 #var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -33,9 +36,8 @@ var can_submit = true
 @onready var footstep_sound = get_node("footstep")
 @onready var player_camera = get_tree().get_first_node_in_group("Player_camera")
 
-@export	var v = 0.0
-@export	var h = 0.0
-
+#CURRENT PLAYER OBJECT
+@export var character = 0
 func allow_typing():
 	can_submit=true
 
@@ -92,6 +94,8 @@ func _physics_process(delta):
 					change_sound("res://sfx/player/cement3.wav")
 				if str(footstep_controller.get_collider().name)=="school":
 					change_sound("res://sfx/player/school_steps.wav")
+				if str(footstep_controller.get_collider().name)=="sand":
+					change_sound("res://sfx/player/sand_steps.wav")
 	else:
 		#IF SPEED NOT FASTER THAN 0.2, DISABLE WALKING ANIM
 		is_walking=false
@@ -392,6 +396,7 @@ func return_character():
 	if Global.current_character==1:
 		material.texture = load("res://graphics/sprites/player/belle.png")
 		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+	character = Global.current_character
 #RESETS CHARACTER
 func reset_sheet():
 	material.hframes = 5

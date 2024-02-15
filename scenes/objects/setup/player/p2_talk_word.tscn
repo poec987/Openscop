@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://x6r0qg4ucbhy"]
+[gd_scene load_steps=7 format=3 uid="uid://x6r0qg4ucbhy"]
 
 [ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="1_1sff2"]
 [ext_resource type="AudioStream" uid="uid://wtrluuy8i0ms" path="res://sfx/player/p2talk/p2paul.wav" id="2_nu0o6"]
+[ext_resource type="AudioStream" uid="uid://bhae0c8mbhp6j" path="res://sfx/player/p2talk/p2marvin.wav" id="3_afilo"]
+[ext_resource type="AudioStream" uid="uid://c6pmafh7p0je6" path="res://sfx/player/p2talk/p2belle.wav" id="4_vjmod"]
+[ext_resource type="AudioStream" uid="uid://cd078787jlqyp" path="res://sfx/player/p2talk/p2null.wav" id="5_3npti"]
 
 [sub_resource type="GDScript" id="GDScript_smphi"]
 script/source = "extends Label3D
@@ -16,7 +19,14 @@ func _ready():
 	tween.tween_interval(2)
 	tween.tween_property(self, \"fade\", 0.0,1)
 	tween.tween_callback(queue_free)
-	
+	if get_tree().get_first_node_in_group(\"Player\").character==0:
+		$p2paul.play()
+	elif get_tree().get_first_node_in_group(\"Player\").character==1:
+		$p2belle.play()
+	elif get_tree().get_first_node_in_group(\"Player\").character==2:
+		$p2marvin.play()
+	else:
+		$p2null.play()
 
 func _process(_delta):
 	set_modulate(Color(1,1,1,fade))	
@@ -35,7 +45,18 @@ font_size = 16
 outline_size = 0
 script = SubResource("GDScript_smphi")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer3D" parent="."]
+[node name="p2paul" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_nu0o6")
 volume_db = 10.0
-autoplay = true
+
+[node name="p2marvin" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_afilo")
+volume_db = 10.0
+
+[node name="p2belle" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_vjmod")
+volume_db = 10.0
+
+[node name="p2null" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_3npti")
+volume_db = 10.0
