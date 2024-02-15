@@ -11,7 +11,7 @@ extends Node3D
 #func _ready():
 func _ready():
 	if slope_direction==0 || slope_direction==3:
-			if abs(abs(get_tree().get_first_node_in_group("Player").global_position.x)-$slope_start.global_position.x)<=slope_width:	
+			if get_tree().get_first_node_in_group("Player").global_position.x>=$slope_start.global_position.x-slope_width/2 && get_tree().get_first_node_in_group("Player").global_position.x<=$slope_start.global_position.x+slope_width/2:
 				if slope_direction==0:
 					if get_tree().get_first_node_in_group("Player").global_position.z>=$slope_start.global_position.z && get_tree().get_first_node_in_group("Player").global_position.z<=$slope_end.global_position.z:
 						if change_brightness:
@@ -24,7 +24,7 @@ func _ready():
 							Global.player_brightness= clamp(1.0-(($slope_start.global_position.z-get_tree().get_first_node_in_group("Player").global_position.z)-0.25),0.0,1.0)
 						slope_processing_z()
 	elif slope_direction==1 || slope_direction==2:
-		if abs(abs(get_tree().get_first_node_in_group("Player").global_position.z)-$slope_start.global_position.z)<=slope_width:
+		if get_tree().get_first_node_in_group("Player").global_position.z>=$slope_start.global_position.z-slope_width/2 && get_tree().get_first_node_in_group("Player").global_position.z<=$slope_start.global_position.z+slope_width/2:
 			if slope_direction==1:
 				if get_tree().get_first_node_in_group("Player").global_position.x>=$slope_start.global_position.x && get_tree().get_first_node_in_group("Player").global_position.x<=$slope_end.global_position.x:
 					if change_brightness:
@@ -68,7 +68,7 @@ func _process(_delta):
 		
 		if slope_direction==0 || slope_direction==3:
 			
-			if get_tree().get_first_node_in_group("Player").global_position.x>$slope_start.global_position.x-slope_width/2 && get_tree().get_first_node_in_group("Player").global_position.x<$slope_start.global_position.x+slope_width/2:
+			if get_tree().get_first_node_in_group("Player").global_position.x>=$slope_start.global_position.x-slope_width/2 && get_tree().get_first_node_in_group("Player").global_position.x<=$slope_start.global_position.x+slope_width/2:
 				if slope_direction==0:
 					if get_tree().get_first_node_in_group("Player").global_position.z>=$slope_start.global_position.z && get_tree().get_first_node_in_group("Player").global_position.z<=$slope_end.global_position.z:
 						if change_brightness:
@@ -101,7 +101,7 @@ func _process(_delta):
 						gravity()
 		elif slope_direction==1 || slope_direction==2:
 			
-			if get_tree().get_first_node_in_group("Player").global_position.z>$slope_start.global_position.z-slope_width/2 && get_tree().get_first_node_in_group("Player").global_position.z<$slope_start.global_position.z+slope_width/2:
+			if get_tree().get_first_node_in_group("Player").global_position.z>=$slope_start.global_position.z-slope_width/2 && get_tree().get_first_node_in_group("Player").global_position.z<=$slope_start.global_position.z+slope_width/2:
 				if slope_direction==1:
 					if get_tree().get_first_node_in_group("Player").global_position.x>=$slope_start.global_position.x && get_tree().get_first_node_in_group("Player").global_position.x<=$slope_end.global_position.x:
 						if change_brightness:
