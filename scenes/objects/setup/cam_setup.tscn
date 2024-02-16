@@ -133,6 +133,7 @@ stretch = true
 metadata/_edit_use_anchors_ = true
 
 [node name="NTSC_viewport" type="SubViewport" parent="NTSC"]
+transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
@@ -150,6 +151,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="dither_view" type="SubViewport" parent="NTSC/NTSC_viewport/Dither"]
+transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true

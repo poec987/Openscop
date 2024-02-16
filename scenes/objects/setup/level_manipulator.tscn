@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgugeeeg7p1cs"]
+[gd_scene load_steps=6 format=3 uid="uid://cgugeeeg7p1cs"]
 
 [ext_resource type="Script" path="res://scripts/level_manipulator.gd" id="1_2f3qw"]
+[ext_resource type="Texture2D" uid="uid://b1uabhin2r18l" path="res://graphics/3d/tex/nmp/grass.png" id="2_4yof8"]
+[ext_resource type="Shader" path="res://shaders/screen/scroll.gdshader" id="2_no2vf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jtixl"]
+shader = ExtResource("2_no2vf")
+shader_parameter/scroll_speed = null
 
 [sub_resource type="Environment" id="Environment_xnjo4"]
 background_mode = 1
+background_canvas_max_layer = -10
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.0
@@ -14,6 +21,22 @@ script = ExtResource("1_2f3qw")
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
+
+[node name="background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="texture" type="TextureRect" parent="background"]
+material = SubResource("ShaderMaterial_jtixl")
+offset_right = 320.0
+offset_bottom = 240.0
+texture = ExtResource("2_4yof8")
+stretch_mode = 1
+
+[node name="color" type="ColorRect" parent="background"]
+visible = false
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(0, 0, 0, 1)
 
 [node name="skybox" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xnjo4")

@@ -28,12 +28,15 @@ extends Node
 @export var vertical_max_limit = 0.
 @export_subgroup("Environment")
 @export var enable_fog = false
+@export var texture_background = false
+@export var texture: Texture2D
+@export var scroll_speed = 0.25
 @export var sky_and_fog_color = Vector4.ZERO
 @export var fog_radius = 0.
 @export var ambient_color = Color(0., 0., 0.,1.0)
 @export var environment_darkness = 0.
 @export var set_custom_fog_focus = false
-@export var set_fog_focus = Vector3.ZERO 
+@export var set_fog_focus = Vector3.ZERO
 @export_subgroup("Hardcoded Preset")
 @export var preset = 0
 #1 = EVENCARE/GIFTPLANE
@@ -132,6 +135,15 @@ func _ready():
 	else:
 		RenderingServer.global_shader_parameter_set("fog_enable", false)
 	
-	$skybox.get_environment().set_bg_color(Color(sky_and_fog_color.x,sky_and_fog_color.y,sky_and_fog_color.z,sky_and_fog_color.w))
+	if !texture_background:
+		$background/color.visible=true
+		$background/texture.visible=false
+		$background/color.color = Color(sky_and_fog_color.x,sky_and_fog_color.y,sky_and_fog_color.z,1.0)
+	else:
+		$background/color.visible=false
+		$background/texture.visible=true
+		if texture!=null:
+			$background/texture.texture=texture
+		$background/texture.get_material().set_shader_parameter("scroll_speed",scroll_speed)
 	bg_music.play_track(background_music_id)
 	
