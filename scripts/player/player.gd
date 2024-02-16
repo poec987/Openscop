@@ -43,10 +43,8 @@ func allow_typing():
 
 #CODE THAT CHANGES FOOTSTEP SOUND
 func change_sound(sound):
-
 	if str(footstep_sound.stream.get_path())!=sound:
 		footstep_sound.stream = load(sound)
-		
 #PHYSICS PROCESS
 
 func _ready():
@@ -73,8 +71,13 @@ func _physics_process(delta):
 
 	#DETECTS IF PLAYER IS WALKING BEFORE ANIMATING AND MAKE FOOTSTEP SOUND
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
-		if !footstep_sound.playing && material.hframes>1 && material.vframes>1:
-			footstep_sound.play()
+		if material.hframes>1 && material.vframes>1:
+			if !footstep_sound.playing:
+				if footstep_sound.stream_paused:
+					footstep_sound.stream_paused=false
+				else:
+					footstep_sound.playing=true
+			create_tween().tween_property(footstep_sound,"volume_db",80.0,1.0)
 		is_walking=true
 		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
 		if is_on_floor() || position.y==0.0:
@@ -82,10 +85,8 @@ func _physics_process(delta):
 			if footstep_controller.get_collider()!=null:
 				if str(footstep_controller.get_collider().name)=="grass":
 					change_sound("res://sfx/player/grass.wav")
-					#footstep_sound.volume_db = 10.0
 				if str(footstep_controller.get_collider().name)=="evencare":
 					change_sound("res://sfx/player/ec_steps.wav")
-					#footstep_sound.volume_db = 10.0
 				if str(footstep_controller.get_collider().name)=="cement":
 					change_sound("res://sfx/player/cement.wav")
 				if str(footstep_controller.get_collider().name)=="cement2":
@@ -99,6 +100,12 @@ func _physics_process(delta):
 	else:
 		#IF SPEED NOT FASTER THAN 0.2, DISABLE WALKING ANIM
 		is_walking=false
+		create_tween().tween_property(footstep_sound,"volume_db",-80.0,1.0)
+		
+	if footstep_sound.volume_db<-79.0:
+		footstep_sound.stream_paused=true
+		
+	print(footstep_sound.stream_paused)
 		
 	#REGULATES PLAYER SPEED SO IT DOESNT GO FASTER WHEN WALKING ON DIAGONALS
 	var magnitude = sqrt(h*h + v*v)
@@ -196,7 +203,7 @@ func _physics_process(delta):
 		if is_walking==false:
 			material.frame_coords = Vector2(animation_direction, 0)
 			current_frame=0
-			footstep_sound.stop()
+			#footstep_sound.stop()
 		else:
 			#IF PLAYER IS WALKING
 			head.frame_coords= Vector2(0,0)
@@ -362,10 +369,10 @@ func create_word():
 	var child_index = 0
 	for words in get_node("p2_talk_buttons/P2_talk").get_children():
 		if child_index!=get_node("p2_talk_buttons/P2_talk").get_child_count()-1:
-			create_tween().tween_property(words, "position", Vector3(0, 0.5, 0), 1.0).set_trans(Tween.TRANS_SINE).as_relative()
+			create_tween().tween_property(words, "position", Vector3(0, 0.5, 0), 1.0).set_trans(Tween.TRANS_LINEAR).as_relative()
 		else:
 			var tween = create_tween()
-			tween.tween_property(words, "position", Vector3(0, 1.0, 0), 1.0).set_trans(Tween.TRANS_SINE).as_relative()
+			tween.tween_property(words, "position", Vector3(0, 1.0, 0), 1.0).set_trans(Tween.TRANS_LINEAR).as_relative()
 			tween.tween_callback(allow_typing)
 		child_index+=1
 
