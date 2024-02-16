@@ -1,6 +1,6 @@
 extends Node2D
 
-const ANIM_SPEED = 0.25
+const ANIM_SPEED = 0.125
 const APPEAR_ANIM_SPEED = 0.5
 
 var cursor_pos = Vector2i(0,0)
