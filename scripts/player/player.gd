@@ -77,7 +77,7 @@ func _physics_process(delta):
 					footstep_sound.stream_paused=false
 				else:
 					footstep_sound.playing=true
-			create_tween().tween_property(footstep_sound,"volume_db",80.0,1.0)
+			create_tween().tween_property(footstep_sound,"volume_db",80.0,0.5)
 		is_walking=true
 		#DETECTS IF PLAYER IS ON FLOOR OR Y0, DEFINES SURFACE TYPE AND SETS FOOTSTEP SOUND
 		if is_on_floor() || position.y==0.0:
@@ -100,12 +100,10 @@ func _physics_process(delta):
 	else:
 		#IF SPEED NOT FASTER THAN 0.2, DISABLE WALKING ANIM
 		is_walking=false
-		create_tween().tween_property(footstep_sound,"volume_db",-80.0,1.0)
+		create_tween().tween_property(footstep_sound,"volume_db",-80.0,0.5)
 		
 	if footstep_sound.volume_db<-79.0:
 		footstep_sound.stream_paused=true
-		
-	print(footstep_sound.stream_paused)
 		
 	#REGULATES PLAYER SPEED SO IT DOESNT GO FASTER WHEN WALKING ON DIAGONALS
 	var magnitude = sqrt(h*h + v*v)
