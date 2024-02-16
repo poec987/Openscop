@@ -7,3 +7,5 @@ void fragment() {
     vec4 color = texture(TEXTURE, shifteduv);
     COLOR = color;
 }
+
+//https://generalistprogrammer.com/godot/godot-infinite-scrolling-background-how-to/
