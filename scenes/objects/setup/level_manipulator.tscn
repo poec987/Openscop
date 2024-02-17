@@ -26,6 +26,7 @@ process_mode = 3
 layer = -1
 
 [node name="texture" type="TextureRect" parent="background"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_jtixl")
 offset_right = 320.0
 offset_bottom = 240.0

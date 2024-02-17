@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, shadows_disabled;
+render_mode shadows_disabled;
 global uniform float precision_multiplier : hint_range(0.0, 1.0) = 1.0;
 global uniform vec4 fog_color;
 global uniform bool fog_enable;
