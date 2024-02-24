@@ -56,7 +56,7 @@ var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a scre
 \"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Olivia.\",
 \"[color=#00FFFF]Sound/Music Ripping Team:[/color]\\nBrowserTG5, Geometricentric,\\nLewgus.\",
 \"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, \\nJerzygorsky, Olivia, Parsley.\",
-\"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Ronicalter, Tom.\",
+\"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Ronicalter, TL/24,Tom.\",
 \"Shoutouts to you all!\\nY'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!\",
 \"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
 \"[color=#38733c]Andrewidot:[/color] Belle, guardian, pet menu names.\",
@@ -275,6 +275,7 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32423, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
