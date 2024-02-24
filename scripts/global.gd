@@ -110,11 +110,12 @@ func get_p2_word(word):
 	else:
 		return "Not in Table"
 		
-func create_textbox(background,text):
+func create_textbox(background,big_textbox,text):
 	var textbox_scene = preload("res://scenes/objects/setup/player/textbox_object.tscn")
 	var dialogue_instance = textbox_scene.instantiate()
 	dialogue_instance.background = background
 	dialogue_instance.text = text
+	dialogue_instance.big = big_textbox
 	if get_tree().get_first_node_in_group("HUD_textboxes").get_child_count()<2:
 		get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).add_child(dialogue_instance)
 
@@ -181,3 +182,8 @@ func create_keyboard(background,ask,fade):
 	if get_tree().get_first_node_in_group("HUD_keyboard").get_child_count()<1:
 		get_tree().get_first_node_in_group("HUD_keyboard").add_child(keyboard_instance)
 		can_pause=false
+
+func strip_bbcode(source:String) -> String:
+	var regex = RegEx.new()
+	regex.compile("\\[.+?\\]")
+	return regex.sub(source, "", true)

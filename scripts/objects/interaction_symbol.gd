@@ -10,6 +10,7 @@ extends Node3D
 @export var show_dialogue = true
 @export var dialogue_id = ""
 @export var textbox_background = 0
+@export var big_textbox = false
 @export_group("Misc.")
 @export var behavior = 0
 
@@ -46,11 +47,11 @@ func _process(delta):
 				if Global.control_mode==0 || Global.control_mode==4:
 					if get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).get_child_count()==0:
 						if Global.dialogue.has(dialogue_id):
-							Global.create_textbox(textbox_background,Global.dialogue[dialogue_id])
+							Global.create_textbox(textbox_background,big_textbox,Global.dialogue[dialogue_id])
 						elif dialogue_id=="":
-							Global.create_textbox(0,["NO TEXT FOUND!"])
+							Global.create_textbox(0,big_textbox,["NO TEXT FOUND!"])
 						else:
-							Global.create_textbox(textbox_background,[dialogue_id])
+							Global.create_textbox(textbox_background,big_textbox,[dialogue_id])
 						interaction_checks()
 		else:
 			if behavior==0:

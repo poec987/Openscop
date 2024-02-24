@@ -340,18 +340,15 @@ modulate = Color(1, 0, 1, 1)
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Position:
-X:
-Y:
-Z:
 DIR:"
 label_settings = SubResource("LabelSettings_oq0wl")
 text_direction = 1
 
 [node name="playervel" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/debughud"]
 modulate = Color(1, 0, 1, 1)
-offset_top = 100.0
+offset_top = 38.0
 offset_right = 63.0
-offset_bottom = 157.0
+offset_bottom = 94.985
 text = "Velocity:"
 label_settings = SubResource("LabelSettings_oq0wl")
 text_direction = 1

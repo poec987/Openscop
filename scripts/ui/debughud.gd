@@ -15,10 +15,10 @@ func _ready():
 	else: #NO PLAYER NODE FOUND
 		isplayer = false
 
-func _process(delta):
+func _process(_delta):
 	if isplayer: #IF THERE IS A PLAYER THIS CODE IS RAN
-		$playerpos.text=str("Position:\nX:",player.position.x,"\nY:",player.position.y,"\nZ:",player.position.z,"\nDIR:",player.animation_direction)
-		$playervel.text=str("Velocity:\nX:",player.velocity.x,"\nY:",player.velocity.y,"\nZ:",player.velocity.z)
+		$playerpos.text=str("Position: X:",snapped(player.position.x,0.0001)," Y:",snapped(player.position.y,0.0001)," Z:",snapped(player.position.z,0.0001),"\nDIR:",player.animation_direction)
+		$playervel.text=str("Velocity: X:",snapped(player.velocity.x,0.00001)," Y:",snapped(player.velocity.y,0.00001)," Z:",snapped(player.velocity.z,0.00001))
 	else: #IF THERE IS NO PLAYER THIS CODE IS RAN
 		$playerpos.text="NO PLAYER FOUND!"
 		$playervel.text=" "

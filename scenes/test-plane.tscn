@@ -1,15 +1,185 @@
-[gd_scene load_steps=23 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=36 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
 [ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="2_fd03b"]
+[ext_resource type="Shader" path="res://shaders/fog shaders/psx_fog_alpha.gdshader" id="2_fudi8"]
+[ext_resource type="Texture2D" uid="uid://vdrra37uylx" path="res://music/hidden_file.png" id="3_8wwrg"]
 [ext_resource type="Shader" path="res://shaders/fog shaders/psx_fog.gdshader" id="3_mdjse"]
 [ext_resource type="Texture2D" uid="uid://d07uqvqx48ugo" path="res://graphics/sprites/objects/interaction.png" id="3_uabo5"]
 [ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="4_1gmmf"]
+[ext_resource type="AudioStream" uid="uid://cokbp5ew0dhdr" path="res://sfx/textbox/interactpopup.wav" id="4_usqaa"]
 [ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="5_bt3tu"]
+[ext_resource type="AudioStream" uid="uid://ct364yp0alg1k" path="res://music/kk_song.mp3" id="5_yfca4"]
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="6_vuu81"]
+[ext_resource type="ArrayMesh" uid="uid://cl41u4kw68uyn" path="res://graphics/3d/models/grass.obj" id="8_5e3bn"]
 [ext_resource type="PackedScene" uid="uid://c6lt1e54fh5bh" path="res://scenes/objects/level_objects/tool.tscn" id="8_btoou"]
 [ext_resource type="PackedScene" uid="uid://47e5v5kgyi3b" path="res://scenes/objects/level_objects/slope.tscn" id="8_x40b7"]
+[ext_resource type="Texture2D" uid="uid://b1uabhin2r18l" path="res://graphics/3d/tex/nmp/grass.png" id="10_wjd0c"]
+
+[sub_resource type="GDScript" id="GDScript_ver1u"]
+script/source = "@tool
+extends Node3D
+
+#CUSTOMIZABLE SETTINGS
+
+#RELATED-NODES
+@onready var interaction_mesh = $height_offset/float_root/interaction_mesh
+@onready var symbol_root = $height_offset/float_root
+
+@export var triggered= false
+@export var interacted = false
+var origin = 0.0
+
+var player_inside_zone = false
+
+#ANIMATION VARIABLES
+const HEIGHT_LIMIT = 0.65
+const HEIGHT_ANIM_SPEED = 0.65
+const ROTATION_LIMIT = 0.25
+const ROTATION_ANIM_SPEED = 1.5
+const GROW_ANIMATION_SPEED = 0.25
+
+
+var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a screenshot to Cheddar.\",
+\"You're now entitled to inserting \\na sprite of your own here.\",
+\"I can't imagine how much you \\nmust have walked to find me.\",
+\"Anyways...\",
+\"I am The Creator.\",
+\"I made this little world for you.\",
+\"Alongside my friends. Whom I'd \\nlike to thank individually here.\",
+\"And now...\",
+\"The [color=#00FF00]MMOscop[/color]/[color=#0000FF]Openscop[/color] Team:\",
+\"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nGeometricentric, Izzint, Lewgus, Maxine, Wowzaboi.\",
+\"[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
+\"[color=#00FFFF]The Level Recreation Team:[/color]\\nIzzint, Lewgus.\\n[color=#00FFFF]The Texture Recreation Team:[/color]\\nBetah, Izzint, Lewgus.\",
+\"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Olivia.\",
+\"[color=#00FFFF]Sound/Music Ripping Team:[/color]\\nBrowserTG5, Geometricentric,\\nLewgus.\",
+\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, \\nJerzygorsky, Olivia, Parsley.\",
+\"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Ronicalter, Tom.\",
+\"Shoutouts to you all!\\nY'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!\",
+\"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
+\"[color=#38733c]Andrewidot:[/color] Belle, guardian, pet menu names.\",
+\"[color=#38733c]Anthony Domenico:[/color] Loading \\nscreen, music, textbox \\nbackgrounds, SFX.\",
+\"[color=#38733c]Betah:[/color] Belle, oeptos guardian,\\np2totalk buttons, pieces.\\n[color=#38733c]Cheddar:[/color] Interaction symbol \\ntexture, pieces, tool answers.\",
+\"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
+\"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
+\"[color=#38733c]Geometricentric:[/color] Cone piece.\\n[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\\n[color=#38733c]Izzint:[/color] NMP grass texture.\",
+\"[color=#38733c]Maxine:[/color] P2totalk buttons.\\n[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
+\"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
+\"[color=#80aab3]Osyu:[/color] Keyboard, loading \\nscreens, p2totalk buttons, pet \\nmenu, pet menu boxes, pets.\\n[color=#80aab3]Releskowitz: [/color]Pause menu.\",
+\"[color=#80aab3]The New Orchestra: [/color]Keyboard, \\npause menu.\\n[color=#80aab3]Ugng: [/color]Pause menu.\\n[color=#80aab3]Wirelex:[/color] Pause menu, School HUD.\",
+\"If it wasn't for our amazing \\nteam this project would've never \\nbeen possible.\",
+\"This is an easter egg.\\n[color=#007108]Coded Between:[/color]\\n[color=#0071ff]Feb 23rd 2024.[/color]\\n[color=#0071ff]Feb 24th 2024.[/color]\",
+\"- Cheddar\"
+]
+func _ready():
+	interaction_mesh.scale = Vector3.ZERO
+	origin = symbol_root.position.y
+	animate()
+	
+func _process(_delta):
+	if Engine.is_editor_hint():
+		visible=false
+	else:
+		visible=true
+	if global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<2.5:
+		if !player_inside_zone:
+			$interaction_sound.play()
+			create_tween().tween_property(interaction_mesh,\"scale\",Vector3(1.,1.,1.),GROW_ANIMATION_SPEED)
+		player_inside_zone = true
+		
+		if Input.is_action_just_pressed(\"pressed_action\"):
+			if Global.control_mode==0 || Global.control_mode==4:
+				if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
+					Global.create_textbox(2,true, credits)
+					if !triggered:
+						$song.play()
+						triggered = true
+						
+		if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
+			if triggered:
+				interacted = true
+				triggered = false
+	else:
+		create_tween().tween_property(interaction_mesh,\"scale\",Vector3(0.,0.,0.),GROW_ANIMATION_SPEED)
+		if player_inside_zone:
+			$interaction_sound.play()
+		player_inside_zone = false
+		
+func delete():
+	queue_free()
+	return true
+
+
+func animate():
+	var tweener_symbol = create_tween().set_loops()
+	tweener_symbol.tween_property(symbol_root, \"position:y\",  origin+randf_range(origin,HEIGHT_LIMIT), HEIGHT_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
+	tweener_symbol.tween_property(symbol_root, \"position:y\", origin-randf_range(origin,HEIGHT_LIMIT), HEIGHT_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
+	
+	var tweener = create_tween().set_loops()
+	tweener.tween_property(interaction_mesh, \"rotation:z\", ROTATION_LIMIT*-1, ROTATION_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
+	tweener.tween_property(interaction_mesh, \"rotation:z\", ROTATION_LIMIT, ROTATION_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
+"
+
+[sub_resource type="QuadMesh" id="QuadMesh_pbefp"]
+center_offset = Vector3(0, 0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufk43"]
+render_priority = 0
+shader = ExtResource("2_fudi8")
+shader_parameter/billboard = false
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_uabo5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0djn"]
+render_priority = 0
+shader = ExtResource("2_fudi8")
+shader_parameter/billboard = true
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_8wwrg")
+
+[sub_resource type="GDScript" id="GDScript_jvya2"]
+script/source = "extends Sprite3D
+
+var toggle = false
+var timer_start = false
+func _process(_delta):
+	if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()>0:
+		if !timer_start:
+			$Timer.start()
+			timer_start = true
+	else:
+		if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
+			if self.frame_coords.x%2!=0:
+				self.frame_coords.x-=1
+		$Timer.stop()
+		timer_start = false
+	if get_parent().interacted:
+		if self.frame_coords.x==0:
+			self.frame_coords.x=2
+
+func _on_timer_timeout():
+	if self.frame_coords.x%2==0:
+		self.frame_coords.x+=1
+	else:
+		self.frame_coords.x-=1
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m5h30"]
+render_priority = 0
+shader = ExtResource("3_mdjse")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/fog = true
+shader_parameter/albedoTex = ExtResource("10_wjd0c")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x1xgp"]
+size = Vector3(29, 0, 29)
 
 [sub_resource type="QuadMesh" id="QuadMesh_8dcwh"]
 size = Vector2(4, 4)
@@ -92,8 +262,61 @@ coordinate_and_direction = Vector4(0, 0, 0, 1)
 
 [node name="level_manipulator" parent="." instance=ExtResource("6_vuu81")]
 level_slogan = "This linebreak*does work."
+enable_fog = true
 texture = ExtResource("3_uabo5")
 environment_darkness = 0.5
+
+[node name="interaction2" type="Node3D" parent="level_manipulator"]
+visible = false
+script = SubResource("GDScript_ver1u")
+
+[node name="height_offset" type="Node3D" parent="level_manipulator/interaction2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="float_root" type="Node3D" parent="level_manipulator/interaction2/height_offset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345375, 0)
+
+[node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/interaction2/height_offset/float_root"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
+mesh = SubResource("QuadMesh_pbefp")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_ufk43")
+
+[node name="interaction_sound" type="AudioStreamPlayer" parent="level_manipulator/interaction2"]
+stream = ExtResource("4_usqaa")
+volume_db = 5.0
+
+[node name="song" type="AudioStreamPlayer" parent="level_manipulator/interaction2"]
+stream = ExtResource("5_yfca4")
+volume_db = 10.0
+
+[node name="me" type="Sprite3D" parent="level_manipulator/interaction2"]
+material_override = SubResource("ShaderMaterial_y0djn")
+offset = Vector2(0, 40)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_8wwrg")
+hframes = 4
+script = SubResource("GDScript_jvya2")
+
+[node name="Timer" type="Timer" parent="level_manipulator/interaction2/me"]
+process_callback = 0
+wait_time = 0.125
+
+[node name="grass" type="Node3D" parent="level_manipulator/interaction2"]
+
+[node name="grass_mesh" type="MeshInstance3D" parent="level_manipulator/interaction2/grass" groups=["grass"]]
+visibility_range_end = 50.0
+mesh = ExtResource("8_5e3bn")
+surface_material_override/0 = SubResource("ShaderMaterial_m5h30")
+
+[node name="grass" type="Area3D" parent="level_manipulator/interaction2/grass"]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="level_manipulator/interaction2/grass/grass"]
+visible = false
+shape = SubResource("BoxShape3D_x1xgp")
 
 [node name="player_root" parent="." instance=ExtResource("2_a0geb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
@@ -1463,3 +1686,5 @@ surface_material_override/0 = SubResource("ShaderMaterial_7jhc3")
 
 [node name="tool" parent="." instance=ExtResource("8_btoou")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, -3)
+
+[connection signal="timeout" from="level_manipulator/interaction2/me/Timer" to="level_manipulator/interaction2/me" method="_on_timer_timeout"]

@@ -100,7 +100,7 @@ func _physics_process(delta):
 	else:
 		#IF SPEED NOT FASTER THAN 0.2, DISABLE WALKING ANIM
 		is_walking=false
-		create_tween().tween_property(footstep_sound,"volume_db",-80.0,0.5)
+		
 		
 	if footstep_sound.volume_db<-79.0:
 		footstep_sound.stream_paused=true
@@ -201,8 +201,11 @@ func _physics_process(delta):
 		if is_walking==false:
 			material.frame_coords = Vector2(animation_direction, 0)
 			current_frame=0
+			create_tween().tween_property(footstep_sound,"volume_db",-80.0,0.5)
 			#footstep_sound.stop()
 		else:
+			if current_frame==0:
+				create_tween().tween_property(footstep_sound,"volume_db",-80.0,0.5)
 			#IF PLAYER IS WALKING
 			head.frame_coords= Vector2(0,0)
 			material.vframes = int(material.texture.get_size().y)/(int(material.texture.get_size().x)/material.hframes) # animations

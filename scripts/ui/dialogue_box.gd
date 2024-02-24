@@ -9,6 +9,7 @@ const TYPING_SOUND_VOLUME = 5.0
 #CUSTOMIZABLE VARIABLES
 @export var background = 0
 @export var text = []
+@export var big = false
 
 #AMOUNT OF CHARS ON DISPLAY, PAGE OF TEXTBOX.
 var chars = 0
@@ -21,7 +22,10 @@ var slowchars="!.?,;"
 var textbox_stage = 0
 
 func _ready():
-	
+	if big:
+		$textbox_background.texture = load("res://graphics/sprites/ui/textbox_big.png")
+		$textbox_background.position.y=167
+		$textbox_text.position.y=134
 	#SETS UP THE TEXTBOX BACKGROUND
 	if background==0:
 		$textbox_text["theme_override_colors/default_color"] = Color(0.0,0.0,0.0,1.0)
@@ -113,17 +117,18 @@ func _process(_delta):
 		
 		
 func check_character():
+	$textbox_timer.stop()
 	#CHECKS IF CHARACATER IS NORMAL OR SPECIAL CHARACTER, WHICH IS TYPED SLOWER ON PETSCOP
-	if slowchars.find($textbox_text.text[$textbox_text.visible_characters])==-1:
-		$textbox_timer.wait_time = DEFAULT_WAIT
-		if !$dialogue_typing.playing:
-			$dialogue_typing.playing=true
-			create_tween().tween_property($dialogue_typing,"volume_db",TYPING_SOUND_VOLUME,TYPING_SOUND_FADE_IN_TIME)
-	else:
-		$textbox_timer.wait_time = PUNCTUATION_WAIT
-		$dialogue_typing.playing=false
-		$dialogue_typing.volume_db=-80.
-
+	if $textbox_text.visible_characters!=Global.strip_bbcode($textbox_text.text).length():
+		if slowchars.find(Global.strip_bbcode($textbox_text.text)[$textbox_text.visible_characters])==-1:
+			$textbox_timer.wait_time = DEFAULT_WAIT
+			if !$dialogue_typing.playing:
+				$dialogue_typing.playing=true
+				create_tween().tween_property($dialogue_typing,"volume_db",TYPING_SOUND_VOLUME,TYPING_SOUND_FADE_IN_TIME)
+		else:
+			$textbox_timer.wait_time = PUNCTUATION_WAIT
+			$dialogue_typing.playing=false
+			$dialogue_typing.volume_db=-80.
 #TEXT TIMER STUFF
 func _on_textbox_timer_timeout():
 	if textbox<=text.size()-1 && !get_tree().paused:
