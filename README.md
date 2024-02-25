@@ -3,38 +3,7 @@ This project has the goal of being an open-source Petscop recreation engine that
 
 The project runs on a modified version of MMOscop's source code with most sheet-related features removed, and no networking related code.
 
+### The project's credits are now hidden within the game as an easter egg!! They can still be read by being accessed directly from the files though.
 
-
-
-### Credits:
-
-**Sprites:**
-
-Guardian: Andrewidot
-
-Newmaker Plane Grass: izzint
-
-P2toTalk buttons: Maximilian
-
-PetscopWide font: Giftscop
-
-Textboxes: Anthony Domenico
-
-**Programming**
-
-ACIDULATED
-
-EonOrange
-
-TechMan06
-
-
-**Sound:**
-
-Taken from "Petscop Soundtrack" by Anthony Domenico (https://petscop.bandcamp.com/album/petscop-soundtrack)
-
-**Ripped by**:
-
-BrowserTG5
-
-Lewgus
+## Documentation:
+https://docs.google.com/document/d/1YAFOUO5GHbZPF1WaxPG_B0A6xiZyIq8KaLhdYcsrMvI/edit?usp=sharing
