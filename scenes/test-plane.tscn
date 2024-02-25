@@ -62,10 +62,10 @@ var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a scre
 \"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
 \"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pet menu names.\",
 \"[color=#38733c]Anthony Domenico:[/color] Care, \\nloading screen, music, \\ntextbox backgrounds, SFX.\",
-\"[color=#38733c]Betah:[/color] Belle, oeptos guardian,\\np2totalk buttons, pieces.\\n[color=#38733c]Cheddar:[/color] Interaction symbol \\ntexture, pieces, tool answers.\",
+\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian,p2totalk buttons, pieces.\\n[color=#38733c]Cheddar:[/color] Interaction symbol \\ntexture, pieces, tool answers.\",
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
-\"[color=#38733c]Geometricentric:[/color] Amber, care, \\ncone piece, Pen.\\n[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
+\"[color=#38733c]Geometricentric:[/color] Amber, care, \\nCAUGHT sprite, cone piece, Pen.\\n[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
 \"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]Maxine:[/color] P2totalk buttons.\\n[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
 \"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
 \"[color=#80aab3]Osyu:[/color] Keyboard, loading \\nscreens, p2totalk buttons, pet \\nmenu, pet menu boxes, pets.\\n[color=#80aab3]Releskowitz: [/color]Pause menu.\",
@@ -95,6 +95,7 @@ func _process(_delta):
 				if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
 					Global.create_textbox(2,true, credits)
 					if !triggered:
+						bg_music.decrease_volume()
 						$song.play()
 						triggered = true
 						
@@ -167,6 +168,10 @@ func _on_timer_timeout():
 		self.frame_coords.x+=1
 	else:
 		self.frame_coords.x-=1
+
+
+func _on_song_finished():
+	bg_music.increase_volume()
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m5h30"]
@@ -296,7 +301,7 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61448, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58298, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
@@ -1727,5 +1732,6 @@ texture = ExtResource("17_mpc66")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("BoxShape3D_liprv")
 
+[connection signal="finished" from="level_manipulator/test_plane_specific/song" to="level_manipulator/test_plane_specific/me" method="_on_song_finished"]
 [connection signal="timeout" from="level_manipulator/test_plane_specific/me/Timer" to="level_manipulator/test_plane_specific/me" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Care B/Area3D" to="Care B" method="_on_area_3d_body_entered"]

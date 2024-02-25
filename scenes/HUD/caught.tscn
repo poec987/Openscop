@@ -7,7 +7,7 @@
 script/source = "extends Node2D
 
 func _ready():
-	bg_music.lower_volume()
+	bg_music.decrease_volume()
 	var scale_animation = create_tween()
 	#SCALE ANIM
 	scale_animation.tween_property(self,\"scale\",Vector2(1.0,1.0),1.0).set_trans(Tween.TRANS_LINEAR)

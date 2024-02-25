@@ -27,7 +27,7 @@ func play_track(track_id):
 	else:
 		stop()
 		
-func lower_volume():
+func decrease_volume():
 	create_tween().tween_property(self,"volume_db",-20.0,1.0)
 
 func increase_volume():
