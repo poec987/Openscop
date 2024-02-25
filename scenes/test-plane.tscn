@@ -62,7 +62,8 @@ var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a scre
 \"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
 \"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pet menu names.\",
 \"[color=#38733c]Anthony Domenico:[/color] Care, \\nloading screen, music, \\ntextbox backgrounds, SFX.\",
-\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian,p2totalk buttons, pieces.\\n[color=#38733c]Cheddar:[/color] Interaction symbol \\ntexture, pieces, tool answers.\",
+\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian,p2totalk \\nbuttons, pieces.\",
+\"[color=#38733c]Cheddar:[/color] Interaction symbol \\ntexture, pieces, tool answers.\",
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
 \"[color=#38733c]Geometricentric:[/color] Amber, care, \\nCAUGHT sprite, cone piece, Pen.\\n[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
@@ -301,7 +302,7 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58298, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.01424, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
