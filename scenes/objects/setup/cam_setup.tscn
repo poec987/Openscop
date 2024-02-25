@@ -353,6 +353,8 @@ text = "Velocity:"
 label_settings = SubResource("LabelSettings_oq0wl")
 text_direction = 1
 
+[node name="caught" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD" groups=["HUD_caught"]]
+
 [node name="loading" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["loading_overlay"]]
 process_mode = 3
 script = ExtResource("19_8h6l3")

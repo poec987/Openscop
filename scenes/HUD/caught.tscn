@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw5uru5bmq16s"]
+
+[ext_resource type="Texture2D" uid="uid://oibevrkarfjk" path="res://graphics/sprites/ui/caught.png" id="1_6u1uv"]
+[ext_resource type="AudioStream" uid="uid://byjq53jidkqmw" path="res://sfx/caught.mp3" id="2_yrfd8"]
+
+[sub_resource type="GDScript" id="GDScript_cni4p"]
+script/source = "extends Node2D
+
+func _ready():
+	bg_music.lower_volume()
+	var scale_animation = create_tween()
+	#SCALE ANIM
+	scale_animation.tween_property(self,\"scale\",Vector2(1.0,1.0),1.0).set_trans(Tween.TRANS_LINEAR)
+	var translation_rotation_animation = create_tween()
+	translation_rotation_animation.tween_property(self,\"position:x\",10.0,0.25).as_relative().set_trans(Tween.TRANS_SINE)
+	translation_rotation_animation.tween_property(self,\"position:x\",-20.0,0.5).as_relative().set_trans(Tween.TRANS_SINE)
+	translation_rotation_animation.tween_property(self,\"position:x\",10.0,0.25).as_relative().set_trans(Tween.TRANS_SINE)
+	translation_rotation_animation.tween_property(self,\"rotation\",deg_to_rad(360),2.0).set_trans(Tween.TRANS_SINE).set_delay(0.25)
+	translation_rotation_animation.tween_property(self,\"modulate\",Color(1.0,1.0,1.0,0.0),1.0).set_trans(Tween.TRANS_SINE).set_delay(0.5)
+	await translation_rotation_animation.finished
+	get_parent().queue_free()
+
+
+func _on_sound_finished():
+	bg_music.increase_volume()
+"
+
+[node name="caught" type="Node2D"]
+
+[node name="caught_origin" type="Node2D" parent="."]
+position = Vector2(160, 120)
+scale = Vector2(0.1, 0.1)
+script = SubResource("GDScript_cni4p")
+
+[node name="caught_sprite" type="TextureRect" parent="caught_origin"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -21.5
+offset_right = 96.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6u1uv")
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_yrfd8")
+autoplay = true
+
+[connection signal="finished" from="sound" to="caught_origin" method="_on_sound_finished"]

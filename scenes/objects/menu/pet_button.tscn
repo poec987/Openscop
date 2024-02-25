@@ -6,13 +6,15 @@
 
 [sub_resource type="GDScript" id="GDScript_e7uam"]
 script/source = "extends Node2D
-
+var frame_counter = 1
 func _process(delta):
 	if get_node(\"AnimationPlayer\").get_current_animation()==\"selected\":
-		if get_node(\"button_face\").frame<15:
-			get_node(\"button_face\").frame+=35.*delta
+		if frame_counter<17:
+			frame_counter+=10.*delta
+			get_node(\"button_face\").frame=clamp(round(frame_counter),0,16)
 		else:
 			get_node(\"button_face\").frame=1
+			frame_counter=1
 	else:
 		get_node(\"button_face\").frame=0
 "

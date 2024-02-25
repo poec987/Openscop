@@ -42,12 +42,6 @@ var fog_focus = 0
 #0 = follow player
 #
 
-
-#GENERAL GAME MANAGEMENT
-var directory = DirAccess.open("user://")
-var fullscreen = false
-var sheets = DirAccess.open("user://sheets")
-
 #P2TALKDICT
 var p2talkdict = {}
 
@@ -75,33 +69,19 @@ var pieces = [0,1,2,3,4,
 #4 = PINK PIECE
 
 func _ready():
+	var directory = DirAccess.open("user://")
 	#GAME BOOTUP
 	#CHECKS IF CUSTOM SHEETS DIRECTORY DOESNT EXIST SO IT CAN CREATE IT
 	if !directory.dir_exists("sheets"):
 		directory.make_dir("sheets")
 	if !directory.dir_exists("savedata"):
 		directory.make_dir("savedata")
+	if !directory.dir_exists("screenshots"):
+		directory.make_dir("screenshots")
 	#LOADS P2TOTALK DICTIONARY
 	p2talkdict = JSON.parse_string((FileAccess.open("res://scripts/p2_talk_data.json", FileAccess.READ)).get_as_text())
 	dialogue = JSON.parse_string((FileAccess.open("res://scripts/dialogue.json", FileAccess.READ)).get_as_text())
 	level_data = JSON.parse_string((FileAccess.open("res://scripts/level_data.json", FileAccess.READ)).get_as_text())
-	#SceneManager.change_scene("res://scenes/test.tscn")
-
-func _process(_delta):
-	if Input.is_action_just_pressed("screenshot"):
-		var viewport_feed: Viewport =  get_tree().root.get_viewport()
-		var screen_texture: Texture2D = viewport_feed.get_texture()
-		var screen_image: Image = screen_texture.get_image()
-		var screen: Texture2D = ImageTexture.create_from_image(screen_image)
-		screen_image.save_png("user://sheets/screen.png")
-	#CHECKS INPUTS FOR SHEET FOLDER HOTKEY AND FULLSCREEN BUTTON
-	if Input.is_action_just_pressed("open_sheet_folder"):
-		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
-
-	if Input.is_action_just_pressed("fullscreen"):
-		fullscreen = !fullscreen
-		DisplayServer.window_set_mode((DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED))
-
 
 #FUNCTION THAT CHECKS P2TOTALK DICTIONARY TABLE, CALLED EVERY TIME P2TOTALK IS USED
 func get_p2_word(word):
@@ -187,3 +167,17 @@ func strip_bbcode(source:String) -> String:
 	var regex = RegEx.new()
 	regex.compile("\\[.+?\\]")
 	return regex.sub(source, "", true)
+	
+func caught(id:int = -1,pet:Node = null,pet_origin:Node = null):
+	if get_tree().get_first_node_in_group("HUD_caught").get_child_count()==0:
+		get_tree().get_first_node_in_group("HUD_caught").add_child(preload("res://scenes/HUD/caught.tscn").instantiate())
+	if id!=-1:
+		pets[id]=true
+	if pet!=null:
+		pet.set_billboard_mode(0)
+		pet.get_material_override().set_shader_parameter("billboard",false)
+		var shrink_animator = create_tween().set_parallel()
+		shrink_animator.tween_property(pet,"scale",Vector3.ZERO,2.0)
+		shrink_animator.tween_property(pet,"rotation:y",deg_to_rad(360),2.0)
+		await shrink_animator.finished
+		pet_origin.queue_free()
