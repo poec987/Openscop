@@ -102,7 +102,7 @@ func _ready():
 		Global.camera_rot = -18
 		
 	if school_preset:
-		Global.control_mode=3
+		Global.control_mode=4
 		
 	if set_custom_fog_focus:
 		Global.fog_focus=-1
