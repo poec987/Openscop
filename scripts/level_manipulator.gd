@@ -46,7 +46,8 @@ extends Node
 @export var set_fog_focus = Vector3.ZERO
 
 @export_subgroup("Hardcoded Preset")
-@export var preset = 0
+@export_enum("No Preset", "Even Care / Gift Plane", "Newmaker Plane") var preset : int
+# 0 = NO PRESET
 # 1 = EVENCARE/GIFTPLANE
 # 2 = NMP
 
