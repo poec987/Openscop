@@ -6,8 +6,8 @@ extends Node
 @export var loading_preset=""
 @export var background_music_id = 0
 @export var fade_color: Color
-@export_multiline var level_slogan = "" # linebreak symbol (*) is no longer required, but it still works
-@export var school_preset = false
+@export_multiline var level_slogan = ""
+@export var school_preset = false 
 
 @export_subgroup("Limit Camera")
 @export var limit_camera_horizontal = false
