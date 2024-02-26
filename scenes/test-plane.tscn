@@ -67,7 +67,8 @@ var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a scre
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
 \"[color=#38733c]Geometricentric:[/color] Amber, care, \\nCAUGHT sprite, cone piece, Pen.\\n[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
-\"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\\n[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
+\"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\",
+\"[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
 \"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
 \"[color=#80aab3]Osyu:[/color] Keyboard, loading \\nscreens, p2totalk buttons, pet \\nmenu, pet menu boxes, pets.\\n[color=#80aab3]Releskowitz: [/color]Pause menu.\",
 \"[color=#80aab3]The New Orchestra: [/color]Keyboard, \\npause menu.\\n[color=#80aab3]Ugng: [/color]Pause menu.\\n[color=#80aab3]Wirelex:[/color] Pause menu, School HUD.\",
@@ -302,10 +303,10 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.2728, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.62547, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
-transform = Transform3D(0.977223, -0.212217, 0, 0.212217, 0.977223, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
 mesh = SubResource("QuadMesh_pbefp")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_ufk43")
@@ -347,7 +348,6 @@ visible = false
 shape = SubResource("BoxShape3D_x1xgp")
 
 [node name="player_root" parent="." instance=ExtResource("2_a0geb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 260)
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
