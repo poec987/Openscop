@@ -26,8 +26,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
-shader_parameter/effect = null
-shader_parameter/ntsc_enable = null
 
 [sub_resource type="GDScript" id="GDScript_en8ci"]
 script/source = "extends Node2D
