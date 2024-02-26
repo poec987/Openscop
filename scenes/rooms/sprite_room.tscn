@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://1pfs5mogg53a"]
+[gd_scene load_steps=3 format=3 uid="uid://1pfs5mogg53a"]
+
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_ky2gh"]
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_vgcff"]
 
 [node name="sprite_room" type="Node3D"]
+
+[node name="level_manipulator" parent="." instance=ExtResource("1_ky2gh")]
+level_slogan = "This is the level slogan!"
+
+[node name="player_root" parent="." instance=ExtResource("2_vgcff")]
