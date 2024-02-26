@@ -20,7 +20,7 @@ func get_screen():
 	var screen_image: Image = screen_texture.get_image()
 	var screen: Texture2D = ImageTexture.create_from_image(screen_image)
 	return screen
-
+	
 
 func selection_sound(variable):
 	if variable%2!=0:
@@ -28,6 +28,9 @@ func selection_sound(variable):
 	else:
 		$select_down.play()
 
+func _ready():
+	$main_pausemenu/visible_group/Select.play()
+	$main_pausemenu/visible_group/Resume.play()
 
 func _process(delta):
 	piece_frame+=10.0*delta
@@ -73,6 +76,7 @@ func _process(delta):
 				$main_pausemenu/buttons.visible = true
 			screenshotted = true
 			create_tween().tween_property($screen_sprite,"scale",Vector2(MINI_SCREEN_SIZE,MINI_SCREEN_SIZE),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_SINE)
+			$main_pausemenu/visible_group/Resume.frame=1
 	else:
 		if $screen_sprite.scale.x<1.:
 			can_unpause=false

@@ -1,11 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dn13e2prkg6p1"]
+[gd_scene load_steps=13 format=3 uid="uid://dn13e2prkg6p1"]
 
 [ext_resource type="Texture2D" uid="uid://7syw6v78cnat" path="res://graphics/sprites/ui/pausemenu_bg2.png" id="1_ors88"]
 [ext_resource type="AudioStream" uid="uid://icvrkxfnaa1q" path="res://sfx/pause/petselect.wav" id="2_8qcp6"]
 [ext_resource type="AudioStream" uid="uid://doub7apu77mdt" path="res://sfx/pause/petselected.wav" id="2_u5cd3"]
-[ext_resource type="Texture2D" uid="uid://btfs4ptkrfxgo" path="res://graphics/sprites/ui/pet_ref.png" id="4_1ftxf"]
 [ext_resource type="Texture2D" uid="uid://bnfrcvqe5fdrl" path="res://graphics/sprites/ui/ui_buttons.png" id="5_spila"]
-[ext_resource type="Script" path="res://scripts/ui/playAnimatedSpriteOnStart.gd" id="6_4chdc"]
 [ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="7_qybop"]
 
 [sub_resource type="GDScript" id="GDScript_6g10t"]
@@ -43,7 +41,8 @@ func _ready():
 		if button_amount==6:
 			row+=2
 		row+=0.5
-		
+	$GoBack.play()
+	$SelectPet.play()
 		
 		
 func _process(delta):
@@ -138,34 +137,12 @@ func _process(delta):
 			$action_input_cap.start()
 			animated = true
 			reading_bio=false
-	$AdvanceText.visible = reading_bio
-	$SelectPet.visible = !reading_bio
+	$SelectPet/AdvanceText.visible = reading_bio
+	$SelectPet/SelectPet.visible = !reading_bio
 			
 func _on_leave_timer_timeout():
 	queue_free()
 "
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jrkxk"]
-atlas = ExtResource("5_spila")
-region = Rect2(0, 34, 34, 34)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qv4ut"]
-atlas = ExtResource("5_spila")
-region = Rect2(136, 34, 34, 34)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_h2ubf"]
-animations = [{
-"frames": [{
-"duration": 5.0,
-"texture": SubResource("AtlasTexture_jrkxk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qv4ut")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gex5d"]
 atlas = ExtResource("5_spila")
@@ -183,6 +160,28 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i26eh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrkxk"]
+atlas = ExtResource("5_spila")
+region = Rect2(0, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qv4ut"]
+atlas = ExtResource("5_spila")
+region = Rect2(136, 34, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h2ubf"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_jrkxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qv4ut")
 }],
 "loop": true,
 "name": &"default",
@@ -226,30 +225,10 @@ autostart = true
 
 [node name="leave_timer" type="Timer" parent="."]
 
-[node name="ReferenceImage" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(160, 120)
-texture = ExtResource("4_1ftxf")
-
-[node name="AdvanceText" type="AnimatedSprite2D" parent="."]
-position = Vector2(60, 201)
-sprite_frames = SubResource("SpriteFrames_h2ubf")
-script = ExtResource("6_4chdc")
-
-[node name="Label" type="Label" parent="AdvanceText"]
-offset_left = 11.0
-offset_top = -1.0
-offset_right = 112.0
-offset_bottom = 25.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("7_qybop")
-text = "Advance Text"
-
 [node name="GoBack" type="AnimatedSprite2D" parent="."]
 position = Vector2(210, 201)
 sprite_frames = SubResource("SpriteFrames_4jgxe")
 frame = 1
-script = ExtResource("6_4chdc")
 
 [node name="Label2" type="Label" parent="GoBack"]
 offset_left = 11.0
@@ -263,15 +242,23 @@ text = "Go Back"
 [node name="SelectPet" type="AnimatedSprite2D" parent="."]
 position = Vector2(60, 201)
 sprite_frames = SubResource("SpriteFrames_h2ubf")
-script = ExtResource("6_4chdc")
 
-[node name="Label" type="Label" parent="SelectPet"]
+[node name="AdvanceText" type="Label" parent="SelectPet"]
 offset_left = 11.0
 offset_top = -1.0
 offset_right = 112.0
 offset_bottom = 25.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_qybop")
-text = "SelectPet"
+text = "Advance Text"
+
+[node name="SelectPet" type="Label" parent="SelectPet"]
+offset_left = 11.0
+offset_top = -1.0
+offset_right = 112.0
+offset_bottom = 25.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_qybop")
+text = "Select Pet"
 
 [connection signal="timeout" from="leave_timer" to="." method="_on_leave_timer_timeout"]
