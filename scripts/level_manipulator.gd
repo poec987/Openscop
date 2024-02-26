@@ -1,6 +1,7 @@
 extends Node 
 # do you think its worth it to make this a class? - izz
 
+@export_category("Level Manipulator")
 @export_subgroup("Level Settings")
 @export var room_name = ""
 @export var loading_preset=""
