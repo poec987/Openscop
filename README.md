@@ -6,6 +6,6 @@ The project runs on a modified version of MMOscop's source code with most sheet-
 ### The project's credits are now hidden within the game as an easter egg!! They can still be read by being accessed directly from the files though.
 
 ## Documentation:
-[Documentation (Github Wiki)](../../wiki)
+[Documentation (Github Wiki)](https://github.com/TechMan06/Openscop/wiki)
 <br>
 [Documentation (Google Docs)](https://docs.google.com/document/d/1YAFOUO5GHbZPF1WaxPG_B0A6xiZyIq8KaLhdYcsrMvI/edit?usp=sharing)
