@@ -1,4 +1,6 @@
-extends Node
+extends Node 
+# do you think its worth it to make this a class? - izz
+
 @export_subgroup("Level Settings")
 @export var room_name = ""
 @export var loading_preset=""
@@ -6,6 +8,7 @@ extends Node
 @export var fade_color: Color
 @export var level_slogan = ""
 @export var school_preset = false
+
 @export_subgroup("Limit Camera")
 @export var limit_camera_horizontal = false
 @export var horizontal_limit = Vector2.ZERO
@@ -13,6 +16,7 @@ extends Node
 @export var front_limit = Vector2.ZERO
 @export var limit_camera_vertical = false
 @export var vertical_limit = Vector2.ZERO
+
 @export_subgroup("Camera_properties")
 @export var allow_horizontal_movement = true
 @export var allow_front_movement = true
@@ -22,10 +26,12 @@ extends Node
 @export var change_camera_angle = false
 @export var camera_angle = 0.
 @export var camera_root_offset_y = 0.
+
 @export_subgroup("Max distance from guardian")
 @export var horizontal_max_limit = 0.
 @export var front_max_limit = 0.
 @export var vertical_max_limit = 0.
+
 @export_subgroup("Environment")
 @export var enable_fog = false
 @export var texture_background = false
@@ -37,10 +43,11 @@ extends Node
 @export var environment_darkness = 0.
 @export var set_custom_fog_focus = false
 @export var set_fog_focus = Vector3.ZERO
+
 @export_subgroup("Hardcoded Preset")
 @export var preset = 0
-#1 = EVENCARE/GIFTPLANE
-#2 = NMP
+# 1 = EVENCARE/GIFTPLANE
+# 2 = NMP
 
 func _ready():
 	Global.room_name = room_name
