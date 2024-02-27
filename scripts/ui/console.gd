@@ -1,4 +1,4 @@
-extends Control
+extends Window
 
 # TODO: fix tooltips
 @export_category("Console")
