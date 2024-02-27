@@ -1,9 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://bttaj8jiwmjv6"]
 
-[ext_resource type="Shader" path="res://shaders/fog shaders/psx_fog_alpha.gdshader" id="1_8a34a"]
+[ext_resource type="Shader" path="res://shaders/fog shaders/fog-shader-alpha.gdshader" id="1_8a34a"]
 [ext_resource type="Script" path="res://scripts/objects/interaction_symbol.gd" id="1_d3jj7"]
 [ext_resource type="Texture2D" uid="uid://d07uqvqx48ugo" path="res://graphics/sprites/objects/interaction.png" id="2_6yoqe"]
 [ext_resource type="AudioStream" uid="uid://cokbp5ew0dhdr" path="res://sfx/textbox/interactpopup.wav" id="4_0xbfh"]
+
 
 [sub_resource type="QuadMesh" id="QuadMesh_pbefp"]
 center_offset = Vector3(0, 0.5, 0)

@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode shadows_disabled;
+render_mode shadows_disabled, depth_draw_opaque;
 global uniform float precision_multiplier : hint_range(0.0, 1.0) = 1.0;
 global uniform vec4 fog_color;
 uniform vec4 modulate_color: source_color;
@@ -32,7 +32,7 @@ void vertex() {
 void fragment() {
 	vec4 texture_color = texture(albedoTex, UV);
 	if (fog_enable) {
-		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR.r).rgb;
+		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR).rgb;
 	} else {
 		ALBEDO = (texture_color*modulate_color).rgb;
 	}

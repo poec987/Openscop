@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://br3ceerrfugd3"
+path="res://.godot/imported/cube.obj-07af46e7d46499aa0e87ffa1fd8a26f8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cube.obj-07af46e7d46499aa0e87ffa1fd8a26f8.mesh"]
+
+source_file="res://graphics/3d/room_mesh/sprite/cube.obj"
+dest_files=["res://.godot/imported/cube.obj-07af46e7d46499aa0e87ffa1fd8a26f8.mesh", "res://.godot/imported/cube.obj-07af46e7d46499aa0e87ffa1fd8a26f8.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

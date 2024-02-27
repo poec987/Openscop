@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ctq5lu2ehk2h4"
+path="res://.godot/imported/sprite.obj-46e225f1c4459df2a6aa2efecd7aa073.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sprite.obj-46e225f1c4459df2a6aa2efecd7aa073.mesh"]
+
+source_file="res://graphics/3d/room_mesh/sprite/sprite.obj"
+dest_files=["res://.godot/imported/sprite.obj-46e225f1c4459df2a6aa2efecd7aa073.mesh", "res://.godot/imported/sprite.obj-46e225f1c4459df2a6aa2efecd7aa073.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

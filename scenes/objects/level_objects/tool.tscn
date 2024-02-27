@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c6lt1e54fh5bh"]
 
 [ext_resource type="Script" path="res://scripts/objects/level_objects/tool.gd" id="1_0g6cr"]
-[ext_resource type="Shader" path="res://shaders/shadeless.gdshader" id="1_61bx3"]
+[ext_resource type="Shader" path="res://shaders/master-shader.gdshader" id="2_uob2x"]
 [ext_resource type="Texture2D" uid="uid://bdseb85ydo2vl" path="res://graphics/sprites/objects/tool/answer_idontknow.png" id="3_f73ik"]
 [ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="4_887sv"]
 
@@ -9,11 +9,28 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yr8eg"]
 render_priority = 0
-shader = ExtResource("1_61bx3")
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader = ExtResource("2_uob2x")
 shader_parameter/billboard = true
-shader_parameter/albedoTex = ExtResource("3_f73ik")
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/color_texture = ExtResource("3_f73ik")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [node name="tool" type="Node3D"]
 script = ExtResource("1_0g6cr")

@@ -13,12 +13,6 @@ uniform vec2 uv_scale = vec2(1.0, 1.0);
 uniform vec2 uv_offset = vec2(.0, .0);
 uniform vec2 uv_pan_velocity = vec2(0.0);
 #endif
-
-#ifdef ALPHA_SCISSOR
-uniform bool billboard = false;
-uniform bool y_billboard = false;
-uniform float alpha_scissor : hint_range(0, 1) = 0.1;
-#endif
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
 uniform bool fog = false;
 global uniform vec4 fog_color;
@@ -65,7 +59,7 @@ void fragment()
 	vec4 color_base = mix(fog_color , modulate_color, COLOR.r);
 	vec4 texture_color = texture(albedoTex, texture_uv);
 	if (fog_enable) {
-		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR.r).rgb;
+		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR).rgb;
 	} else {
 		ALBEDO = (texture_color*modulate_color).rgb;
 	}
