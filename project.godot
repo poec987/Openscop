@@ -21,6 +21,7 @@ config/icon="res://gift.png"
 [autoload]
 
 Global="*res://scripts/global.gd"
+Console="*res://scenes/objects/menu/console.tscn"
 bg_music="*res://scenes/objects/setup/bg_music.tscn"
 PersistentData="*res://scenes/objects/setup/persistent_data.tscn"
 
@@ -28,6 +29,7 @@ PersistentData="*res://scenes/objects/setup/persistent_data.tscn"
 
 window/size/viewport_width=320
 window/size/viewport_height=240
+window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
