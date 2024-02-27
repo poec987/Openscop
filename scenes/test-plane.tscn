@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=41 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://47e5v5kgyi3b" path="res://scenes/objects/level_objects/slope.tscn" id="8_x40b7"]
 [ext_resource type="Texture2D" uid="uid://b1uabhin2r18l" path="res://graphics/3d/tex/nmp/grass.png" id="10_wjd0c"]
 [ext_resource type="Texture2D" uid="uid://whmjo2a2cyq5" path="res://graphics/sprites/objects/pets/care_b.png" id="17_mpc66"]
+[ext_resource type="AudioStream" uid="uid://ciltmyhu21l1a" path="res://sfx/pets/care_b_cry.wav" id="18_r5enk"]
 
 [sub_resource type="GDScript" id="GDScript_ver1u"]
 script/source = "@tool
@@ -61,16 +62,17 @@ var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a scre
 \"Shoutouts to you all!\\nY'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!\",
 \"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
 \"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pet menu names.\",
-\"[color=#38733c]Anthony Domenico:[/color] Care, \\nloading screen, music, \\ntextbox backgrounds, SFX.\",
-\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian,p2totalk \\nbuttons, pieces.\",
-\"[color=#38733c]Cheddar:[/color] Interaction symbol \\ntexture, pieces, tool answers.\",
+\"[color=#38733c]Anthony Domenico:[/color] Care, \\nloading screens, music, \\ntextbox backgrounds, SFX.\",
+\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian,p2totalk \\nbuttons, pieces.\\n[color=#38733c]Cheddar:[/color] Pieces, tool answers.\",
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
-\"[color=#38733c]Geometricentric:[/color] Amber, care, \\nCAUGHT sprite, cone piece, Pen.\\n[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
+\"[color=#38733c]Geometricentric:[/color] Amber, Care, \\ncone piece, CAUGHT sprite, Gift \\nPlane loading screen, gift sprite and icon...\",
+\"Interaction symbol texture, \\nkeyboard, Pen, Tool answers.\",
+\"[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
 \"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\",
 \"[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
 \"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
-\"[color=#80aab3]Osyu:[/color] Keyboard, loading \\nscreens, p2totalk buttons, pet \\nmenu, pet menu boxes, pets.\\n[color=#80aab3]Releskowitz: [/color]Pause menu.\",
+\"[color=#80aab3]Osyu:[/color] Keyboard, p2totalk \\nbuttons, pet menu, pet menu \\nboxes, pets.\\n[color=#80aab3]Releskowitz: [/color]Pause menu.\",
 \"[color=#80aab3]The New Orchestra: [/color]Keyboard, \\npause menu.\\n[color=#80aab3]Ugng: [/color]Pause menu.\\n[color=#80aab3]Wirelex:[/color] Pause menu, School HUD.\",
 \"If it wasn't for our amazing \\nteam this project would've never \\nbeen possible.\",
 \"This is an easter egg.\\n[color=#007108]Coded Between:[/color]\\n[color=#0071ff]Feb 23rd 2024.[/color]\\n[color=#0071ff]Feb 24th 2024.[/color]\",
@@ -262,6 +264,7 @@ script/source = "extends Node3D
 
 func _on_area_3d_body_entered(body):
 	if body==get_tree().get_first_node_in_group(\"Player\"):
+		$cry.play()
 		Global.caught(7,$sprite,self)
 "
 
@@ -305,7 +308,7 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32641, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.28562, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
@@ -1735,6 +1738,10 @@ texture = ExtResource("17_mpc66")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Care B/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("BoxShape3D_liprv")
+
+[node name="cry" type="AudioStreamPlayer3D" parent="Care B"]
+stream = ExtResource("18_r5enk")
+volume_db = 1.0
 
 [connection signal="finished" from="level_manipulator/test_plane_specific/song" to="level_manipulator/test_plane_specific/me" method="_on_song_finished"]
 [connection signal="timeout" from="level_manipulator/test_plane_specific/me/Timer" to="level_manipulator/test_plane_specific/me" method="_on_timer_timeout"]
