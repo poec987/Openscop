@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8lqsiave6xn8"]
+
+[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="1_do0rf"]
+[ext_resource type="Script" path="res://scripts/ui/console.gd" id="1_hadmd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi4xw"]
+bg_color = Color(0.203922, 0.192157, 0.203922, 0.886275)
+
+[node name="Console" type="Control" node_paths=PackedStringArray("console_input", "console_output")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hadmd")
+console_input = NodePath("Input")
+console_output = NodePath("Background/Output")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 97.0
+grow_horizontal = 2
+color = Color(0.211765, 0.184314, 0.203922, 0.619608)
+
+[node name="Output" type="RichTextLabel" parent="Background"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 97.0
+theme_override_fonts/normal_font = ExtResource("1_do0rf")
+scroll_active = false
+scroll_following = true
+
+[node name="Input" type="TextEdit" parent="."]
+layout_mode = 0
+offset_top = 97.0
+offset_right = 320.0
+offset_bottom = 118.0
+theme_override_fonts/font = ExtResource("1_do0rf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bi4xw")
+placeholder_text = "type a command..."
+context_menu_enabled = false
+shortcut_keys_enabled = false
+virtual_keyboard_enabled = false
+caret_type = 1
+caret_blink = true

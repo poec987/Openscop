@@ -10,6 +10,7 @@ extends Node
 @export_multiline var level_slogan = ""
 @export var school_preset = false 
 
+
 @export_subgroup("Limit Camera")
 @export var limit_camera_horizontal = false
 @export var horizontal_limit = Vector2.ZERO
