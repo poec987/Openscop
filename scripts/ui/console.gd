@@ -1,9 +1,9 @@
 extends Control
 
-
+# TODO: fix tooltips
 @export_category("Console")
-## The [TextEdit] to be parsed.
-@export var console_input : TextEdit
+## The [LineEdit] to be parsed.
+@export var console_input : LineEdit
 ## The [RichTextLabel] to display Console output.
 @export var console_output : RichTextLabel
 
