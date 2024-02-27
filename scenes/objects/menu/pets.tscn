@@ -41,8 +41,8 @@ func _ready():
 		if button_amount==6:
 			row+=2
 		row+=0.5
-	$GoBack.play()
-	$SelectPet.play()
+	$buttons_group/GoBack.play()
+	$buttons_group/SelectPet.play()
 		
 		
 func _process(delta):
@@ -98,7 +98,12 @@ func _process(delta):
 					reading_bio=true
 					animated=false
 					spawned_textbox=false
-	
+		var go_down = create_tween()
+		go_down.tween_property($buttons_group,\"position:y\",45,0.5).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+		await go_down.finished
+		$buttons_group/SelectPet/AdvanceText.visible = reading_bio
+		$buttons_group/SelectPet/SelectPet.visible = !reading_bio
+		create_tween().tween_property($buttons_group,\"position:y\",0,0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	
 	if reading_bio:
 		if get_node(\"pet_buttons\").get_child(selected_option).position.x==75.5:
@@ -121,7 +126,6 @@ func _process(delta):
 				$action_input_cap.start()
 				animated = true
 				reading_bio=false
-			
 	if Input.is_action_just_pressed(\"pressed_triangle\") && $triangle_input_cap.time_left<1.0:
 		if get_node(\"pet_textbox\").get_child_count()!=0 && spawned_textbox:
 			get_node(\"pet_textbox\").get_child(0).queue_free()
@@ -137,9 +141,13 @@ func _process(delta):
 			$action_input_cap.start()
 			animated = true
 			reading_bio=false
-	$SelectPet/AdvanceText.visible = reading_bio
-	$SelectPet/SelectPet.visible = !reading_bio
-			
+			var go_up = create_tween()
+			go_up.tween_property($buttons_group,\"position:y\",45,0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+			await go_up.finished
+			$buttons_group/SelectPet/AdvanceText.visible = reading_bio
+			$buttons_group/SelectPet/SelectPet.visible = !reading_bio
+			create_tween().tween_property($buttons_group,\"position:y\",0,0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+
 func _on_leave_timer_timeout():
 	queue_free()
 "
@@ -189,6 +197,7 @@ animations = [{
 }]
 
 [node name="options" type="Node2D"]
+texture_filter = 1
 script = SubResource("GDScript_6g10t")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -201,7 +210,7 @@ stretch_mode = 1
 z_index = 1
 offset_right = 320.0
 offset_bottom = 240.0
-color = Color(0.996078, 0.847059, 0.996078, 0)
+color = Color(0.996078, 0.847059, 0.996078, 1)
 
 [node name="pet_buttons" type="Node2D" parent="."]
 position = Vector2(13.5, 12.5)
@@ -218,19 +227,23 @@ volume_db = 5.0
 
 [node name="triangle_input_cap" type="Timer" parent="."]
 wait_time = 0.001
+one_shot = true
 
 [node name="action_input_cap" type="Timer" parent="."]
 wait_time = 0.001
+one_shot = true
 autostart = true
 
 [node name="leave_timer" type="Timer" parent="."]
 
-[node name="GoBack" type="AnimatedSprite2D" parent="."]
+[node name="buttons_group" type="Node2D" parent="."]
+
+[node name="GoBack" type="AnimatedSprite2D" parent="buttons_group"]
 position = Vector2(210, 201)
 sprite_frames = SubResource("SpriteFrames_4jgxe")
 frame = 1
 
-[node name="Label2" type="Label" parent="GoBack"]
+[node name="Label2" type="Label" parent="buttons_group/GoBack"]
 offset_left = 11.0
 offset_top = -1.0
 offset_right = 112.0
@@ -238,12 +251,14 @@ offset_bottom = 25.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_qybop")
 text = "Go Back"
+metadata/_edit_use_anchors_ = true
 
-[node name="SelectPet" type="AnimatedSprite2D" parent="."]
+[node name="SelectPet" type="AnimatedSprite2D" parent="buttons_group"]
 position = Vector2(60, 201)
 sprite_frames = SubResource("SpriteFrames_h2ubf")
 
-[node name="AdvanceText" type="Label" parent="SelectPet"]
+[node name="AdvanceText" type="Label" parent="buttons_group/SelectPet"]
+visible = false
 offset_left = 11.0
 offset_top = -1.0
 offset_right = 112.0
@@ -252,7 +267,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_qybop")
 text = "Advance Text"
 
-[node name="SelectPet" type="Label" parent="SelectPet"]
+[node name="SelectPet" type="Label" parent="buttons_group/SelectPet"]
 offset_left = 11.0
 offset_top = -1.0
 offset_right = 112.0

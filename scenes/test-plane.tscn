@@ -308,7 +308,7 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.28562, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04298, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
