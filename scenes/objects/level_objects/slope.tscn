@@ -1,24 +1,40 @@
 [gd_scene load_steps=6 format=3 uid="uid://47e5v5kgyi3b"]
 
 [ext_resource type="Script" path="res://scripts/objects/level_objects/slope.gd" id="1_iiwop"]
-[ext_resource type="Shader" path="res://shaders/shadeless.gdshader" id="2_le5ag"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="2_a8h3p"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="3_m05bp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_530s6"]
 render_priority = 0
-shader = ExtResource("2_le5ag")
-shader_parameter/modulate_color = Color(1, 0, 0, 1)
+shader = ExtResource("2_a8h3p")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
-shader_parameter/billboard = true
-shader_parameter/albedoTex = ExtResource("3_m05bp")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqw7w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2efmt"]
 render_priority = 0
-shader = ExtResource("2_le5ag")
-shader_parameter/modulate_color = Color(0, 0, 1, 1)
+shader = ExtResource("2_a8h3p")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
-shader_parameter/billboard = true
-shader_parameter/albedoTex = ExtResource("3_m05bp")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [node name="slope" type="Node3D"]
 script = ExtResource("1_iiwop")
@@ -28,7 +44,7 @@ script = ExtResource("1_iiwop")
 [node name="visual" type="Sprite3D" parent="slope_start"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
 material_override = SubResource("ShaderMaterial_530s6")
-pixel_size = 0.03
+pixel_size = 0.015
 billboard = 1
 texture_filter = 0
 texture = ExtResource("3_m05bp")
@@ -40,8 +56,8 @@ frame = 10
 
 [node name="visual2" type="Sprite3D" parent="slope_end"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
-material_override = SubResource("ShaderMaterial_fqw7w")
-pixel_size = 0.03
+material_override = SubResource("ShaderMaterial_2efmt")
+pixel_size = 0.015
 billboard = 1
 texture_filter = 0
 texture = ExtResource("3_m05bp")

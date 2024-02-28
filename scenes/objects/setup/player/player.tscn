@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_l7eau"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="2_a2356"]
-[ext_resource type="Shader" path="res://shaders/fog shaders/sprite3d_fog.gdshader" id="2_rcw1y"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/sprite3d_fog.gdshader" id="2_ovidc"]
 [ext_resource type="Texture2D" uid="uid://tto7x3eghbjr" path="res://graphics/sprites/player/none.png" id="3_0l6ym"]
 [ext_resource type="Script" path="res://scripts/player/camera_root.gd" id="3_eo5w1"]
 [ext_resource type="AudioStream" uid="uid://dvip8isc7rg2n" path="res://sfx/player/ec_steps.wav" id="5_nm087"]
@@ -17,17 +17,35 @@ size = Vector3(1, 1.4, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fpn34"]
 render_priority = 0
-shader = ExtResource("2_rcw1y")
+shader = ExtResource("2_ovidc")
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
 shader_parameter/albedoTex = ExtResource("2_a2356")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y38ro"]
 render_priority = 0
-shader = ExtResource("2_rcw1y")
+shader = ExtResource("2_ovidc")
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
 shader_parameter/albedoTex = ExtResource("3_0l6ym")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
 
 [node name="player_root" type="Node3D"]
 

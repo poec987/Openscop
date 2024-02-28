@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://vdrra37uylx" path="res://music/hidden_file.png" id="3_8wwrg"]
 [ext_resource type="Texture2D" uid="uid://d07uqvqx48ugo" path="res://graphics/sprites/objects/interaction.png" id="3_uabo5"]
 [ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="4_1gmmf"]
-[ext_resource type="Shader" path="res://shaders/fog shaders/fog-shader-alpha.gdshader" id="4_3bo6i"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-alpha.gdshader" id="4_bnklu"]
 [ext_resource type="AudioStream" uid="uid://cokbp5ew0dhdr" path="res://sfx/textbox/interactpopup.wav" id="4_usqaa"]
 [ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="5_bt3tu"]
 [ext_resource type="AudioStream" uid="uid://ct364yp0alg1k" path="res://music/kk_song.mp3" id="5_yfca4"]
@@ -14,11 +14,11 @@
 [ext_resource type="ArrayMesh" uid="uid://cl41u4kw68uyn" path="res://graphics/3d/models/grass.obj" id="8_5e3bn"]
 [ext_resource type="PackedScene" uid="uid://c6lt1e54fh5bh" path="res://scenes/objects/level_objects/tool.tscn" id="8_btoou"]
 [ext_resource type="PackedScene" uid="uid://47e5v5kgyi3b" path="res://scenes/objects/level_objects/slope.tscn" id="8_x40b7"]
-[ext_resource type="Shader" path="res://shaders/fog shaders/fog-shader-opaque.gdshader" id="9_lldr0"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="9_y07kv"]
 [ext_resource type="Texture2D" uid="uid://b1uabhin2r18l" path="res://graphics/3d/tex/nmp/grass.png" id="10_wjd0c"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/sprite3d_fog.gdshader" id="17_g7lcc"]
 [ext_resource type="Texture2D" uid="uid://whmjo2a2cyq5" path="res://graphics/sprites/objects/pets/care_b.png" id="17_mpc66"]
 [ext_resource type="AudioStream" uid="uid://ciltmyhu21l1a" path="res://sfx/pets/care_b_cry.wav" id="18_r5enk"]
-[ext_resource type="Shader" path="res://shaders/fog shaders/sprite3d_fog.gdshader" id="19_uowb6"]
 
 [sub_resource type="GDScript" id="GDScript_ver1u"]
 script/source = "@tool
@@ -134,14 +134,14 @@ center_offset = Vector3(0, 0.5, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ufk43"]
 render_priority = 0
-shader = ExtResource("4_3bo6i")
+shader = ExtResource("4_bnklu")
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/albedoTex = ExtResource("3_uabo5")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y0djn"]
 render_priority = 0
-shader = ExtResource("4_3bo6i")
+shader = ExtResource("4_bnklu")
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/albedoTex = ExtResource("3_8wwrg")
@@ -179,7 +179,7 @@ func _on_song_finished():
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m5h30"]
 render_priority = 0
-shader = ExtResource("9_lldr0")
+shader = ExtResource("9_y07kv")
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -196,7 +196,7 @@ orientation = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eyyga"]
 render_priority = 0
-shader = ExtResource("9_lldr0")
+shader = ExtResource("9_y07kv")
 shader_parameter/modulate_color = Color(0, 0.643137, 0.105882, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -208,7 +208,7 @@ data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8523r"]
 render_priority = 0
-shader = ExtResource("9_lldr0")
+shader = ExtResource("9_y07kv")
 shader_parameter/modulate_color = Color(1, 0.572549, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -227,7 +227,7 @@ orientation = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g2cgu"]
 render_priority = 0
-shader = ExtResource("9_lldr0")
+shader = ExtResource("9_y07kv")
 shader_parameter/modulate_color = Color(0.619608, 0.619608, 0.619608, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -239,7 +239,7 @@ data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fwgxa"]
 render_priority = 0
-shader = ExtResource("9_lldr0")
+shader = ExtResource("9_y07kv")
 shader_parameter/modulate_color = Color(0.588235, 0.298039, 0.270588, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -251,7 +251,7 @@ orientation = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7jhc3"]
 render_priority = 0
-shader = ExtResource("9_lldr0")
+shader = ExtResource("9_y07kv")
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -269,10 +269,19 @@ func _on_area_3d_body_entered(body):
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b4q8c"]
 render_priority = 0
-shader = ExtResource("19_uowb6")
+shader = ExtResource("17_g7lcc")
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
 shader_parameter/albedoTex = ExtResource("17_mpc66")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_liprv"]
 size = Vector3(0.5, 1.5, 0.5)
@@ -306,7 +315,7 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00682784, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61952, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)

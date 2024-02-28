@@ -1,17 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://1pfs5mogg53a"]
+[gd_scene load_steps=10 format=3 uid="uid://1pfs5mogg53a"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_ky2gh"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_vgcff"]
-[ext_resource type="Shader" path="res://shaders/vertex-color.gdshader" id="3_8avs1"]
-[ext_resource type="Shader" path="res://shaders/fog shaders/fog-shader-opaque.gdshader" id="3_qbahh"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="3_ecfpe"]
 [ext_resource type="Texture2D" uid="uid://5pbfoo5v4s1w" path="res://graphics/3d/room_mesh/sprite/texture_1.png" id="4_ynr5e"]
 [ext_resource type="ArrayMesh" uid="uid://ctq5lu2ehk2h4" path="res://graphics/3d/room_mesh/sprite/sprite.obj" id="5_xqpms"]
-[ext_resource type="Texture2D" uid="uid://b1uabhin2r18l" path="res://graphics/3d/tex/nmp/grass.png" id="6_s5kj7"]
 [ext_resource type="ArrayMesh" uid="uid://br3ceerrfugd3" path="res://graphics/3d/room_mesh/sprite/cube.obj" id="7_lb5n4"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="7_njv3k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f0prg"]
 render_priority = 0
-shader = ExtResource("3_qbahh")
+shader = ExtResource("3_ecfpe")
 shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
@@ -21,21 +20,12 @@ shader_parameter/albedoTex = ExtResource("4_ynr5e")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4niwk"]
 render_priority = 0
-shader = ExtResource("3_8avs1")
+shader = ExtResource("7_njv3k")
 shader_parameter/billboard = false
 shader_parameter/y_billboard = false
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/fog = false
-shader_parameter/color_texture = ExtResource("6_s5kj7")
-shader_parameter/is_spritesheet = false
-shader_parameter/spritesheet_size = Vector2i(1, 1)
-shader_parameter/sprite = Vector2i(0, 0)
-shader_parameter/enable_auto_animation_x = false
-shader_parameter/enable_auto_animation_y = false
-shader_parameter/frame_count = 1
-shader_parameter/frame_offset = 0
-shader_parameter/animation_speed = 1.0
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/vertex_color_as_mask = false

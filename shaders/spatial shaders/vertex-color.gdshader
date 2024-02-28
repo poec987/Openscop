@@ -17,20 +17,6 @@ global uniform vec4 fog_color;
 global uniform float sphere_size;
 global uniform vec3 player_pos; 
 
-
-group_uniforms spritesheet;
-
-	uniform bool is_spritesheet = false;
-	uniform ivec2 spritesheet_size = ivec2(1, 1);
-	uniform ivec2 sprite = ivec2(0, 0);
-	
-group_uniforms animation;
-	uniform bool enable_auto_animation_x = false;
-	uniform bool enable_auto_animation_y = false;
-	uniform int frame_count = 1;
-	uniform int frame_offset = 0;
-	uniform float animation_speed = 1.0;
-
 group_uniforms uv_mofification;
 
 	uniform vec2 uv_scale = vec2(1.0, 1.0);
@@ -48,26 +34,7 @@ const float alpha_scissor = 0.25;
 void vertex()
 {
 	UV = UV * uv_scale + uv_offset;
-	if(is_spritesheet)
-	{
-		vec2 anim_sprite = vec2(sprite);
-		if(allow_animation)
-		{
-			if(enable_auto_animation_x && frame_count != 0)
-			{
-				anim_sprite.x = floor(TIME * animation_speed);
-				anim_sprite.x = floor(anim_sprite.x / float(frame_count) * vec2(spritesheet_size).x);
-				anim_sprite.x += float(frame_offset);
-			}
-			else if(enable_auto_animation_y && frame_count != 0)
-			{
-				anim_sprite.y = floor(TIME * animation_speed);
-				anim_sprite.y = floor(anim_sprite.y / float(frame_count) * vec2(spritesheet_size).y);
-				anim_sprite.y += float(frame_offset);
-			}
-		}
-		UV = (UV + anim_sprite) / vec2(spritesheet_size);
-	}
+	
 	if (fog) {
 		world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 		float min_dist = length(player_pos - world_vertex);
