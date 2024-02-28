@@ -26,6 +26,13 @@ var cam_move_limit_z = Vector2.ZERO
 
 #GAME
 var control_mode = 0
+#0 = normal controls
+#1 = P2toTALK
+#2 = Retrace steps.
+#3 = Empty slot.
+#4 = School
+#5 = Green Tool
+var retrace_steps = false
 var game_paused = false
 var can_pause = true
 
@@ -129,7 +136,8 @@ func save_data():
 		},
 		"game": {
 			"gen": gen,
-			"pets": pets
+			"pets": pets,
+			"retrace_steps":retrace_steps
 		},
 		"player": {
 			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction],
@@ -152,6 +160,7 @@ func load_game(slot):
 	var save_game = JSON.parse_string((FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.READ)).get_as_text())
 	gen = save_game["game"]["gen"]
 	pets = save_game["game"]["pets"]
+	retrace_steps = save_game["game"]["retrace_steps"]
 	player_array = Vector4(save_game["player"]["coords"][0],save_game["player"]["coords"][1],save_game["player"]["coords"][2],save_game["player"]["coords"][3])
 	pieces_amount = save_game["player"]["pieces"]
 	control_mode = save_game["player"]["control_mode"]

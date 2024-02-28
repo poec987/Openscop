@@ -52,6 +52,8 @@ func _ready():
 	position = Vector3(Global.player_array.x,Global.player_array.y,Global.player_array.z)
 	player_camera.position=position
 	animation_direction = int(Global.player_array.w)
+	if Global.retrace_steps:
+		movement_speed = movement_speed*-1
 #TO-DO: ORGANIZE PROPERLY
 func _physics_process(delta):
 	material.get_material_override().set_shader_parameter("modulate_color",Vector4(Global.player_brightness,Global.player_brightness,Global.player_brightness,1.0))
