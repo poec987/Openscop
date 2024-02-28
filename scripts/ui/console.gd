@@ -12,3 +12,6 @@ func _ready():
 
 func _process(_delta):
 	pass
+
+func _close_requested():
+	visible = false
