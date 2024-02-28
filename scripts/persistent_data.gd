@@ -17,3 +17,6 @@ func _process(_delta):
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreen = !fullscreen
 		DisplayServer.window_set_mode((DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED))
+		
+	if Input.is_action_just_pressed("console"):
+		Console.visible = !Console.visible
