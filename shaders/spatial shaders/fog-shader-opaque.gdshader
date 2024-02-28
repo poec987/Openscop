@@ -14,7 +14,6 @@ uniform vec2 uv_offset = vec2(.0, .0);
 uniform vec2 uv_pan_velocity = vec2(0.0);
 #endif
 // https://github.com/dsoft20/psx_retroshader/blob/master/Assets/Shaders/psx-vertexlit.shader
-uniform bool fog = false;
 global uniform vec4 fog_color;
 global uniform float sphere_size;
 global uniform vec3 player_pos; 
@@ -35,12 +34,11 @@ vec4 get_snapped_pos(vec4 base_pos)
 
 void vertex()
 {
-if (fog==true) {
 	world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	float min_dist = length(player_pos - world_vertex);
 	float fog_func = ( 0.5 - clamp((min_dist/1.5)/sphere_size, 0.0, 1.0) );
 	COLOR = vec4( fog_func, fog_func, fog_func, 1.0);
-}
+
 #if !defined(NO_TEXTURE) && !defined(METAL)  // METAL doesn't use UV, so no need to pan UVs
 	UV = UV * uv_scale + uv_offset;
 	UV += uv_pan_velocity * TIME;

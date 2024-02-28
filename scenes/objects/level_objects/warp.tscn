@@ -10,11 +10,12 @@ size = Vector3(2, 2, 0)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pi83i"]
 render_priority = 0
 shader = ExtResource("2_nwd8i")
-shader_parameter/billboard = false
+shader_parameter/billboard = true
 shader_parameter/y_billboard = false
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
-shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/tint_color = Color(0, 1, 0, 1)
 shader_parameter/fog = false
+shader_parameter/color_texture = ExtResource("3_83l72")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/vertex_color_as_mask = false
