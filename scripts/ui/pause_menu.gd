@@ -48,7 +48,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("pressed_start") && Global.control_mode!=1 && get_tree().get_first_node_in_group("HUD_pausemenu").can_unpause && Global.can_pause:
 		if $current_menu.get_child_count()==0:
 			Global.game_paused=!Global.game_paused
-	var pets = get_node_or_null("pets")
 	
 	
 	if Global.game_paused:

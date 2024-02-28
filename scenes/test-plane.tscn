@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=46 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://ciltmyhu21l1a" path="res://sfx/pets/care_b_cry.wav" id="18_r5enk"]
 [ext_resource type="ArrayMesh" uid="uid://br3ceerrfugd3" path="res://graphics/3d/room_mesh/sprite/cube.obj" id="21_u3r2h"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="22_0x8xh"]
+[ext_resource type="Texture2D" uid="uid://5pbfoo5v4s1w" path="res://graphics/3d/room_mesh/sprite/texture_1.png" id="23_vt0as"]
 
 [sub_resource type="GDScript" id="GDScript_ver1u"]
 script/source = "@tool
@@ -293,6 +294,7 @@ shader_parameter/y_billboard = false
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/fog = true
+shader_parameter/albedo_tex = ExtResource("23_vt0as")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/vertex_color_as_mask = false
@@ -329,7 +331,7 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.272937, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0237762, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
