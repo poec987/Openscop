@@ -404,6 +404,12 @@ func return_character():
 	if Global.current_character==1:
 		material.texture = load("res://graphics/sprites/player/belle.png")
 		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+	if Global.current_character==2:
+		material.texture = load("res://graphics/sprites/player/marvin.png")
+		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+		movement_speed = 8
+	else:
+		movement_speed = 5
 	character = Global.current_character
 #RESETS CHARACTER
 func reset_sheet():
