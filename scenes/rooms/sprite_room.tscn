@@ -1,23 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://1pfs5mogg53a"]
+[gd_scene load_steps=7 format=3 uid="uid://1pfs5mogg53a"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_ky2gh"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_vgcff"]
-[ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="3_ecfpe"]
 [ext_resource type="Texture2D" uid="uid://5pbfoo5v4s1w" path="res://graphics/3d/room_mesh/sprite/texture_1.png" id="4_ynr5e"]
 [ext_resource type="ArrayMesh" uid="uid://ctq5lu2ehk2h4" path="res://graphics/3d/room_mesh/sprite/sprite.obj" id="5_xqpms"]
-[ext_resource type="ArrayMesh" uid="uid://br3ceerrfugd3" path="res://graphics/3d/room_mesh/sprite/cube.obj" id="7_lb5n4"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="7_njv3k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f0prg"]
-render_priority = 0
-shader = ExtResource("3_ecfpe")
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/albedoTex = ExtResource("4_ynr5e")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4niwk"]
 render_priority = 0
 shader = ExtResource("7_njv3k")
 shader_parameter/billboard = false
@@ -25,6 +14,7 @@ shader_parameter/y_billboard = false
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/fog = false
+shader_parameter/albedo_tex = ExtResource("4_ynr5e")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/vertex_color_as_mask = false
@@ -37,7 +27,7 @@ shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_ky2gh")]
 level_slogan = "This is the level slogan!"
-enable_fog = true
+sky_and_fog_color = Vector4(1, 1, 1, 0)
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
 
@@ -48,8 +38,3 @@ environment_darkness = 1.0
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level_mesh"]
 material_override = SubResource("ShaderMaterial_f0prg")
 mesh = ExtResource("5_xqpms")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
-mesh = ExtResource("7_lb5n4")
-surface_material_override/0 = SubResource("ShaderMaterial_4niwk")
