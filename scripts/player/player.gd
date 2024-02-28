@@ -398,15 +398,17 @@ func _on_open_sheets_file_selected(path):
 		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 		head.get_material_override().set_shader_parameter("albedoTex", head.texture)
 func return_character():
-	if Global.current_character==0:
-		material.texture = load("res://graphics/sprites/player/guardian.png")
-		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-	if Global.current_character==1:
-		material.texture = load("res://graphics/sprites/player/belle.png")
-		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+	if Global.update_sheets:
+		if Global.current_character==0:
+			material.texture = load("res://graphics/sprites/player/guardian.png")
+			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+		if Global.current_character==1:
+			material.texture = load("res://graphics/sprites/player/belle.png")
+			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 	if Global.current_character==2:
-		material.texture = load("res://graphics/sprites/player/marvin.png")
-		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+		if Global.update_sheets:
+			material.texture = load("res://graphics/sprites/player/marvin.png")
+			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 		movement_speed = 8
 	else:
 		movement_speed = 5

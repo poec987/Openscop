@@ -68,14 +68,15 @@ var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a scre
 \"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
 \"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pet menu names.\",
 \"[color=#38733c]Anthony Domenico:[/color] Care, \\nloading screens, music, \\ntextbox backgrounds, SFX.\",
-\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian,p2totalk \\nbuttons, pieces.\\n[color=#38733c]Cheddar:[/color] Care B, pieces, tool answers.\",
+\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian,p2totalk \\nbuttons, pieces.\",
+\"[color=#38733c]Cheddar:[/color] Care B, pieces, tool answers.\",
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
 \"[color=#38733c]Geometricentric:[/color] Amber, Care, \\ncone piece, CAUGHT sprite, Gift \\nPlane loading screen, gift sprite and icon...\",
 \"Interaction symbol texture, \\nkeyboard, Pen, Tool answers.\",
 \"[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
-\"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\",
-\"[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
+\"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]JuanB7:[/color] Marvin, Paul, Pause Menu.\",
+\"[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\\n[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
 \"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
 \"[color=#80aab3]Osyu:[/color] Keyboard, p2totalk \\nbuttons, pet menu, pet menu \\nboxes, pets.\\n[color=#80aab3]Releskowitz: [/color]Pause menu.\",
 \"[color=#80aab3]The New Orchestra: [/color]Keyboard, \\npause menu.\\n[color=#80aab3]Ugng: [/color]Pause menu.\\n[color=#80aab3]Wirelex:[/color] Pause menu, School HUD.\",
@@ -331,7 +332,7 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337269, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.118563, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)

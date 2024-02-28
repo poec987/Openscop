@@ -32,9 +32,14 @@ var can_pause = true
 #SAVEDATA
 var gen = 6
 var key = 0
-var current_character = 0
-var pieces_amount = [0,0]
+var current_character = 3
 # 0 = guardian
+# 1 = Belle
+# 2 = Marvin
+var update_sheets = true
+var pieces_amount = [0,0,0,0,0]
+
+
 var player_array = Vector4(0.,0.,0.,0)
 var player_brightness = 1.0
 var pets = [false,false,false,false,false,false,false,false,false,false]
