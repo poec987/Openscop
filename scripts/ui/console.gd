@@ -17,7 +17,6 @@ func _parse_command(input : Array):
 		_:
 			console_log("Invalid Command")
 		
-			
 func console_log(input):
 	console_output.append_text(input)
 	console_output.newline()
