@@ -8,7 +8,8 @@ extends Node
 @export var background_music_id = 0
 @export var fade_color: Color
 @export_multiline var level_slogan = ""
-@export var school_preset = false 
+@export var school_preset = false
+@export var footstep_sound = 0
 
 
 @export_subgroup("Limit Camera")
@@ -58,6 +59,8 @@ func _ready():
 	get_tree().paused=false
 	get_tree().get_first_node_in_group("level_slogan").text = level_slogan
 	get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=fade_color
+	if footstep_sound!=0:
+		get_tree().get_first_node_in_group("Player").current_footstep=footstep_sound
 	if Global.camera_dist_ver!=camera_height || camera_height>0.:
 		Global.camera_dist_ver = camera_height
 	if Global.camera_dist_hor!=camera_distance || camera_distance>0.:

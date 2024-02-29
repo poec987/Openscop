@@ -40,11 +40,15 @@ func _process(_delta):
 func _on_warp_area_body_entered(body):
 	
 	if body==get_tree().get_first_node_in_group("Player"):
-		if diagonal_entrance:
-			if get_tree().get_first_node_in_group("Player").animation_direction==directions.x || get_tree().get_first_node_in_group("Player").animation_direction==directions.y:
-				Global.warp_to(scene,loading_preset)
-				Global.player_array=coordinate_and_direction
+		if get_tree().get_first_node_in_group("Player_sprite").hframes==5:
+			if diagonal_entrance:
+				if get_tree().get_first_node_in_group("Player").animation_direction==directions.x || get_tree().get_first_node_in_group("Player").animation_direction==directions.y:
+					Global.warp_to(scene,loading_preset)
+					Global.player_array=coordinate_and_direction
+			else:
+				if get_tree().get_first_node_in_group("Player").animation_direction==warp_direction || all_directions:
+					Global.warp_to(scene,loading_preset)
+					Global.player_array=coordinate_and_direction
 		else:
-			if get_tree().get_first_node_in_group("Player").animation_direction==warp_direction || all_directions:
-				Global.warp_to(scene,loading_preset)
-				Global.player_array=coordinate_and_direction
+			Global.warp_to(scene,loading_preset)
+			Global.player_array=coordinate_and_direction

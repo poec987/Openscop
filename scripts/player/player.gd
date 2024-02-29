@@ -7,8 +7,7 @@ const ACCELERATION = 8
 @export var is_walking = false
 @export	var v = 0.0
 @export	var h = 0.0
-
-
+@export var current_footstep = 0
 #GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP
 #var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -54,6 +53,12 @@ func _ready():
 	animation_direction = int(Global.player_array.w)
 	if Global.retrace_steps:
 		movement_speed = movement_speed*-1
+
+	material.texture = material.get_material_override().get_shader_parameter("albedoTex")
+	if material.hframes!= material.texture.get_size().x/64:
+		material.hframes = material.texture.get_size().x/64
+		material.vframes = material.texture.get_size().y/64
+
 #TO-DO: ORGANIZE PROPERLY
 func _physics_process(delta):
 	material.get_material_override().set_shader_parameter("modulate_color",Vector4(Global.player_brightness,Global.player_brightness,Global.player_brightness,1.0))
@@ -64,7 +69,6 @@ func _physics_process(delta):
 		RenderingServer.global_shader_parameter_set("player_pos",global_position)
 
 	var direction = Vector3()
-	
 	#CONTROL MODE 0: CONTROL PLAYER NORMALLY
 	if Global.control_mode==0 || Global.control_mode==4:
 		#CREATES MOVEMENT VECTORS
@@ -86,23 +90,37 @@ func _physics_process(delta):
 			#CHECKS IF BELOW PLAYER THERE'S MESH WITH THESE NAMES
 			if footstep_controller.get_collider()!=null:
 				if str(footstep_controller.get_collider().name)=="grass":
-					change_sound("res://sfx/player/grass.wav")
+					current_footstep=1
 				if str(footstep_controller.get_collider().name)=="evencare":
-					change_sound("res://sfx/player/ec_steps.wav")
+					current_footstep=0
 				if str(footstep_controller.get_collider().name)=="cement":
-					change_sound("res://sfx/player/cement.wav")
+					current_footstep=2
 				if str(footstep_controller.get_collider().name)=="cement2":
-					change_sound("res://sfx/player/cement2.wav")
+					current_footstep=3
 				if str(footstep_controller.get_collider().name)=="cement3":
-					change_sound("res://sfx/player/cement3.wav")
+					current_footstep=4
 				if str(footstep_controller.get_collider().name)=="school":
-					change_sound("res://sfx/player/school_steps.wav")
+					current_footstep=5
 				if str(footstep_controller.get_collider().name)=="sand":
-					change_sound("res://sfx/player/sand_steps.wav")
+					current_footstep=6
 	else:
 		#IF SPEED NOT FASTER THAN 0.2, DISABLE WALKING ANIM
 		is_walking=false
-		
+	
+	if current_footstep==0:
+		change_sound("res://sfx/player/ec_steps.wav")
+	if current_footstep==1:
+		change_sound("res://sfx/player/grass.wav")
+	if current_footstep==2:
+		change_sound("res://sfx/player/cement.wav")
+	if current_footstep==3:
+		change_sound("res://sfx/player/cement2.wav")
+	if current_footstep==4:
+		change_sound("res://sfx/player/cement3.wav")
+	if current_footstep==5:
+		change_sound("res://sfx/player/school_steps.wav")
+	if current_footstep==6:
+		change_sound("res://sfx/player/sand_steps.wav")
 		
 	if footstep_sound.volume_db<-79.0:
 		footstep_sound.stream_paused=true
@@ -415,7 +433,8 @@ func return_character():
 	else:
 		movement_speed = 5
 	character = Global.current_character
-#RESETS CHARACTER
+	material.texture = load("res://graphics/sprites/player/guardian.png")
+	#RESETS CHARACTER
 func reset_sheet():
 	material.hframes = 5
 	material.vframes = 5

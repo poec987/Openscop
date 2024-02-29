@@ -339,6 +339,7 @@ coordinate_and_direction = Vector4(0, 0, 0, 1)
 level_slogan = "This isn't an intentional linebreak.
 This is
 an intentional linebreak."
+footstep_sound = 1
 enable_fog = true
 texture = ExtResource("3_uabo5")
 environment_darkness = 0.5
@@ -352,7 +353,7 @@ script = SubResource("GDScript_ver1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/height_offset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.950368, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.637193, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
@@ -397,6 +398,7 @@ visible = false
 shape = SubResource("BoxShape3D_x1xgp")
 
 [node name="player_root" parent="." instance=ExtResource("2_a0geb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
