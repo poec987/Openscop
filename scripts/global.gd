@@ -39,7 +39,7 @@ var can_pause = true
 #SAVEDATA
 var gen = 6
 var key = 0
-var current_character = 3
+var current_character = 0
 # 0 = guardian
 # 1 = Belle
 # 2 = Marvin

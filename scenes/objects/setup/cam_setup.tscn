@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ciyscr1kgpgnf"]
+[gd_scene load_steps=42 format=3 uid="uid://ciyscr1kgpgnf"]
 
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
@@ -23,6 +23,7 @@
 [ext_resource type="Shader" path="res://shaders/screen/transparent.gdshader" id="21_c3mch"]
 [ext_resource type="Script" path="res://scripts/ui/nifty.gd" id="21_jym5i"]
 [ext_resource type="Texture2D" uid="uid://bcufsjjwgakij" path="res://graphics/sprites/ui/school.png" id="21_lx5qg"]
+[ext_resource type="Texture2D" uid="uid://bjbo7regcuusm" path="res://graphics/sprites/ui/nifty_pencil.png" id="22_1wl73"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="22_rype5"]
 [ext_resource type="Texture2D" uid="uid://btfs4ptkrfxgo" path="res://graphics/sprites/ui/pet_ref.png" id="25_acm8a"]
 
@@ -435,24 +436,39 @@ visible = false
 script = ExtResource("21_jym5i")
 
 [node name="border" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
-z_index = 2
+z_index = 1
 
 [node name="wall_1" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
-offset_right = 40.0
+offset_right = 32.0
 offset_bottom = 240.0
 texture = SubResource("GradientTexture1D_264x2")
 
 [node name="wall_2" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
 offset_left = 288.0
-offset_right = 328.0
+offset_right = 320.0
 offset_bottom = 240.0
 texture = SubResource("GradientTexture1D_264x2")
 flip_h = true
 
+[node name="color" type="ColorRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
+offset_left = 32.0
+offset_right = 288.0
+offset_bottom = 240.0
+color = Color(1, 0, 1, 1)
+
 [node name="Texture" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+z_index = 1
 offset_left = 32.0
 offset_right = 72.0
 offset_bottom = 40.0
+
+[node name="pencil" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+z_index = 2
+position = Vector2(32, 230)
+
+[node name="sprite" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/pencil"]
+texture = ExtResource("22_1wl73")
+centered = false
 
 [node name="keyboard" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["HUD_keyboard"]]
 
