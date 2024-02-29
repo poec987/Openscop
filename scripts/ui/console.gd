@@ -10,8 +10,8 @@ func _ready():
 	visible = false
 func _parse_command(input : Array):
 	match input[0]:
-		"Test":
-			console_log("test")
+		"!nifty":
+			Global.nifty()
 		_:
 			console_log("Invalid Command")
 		

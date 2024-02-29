@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ciyscr1kgpgnf"]
+[gd_scene load_steps=41 format=3 uid="uid://ciyscr1kgpgnf"]
 
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bnfrcvqe5fdrl" path="res://graphics/sprites/ui/ui_buttons.png" id="17_32bl0"]
 [ext_resource type="Script" path="res://scripts/objects/loading.gd" id="19_8h6l3"]
 [ext_resource type="Shader" path="res://shaders/screen/transparent.gdshader" id="21_c3mch"]
+[ext_resource type="Script" path="res://scripts/ui/nifty.gd" id="21_jym5i"]
 [ext_resource type="Texture2D" uid="uid://bcufsjjwgakij" path="res://graphics/sprites/ui/school.png" id="21_lx5qg"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="22_rype5"]
 [ext_resource type="Texture2D" uid="uid://btfs4ptkrfxgo" path="res://graphics/sprites/ui/pet_ref.png" id="25_acm8a"]
@@ -117,7 +118,7 @@ animations = [{
 }]
 
 [sub_resource type="Gradient" id="Gradient_xo8nd"]
-colors = PackedColorArray(0.611765, 0.0156863, 0.976471, 1, 0, 0, 0, 1)
+colors = PackedColorArray(0.772549, 0.137255, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_264x2"]
 gradient = SubResource("Gradient_xo8nd")
@@ -428,13 +429,30 @@ offset_bottom = 40.0
 
 [node name="loading_timer" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
 
-[node name="nifty" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
-
-[node name="TextureRect" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+[node name="nifty" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["Nifty"]]
+process_mode = 3
 visible = false
+script = ExtResource("21_jym5i")
+
+[node name="border" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+z_index = 2
+
+[node name="wall_1" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 240.0
 texture = SubResource("GradientTexture1D_264x2")
+
+[node name="wall_2" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
+offset_left = 288.0
+offset_right = 328.0
+offset_bottom = 240.0
+texture = SubResource("GradientTexture1D_264x2")
+flip_h = true
+
+[node name="Texture" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+offset_left = 32.0
+offset_right = 72.0
+offset_bottom = 40.0
 
 [node name="keyboard" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["HUD_keyboard"]]
 

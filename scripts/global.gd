@@ -198,3 +198,9 @@ func caught(id:int = -1,pet:Node = null,pet_origin:Node = null):
 		await shrink_animator.finished
 		if pet_origin!=null:
 			pet_origin.queue_free()
+			
+func nifty():
+	can_pause=false
+	get_tree().get_first_node_in_group("Nifty").visible=true
+	get_tree().paused = true
+	
