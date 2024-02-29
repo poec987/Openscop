@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=46 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -14,7 +14,6 @@
 [ext_resource type="ArrayMesh" uid="uid://cl41u4kw68uyn" path="res://graphics/3d/models/grass.obj" id="8_5e3bn"]
 [ext_resource type="PackedScene" uid="uid://c6lt1e54fh5bh" path="res://scenes/objects/level_objects/tool.tscn" id="8_btoou"]
 [ext_resource type="PackedScene" uid="uid://47e5v5kgyi3b" path="res://scenes/objects/level_objects/slope.tscn" id="8_x40b7"]
-[ext_resource type="Shader" path="res://shaders/fog shaders/fog-shader-opaque.gdshader" id="9_lldr0"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="9_y07kv"]
 [ext_resource type="Texture2D" uid="uid://b1uabhin2r18l" path="res://graphics/3d/tex/nmp/grass.png" id="10_wjd0c"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/sprite3d_fog.gdshader" id="17_g7lcc"]
@@ -246,7 +245,11 @@ orientation = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g2cgu"]
 render_priority = 0
-shader = ExtResource("9_lldr0")
+shader = ExtResource("9_y07kv")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_b57xb"]
 data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0, -2)
