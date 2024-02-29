@@ -193,7 +193,7 @@ func caught(id:int = -1,pet:Node = null,pet_origin:Node = null):
 		var shrink_animator = create_tween().set_parallel()
 		shrink_animator.tween_property(pet,"scale",Vector3.ZERO,2.5)
 		var original_offset = pet.offset.y
-		shrink_animator.tween_property(pet,"offset:y",original_offset*2,2.5)
+		shrink_animator.tween_property(pet,"offset:y",original_offset*2,2.5).set_trans(Tween.TRANS_LINEAR)
 		shrink_animator.tween_property(pet,"rotation:y",deg_to_rad(360),2.5)
 		await shrink_animator.finished
 		if pet_origin!=null:
