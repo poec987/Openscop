@@ -33,8 +33,11 @@ environment_darkness = 1.0
 
 [node name="player_root" parent="." instance=ExtResource("2_vgcff")]
 
-[node name="level_mesh" type="Node3D" parent="."]
+[node name="level_root" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level_mesh"]
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="mesh0" type="MeshInstance3D" parent="level_root/visual_mesh"]
 material_override = SubResource("ShaderMaterial_f0prg")
 mesh = ExtResource("5_xqpms")
+skeleton = NodePath("../..")
