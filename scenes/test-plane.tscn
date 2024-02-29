@@ -55,9 +55,10 @@ var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a scre
 \"Alongside my friends. Whom I'd \\nlike to thank individually here.\",
 \"And now...\",
 \"The [color=#00FF00]MMOscop[/color]/[color=#0000FF]Openscop[/color] Team:\",
-\"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nGeometricentric, Izzint, JuanB7, Lewgus, Maxine, Wowzaboi.\",
-\"[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
-\"[color=#00FFFF]The Level Recreation Team:[/color]\\nIzzint, Lewgus.\\n[color=#00FFFF]The Texture Recreation Team:[/color]\\nBetah, Izzint, Lewgus.\",
+\"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nGeometricentric, Izzint, \\nJuanB7, Lewgus, Maxine\",
+\"Wowzaboi.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
+\"[color=#00FFFF]The Level Recreation Team:[/color]\\nCheddar, Geometricentric, \\nIzzint, Lewgus.\",
+\"[color=#00FFFF]The Texture Recreation Team:[/color]\\nBetah, Izzint, Lewgus.\",
 \"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Olivia.\",
 \"[color=#00FFFF]Sound/Music Ripping Team:[/color]\\nCheddar, BrowserTG5, \\nGeometricentric, Lewgus.\",
 \"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, \\nJerzygorsky, Olivia, Parsley.\",
@@ -397,7 +398,6 @@ visible = false
 shape = SubResource("BoxShape3D_x1xgp")
 
 [node name="player_root" parent="." instance=ExtResource("2_a0geb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
