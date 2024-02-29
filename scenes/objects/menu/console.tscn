@@ -1,14 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgll3bvpolsum"]
+[gd_scene load_steps=8 format=3 uid="uid://cgll3bvpolsum"]
 
 [ext_resource type="Script" path="res://scripts/ui/console.gd" id="1_hadmd"]
 [ext_resource type="FontFile" uid="uid://cj3pwu1j055wh" path="res://graphics/sprites/ui/console.ttf" id="2_btgok"]
 [ext_resource type="Texture2D" uid="uid://ckljr38wkg63m" path="res://graphics/sprites/ui/console_bg.png" id="2_r6dau"]
 [ext_resource type="Script" path="res://scripts/ui/debughud.gd" id="4_u2r7x"]
-[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="5_l0dnx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7mb10"]
-font = ExtResource("5_l0dnx")
-outline_color = Color(0, 0, 0, 1)
+font = ExtResource("2_btgok")
+font_size = 8
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yojio"]
 bg_color = Color(0.168627, 0.156863, 0.168627, 0.894118)
@@ -43,8 +43,7 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("4_u2r7x")
 
-[node name="playerpos" type="Label" parent="DebugHud"]
-modulate = Color(0, 0, 1, 1)
+[node name="PlayerPos" type="Label" parent="DebugHud"]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Position:
@@ -52,11 +51,10 @@ DIR:"
 label_settings = SubResource("LabelSettings_7mb10")
 text_direction = 1
 
-[node name="playervel" type="Label" parent="DebugHud"]
-modulate = Color(0, 0, 1, 1)
-offset_top = 38.0
-offset_right = 63.0
-offset_bottom = 94.985
+[node name="PlayerVel" type="Label" parent="DebugHud"]
+offset_top = 22.39
+offset_right = 34.0
+offset_bottom = 33.39
 text = "Velocity:"
 label_settings = SubResource("LabelSettings_7mb10")
 text_direction = 1
@@ -75,6 +73,8 @@ anchors_preset = -1
 anchor_top = 0.708
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -13.0
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.211765, 0.184314, 0.203922, 0.666667)
