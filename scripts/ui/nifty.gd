@@ -14,5 +14,6 @@ func _process(_delta):
 		$pencil.position.y+= int(Input.is_action_pressed("pressed_down"))-int(Input.is_action_pressed("pressed_up"))
 		$pencil.position.x+= int(Input.is_action_pressed("pressed_right"))-int(Input.is_action_pressed("pressed_left"))
 		if Input.is_action_pressed("pressed_action"):
-			texture_image.set_pixel(1, 2, Color.WHITE) # Sets the color at (1, 2) to red.
-			$Texture.set_texture(ImageTexture.create_from_image(texture_image))
+			if $pencil.position.x<texture_image.get_width() && $pencil.position.y<texture_image.get_height():
+				texture_image.set_pixel($pencil.position.x-32, $pencil.position.y, Color.html("#FFCEE5"))
+				$Texture.set_texture(ImageTexture.create_from_image(texture_image))
