@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgll3bvpolsum"]
+[gd_scene load_steps=9 format=3 uid="uid://cgll3bvpolsum"]
 
 [ext_resource type="Script" path="res://scripts/ui/console.gd" id="1_hadmd"]
 [ext_resource type="FontFile" uid="uid://cj3pwu1j055wh" path="res://graphics/sprites/ui/console.ttf" id="2_btgok"]
 [ext_resource type="Texture2D" uid="uid://ckljr38wkg63m" path="res://graphics/sprites/ui/console_bg.png" id="2_r6dau"]
+[ext_resource type="Script" path="res://scripts/ui/debughud.gd" id="4_u2r7x"]
+[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="5_l0dnx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7mb10"]
+font = ExtResource("5_l0dnx")
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yojio"]
 bg_color = Color(0.168627, 0.156863, 0.168627, 0.894118)
@@ -12,11 +18,44 @@ bg_color = Color(0.219608, 0.207843, 0.223529, 0.815686)
 
 [node name="Console" type="Window" node_paths=PackedStringArray("console_input", "console_output")]
 process_mode = 3
+title = "Openscop - Developer Menu"
 initial_position = 5
-size = Vector2i(640, 480)
+size = Vector2i(320, 240)
+content_scale_mode = 2
 script = ExtResource("1_hadmd")
 console_input = NodePath("ConsoleContainer/Input")
 console_output = NodePath("ConsoleContainer/Background/Output")
+
+[node name="ConsoleBackground" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r6dau")
+
+[node name="debughud" type="Node2D" parent="."]
+texture_filter = 1
+script = ExtResource("4_u2r7x")
+
+[node name="playerpos" type="Label" parent="debughud"]
+modulate = Color(0, 0, 1, 1)
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Position:
+DIR:"
+label_settings = SubResource("LabelSettings_7mb10")
+text_direction = 1
+
+[node name="playervel" type="Label" parent="debughud"]
+modulate = Color(0, 0, 1, 1)
+offset_top = 38.0
+offset_right = 63.0
+offset_bottom = 94.985
+text = "Velocity:"
+label_settings = SubResource("LabelSettings_7mb10")
+text_direction = 1
 
 [node name="ConsoleContainer" type="Control" parent="."]
 layout_mode = 3
@@ -26,19 +65,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ConsoleBackground" type="TextureRect" parent="ConsoleContainer"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_r6dau")
-
 [node name="Background" type="ColorRect" parent="ConsoleContainer"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.708
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

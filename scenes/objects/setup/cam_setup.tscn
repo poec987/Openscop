@@ -20,7 +20,6 @@
 [ext_resource type="FontFile" uid="uid://gsd5w8kh7xxx" path="res://graphics/sprites/ui/pausemenu_numbers.fnt" id="16_gfid7"]
 [ext_resource type="Texture2D" uid="uid://bnfrcvqe5fdrl" path="res://graphics/sprites/ui/ui_buttons.png" id="17_32bl0"]
 [ext_resource type="Script" path="res://scripts/objects/loading.gd" id="19_8h6l3"]
-[ext_resource type="Script" path="res://scripts/ui/debughud.gd" id="19_r0a67"]
 [ext_resource type="Shader" path="res://shaders/screen/transparent.gdshader" id="21_c3mch"]
 [ext_resource type="Texture2D" uid="uid://bcufsjjwgakij" path="res://graphics/sprites/ui/school.png" id="21_lx5qg"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="22_rype5"]
@@ -117,9 +116,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_oq0wl"]
-font = ExtResource("5_5sf62")
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_xo8nd"]
+colors = PackedColorArray(0.611765, 0.0156863, 0.976471, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_264x2"]
+gradient = SubResource("Gradient_xo8nd")
+width = 32
 
 [sub_resource type="GDScript" id="GDScript_2wviw"]
 script/source = "extends Node2D
@@ -409,27 +411,6 @@ offset_right = 320.0
 offset_bottom = 240.0
 color = Color(0.996078, 0.847059, 0.996078, 0)
 
-[node name="debughud" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD"]
-script = ExtResource("19_r0a67")
-
-[node name="playerpos" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/debughud"]
-modulate = Color(1, 0, 1, 1)
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Position:
-DIR:"
-label_settings = SubResource("LabelSettings_oq0wl")
-text_direction = 1
-
-[node name="playervel" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/debughud"]
-modulate = Color(1, 0, 1, 1)
-offset_top = 38.0
-offset_right = 63.0
-offset_bottom = 94.985
-text = "Velocity:"
-label_settings = SubResource("LabelSettings_oq0wl")
-text_direction = 1
-
 [node name="loading" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["loading_overlay"]]
 process_mode = 3
 script = ExtResource("19_8h6l3")
@@ -448,6 +429,12 @@ offset_bottom = 40.0
 [node name="loading_timer" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
 
 [node name="nifty" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+
+[node name="TextureRect" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("GradientTexture1D_264x2")
 
 [node name="keyboard" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["HUD_keyboard"]]
 

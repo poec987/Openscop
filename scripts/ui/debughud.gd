@@ -6,8 +6,6 @@ extends Node2D
 
 #FUNCTIONS
 func _ready():
-	get_node(".").visible=Global.debug #CHECKS IF DEBUG IS ENABLED. IF IT ISN'T, THE "DEBUGHUD" NODE'S VISIBILITY IS TURNED OFF.
-	
 	#CHECK IF THERES A PLAYER NODE IN THE SCENE
 	if get_tree().get_first_node_in_group("Player"): #PLAYER NODE FOUND
 		player = get_tree().get_first_node_in_group("Player")
