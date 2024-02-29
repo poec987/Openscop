@@ -6,8 +6,10 @@ extends Window
 @export var console_input : LineEdit
 ## The [RichTextLabel] to display Console output.
 @export var console_output : RichTextLabel
+
 func _ready():
 	visible = false
+	
 func _parse_command(input : Array):
 	match input[0]:
 		"!nifty":
