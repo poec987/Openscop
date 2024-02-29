@@ -17,7 +17,7 @@ func _process(_delta):
 				background_image = $border/bg.texture.get_image()
 				$nifty.play()
 				loaded = true
-		if Input.is_action_pressed("pressed_triangle"):
+		if Input.is_action_pressed("pressed_start"):
 			$pencil.position=Vector2i(32,240)
 			get_tree().paused = false
 			Global.can_pause=true
