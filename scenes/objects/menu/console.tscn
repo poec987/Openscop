@@ -21,6 +21,9 @@ process_mode = 3
 title = "Openscop - Developer Menu"
 initial_position = 5
 size = Vector2i(320, 240)
+content_scale_size = Vector2i(320, 240)
+content_scale_mode = 2
+content_scale_aspect = 4
 script = ExtResource("1_hadmd")
 console_input = NodePath("ConsoleContainer/Input")
 console_output = NodePath("ConsoleContainer/Background/Output")
@@ -34,11 +37,13 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_r6dau")
 
-[node name="debughud" type="Node2D" parent="."]
+[node name="DebugHud" type="Control" parent="."]
 texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("4_u2r7x")
 
-[node name="playerpos" type="Label" parent="debughud"]
+[node name="playerpos" type="Label" parent="DebugHud"]
 modulate = Color(0, 0, 1, 1)
 offset_right = 40.0
 offset_bottom = 23.0
@@ -47,7 +52,7 @@ DIR:"
 label_settings = SubResource("LabelSettings_7mb10")
 text_direction = 1
 
-[node name="playervel" type="Label" parent="debughud"]
+[node name="playervel" type="Label" parent="DebugHud"]
 modulate = Color(0, 0, 1, 1)
 offset_top = 38.0
 offset_right = 63.0

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 #DECLARING VARIABLES
 @onready var player
