@@ -30,6 +30,8 @@ func _process(_delta):
 	#CHECKS INPUTS FOR SHEET FOLDER HOTKEY AND FULLSCREEN BUTTON
 	if Input.is_action_just_pressed("open_sheet_folder"):
 		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://sheets"),true)
+	if Input.is_action_just_pressed("screenshot_folder"):
+		OS.shell_show_in_file_manager(ProjectSettings.globalize_path("user://screenshots"),true)
 
 	if Input.is_action_just_pressed("fullscreen"):
 		fullscreen = !fullscreen

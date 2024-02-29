@@ -55,7 +55,7 @@ var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a scre
 \"Alongside my friends. Whom I'd \\nlike to thank individually here.\",
 \"And now...\",
 \"The [color=#00FF00]MMOscop[/color]/[color=#0000FF]Openscop[/color] Team:\",
-\"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nGeometricentric, Izzint, Lewgus, Maxine, Wowzaboi.\",
+\"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nGeometricentric, Izzint, JuanB7, Lewgus, Maxine, Wowzaboi.\",
 \"[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
 \"[color=#00FFFF]The Level Recreation Team:[/color]\\nIzzint, Lewgus.\\n[color=#00FFFF]The Texture Recreation Team:[/color]\\nBetah, Izzint, Lewgus.\",
 \"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Olivia.\",
@@ -64,7 +64,7 @@ var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a scre
 \"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Ronicalter, TL/24,Tom.\",
 \"Shoutouts to you all!\\nY'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!\",
 \"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
-\"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pet menu names.\",
+\"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pause menu\\n buttons, pet menu names.\",
 \"[color=#38733c]Anthony Domenico:[/color] Care, \\nloading screens, music, \\ntextbox backgrounds, SFX.\",
 \"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian,p2totalk \\nbuttons, pieces.\",
 \"[color=#38733c]Cheddar:[/color] Care B, pieces, tool answers.\",
@@ -301,6 +301,7 @@ shader_parameter/y_billboard = false
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/tint_color = Color(0, 0, 1, 1)
 shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("10_wjd0c")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/vertex_color_as_mask = false
@@ -317,6 +318,7 @@ shader_parameter/y_billboard = false
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("10_wjd0c")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/vertex_color_as_mask = false
@@ -334,13 +336,9 @@ directions = null
 warp_direction = 3
 scene = "res://scenes/test-plane.tscn"
 loading_preset = "evencare_noload"
-coordinate_and_direction = Vector4(0, 0, 0, 1)
 
 [node name="level_manipulator" parent="." instance=ExtResource("6_vuu81")]
-level_slogan = "This isn't an intentional linebreak.
-This is
-an intentional linebreak."
-footstep_sound = 1
+loading_preset = "evencare"
 enable_fog = true
 texture = ExtResource("3_uabo5")
 environment_darkness = 0.5

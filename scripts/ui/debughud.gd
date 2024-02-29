@@ -1,22 +1,9 @@
 extends Control
 
-#DECLARING VARIABLES
-@onready var player
-@onready var isplayer = false #THIS VALUE CHECKS IF THERES A PLAYER
-
-#FUNCTIONS
-func _ready():
-	#CHECK IF THERES A PLAYER NODE IN THE SCENE
-	if get_tree().get_first_node_in_group("Player"): #PLAYER NODE FOUND
-		player = get_tree().get_first_node_in_group("Player")
-		isplayer = true
-	else: #NO PLAYER NODE FOUND
-		isplayer = false
-
 func _process(_delta):
-	if isplayer: #IF THERE IS A PLAYER THIS CODE IS RAN
-		$PlayerPos.text=str("Position: X:",player.position.x," Y:",player.position.y," Z:",player.position.z,"\nDIR:",player.animation_direction)
-		$PlayerVel.text=str("Velocity: X:",player.velocity.x," Y:",player.velocity.y," Z:",player.velocity.z)
+	if get_tree().get_first_node_in_group("Player")!=null: #IF THERE IS A PLAYER THIS CODE IS RAN
+		$PlayerPos.text=str("Position: X:",snapped(get_tree().get_first_node_in_group("Player").position.x,0.0001)," Y:",snapped(get_tree().get_first_node_in_group("Player").position.y,0.0001)," Z:",snapped(get_tree().get_first_node_in_group("Player").position.z,0.0001),"\nDIR:",get_tree().get_first_node_in_group("Player").animation_direction)
+		$PlayerVel.text=str("Velocity: X:",snapped(get_tree().get_first_node_in_group("Player").velocity.x,0.00001)," Y:",snapped(get_tree().get_first_node_in_group("Player").velocity.y,0.00001)," Z:",snapped(get_tree().get_first_node_in_group("Player").velocity.z,0.00001))
 	else: #IF THERE IS NO PLAYER THIS CODE IS RAN
 		$PlayerPos.text="NO PLAYER FOUND!"
 		$PlayerVel.text=""

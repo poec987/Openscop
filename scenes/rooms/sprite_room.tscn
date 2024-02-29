@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://1pfs5mogg53a"]
+[gd_scene load_steps=6 format=3 uid="uid://1pfs5mogg53a"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_ky2gh"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_vgcff"]
-[ext_resource type="Texture2D" uid="uid://5pbfoo5v4s1w" path="res://graphics/3d/room_mesh/sprite/texture_1.png" id="4_ynr5e"]
 [ext_resource type="ArrayMesh" uid="uid://ctq5lu2ehk2h4" path="res://graphics/3d/room_mesh/sprite/sprite.obj" id="5_xqpms"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="7_njv3k"]
 
@@ -14,7 +13,6 @@ shader_parameter/y_billboard = false
 shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/fog = false
-shader_parameter/albedoTex = ExtResource("4_ynr5e")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/vertex_color_as_mask = false

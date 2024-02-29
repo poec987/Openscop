@@ -59,7 +59,7 @@ func _ready():
 	get_tree().paused=false
 	get_tree().get_first_node_in_group("level_slogan").text = level_slogan
 	get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=fade_color
-	if footstep_sound!=0:
+	if footstep_sound!=0 && footstep_sound<7  && footstep_sound>0:
 		get_tree().get_first_node_in_group("Player").current_footstep=footstep_sound
 	if Global.camera_dist_ver!=camera_height || camera_height>0.:
 		Global.camera_dist_ver = camera_height

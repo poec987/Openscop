@@ -43,7 +43,7 @@ var current_character = 0
 # 0 = guardian
 # 1 = Belle
 # 2 = Marvin
-var update_sheets = true
+var update_sheets = false
 var pieces_amount = [0,0,0,0,0]
 
 
