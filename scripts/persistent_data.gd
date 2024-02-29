@@ -4,7 +4,24 @@ extends Node
 var fullscreen = false
 var sheets = DirAccess.open("user://sheets")
 
+
+
+#CODES
+var nifty_code = ["pressed_l2","pressed_square","pressed_r1","pressed_triangle","pressed_r2","pressed_up","pressed_r2","pressed_circle","pressed_r2","pressed_circle"]
+var input_counter = 0
+var last_input = ""
 func _process(_delta):
+
+	if Input.is_action_just_pressed("pressed_l2") || Input.is_action_just_pressed("pressed_l1") || Input.is_action_just_pressed("pressed_r2") || Input.is_action_just_pressed("pressed_r1") || Input.is_action_just_pressed("pressed_up") || Input.is_action_just_pressed("pressed_down") || Input.is_action_just_pressed("pressed_left") || Input.is_action_just_pressed("pressed_right") || Input.is_action_just_pressed("pressed_start") || Input.is_action_just_pressed("pressed_select") || Input.is_action_just_pressed("pressed_action") || Input.is_action_just_pressed("pressed_triangle") || Input.is_action_just_pressed("pressed_square") || Input.is_action_just_pressed("pressed_circle"):
+		if Input.is_action_just_pressed(nifty_code[input_counter]):
+			if input_counter<9:
+				print(nifty_code[input_counter])
+				input_counter+=1
+			else:
+				Global.nifty()
+		else:
+			input_counter=0
+	
 	if Input.is_action_just_pressed("screenshot"):
 		var viewport_feed: Viewport =  get_tree().root.get_viewport()
 		var screen_texture: Texture2D = viewport_feed.get_texture()

@@ -6,7 +6,7 @@ render_mode unshaded, shadows_disabled, depth_prepass_alpha, blend_mix;
 varying vec3 world_vertex;
 uniform bool billboard = false;
 uniform bool y_billboard = false;
-uniform sampler2D albedo_tex : source_color, filter_nearest, repeat_enable;
+uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
 
 uniform vec4 transparent_color : source_color = vec4(1.0,0.0,1.0,1.0);
 uniform vec4 tint_color : source_color = vec4(1.0,1.0,1.0,1.0);
@@ -72,7 +72,7 @@ void vertex()
 
 void fragment()
 {
-	vec4 texture_color = texture(albedo_tex, UV);
+	vec4 texture_color = texture(albedoTex, UV);
 	
 	if (vertex_color_as_mask)
 	{

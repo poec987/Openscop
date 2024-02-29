@@ -102,7 +102,7 @@ func _process(delta):
 			await screen_scaler.finished
 			get_tree().paused = false
 
-	if can_unpause && Global.game_paused && $current_menu.get_child_count()==0 && $main_pausemenu/buttons.visible:
+	if can_unpause && Global.game_paused && $current_menu.get_child_count()==0 && $main_pausemenu/buttons.visible && !get_tree().get_first_node_in_group("Nifty").visible:
 		if fade==0.0:
 			if Input.is_action_just_pressed("pressed_up") && selected_option!=0:
 				selected_option-=1
@@ -126,7 +126,7 @@ func _process(delta):
 					active_menu[selected_option]=true
 					inMenu = true
 
-		if Input.is_action_just_pressed("pressed_action"):
+		if Input.is_action_just_pressed("pressed_action") && !get_tree().get_first_node_in_group("Nifty").visible:
 			if selected_option==4:
 				#$selected.play()
 				active_menu[selected_option]=true

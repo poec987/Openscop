@@ -203,4 +203,5 @@ func nifty():
 	can_pause=false
 	get_tree().get_first_node_in_group("Nifty").visible=true
 	get_tree().paused = true
+	bg_music.pause()
 	

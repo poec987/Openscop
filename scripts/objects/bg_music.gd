@@ -30,5 +30,11 @@ func play_track(track_id):
 func decrease_volume():
 	create_tween().tween_property(self,"volume_db",-20.0,1.0)
 
+func pause():
+	stream_paused=true
+
+func resume():
+	stream_paused=false
+	
 func increase_volume():
 	create_tween().tween_property(self,"volume_db",0.0,1.0)

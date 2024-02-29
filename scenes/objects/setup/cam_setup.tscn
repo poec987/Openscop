@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ciyscr1kgpgnf"]
+[gd_scene load_steps=45 format=3 uid="uid://ciyscr1kgpgnf"]
 
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
@@ -24,8 +24,11 @@
 [ext_resource type="Script" path="res://scripts/ui/nifty.gd" id="21_jym5i"]
 [ext_resource type="Texture2D" uid="uid://bcufsjjwgakij" path="res://graphics/sprites/ui/school.png" id="21_lx5qg"]
 [ext_resource type="Texture2D" uid="uid://bjbo7regcuusm" path="res://graphics/sprites/ui/nifty_pencil.png" id="22_1wl73"]
+[ext_resource type="Texture2D" uid="uid://ed76e6dscv1j" path="res://graphics/sprites/ui/nifty_background.png" id="22_ep7cm"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="22_rype5"]
+[ext_resource type="AudioStream" uid="uid://b5yjt4nju1572" path="res://sfx/nifty.wav" id="24_eywim"]
 [ext_resource type="Texture2D" uid="uid://btfs4ptkrfxgo" path="res://graphics/sprites/ui/pet_ref.png" id="25_acm8a"]
+[ext_resource type="AudioStream" uid="uid://df3cskqopxqdo" path="res://sfx/draw.wav" id="25_yeaa7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
@@ -450,11 +453,10 @@ offset_bottom = 240.0
 texture = SubResource("GradientTexture1D_264x2")
 flip_h = true
 
-[node name="color" type="ColorRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
-offset_left = 32.0
-offset_right = 288.0
-offset_bottom = 240.0
-color = Color(1, 0, 1, 1)
+[node name="bg" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
+position = Vector2(32, 0)
+texture = ExtResource("22_ep7cm")
+centered = false
 
 [node name="Texture" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
 z_index = 1
@@ -469,6 +471,14 @@ position = Vector2(32, 230)
 [node name="sprite" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/pencil"]
 texture = ExtResource("22_1wl73")
 centered = false
+
+[node name="nifty" type="AudioStreamPlayer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+stream = ExtResource("24_eywim")
+volume_db = 5.0
+
+[node name="draw" type="AudioStreamPlayer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+stream = ExtResource("25_yeaa7")
+volume_db = 5.0
 
 [node name="keyboard" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["HUD_keyboard"]]
 
