@@ -40,14 +40,6 @@ func _parse_command(input : Array):
 			Global.load_game(2)
 			console_log("[color=green]Loading game data from slot 3...[/color]")
 			$ConsoleContainer/Input.clear()
-		"!keyboard":
-			Global.create_keyboard(0,false,true)
-			console_log("[color=blue]Keyboard opened[/color]")
-			$ConsoleContainer/Input.clear()
-		"!keyboard_ask":
-			Global.create_keyboard(0,true,true)
-			console_log("[color=blue]Question keyboard opened[/color]")
-			$ConsoleContainer/Input.clear()
 		"!caught":
 			Global.caught()
 			console_log("[color=blue]Playing CAUGHT animation...[/color]")
