@@ -14,24 +14,43 @@ func _parse_command(input : Array):
 	match input[0]:
 		"!nifty":
 			Global.nifty()
+			console_log("[color=blue]The Nifty menu has been opened.[/color]")
 			$ConsoleContainer/Input.clear()
 		"!save_game_0":
 			Global.save_game(0)
+			console_log("[color=green]Saving game data to slot 1...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!save_game_1":
 			Global.save_game(1)
+			console_log("[color=green]Saving game data to slot 2...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!save_game_2":
 			Global.save_game(1)
+			console_log("[color=green]Saving game data to slot 3...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!load_game_0":
 			Global.load_game(0)
+			console_log("[color=green]Loading game data from slot 1...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!load_game_1":
 			Global.load_game(1)
+			console_log("[color=green]Loading game data from slot 2...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!load_game_2":
 			Global.load_game(2)
+			console_log("[color=green]Loading game data from slot 3...[/color]")
+			$ConsoleContainer/Input.clear()
+		"!keyboard":
+			Global.create_keyboard(0,false,true)
+			console_log("[color=blue]Keyboard opened[/color]")
+			$ConsoleContainer/Input.clear()
+		"!keyboard_ask":
+			Global.create_keyboard(0,true,true)
+			console_log("[color=blue]Question keyboard opened[/color]")
+			$ConsoleContainer/Input.clear()
+		"!caught":
+			Global.caught()
+			console_log("[color=blue]Playing CAUGHT animation...[/color]")
 			$ConsoleContainer/Input.clear()
 		_:
 			console_log("[color=red]Invalid Command[/color]")
