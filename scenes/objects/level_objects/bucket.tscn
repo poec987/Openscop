@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://wgrqckgh4an2"]
+
+[ext_resource type="ArrayMesh" uid="uid://dltibstgb03js" path="res://graphics/3d/models/bucket.obj" id="1_2xqt0"]
+[ext_resource type="Script" path="res://scripts/objects/level_objects/bucket.gd" id="1_goka3"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/bucket.gdshader" id="2_vwlvu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5yxp"]
+render_priority = 0
+shader = ExtResource("2_vwlvu")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sqwr5"]
+custom_solver_bias = 1.0
+margin = 1.0
+size = Vector3(1, 0, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4nuk6"]
+custom_solver_bias = 1.0
+margin = 1.0
+size = Vector3(0, 0, 1)
+
+[node name="bucket" type="CharacterBody3D"]
+script = ExtResource("1_goka3")
+
+[node name="meshes" type="Node3D" parent="."]
+
+[node name="mesh0" type="MeshInstance3D" parent="meshes"]
+mesh = ExtResource("1_2xqt0")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_v5yxp")
+
+[node name="raycast" type="Node3D" parent="."]
+
+[node name="z_positive" type="ShapeCast3D" parent="raycast"]
+shape = SubResource("BoxShape3D_sqwr5")
+target_position = Vector3(0, 0, 0.5)
+max_results = 1
+
+[node name="z_negative" type="ShapeCast3D" parent="raycast"]
+shape = SubResource("BoxShape3D_sqwr5")
+target_position = Vector3(0, 0, -0.5)
+max_results = 1
+
+[node name="x_positive" type="ShapeCast3D" parent="raycast"]
+shape = SubResource("BoxShape3D_4nuk6")
+target_position = Vector3(0.5, 0, 0)
+max_results = 1
+
+[node name="x_negative" type="ShapeCast3D" parent="raycast"]
+shape = SubResource("BoxShape3D_4nuk6")
+target_position = Vector3(-0.5, 0, 0)
+max_results = 1
