@@ -70,5 +70,3 @@ func _on_answer_wait_timeout():
 	#if !went_down:
 	create_tween().tween_property($answer_origin,"position:y",0.0,ANIM_SPEEDS).set_trans(Tween.TRANS_SINE)
 		#went_down=true
-
-
