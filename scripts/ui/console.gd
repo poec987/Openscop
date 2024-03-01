@@ -44,6 +44,11 @@ func _parse_command(input : Array):
 			Global.caught()
 			console_log("[color=blue]Playing CAUGHT animation...[/color]")
 			$ConsoleContainer/Input.clear()
+		"!cur_char":
+			Global.update_sheets = true
+			Global.current_character = input[1].to_int()
+			get_tree().get_root().get_child(4).find_child("player_root").find_child("player").return_character()
+			console_log("[color=blue]Changing character...")
 		_:
 			console_log("[color=red]Invalid Command[/color]")
 		

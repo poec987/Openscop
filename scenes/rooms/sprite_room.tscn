@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://1pfs5mogg53a"]
+[gd_scene load_steps=8 format=3 uid="uid://1pfs5mogg53a"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_ky2gh"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_vgcff"]
@@ -23,6 +23,9 @@ shader_parameter/add_blend_mode = false
 shader_parameter/multiply_blend_mode = false
 shader_parameter/masked_color = Color(1, 1, 1, 1)
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wa4a5"]
+data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0, -2)
+
 [node name="sprite_room" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_ky2gh")]
@@ -38,6 +41,17 @@ environment_darkness = 1.0
 [node name="visual_mesh" type="Node3D" parent="level_root"]
 
 [node name="mesh0" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("5_xqpms")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_mjgkd")
+
+[node name="evencare" type="Area3D" parent="."]
+
+[node name="evencare" type="CollisionShape3D" parent="evencare"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+shape = SubResource("ConcavePolygonShape3D_wa4a5")
+
+[node name="mesh0" type="MeshInstance3D" parent="evencare"]
 mesh = ExtResource("5_xqpms")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_mjgkd")

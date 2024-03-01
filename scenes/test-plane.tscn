@@ -346,6 +346,7 @@ loading_preset = "evencare"
 enable_fog = true
 texture = ExtResource("3_uabo5")
 environment_darkness = 0.5
+preset = 1
 
 [node name="test_plane_specific" type="Node3D" parent="level_manipulator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 260)

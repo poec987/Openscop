@@ -43,6 +43,8 @@ var current_character = 0
 # 0 = guardian
 # 1 = Belle
 # 2 = Marvin
+# 3 = Poe
+# 4 = Didgie
 var update_sheets = false
 var pieces_amount = [0,0,0,0,0]
 
@@ -205,3 +207,7 @@ func nifty():
 	get_tree().paused = true
 	bg_music.pause()
 	
+func change_character(charId:int):
+	Global.update_sheets = true
+	Global.current_character = charId
+	get_tree().get_root().get_child(4).find_child("player_root").find_child("player").return_character()

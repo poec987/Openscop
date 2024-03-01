@@ -185,6 +185,8 @@ func _physics_process(delta):
 		#velocity.y -= gravity * delta
 	
 #HANDLES A BUNCH OF KEYBOARD SHORTCUTS
+	if Input.is_action_just_pressed("pressed_nifty"):
+		Global.nifty()
 	if Input.is_action_just_released("sheet_hotkey"):
 		get_node("../OpenSheets").show()
 	if Input.is_action_just_pressed("default_char"):
@@ -424,6 +426,12 @@ func return_character():
 			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 		if Global.current_character==1:
 			material.texture = load("res://graphics/sprites/player/belle.png")
+			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+		if Global.current_character==3:
+			material.texture = load("res://graphics/sprites/player/poe.png")
+			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+		if Global.current_character==4:
+			material.texture = load("res://graphics/sprites/player/didgie.png")
 			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 	if Global.current_character==2:
 		if Global.update_sheets:
