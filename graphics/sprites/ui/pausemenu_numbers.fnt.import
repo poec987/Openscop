@@ -14,3 +14,4 @@ dest_files=["res://.godot/imported/pausemenu_numbers.fnt-6d1d68b1ed6dd0358e30a56
 
 fallbacks=[]
 compress=true
+scaling_mode=2
