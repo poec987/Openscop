@@ -5,7 +5,6 @@ const DEFAULT_ANSWER_WAIT = 0.5
 var pink = false
 
 var went_down = false
-var got_answer = false
 
 @onready var material = $answer_origin/answer
 
@@ -19,7 +18,6 @@ func _process(delta):
 		$answer_origin.rotation.y=0.
 
 	if Global.keyboard_RAM!="":
-		got_answer = false
 		if $answer_origin.position.y<5:
 			var go_up = create_tween()
 			go_up.tween_property($answer_origin,"position:y",5.0,ANIM_SPEEDS)
@@ -45,21 +43,20 @@ func answer_processing(keyboard_answer):
 		if question=="where was the windmill":
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
 			set_answer("res://graphics/sprites/objects/tool/answer_windmill.png")
-		elif !got_answer: # Answer for invalid question.
+		else:
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
 			set_answer("res://graphics/sprites/objects/tool/answer_idontknow.png")
 	else:
 		if question=="poop":
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
 			set_answer("res://graphics/sprites/objects/tool/answer_windmill.png")
-		elif !got_answer: # Answer for invalid question.
+		else:
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
 			set_answer("res://graphics/sprites/objects/tool/answer_idontknow.png")
 			
 func set_answer(filepath):
 	material.texture = load(filepath)
 	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-	got_answer = true
 	
 func watch_windmill():
 	var go_up = create_tween()
