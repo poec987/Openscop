@@ -47,35 +47,36 @@ const ROTATION_ANIM_SPEED = 1.5
 const GROW_ANIMATION_SPEED = 0.25
 
 
-var credits = [\"YOU FOUND ME!\\nDon't tell anybody, and privately\\nsend a screenshot to Cheddar.\",
+var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a screenshot to Cheddar.\",
 \"You're now entitled to inserting \\na sprite of your own here.\",
-\"I can't imagine how much you \\nmust have walked to find me.\",
+\"I can't imagine how much you \\nmust have walked to find this \\nplace.\",
 \"Anyways...\",
 \"I am The Creator.\",
 \"I made this little world for you.\",
 \"Alongside my friends. Whom I'd \\nlike to thank individually here.\",
 \"And now...\",
 \"The [color=#00FF00]MMOscop[/color]/[color=#0000FF]Openscop[/color] Team:\",
-\"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nGeometricentric, Izzint, \\nJuanB7, Lewgus, Maxine\",
-\"Wowzaboi.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
+\"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nGeometricentric, Izzint, \\nJuanB7, Lewgus...\",
+\"Maxine, Wowzaboi.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
 \"[color=#00FFFF]The Level Recreation Team:[/color]\\nCheddar, Geometricentric, \\nIzzint, Lewgus.\",
 \"[color=#00FFFF]The Texture Recreation Team:[/color]\\nBetah, Izzint, Lewgus.\",
-\"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Olivia.\",
+\"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Olivia, Unnaturalistic.\",
 \"[color=#00FFFF]Sound/Music Ripping Team:[/color]\\nCheddar, BrowserTG5, \\nGeometricentric, Lewgus.\",
-\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, \\nJerzygorsky, Olivia, Parsley.\",
+\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, \\nJerzygorsky, Olivia, \\nUnnaturalistic, Parsley.\",
 \"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Ronicalter, TL/24,Tom.\",
+\"[color=#47B6FF]Shoutouts to:\\n[/color]PoeDev, ZLD1.\",
 \"Shoutouts to you all!\\nY'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!\",
 \"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
-\"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pause menu\\n buttons, pet menu names.\",
-\"[color=#38733c]Anthony Domenico:[/color] Care, \\nloading screens, music, \\ntextbox backgrounds, SFX.\",
-\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian,p2totalk \\nbuttons, pieces.\",
-\"[color=#38733c]Cheddar:[/color] Care B, Nifty, pieces, tool answers.\",
+\"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pause menu buttons, \\npet menu names.\",
+\"[color=#38733c]Anthony Domenico:[/color] Care, bucket, \\nloading screens, music, textbox \\nbackgrounds, SFX.\",
+\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian, p2totalk \\nbuttons, pieces.\",
+\"[color=#38733c]Cheddar:[/color] Care B, bucket, Nifty, pieces, tool answers.\",
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
 \"[color=#38733c]Geometricentric:[/color] Amber, Care, \\ncone piece, CAUGHT sprite, Gift \\nPlane loading screen, gift sprite and icon...\",
 \"Interaction symbol texture, \\nkeyboard, Pen, Tool answers.\",
 \"[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
-\"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]JuanB7:[/color] Marvin, Paul, Pause Menu.\",
+\"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]JuanB7:[/color] Marvin, Paul, Pause \\nmenu.\",
 \"[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\\n[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
 \"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
 \"[color=#80aab3]Osyu:[/color] Keyboard, p2totalk \\nbuttons, pet menu, pet menu \\nboxes, pets.\\n[color=#80aab3]Releskowitz: [/color]Pause menu.\",
@@ -380,11 +381,48 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("3_8wwrg")
 hframes = 4
+vframes = 2
 script = SubResource("GDScript_jvya2")
 
 [node name="Timer" type="Timer" parent="level_manipulator/test_plane_specific/me"]
 process_callback = 0
 wait_time = 0.125
+
+[node name="andrew" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+material_override = SubResource("ShaderMaterial_y0djn")
+offset = Vector2(0, 40)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_8wwrg")
+hframes = 4
+vframes = 2
+frame = 4
+
+[node name="mrfas" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+material_override = SubResource("ShaderMaterial_y0djn")
+offset = Vector2(0, 40)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_8wwrg")
+hframes = 4
+vframes = 2
+frame = 5
+
+[node name="max" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+material_override = SubResource("ShaderMaterial_y0djn")
+offset = Vector2(0, 40)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_8wwrg")
+hframes = 4
+vframes = 2
+frame = 6
 
 [node name="grass" type="Node3D" parent="level_manipulator/test_plane_specific"]
 
