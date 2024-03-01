@@ -11,13 +11,9 @@ shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/fog = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sqwr5"]
-custom_solver_bias = 1.0
-margin = 1.0
 size = Vector3(1, 0, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4nuk6"]
-custom_solver_bias = 1.0
-margin = 1.0
 size = Vector3(0, 0, 1)
 
 [node name="bucket" type="CharacterBody3D"]
