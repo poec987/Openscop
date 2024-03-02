@@ -72,6 +72,7 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_npv3p"]
 font = ExtResource("16_gfid7")
+font_size = 27
 
 [sub_resource type="LabelSettings" id="LabelSettings_rtn8s"]
 font = ExtResource("5_5sf62")

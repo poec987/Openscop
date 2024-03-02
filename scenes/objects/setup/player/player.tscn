@@ -99,7 +99,7 @@ billboard = 1
 fixed_size = true
 texture_filter = 0
 font = ExtResource("6_q7wbx")
-font_size = 1
+font_size = 34
 outline_size = 0
 uppercase = true
 
