@@ -136,6 +136,4 @@ access = 1
 root_subfolder = "sheets"
 filters = PackedStringArray("*.png")
 
-[node name="conflict_test" type="Node" parent="."]
-
 [connection signal="file_selected" from="OpenSheets" to="player" method="_on_open_sheets_file_selected"]
