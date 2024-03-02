@@ -51,6 +51,7 @@ shader_parameter/animation_speed = 1.0
 
 [node name="player" type="CharacterBody3D" parent="." groups=["Player"]]
 transform = Transform3D(-1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, 0)
+floor_block_on_wall = false
 script = ExtResource("1_l7eau")
 
 [node name="collision" type="CollisionShape3D" parent="player"]
