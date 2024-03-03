@@ -98,13 +98,14 @@ func _process(delta):
 					reading_bio=true
 					animated=false
 					spawned_textbox=false
-		var go_down = create_tween()
-		go_down.tween_property($buttons_group,\"position:y\",45,0.5).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
-		await go_down.finished
-		$buttons_group/SelectPet/AdvanceText.visible = reading_bio
-		$buttons_group/SelectPet/SelectPet.visible = !reading_bio
-		create_tween().tween_property($buttons_group,\"position:y\",0,0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
-	
+		if reading_bio:
+			var go_down = create_tween()
+			go_down.tween_property($buttons_group,\"position:y\",45,0.5).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+			await go_down.finished
+			$buttons_group/SelectPet/AdvanceText.visible = reading_bio
+			$buttons_group/SelectPet/SelectPet.visible = !reading_bio
+			create_tween().tween_property($buttons_group,\"position:y\",0,0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+		
 	if reading_bio:
 		if get_node(\"pet_buttons\").get_child(selected_option).position.x==75.5:
 			var textbox_scene = preload(\"res://scenes/objects/menu/pettextbox_object.tscn\")
