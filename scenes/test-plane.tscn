@@ -339,7 +339,6 @@ data = PackedVector3Array(-1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 
 
 [node name="warp" parent="." instance=ExtResource("5_bt3tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
-diagonal_entrance = null
 directions = null
 warp_direction = 3
 scene = "res://scenes/test-plane.tscn"

@@ -2,7 +2,7 @@
 extends Node3D
 @export_subgroup("Warp_properties")
 @export var all_directions = false
-@export var diagonal_entrance = true
+@export var diagonal_entrance = false
 @export var directions = Vector2i.ZERO
 @export var warp_direction=0
 @export_subgroup("Warp_to")
