@@ -55,21 +55,13 @@ background_color = Color(1, 1, 1, 1)
 [sub_resource type="GDScript" id="GDScript_v5jfi"]
 script/source = "extends Node3D
 
-var boot_y = false
-var random_array = [1.0,1.0]
-# Called when the node enters the scene tree for the first time.
-func _process(_delta):
-	if !boot_y:
-		animate_y()
-		boot_y=true
-func animate_y():
-	random_array[0] = randi_range(0.25,1.0)
-	var scroll = create_tween()
-	scroll.tween_property(self,\"rotation:y\",-0.5,random_array[0]).set_trans(Tween.TRANS_SINE).as_relative()
-	scroll.tween_property(self,\"rotation:y\",0.5,random_array[0]*-1).set_trans(Tween.TRANS_SINE).as_relative()
-	scroll.tween_property(self,\"rotation:y\",0.5,random_array[0]).set_trans(Tween.TRANS_SINE).as_relative()
-	scroll.tween_property(self,\"rotation:y\",-0.5,random_array[0]*-1).set_trans(Tween.TRANS_SINE).as_relative()
-	boot_y=false
+var timer:float = 0
+
+func _process(delta):
+	timer += delta
+	
+	rotation.z = -sin(2 * timer * PI) * cos(timer * PI / 5) * 0.25
+	rotation.y = cos(2 * (timer + 0.25) * PI) * sin(timer * PI / 5) * 0.4
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g30e1"]
