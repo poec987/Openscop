@@ -1,104 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxr4ceswpfl0g"]
+[gd_scene load_steps=16 format=3 uid="uid://bxr4ceswpfl0g"]
 
-[ext_resource type="Shader" path="res://shaders/screen/scroll.gdshader" id="1_x6syp"]
-[ext_resource type="Texture2D" uid="uid://b1uabhin2r18l" path="res://graphics/3d/tex/nmp/grass.png" id="2_xngdo"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="3_0q3dl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="4_2kieq"]
+[ext_resource type="ArrayMesh" uid="uid://c7tubgaxyorre" path="res://graphics/3d/room_mesh/gift_plane/logo.obj" id="4_qx0pe"]
+[ext_resource type="Texture2D" uid="uid://btfs4ptkrfxgo" path="res://graphics/sprites/ui/pet_ref.png" id="4_st8hs"]
 [ext_resource type="Script" path="res://scripts/objects/loading.gd" id="5_58din"]
 [ext_resource type="ArrayMesh" uid="uid://b6jbae51ut5w5" path="res://graphics/3d/room_mesh/gift_plane/rail.obj" id="6_1wwlf"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="7_qmxk7"]
 [ext_resource type="Texture2D" uid="uid://bbk0spn2utow1" path="res://graphics/3d/room_mesh/gift_plane/texture_1.png" id="8_57nga"]
-
-[sub_resource type="GDScript" id="GDScript_kwjvh"]
-script/source = "extends Node 
-# do you think its worth it to make this a class? - izz
-
-@export_category(\"Title Screen Manipulator\")
-@export var room_name = \"\"
-@export var loading_preset=\"\"
-@export var background_music_id = 0
-@export var fade_color: Color
-
-@export_subgroup(\"Environment\")
-@export var enable_fog = false
-@export var texture_background = false
-@export var texture: Texture2D
-@export var scroll_speed = 0.25
-@export var sky_and_fog_color = Vector4.ZERO
-@export var fog_radius = 0.
-@export var ambient_color = Color(0., 0., 0.,1.0)
-@export var environment_darkness = 0.
-@export var set_fog_focus = Vector3.ZERO
-
-# 0 = NO PRESET
-# 1 = EVENCARE/GIFTPLANE
-# 2 = NMP
-
-func _ready():
-	Global.room_name = room_name
-	Global.loading_preset = loading_preset
-	get_tree().paused=false
-	get_tree().get_first_node_in_group(\"loading_overlay\").get_child(0).color=fade_color
-	
-	
-	if ambient_color!=Color(0., 0., 0.,1.0):
-		$skybox.get_environment().set_ambient_light_color(ambient_color)
-	else:
-		$skybox.get_environment().set_ambient_light_color(Color(0.89, 0.89, 0.89,1.0))
-	
-	if environment_darkness!=0.:
-		$skybox.get_environment().ambient_light_energy = environment_darkness
-	else:
-		$skybox.get_environment().ambient_light_energy = 0.73
-	
-	if enable_fog:
-		RenderingServer.global_shader_parameter_set(\"fog_enable\", true)
-		if sky_and_fog_color!=Vector4(0.,0.,0.,0.):
-		#SETS FOG COLOR AND FOG RADIUS AS GAME RUNS
-			RenderingServer.global_shader_parameter_set(\"fog_color\", sky_and_fog_color)
-			$skybox.get_environment().set_bg_color(Color(sky_and_fog_color.x,sky_and_fog_color.y,sky_and_fog_color.z,sky_and_fog_color.w))
-		else:
-			RenderingServer.global_shader_parameter_set(\"fog_color\", Vector4.ZERO)
-			$skybox.get_environment().set_bg_color(Color(0.,0.,0.,0.))
-			if fog_radius!=0.:
-				RenderingServer.global_shader_parameter_set(\"sphere_size\", fog_radius)
-			else:
-				RenderingServer.global_shader_parameter_set(\"sphere_size\", 13.5)
-	else:
-		RenderingServer.global_shader_parameter_set(\"fog_enable\", false)
-	
-	if !texture_background:
-		$background/color.visible=true
-		$background/texture.visible=false
-		$background/color.color = Color(sky_and_fog_color.x,sky_and_fog_color.y,sky_and_fog_color.z,1.0)
-	else:
-		$background/color.visible=false
-		$background/texture.visible=true
-		if texture!=null:
-			$background/texture.texture=texture
-		$background/texture.get_material().set_shader_parameter(\"scroll_speed\",scroll_speed)
-	bg_music.play_track(background_music_id)
-	
-
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jtixl"]
-shader = ExtResource("1_x6syp")
-shader_parameter/scroll_speed = null
-
-[sub_resource type="Environment" id="Environment_xnjo4"]
-background_mode = 1
-background_canvas_max_layer = -10
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("3_0q3dl")
 shader_parameter/effect = null
 shader_parameter/ntsc_enable = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8owon"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fstwp"]
 render_priority = 0
 shader = ExtResource("7_qmxk7")
 shader_parameter/billboard = false
@@ -115,39 +31,85 @@ shader_parameter/add_blend_mode = false
 shader_parameter/multiply_blend_mode = false
 shader_parameter/masked_color = Color(1, 1, 1, 1)
 
+[sub_resource type="GDScript" id="GDScript_ue0wc"]
+script/source = "extends MeshInstance3D
+
+var boot = false
+# Called when the node enters the scene tree for the first time.
+func _process(_delta):
+	if !boot:
+		animate()
+		boot=true
+func animate():
+	var scroll = create_tween()
+	scroll.tween_property(self,\"position:x\",-1.0,0.5).set_trans(Tween.TRANS_LINEAR)
+	await scroll.finished
+	self.position.x=0
+	boot=false
+"
+
+[sub_resource type="Environment" id="Environment_wbo6w"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_v5jfi"]
+script/source = "extends Node3D
+
+var boot_y = false
+var random_array = [1.0,1.0]
+# Called when the node enters the scene tree for the first time.
+func _process(_delta):
+	if !boot_y:
+		animate_y()
+		boot_y=true
+func animate_y():
+	random_array[0] = randi_range(0.25,1.0)
+	var scroll = create_tween()
+	scroll.tween_property(self,\"rotation:y\",-0.5,random_array[0]).set_trans(Tween.TRANS_SINE).as_relative()
+	scroll.tween_property(self,\"rotation:y\",0.5,random_array[0]*-1).set_trans(Tween.TRANS_SINE).as_relative()
+	scroll.tween_property(self,\"rotation:y\",0.5,random_array[0]).set_trans(Tween.TRANS_SINE).as_relative()
+	scroll.tween_property(self,\"rotation:y\",-0.5,random_array[0]*-1).set_trans(Tween.TRANS_SINE).as_relative()
+	boot_y=false
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g30e1"]
+render_priority = 0
+shader = ExtResource("7_qmxk7")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(0.631373, 0.25098, 1, 1)
+shader_parameter/fog = false
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ep10c"]
+render_priority = 0
+shader = ExtResource("7_qmxk7")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 0.537255, 1, 1)
+shader_parameter/fog = false
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
 [node name="title" type="Node3D"]
 
-[node name="title_manipulator" type="Node" parent="."]
-process_mode = 3
-script = SubResource("GDScript_kwjvh")
-fade_color = Color(1, 1, 1, 1)
-sky_and_fog_color = Vector4(1, 1, 1, 1)
-environment_darkness = 1.0
-
-[node name="bg_music" type="AudioStreamPlayer" parent="title_manipulator"]
-process_mode = 3
-
-[node name="background" type="CanvasLayer" parent="title_manipulator"]
-layer = -1
-
-[node name="texture" type="TextureRect" parent="title_manipulator/background"]
-texture_filter = 1
-material = SubResource("ShaderMaterial_jtixl")
-offset_right = 320.0
-offset_bottom = 240.0
-texture = ExtResource("2_xngdo")
-stretch_mode = 1
-
-[node name="color" type="ColorRect" parent="title_manipulator/background"]
-visible = false
-offset_right = 320.0
-offset_bottom = 240.0
-color = Color(0, 0, 0, 1)
-
-[node name="skybox" type="WorldEnvironment" parent="title_manipulator"]
-environment = SubResource("Environment_xnjo4")
-
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 3.924, 3.25, 8)
+current = true
+fov = 35.0
 
 [node name="PSXLayer" type="CanvasLayer" parent="Camera3D"]
 
@@ -209,16 +171,40 @@ offset_right = 320.0
 offset_bottom = 240.0
 
 [node name="loading_screen" type="TextureRect" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
+visible = false
 z_index = 11
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="loading_timer" type="Timer" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
 
+[node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.8143)
+modulate = Color(1, 1, 1, 0.164706)
+texture = ExtResource("4_st8hs")
+
 [node name="level_root" type="Node3D" parent="."]
 
 [node name="visual_mesh" type="Node3D" parent="level_root"]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="level_root/visual_mesh"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
 mesh = ExtResource("6_1wwlf")
-surface_material_override/0 = SubResource("ShaderMaterial_8owon")
+surface_material_override/0 = SubResource("ShaderMaterial_fstwp")
+script = SubResource("GDScript_ue0wc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wbo6w")
+
+[node name="title_root" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.924, 3.25, 8)
+
+[node name="title_mesh_root" type="Node3D" parent="title_root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.157645, -0.513)
+script = SubResource("GDScript_v5jfi")
+
+[node name="title_mesh" type="MeshInstance3D" parent="title_root/title_mesh_root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0012579)
+mesh = ExtResource("4_qx0pe")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_g30e1")
+surface_material_override/1 = SubResource("ShaderMaterial_ep10c")
