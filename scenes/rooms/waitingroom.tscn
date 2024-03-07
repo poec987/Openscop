@@ -1,26 +1,34 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1evdrl0tbjmu"]
+[gd_scene load_steps=8 format=3 uid="uid://b1evdrl0tbjmu"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_nwcat"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_t7doa"]
 [ext_resource type="ArrayMesh" uid="uid://bxbyl6yjx8bnc" path="res://graphics/3d/room_mesh/waitingroom/waitingroomVERT.obj" id="3_ux568"]
-[ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="4_74fpo"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_qflsr"]
 [ext_resource type="Texture2D" uid="uid://5mfj3hykhve1" path="res://graphics/3d/room_mesh/waitingroom/texture_0.png" id="5_7n7iq"]
+[ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="6_b02sb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yyoh0"]
 render_priority = 0
-shader = ExtResource("4_74fpo")
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader = ExtResource("4_qflsr")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = true
+shader_parameter/albedoTex = ExtResource("5_7n7iq")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_pan_velocity = Vector2(0, 0)
-shader_parameter/albedoTex = ExtResource("5_7n7iq")
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [node name="waitingroom" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_nwcat")]
 level_slogan = "This is probably going to take a while."
 footstep_sound = 3
-enable_fog = true
 fog_radius = 5.0
 
 [node name="player_root" parent="." instance=ExtResource("2_t7doa")]
@@ -30,6 +38,36 @@ fog_radius = 5.0
 [node name="visual_mesh" type="Node3D" parent="level_root"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
-transform = Transform3D(0.515965, 0, 0, 0, 0.515965, 0, 0, 0, 0.515965, -0.833483, -1.90735e-06, -0.660106)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.833483, -1.90735e-06, -0.660106)
 mesh = ExtResource("3_ux568")
 surface_material_override/0 = SubResource("ShaderMaterial_yyoh0")
+
+[node name="piece_root" parent="level_root" instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.55095, 0, 1.71424)
+
+[node name="piece_root" parent="." instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02881, 0, 1.71424)
+
+[node name="piece_root2" parent="." instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.719, 0, 1.71424)
+
+[node name="piece_root3" parent="." instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3779, 0, 1.71424)
+
+[node name="piece_root4" parent="." instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8589, 0, 1.71424)
+
+[node name="piece_root5" parent="." instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4936, 0, 1.71424)
+
+[node name="piece_root6" parent="." instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9714, 0, 1.71424)
+
+[node name="piece_root7" parent="." instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6616, 0, 1.71424)
+
+[node name="piece_root8" parent="." instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3205, 0, 1.71424)
+
+[node name="piece_root9" parent="." instance=ExtResource("6_b02sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8015, 0, 1.71424)
