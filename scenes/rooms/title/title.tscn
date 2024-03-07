@@ -1,20 +1,57 @@
-[gd_scene load_steps=16 format=3 uid="uid://bxr4ceswpfl0g"]
+[gd_scene load_steps=30 format=3 uid="uid://bxr4ceswpfl0g"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="3_0q3dl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="4_2kieq"]
+[ext_resource type="FontFile" uid="uid://cernpx6usgjfx" path="res://graphics/sprites/ui/PetscopWide.ttf" id="4_8pwy7"]
 [ext_resource type="ArrayMesh" uid="uid://c7tubgaxyorre" path="res://graphics/3d/room_mesh/gift_plane/logo.obj" id="4_qx0pe"]
 [ext_resource type="Texture2D" uid="uid://btfs4ptkrfxgo" path="res://graphics/sprites/ui/pet_ref.png" id="4_st8hs"]
 [ext_resource type="Script" path="res://scripts/objects/loading.gd" id="5_58din"]
+[ext_resource type="Texture2D" uid="uid://cfulnjfmj8lxv" path="res://graphics/sprites/ui/press_start.png" id="5_ox8jy"]
 [ext_resource type="ArrayMesh" uid="uid://b6jbae51ut5w5" path="res://graphics/3d/room_mesh/gift_plane/rail.obj" id="6_1wwlf"]
+[ext_resource type="Script" path="res://scripts/ui/nifty.gd" id="6_8uvr8"]
+[ext_resource type="Texture2D" uid="uid://ed76e6dscv1j" path="res://graphics/sprites/ui/nifty_background.png" id="7_a78oc"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="7_qmxk7"]
 [ext_resource type="Texture2D" uid="uid://bbk0spn2utow1" path="res://graphics/3d/room_mesh/gift_plane/texture_1.png" id="8_57nga"]
+[ext_resource type="Texture2D" uid="uid://bjbo7regcuusm" path="res://graphics/sprites/ui/nifty_pencil.png" id="8_rrfvg"]
+[ext_resource type="AudioStream" uid="uid://b5yjt4nju1572" path="res://sfx/nifty.wav" id="9_ncojn"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/title-opaque.gdshader" id="10_gu5ww"]
+[ext_resource type="AudioStream" uid="uid://df3cskqopxqdo" path="res://sfx/draw.wav" id="10_nfgrt"]
+[ext_resource type="Texture2D" uid="uid://cigrkwlb1f6jt" path="res://graphics/sprites/ui/gift.png" id="11_7r1ny"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("3_0q3dl")
 shader_parameter/effect = null
 shader_parameter/ntsc_enable = null
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fstwp"]
+[sub_resource type="LabelSettings" id="LabelSettings_pb015"]
+font = ExtResource("4_8pwy7")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_26wy2"]
+script/source = "extends Sprite2D
+
+var timer:float = 0
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	timer +=delta
+	self.visible = !(int(timer)%2)
+"
+
+[sub_resource type="Gradient" id="Gradient_xo8nd"]
+colors = PackedColorArray(0.772549, 0.137255, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kesri"]
+gradient = SubResource("Gradient_xo8nd")
+width = 32
+
+[sub_resource type="Environment" id="Environment_wbo6w"]
+background_color = Color(1, 1, 1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.705882, 0.027451, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_117g6"]
 render_priority = 0
 shader = ExtResource("7_qmxk7")
 shader_parameter/billboard = false
@@ -48,10 +85,6 @@ func animate():
 	boot=false
 "
 
-[sub_resource type="Environment" id="Environment_wbo6w"]
-background_mode = 1
-background_color = Color(1, 1, 1, 1)
-
 [sub_resource type="GDScript" id="GDScript_v5jfi"]
 script/source = "extends Node3D
 
@@ -64,48 +97,32 @@ func _process(delta):
 	rotation.y = cos(2 * (timer + 0.25) * PI) * sin(timer * PI / 5) * 0.4
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g30e1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qn5j"]
 render_priority = 0
-shader = ExtResource("7_qmxk7")
-shader_parameter/billboard = false
-shader_parameter/y_billboard = false
-shader_parameter/transparent_color = Color(1, 0, 1, 1)
-shader_parameter/tint_color = Color(0.631373, 0.25098, 1, 1)
-shader_parameter/fog = false
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/vertex_color_as_mask = false
-shader_parameter/invert = false
-shader_parameter/add_blend_mode = false
-shader_parameter/multiply_blend_mode = false
-shader_parameter/masked_color = Color(1, 1, 1, 1)
+shader = ExtResource("10_gu5ww")
+shader_parameter/modulate_color = Color(0.631373, 0.25098, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ep10c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h4bov"]
 render_priority = 0
-shader = ExtResource("7_qmxk7")
-shader_parameter/billboard = false
-shader_parameter/y_billboard = false
-shader_parameter/transparent_color = Color(1, 0, 1, 1)
-shader_parameter/tint_color = Color(1, 0.537255, 1, 1)
-shader_parameter/fog = false
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/vertex_color_as_mask = false
-shader_parameter/invert = false
-shader_parameter/add_blend_mode = false
-shader_parameter/multiply_blend_mode = false
-shader_parameter/masked_color = Color(1, 1, 1, 1)
+shader = ExtResource("10_gu5ww")
+shader_parameter/modulate_color = Color(1, 0.537255, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_xt5qy"]
+script/source = "extends Sprite3D
+
+var timer:float = 5
+
+func _process(delta):
+	timer += delta
+	
+	rotation.z = -sin(2 * timer * PI)/5
+"
 
 [node name="title" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 3.924, 3.25, 8)
-current = true
-fov = 35.0
+[node name="PSXLayer" type="CanvasLayer" parent="."]
 
-[node name="PSXLayer" type="CanvasLayer" parent="Camera3D"]
-
-[node name="NTSC" type="SubViewportContainer" parent="Camera3D/PSXLayer"]
+[node name="NTSC" type="SubViewportContainer" parent="PSXLayer"]
 material = SubResource("ShaderMaterial_jhksb")
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,7 +133,7 @@ mouse_filter = 2
 stretch = true
 metadata/_edit_use_anchors_ = true
 
-[node name="NTSC_viewport" type="SubViewport" parent="Camera3D/PSXLayer/NTSC"]
+[node name="NTSC_viewport" type="SubViewport" parent="PSXLayer/NTSC"]
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
@@ -125,7 +142,7 @@ audio_listener_enable_3d = true
 size = Vector2i(320, 240)
 render_target_update_mode = 4
 
-[node name="Dither" type="SubViewportContainer" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport"]
+[node name="Dither" type="SubViewportContainer" parent="PSXLayer/NTSC/NTSC_viewport"]
 material = ExtResource("4_2kieq")
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,7 +151,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="dither_view" type="SubViewport" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport/Dither"]
+[node name="dither_view" type="SubViewport" parent="PSXLayer/NTSC/NTSC_viewport/Dither"]
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
@@ -143,60 +160,148 @@ audio_listener_enable_3d = true
 size = Vector2i(320, 240)
 render_target_update_mode = 4
 
-[node name="no_filter_view" type="SubViewportContainer" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+[node name="no_filter_view" type="SubViewportContainer" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="no_filter_view" type="SubViewport" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view" groups=["screen_feed"]]
+[node name="no_filter_view" type="SubViewport" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view" groups=["screen_feed"]]
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="loading" type="Node2D" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["loading_overlay"]]
+[node name="loading" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["loading_overlay"]]
 process_mode = 3
 script = ExtResource("5_58din")
 
-[node name="fade_in" type="ColorRect" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
+[node name="fade_in" type="ColorRect" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
 visible = false
 z_index = 10
 offset_right = 320.0
 offset_bottom = 240.0
 
-[node name="loading_screen" type="TextureRect" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
+[node name="loading_screen" type="TextureRect" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
 visible = false
 z_index = 11
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="loading_timer" type="Timer" parent="Camera3D/PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
+[node name="loading_timer" type="Timer" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
 
-[node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
+[node name="Label" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+offset_left = 96.0
+offset_top = 207.0
+offset_right = 228.0
+offset_bottom = 226.0
+text = "© 1997 Garalina"
+label_settings = SubResource("LabelSettings_pb015")
+
+[node name="press_start" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+texture = ExtResource("5_ox8jy")
+centered = false
+script = SubResource("GDScript_26wy2")
+
+[node name="nifty" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["Nifty"]]
+process_mode = 3
+visible = false
+script = ExtResource("6_8uvr8")
+
+[node name="border" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+z_index = 1
+
+[node name="wall_1" type="TextureRect" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
+offset_right = 32.0
+offset_bottom = 240.0
+texture = SubResource("GradientTexture1D_kesri")
+
+[node name="wall_2" type="TextureRect" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
+offset_left = 288.0
+offset_right = 320.0
+offset_bottom = 240.0
+texture = SubResource("GradientTexture1D_kesri")
+flip_h = true
+
+[node name="bg" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/border"]
+position = Vector2(32, 0)
+texture = ExtResource("7_a78oc")
+centered = false
+
+[node name="Texture" type="TextureRect" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+z_index = 1
+offset_left = 32.0
+offset_right = 72.0
+offset_bottom = 40.0
+
+[node name="pencil" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+z_index = 2
+position = Vector2(32, 230)
+
+[node name="sprite" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty/pencil"]
+texture = ExtResource("8_rrfvg")
+centered = false
+
+[node name="nifty" type="AudioStreamPlayer" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+stream = ExtResource("9_ncojn")
+volume_db = 5.0
+
+[node name="draw" type="AudioStreamPlayer" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/nifty"]
+stream = ExtResource("10_nfgrt")
+volume_db = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 3.924, 3.25, 8)
+fov = 35.0
+
+[node name="Sprite3D" type="Sprite3D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.8143)
+visible = false
 modulate = Color(1, 1, 1, 0.164706)
 texture = ExtResource("4_st8hs")
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(0.967268, 0, -0.253758, 0, 1, 0, 0.253758, 0, 0.967268, 3.67449, 3.07897, 7.82394)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wbo6w")
 
 [node name="level_root" type="Node3D" parent="."]
 
 [node name="visual_mesh" type="Node3D" parent="level_root"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
+[node name="mesh0" type="MeshInstance3D" parent="level_root/visual_mesh"]
 mesh = ExtResource("6_1wwlf")
-surface_material_override/0 = SubResource("ShaderMaterial_fstwp")
+surface_material_override/0 = SubResource("ShaderMaterial_117g6")
 script = SubResource("GDScript_ue0wc")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_wbo6w")
 
 [node name="title_root" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.924, 3.25, 8)
 
 [node name="title_mesh_root" type="Node3D" parent="title_root"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.157645, -0.513)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00254679, -0.157645, -0.513)
 script = SubResource("GDScript_v5jfi")
 
 [node name="title_mesh" type="MeshInstance3D" parent="title_root/title_mesh_root"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0012579)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00349665, 0, -0.0012579)
 mesh = ExtResource("4_qx0pe")
-skeleton = NodePath("../../../Camera3D")
-surface_material_override/0 = SubResource("ShaderMaterial_g30e1")
-surface_material_override/1 = SubResource("ShaderMaterial_ep10c")
+skeleton = NodePath("../../../PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_6qn5j")
+surface_material_override/1 = SubResource("ShaderMaterial_h4bov")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="title_root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.077208, 0.066988)
+spot_range = 1.0
+
+[node name="gift" type="Sprite3D" parent="title_root"]
+transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 0, -0.185306, -0.719129)
+pixel_size = 0.002
+double_sided = false
+texture_filter = 0
+texture = ExtResource("11_7r1ny")
+script = SubResource("GDScript_xt5qy")
+
+[node name="background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="color" type="ColorRect" parent="background"]
+offset_right = 320.0
+offset_bottom = 240.0

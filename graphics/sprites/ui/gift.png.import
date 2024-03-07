@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbk0spn2utow1"
-path="res://.godot/imported/texture_1.png-07e5eccbbaf735e867d9286e91bfbab5.ctex"
+uid="uid://cigrkwlb1f6jt"
+path.s3tc="res://.godot/imported/gift.png-bd041583f4412e4aaf045c13b33cf43b.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://graphics/3d/room_mesh/gift_plane/texture_1.png"
-dest_files=["res://.godot/imported/texture_1.png-07e5eccbbaf735e867d9286e91bfbab5.ctex"]
+source_file="res://graphics/sprites/ui/gift.png"
+dest_files=["res://.godot/imported/gift.png-bd041583f4412e4aaf045c13b33cf43b.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
