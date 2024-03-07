@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bettcxtq4y2jb"]
+
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_ig67g"]
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_m4jqv"]
+[ext_resource type="ArrayMesh" uid="uid://dobw7vsad33u8" path="res://graphics/3d/models/workzone.obj" id="3_6tdcf"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_5hdli"]
+[ext_resource type="Texture2D" uid="uid://cy2bhbpyilwt6" path="res://graphics/3d/room_mesh/level2.png" id="5_dbvuk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gnsvx"]
+render_priority = 0
+shader = ExtResource("4_5hdli")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("5_dbvuk")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
+[node name="workzone" type="Node3D"]
+
+[node name="level_manipulator" parent="." instance=ExtResource("1_ig67g")]
+background_music_id = 1
+sky_and_fog_color = Vector4(255, 255, 255, 0)
+ambient_color = Color(1, 1, 1, 1)
+
+[node name="player_root" parent="level_manipulator" instance=ExtResource("2_m4jqv")]
+
+[node name="level_root" type="Node3D" parent="level_manipulator"]
+
+[node name="visual_mesh" type="Node3D" parent="level_manipulator/level_root"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level_manipulator/level_root/visual_mesh"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.458315, 0, -3.33648)
+mesh = ExtResource("3_6tdcf")
+surface_material_override/0 = SubResource("ShaderMaterial_gnsvx")

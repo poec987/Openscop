@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+#COMMENT
+
 # MOVEMENT VARIABLES
 
 var movement_speed = 5
