@@ -29,7 +29,6 @@ data = PackedVector3Array(2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0
 [node name="sprite_room" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_ky2gh")]
-level_slogan = "This is the level slogan!"
 sky_and_fog_color = Vector4(1, 1, 1, 0)
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0

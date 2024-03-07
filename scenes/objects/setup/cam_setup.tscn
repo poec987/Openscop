@@ -70,6 +70,7 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_npv3p"]
 font = ExtResource("16_gfid7")
+font_size = 27
 
 [sub_resource type="LabelSettings" id="LabelSettings_rtn8s"]
 font = ExtResource("5_5sf62")
@@ -119,11 +120,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_xo8nd"]
+[sub_resource type="Gradient" id="Gradient_08i3i"]
 colors = PackedColorArray(0.772549, 0.137255, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_264x2"]
-gradient = SubResource("Gradient_xo8nd")
+gradient = SubResource("Gradient_08i3i")
 width = 32
 
 [sub_resource type="GDScript" id="GDScript_2wviw"]

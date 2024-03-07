@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://buoyaqay1lkw1"
+path="res://.godot/imported/waitingroom.obj-fac2c6bc1f6739052813a6bbda029a6c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/waitingroom.obj-fac2c6bc1f6739052813a6bbda029a6c.mesh"]
+
+source_file="res://graphics/3d/room_mesh/waitingroom/waitingroom.obj"
+dest_files=["res://.godot/imported/waitingroom.obj-fac2c6bc1f6739052813a6bbda029a6c.mesh", "res://.godot/imported/waitingroom.obj-fac2c6bc1f6739052813a6bbda029a6c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

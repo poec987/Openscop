@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btfs4ptkrfxgo"
-path.s3tc="res://.godot/imported/pet_ref.png-fb2878b13f193a179965a6c5c3b402ee.s3tc.ctex"
+uid="uid://cy2bhbpyilwt6"
+path="res://.godot/imported/level2.png-b997cd39714d6cdab5cfc4e9a2e41743.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/sprites/ui/pet_ref.png"
-dest_files=["res://.godot/imported/pet_ref.png-fb2878b13f193a179965a6c5c3b402ee.s3tc.ctex"]
+source_file="res://graphics/3d/room_mesh/level2.png"
+dest_files=["res://.godot/imported/level2.png-b997cd39714d6cdab5cfc4e9a2e41743.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
