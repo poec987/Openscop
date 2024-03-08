@@ -18,9 +18,15 @@ var just_quit = false
 var just_quit_step = 0
 func selection_sound(variable):
 	if variable%2!=0:
-		$select_up.play()
+		if Global.gen!=6:
+			$select_up.play()
+		else:
+			$select_down.play()
 	else:
-		$select_down.play()
+		if Global.gen!=6:
+			$select_down.play()
+		else:
+			$select_up.play()
 
 func _process(_delta):
 	if Input.is_action_just_pressed(\"pressed_triangle\") && !$just_quit_menu.visible:
@@ -80,10 +86,16 @@ func _process(_delta):
 			
 		if Input.is_action_just_pressed(\"pressed_up\") && just_quit:
 			just_quit=false
-			$select_down.play()
+			if Global.gen!=6:
+				$select_down.play()
+			else:
+				$select_up.play()
 		if Input.is_action_just_pressed(\"pressed_down\") && !just_quit:
 			just_quit=true
-			$select_up.play()
+			if Global.gen!=6:
+				$select_up.play()
+			else:
+				$select_down.play()
 			
 		if Input.is_action_just_pressed(\"pressed_triangle\"):
 			just_quit_step=0

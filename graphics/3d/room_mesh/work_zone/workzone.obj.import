@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dobw7vsad33u8"
+path="res://.godot/imported/workzone.obj-af57dfc1afa2841f02145c46bff2c5c6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/workzone.obj-af57dfc1afa2841f02145c46bff2c5c6.mesh"]
+
+source_file="res://graphics/3d/room_mesh/work_zone/workzone.obj"
+dest_files=["res://.godot/imported/workzone.obj-af57dfc1afa2841f02145c46bff2c5c6.mesh", "res://.godot/imported/workzone.obj-af57dfc1afa2841f02145c46bff2c5c6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

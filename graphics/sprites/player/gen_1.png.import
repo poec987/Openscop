@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy2bhbpyilwt6"
-path="res://.godot/imported/level2.png-b997cd39714d6cdab5cfc4e9a2e41743.ctex"
+uid="uid://dh7m5j4nyvqug"
+path="res://.godot/imported/gen_1.png-249f3c7e08c5c7ab7b7306941e2832e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/3d/room_mesh/level2.png"
-dest_files=["res://.godot/imported/level2.png-b997cd39714d6cdab5cfc4e9a2e41743.ctex"]
+source_file="res://graphics/sprites/player/gen_1.png"
+dest_files=["res://.godot/imported/gen_1.png-249f3c7e08c5c7ab7b7306941e2832e5.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

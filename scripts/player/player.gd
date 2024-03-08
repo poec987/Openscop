@@ -55,11 +55,12 @@ func _ready():
 	animation_direction = int(Global.player_array.w)
 	if Global.retrace_steps:
 		movement_speed = movement_speed*-1
-
 	material.texture = material.get_material_override().get_shader_parameter("albedoTex")
 	if material.hframes!= material.texture.get_size().x/64:
 		material.hframes = material.texture.get_size().x/64
 		material.vframes = material.texture.get_size().y/64
+	if Global.gen<=2:
+		set_collision_mask(0)
 
 #TO-DO: ORGANIZE PROPERLY
 func _physics_process(delta):
@@ -420,23 +421,24 @@ func _on_open_sheets_file_selected(path):
 		material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 		head.get_material_override().set_shader_parameter("albedoTex", head.texture)
 func return_character():
-	if Global.update_sheets:
-		if Global.current_character==0:
+	if Global.current_character==0:
+		if Global.gen<=2:
+			material.texture = load("res://graphics/sprites/player/gen_1.png")
+		else:
 			material.texture = load("res://graphics/sprites/player/guardian.png")
-			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-		if Global.current_character==1:
-			material.texture = load("res://graphics/sprites/player/belle.png")
-			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+	if Global.current_character==1 && Global.update_sheets:
+		material.texture = load("res://graphics/sprites/player/belle.png")
 	if Global.current_character==2:
 		if Global.update_sheets:
 			material.texture = load("res://graphics/sprites/player/marvin.png")
-			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 		movement_speed = 8
 	else:
 		movement_speed = 5
 	character = Global.current_character
-	material.texture = load("res://graphics/sprites/player/guardian.png")
+	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 	#RESETS CHARACTER
+	
+			
 func reset_sheet():
 	material.hframes = 5
 	material.vframes = 5
