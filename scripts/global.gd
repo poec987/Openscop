@@ -38,7 +38,7 @@ var can_pause = true
 var save_name = ""
 
 #SAVEDATA
-var gen = 6
+var gen = 8
 var key = 0
 var current_character = 0
 # 0 = guardian
