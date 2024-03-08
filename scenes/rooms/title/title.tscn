@@ -20,8 +20,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("3_0q3dl")
-shader_parameter/effect = null
-shader_parameter/ntsc_enable = null
 
 [sub_resource type="LabelSettings" id="LabelSettings_pb015"]
 font = ExtResource("4_8pwy7")

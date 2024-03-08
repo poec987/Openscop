@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://1pfs5mogg53a"]
+[gd_scene load_steps=10 format=3 uid="uid://1pfs5mogg53a"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_ky2gh"]
+[ext_resource type="Texture2D" uid="uid://bt73h04g80cpv" path="res://gift.png" id="2_hdl7n"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_vgcff"]
 [ext_resource type="ArrayMesh" uid="uid://dmup21pwsnoh8" path="res://graphics/3d/room_mesh/sprite/SO REAL.obj" id="3_21fgf"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_62fmi"]
@@ -30,6 +31,8 @@ shader_parameter/masked_color = Color(1, 1, 1, 1)
 [node name="level_manipulator" parent="." instance=ExtResource("1_ky2gh")]
 background_music_id = 1
 level_slogan = "Petscop is SO REAL FRFR ONG"
+texture_background = true
+texture = ExtResource("2_hdl7n")
 sky_and_fog_color = Vector4(1, 1, 1, 0)
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
@@ -51,5 +54,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21928, 0, 0.234342)
 [node name="warp" parent="." instance=ExtResource("7_4usy5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -1.61801)
 all_directions = true
-diagonal_entrance = false
 scene = "res://scenes/test.tscn"
