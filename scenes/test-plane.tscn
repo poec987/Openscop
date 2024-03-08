@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=48 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -60,24 +60,25 @@ var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a scre
 \"Maxine, Wowzaboi.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
 \"[color=#00FFFF]The Level Recreation Team:[/color]\\nCheddar, Geometricentric, \\nIzzint, Lewgus.\",
 \"[color=#00FFFF]The Texture Recreation Team:[/color]\\nBetah, Izzint, Lewgus.\",
-\"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Olivia, Unnaturalistic.\",
+\"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Unnaturalistic.\",
 \"[color=#00FFFF]Sound/Music Ripping Team:[/color]\\nCheddar, BrowserTG5, \\nGeometricentric, Lewgus.\",
-\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, \\nJerzygorsky, Olivia, \\nUnnaturalistic, Parsley.\",
+\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, \\nJerzygorsky, Unnaturalistic, \\nParsley, WestCraft15.\",
 \"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Ronicalter, TL/24,Tom.\",
 \"[color=#47B6FF]Shoutouts to:\\n[/color]PoeDev, ZLD1.\",
 \"Shoutouts to you all!\\nY'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!\",
 \"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
-\"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pause menu buttons, \\npet menu names.\",
+\"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pause menu buttons, \\ntitle screen UI, pet menu names.\",
 \"[color=#38733c]Anthony Domenico:[/color] Care, bucket, \\nloading screens, music, textbox \\nbackgrounds, SFX.\",
 \"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian, p2totalk \\nbuttons, pieces.\",
-\"[color=#38733c]Cheddar:[/color] Care B, bucket, Nifty, pieces, tool answers.\",
+\"[color=#38733c]Cheddar:[/color] Care B, bucket, logo, \\ngift plane road, Nifty, \\npieces, tool answers.\",
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
 \"[color=#38733c]Geometricentric:[/color] Amber, Care, \\ncone piece, CAUGHT sprite, Gift \\nPlane loading screen, gift sprite and icon...\",
-\"Interaction symbol texture, \\nkeyboard, Pen, Tool answers.\",
+\"Interaction symbol texture, \\nkeyboard, Pen, sprite room, \\nTool answers, waiting room.\",
 \"[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
 \"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]JuanB7:[/color] Marvin, Paul, Pause \\nmenu.\",
 \"[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\\n[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
+\"[color=#38733c]WestCraft15:[/color] Logo animation.\",
 \"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
 \"[color=#80aab3]Osyu:[/color] Keyboard, p2totalk \\nbuttons, pet menu, pet menu \\nboxes, pets.\\n[color=#80aab3]Releskowitz: [/color]Pause menu.\",
 \"[color=#80aab3]The New Orchestra: [/color]Keyboard, \\npause menu.\\n[color=#80aab3]Ugng: [/color]Pause menu.\\n[color=#80aab3]Wirelex:[/color] Pause menu, School HUD.\",
@@ -332,11 +333,13 @@ shader_parameter/add_blend_mode = false
 shader_parameter/multiply_blend_mode = false
 shader_parameter/masked_color = Color(0.764706, 0.498039, 1, 1)
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tualr"]
+data = PackedVector3Array(-1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, -1, 1, -1, 1, 1, -1, 1, -1, -1, -1, -1, -1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1, -1, -1, 1, -1, -1)
+
 [node name="test-plane" type="Node3D"]
 
 [node name="warp" parent="." instance=ExtResource("5_bt3tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
-diagonal_entrance = null
 directions = null
 warp_direction = 3
 scene = "res://scenes/rooms/sprite_room.tscn"
@@ -552,16 +555,23 @@ volume_db = 1.0
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3)
 mesh = SubResource("BoxMesh_yfsxg")
-skeleton = NodePath("../MeshInstance3D")
+skeleton = NodePath("../StaticBody3D/MeshInstance3D")
 surface_material_override/0 = SubResource("ShaderMaterial_gk7pi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -3)
-mesh = ExtResource("21_u3r2h")
-surface_material_override/0 = SubResource("ShaderMaterial_aj8nc")
 
 [node name="bucket" parent="." instance=ExtResource("22_se66f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -3)
+mesh = ExtResource("21_u3r2h")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_aj8nc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -3)
+shape = SubResource("ConcavePolygonShape3D_tualr")
 
 [connection signal="finished" from="level_manipulator/test_plane_specific/song" to="level_manipulator/test_plane_specific/me" method="_on_song_finished"]
 [connection signal="timeout" from="level_manipulator/test_plane_specific/me/Timer" to="level_manipulator/test_plane_specific/me" method="_on_timer_timeout"]

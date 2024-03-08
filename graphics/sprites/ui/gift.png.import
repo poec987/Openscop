@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btfs4ptkrfxgo"
-path.s3tc="res://.godot/imported/pet_ref.png-fb2878b13f193a179965a6c5c3b402ee.s3tc.ctex"
+uid="uid://cigrkwlb1f6jt"
+path.s3tc="res://.godot/imported/gift.png-bd041583f4412e4aaf045c13b33cf43b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://graphics/sprites/ui/pet_ref.png"
-dest_files=["res://.godot/imported/pet_ref.png-fb2878b13f193a179965a6c5c3b402ee.s3tc.ctex"]
+source_file="res://graphics/sprites/ui/gift.png"
+dest_files=["res://.godot/imported/gift.png-bd041583f4412e4aaf045c13b33cf43b.s3tc.ctex"]
 
 [params]
 
