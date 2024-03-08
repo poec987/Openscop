@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bxr4ceswpfl0g"]
+[gd_scene load_steps=32 format=3 uid="uid://bxr4ceswpfl0g"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="3_0q3dl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="4_2kieq"]
@@ -17,6 +17,7 @@
 [ext_resource type="Shader" path="res://shaders/spatial shaders/title-opaque.gdshader" id="10_gu5ww"]
 [ext_resource type="AudioStream" uid="uid://df3cskqopxqdo" path="res://sfx/draw.wav" id="10_nfgrt"]
 [ext_resource type="Texture2D" uid="uid://cigrkwlb1f6jt" path="res://graphics/sprites/ui/gift.png" id="11_7r1ny"]
+[ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="15_xfy13"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("3_0q3dl")
@@ -26,13 +27,13 @@ shader_parameter/ntsc_enable = null
 [sub_resource type="GDScript" id="GDScript_26wy2"]
 script/source = "extends Sprite2D
 
-var timer:float = 0
+var timer:int = 0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	timer +=delta
-	self.visible = !(int(timer)%2)
+func _physics_process(_delta):
+	timer += 1
+	if timer == 30:
+		timer = 0
+	visible = timer < 24
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_pb015"]
@@ -71,18 +72,11 @@ shader_parameter/masked_color = Color(1, 1, 1, 1)
 [sub_resource type="GDScript" id="GDScript_ue0wc"]
 script/source = "extends MeshInstance3D
 
-var boot = false
-# Called when the node enters the scene tree for the first time.
-func _process(_delta):
-	if !boot:
-		animate()
-		boot=true
-func animate():
-	var scroll = create_tween()
-	scroll.tween_property(self,\"position:x\",-1.0,0.5).set_trans(Tween.TRANS_LINEAR)
-	await scroll.finished
-	self.position.x=0
-	boot=false
+func _process(delta):
+	position.x -= delta * 2
+
+	if position.x <= -1:
+		position.x += 1
 "
 
 [sub_resource type="GDScript" id="GDScript_v5jfi"]
@@ -93,8 +87,10 @@ var timer:float = 0
 func _process(delta):
 	timer += delta
 	
-	rotation.z = -sin(2 * timer * PI) * cos(timer * PI / 5) * 0.25
-	rotation.y = cos(2 * (timer + 0.25) * PI) * sin(timer * PI / 5) * 0.4
+	rotation.z = -sin(1 * timer * PI) * cos(timer * PI / 5) * 0.25
+	rotation.y = -cos(1 * (timer + 0.25) * PI) * sin(timer * PI / 5) * 0.4
+
+	timer += delta
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6qn5j"]
@@ -127,15 +123,15 @@ shader_parameter/masked_color = Color(1, 1, 1, 1)
 [sub_resource type="GDScript" id="GDScript_xt5qy"]
 script/source = "extends Sprite3D
 
-var timer:float = 5
+var timer:float = 0
 
 func _process(delta):
+	rotation.z = cos(2 * timer * PI) * 0.2
 	timer += delta
-	
-	rotation.z = -sin(2 * timer * PI)/5
 "
 
 [node name="title" type="Node3D"]
+script = ExtResource("15_xfy13")
 
 [node name="PSXLayer" type="CanvasLayer" parent="."]
 

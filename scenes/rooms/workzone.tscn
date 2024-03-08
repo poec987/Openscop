@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_ig67g"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_m4jqv"]
-[ext_resource type="ArrayMesh" uid="uid://dobw7vsad33u8" path="res://graphics/3d/models/workzone.obj" id="3_6tdcf"]
+[ext_resource type="ArrayMesh" uid="uid://dobw7vsad33u8" path="res://graphics/3d/room_mesh/work_zone/workzone.obj" id="3_6tdcf"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_5hdli"]
-[ext_resource type="Texture2D" uid="uid://cy2bhbpyilwt6" path="res://graphics/3d/room_mesh/level2.png" id="5_dbvuk"]
+[ext_resource type="Texture2D" uid="uid://cy2bhbpyilwt6" path="res://graphics/3d/room_mesh/work_zone/level2.png" id="5_dbvuk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gnsvx"]
 render_priority = 0
