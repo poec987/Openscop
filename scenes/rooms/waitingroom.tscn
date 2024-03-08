@@ -33,7 +33,8 @@ footstep_sound = 3
 allow_front_movement = false
 allow_vertical_movement = false
 camera_distance = 10.0
-fog_radius = 5.0
+enable_fog = true
+fog_radius = 10.0
 
 [node name="player_root" parent="." instance=ExtResource("2_t7doa")]
 
