@@ -45,8 +45,10 @@ func _ready():
 	$textbox_timer.set_wait_time($textbox_timer.wait_time/5)
 	#STARTS THE TIMER
 	$textbox_timer.start()
-	
-	
+	if Global.gen<=2:
+		$dialogue_change.volume_db=-80
+		$dialogue_typing.volume_db=-80
+
 
 func _process(_delta):
 	#WAITS UNTIL HALF THE TIME HAS BEEN COMPLETED TO SHOW THE TEXTBOX BACKGROUND.
@@ -59,13 +61,16 @@ func _process(_delta):
 		$textbox_background.visible=true
 		
 	#STARTS SHOWING TEXT IMMEDIATELY IF NO TEXT HAS APPEARED YET
-	if $textbox_text.visible_characters==0 && $textbox_timer.get_time_left()<$textbox_timer.wait_time/2.0:
-		$textbox_text.visible_characters=1
-	
+
+		if $textbox_text.visible_characters==0 && $textbox_timer.get_time_left()<$textbox_timer.wait_time/2.0:
+			$textbox_text.visible_characters=1
+
+			
 	#CHECKS IF TEXT HAS ENDED, IF IT DID, PLAY CLOSE SOUND AND DELETE TEXTBOX
 	if textbox>text.size()-1:
 		textbox = 0
-		get_node("../../dialogue_close").playing=true
+		if Global.gen>2:
+			get_node("../../dialogue_close").playing=true
 		queue_free()
 		
 	#SETS THE TEXT OF THE TEXTBOX
@@ -85,6 +90,10 @@ func _process(_delta):
 		$textbox_text.visible_ratio = 1.0
 		textbox_stage=1
 		$arrow_timer.start()
+	
+	if Global.gen<=2:
+		$textbox_text.visible_ratio = 1.0
+		textbox_stage=2
 	
 	#IF FINISHED TYPING, AND YOU ARE NOT PRESSING ANY BUTTON, ALLOW YOU TO PROCCEED BY PRESSING X
 	if $textbox_text.visible_ratio==1.0 && !Input.is_action_pressed("pressed_action"):
@@ -122,7 +131,7 @@ func check_character():
 	if $textbox_text.visible_characters!=Global.strip_bbcode($textbox_text.text).length():
 		if slowchars.find(Global.strip_bbcode($textbox_text.text)[$textbox_text.visible_characters])==-1:
 			$textbox_timer.wait_time = DEFAULT_WAIT
-			if !$dialogue_typing.playing:
+			if !$dialogue_typing.playing && Global.gen>2:
 				$dialogue_typing.playing=true
 				create_tween().tween_property($dialogue_typing,"volume_db",TYPING_SOUND_VOLUME,TYPING_SOUND_FADE_IN_TIME)
 		else:

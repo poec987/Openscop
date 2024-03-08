@@ -35,9 +35,10 @@ var control_mode = 0
 var retrace_steps = false
 var game_paused = false
 var can_pause = true
+var save_name = ""
 
 #SAVEDATA
-var gen = 6
+var gen = 3
 var key = 0
 var current_character = 0
 # 0 = guardian
@@ -135,7 +136,7 @@ func save_data():
 			"current_room": get_tree().get_current_scene().scene_file_path
 		},
 		"game": {
-			"gen": gen,
+			"save_filename": save_name,
 			"pets": pets,
 			"retrace_steps":retrace_steps
 		},
@@ -149,10 +150,22 @@ func save_data():
 	}
 	return save_data
 
+func save_general():
+	var save_general = {
+		"general": {
+			"gen":gen,
+		},
+	}
+	return save_general
+
 func save_game(slot):
 	var save_game = FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.WRITE)
 	var json_data = JSON.stringify(save_data())
 	save_game.store_line(json_data)
+	var save_main = FileAccess.open("user://savedata/global_save.save",FileAccess.WRITE)
+	json_data = ""
+	json_data = JSON.stringify(save_general())
+	save_main.store_line(json_data)
 	
 func load_game(slot):
 	if not FileAccess.file_exists("user://savedata/saveslot"+str(slot)+".save"):
@@ -165,7 +178,12 @@ func load_game(slot):
 	pieces_amount = save_game["player"]["pieces"]
 	control_mode = save_game["player"]["control_mode"]
 	key = save_game["player"]["key"]
+	save_name = save_game["game"]["save_filename"]
 	warp_to(save_game["room"]["current_room"],"evencare")
+	
+	if FileAccess.file_exists("user://savedata/global_save.save"):
+		var save_global = JSON.parse_string((FileAccess.open("user://savedata/global_save.save",FileAccess.READ)).get_as_text())
+		gen = save_global["general"]["gen"]
 
 func create_keyboard(background,ask,fade):
 	var keyboard_scene = preload("res://scenes/objects/menu/keyboard.tscn")
