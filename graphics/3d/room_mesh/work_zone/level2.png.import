@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cigrkwlb1f6jt"
-path="res://.godot/imported/gift.png-bd041583f4412e4aaf045c13b33cf43b.ctex"
+uid="uid://cy2bhbpyilwt6"
+path="res://.godot/imported/level2.png-b41b5e163d87a54f14097d3747ac9d7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/sprites/ui/gift.png"
-dest_files=["res://.godot/imported/gift.png-bd041583f4412e4aaf045c13b33cf43b.ctex"]
+source_file="res://graphics/3d/room_mesh/work_zone/level2.png"
+dest_files=["res://.godot/imported/level2.png-b41b5e163d87a54f14097d3747ac9d7a.ctex"]
 
 [params]
 

@@ -13,6 +13,7 @@ uniform vec4 tint_color : source_color = vec4(1.0,1.0,1.0,1.0);
 
 
 uniform bool fog = false;
+global uniform bool fog_enable;
 global uniform vec4 fog_color;
 global uniform float sphere_size;
 global uniform vec3 player_pos; 
@@ -35,14 +36,14 @@ void vertex()
 {
 	UV = UV * uv_scale + uv_offset;
 	
-	if (fog) {
+	if (fog && fog_enable) {
 		world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 		float min_dist = length(player_pos - world_vertex);
 		float fog_func = ( 0.5 - clamp((min_dist/1.5)/sphere_size, 0.0, 1.0) );
 		if (billboard){
 			fog_func = ( 0.75 - clamp((min_dist/2.)/sphere_size*2., 0.0, 1.0) );
 		}
-		if (fog){
+		if (fog && fog_enable){
 			COLOR = COLOR.rgba*vec4( fog_func, fog_func, fog_func, 1.0);
 		}
 		if (billboard) {

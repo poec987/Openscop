@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bxr4ceswpfl0g"]
+[gd_scene load_steps=32 format=3 uid="uid://bxr4ceswpfl0g"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="3_0q3dl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="4_2kieq"]
@@ -17,25 +17,26 @@
 [ext_resource type="Shader" path="res://shaders/spatial shaders/title-opaque.gdshader" id="10_gu5ww"]
 [ext_resource type="AudioStream" uid="uid://df3cskqopxqdo" path="res://sfx/draw.wav" id="10_nfgrt"]
 [ext_resource type="Texture2D" uid="uid://cigrkwlb1f6jt" path="res://graphics/sprites/ui/gift.png" id="11_7r1ny"]
+[ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="15_xfy13"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("3_0q3dl")
 
-[sub_resource type="LabelSettings" id="LabelSettings_pb015"]
-font = ExtResource("4_8pwy7")
-font_color = Color(0, 0, 0, 1)
-
 [sub_resource type="GDScript" id="GDScript_26wy2"]
 script/source = "extends Sprite2D
 
-var timer:float = 0
+var timer:int = 0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	timer +=delta
-	self.visible = !(int(timer)%2)
+func _physics_process(_delta):
+	timer += 1
+	if timer == 30:
+		timer = 0
+	visible = timer < 24
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_pb015"]
+font = ExtResource("4_8pwy7")
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_xo8nd"]
 colors = PackedColorArray(0.772549, 0.137255, 1, 1, 0, 0, 0, 1)
@@ -47,7 +48,7 @@ width = 32
 [sub_resource type="Environment" id="Environment_wbo6w"]
 background_color = Color(1, 1, 1, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.705882, 0.027451, 1, 1)
+ambient_light_color = Color(0.501961, 0, 0.717647, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_117g6"]
 render_priority = 0
@@ -69,18 +70,11 @@ shader_parameter/masked_color = Color(1, 1, 1, 1)
 [sub_resource type="GDScript" id="GDScript_ue0wc"]
 script/source = "extends MeshInstance3D
 
-var boot = false
-# Called when the node enters the scene tree for the first time.
-func _process(_delta):
-	if !boot:
-		animate()
-		boot=true
-func animate():
-	var scroll = create_tween()
-	scroll.tween_property(self,\"position:x\",-1.0,0.5).set_trans(Tween.TRANS_LINEAR)
-	await scroll.finished
-	self.position.x=0
-	boot=false
+func _process(delta):
+	position.x -= delta * 2
+
+	if position.x <= -1:
+		position.x += 1
 "
 
 [sub_resource type="GDScript" id="GDScript_v5jfi"]
@@ -91,8 +85,10 @@ var timer:float = 0
 func _process(delta):
 	timer += delta
 	
-	rotation.z = -sin(2 * timer * PI) * cos(timer * PI / 5) * 0.25
-	rotation.y = cos(2 * (timer + 0.25) * PI) * sin(timer * PI / 5) * 0.4
+	rotation.z = -sin(1 * timer * PI) * cos(timer * PI / 5) * 0.25
+	rotation.y = -cos(1 * (timer + 0.25) * PI) * sin(timer * PI / 5) * 0.4
+
+	timer += delta
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6qn5j"]
@@ -105,18 +101,35 @@ render_priority = 0
 shader = ExtResource("10_gu5ww")
 shader_parameter/modulate_color = Color(1, 0.537255, 1, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_unqot"]
+render_priority = 0
+shader = ExtResource("7_qmxk7")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("11_7r1ny")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
 [sub_resource type="GDScript" id="GDScript_xt5qy"]
 script/source = "extends Sprite3D
 
-var timer:float = 5
+var timer:float = 0
 
 func _process(delta):
+	rotation.z = cos(2 * timer * PI) * 0.2
 	timer += delta
-	
-	rotation.z = -sin(2 * timer * PI)/5
 "
 
 [node name="title" type="Node3D"]
+script = ExtResource("15_xfy13")
 
 [node name="PSXLayer" type="CanvasLayer" parent="."]
 
@@ -158,6 +171,11 @@ audio_listener_enable_3d = true
 size = Vector2i(320, 240)
 render_target_update_mode = 4
 
+[node name="press_start" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+texture = ExtResource("5_ox8jy")
+centered = false
+script = SubResource("GDScript_26wy2")
+
 [node name="no_filter_view" type="SubViewportContainer" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -192,11 +210,6 @@ offset_right = 228.0
 offset_bottom = 226.0
 text = "© 1997 Garalina"
 label_settings = SubResource("LabelSettings_pb015")
-
-[node name="press_start" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
-texture = ExtResource("5_ox8jy")
-centered = false
-script = SubResource("GDScript_26wy2")
 
 [node name="nifty" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["Nifty"]]
 process_mode = 3
@@ -291,6 +304,7 @@ spot_range = 1.0
 
 [node name="gift" type="Sprite3D" parent="title_root"]
 transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 0, -0.185306, -0.719129)
+material_override = SubResource("ShaderMaterial_unqot")
 pixel_size = 0.002
 double_sided = false
 texture_filter = 0
