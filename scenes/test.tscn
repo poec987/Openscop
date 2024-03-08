@@ -1,9 +1,85 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs5ur4bnh0has"]
+[gd_scene load_steps=21 format=3 uid="uid://bs5ur4bnh0has"]
 
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="1_e3cb5"]
 [ext_resource type="Script" path="res://scripts/player/grass.gd" id="2_q3i23"]
 [ext_resource type="PackedScene" uid="uid://dgoxysshxruys" path="res://scenes/objects/level_objects/nmp/grass.tscn" id="3_qmd8q"]
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="4_bgdvl"]
+[ext_resource type="ArrayMesh" uid="uid://br3ceerrfugd3" path="res://graphics/3d/room_mesh/sprite/cube.obj" id="5_vidyn"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="6_v4smq"]
+[ext_resource type="Texture2D" uid="uid://cm3ahyioeeo2d" path="res://graphics/sprites/objects/pieces.png" id="7_aru5t"]
+[ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="8_dvk0l"]
+[ext_resource type="ArrayMesh" uid="uid://dm0ossosbxgc2" path="res://graphics/3d/room_mesh/sprite/House.obj" id="9_ygrv3"]
+[ext_resource type="Texture2D" uid="uid://clg4gb0lrl8ym" path="res://graphics/3d/room_mesh/sprite/texture_2.png" id="10_4jebr"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/sprite3d_fog.gdshader" id="10_rxryx"]
+[ext_resource type="Texture2D" uid="uid://dcm2oem06r1nv" path="res://graphics/sprites/ui/pets_menu/fempoe_a.png" id="11_to7he"]
+[ext_resource type="AudioStream" uid="uid://ciltmyhu21l1a" path="res://sfx/pets/care_b_cry.wav" id="12_s26dm"]
+[ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="15_cj4vl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xm7m7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xg55r"]
+render_priority = 0
+shader = ExtResource("6_v4smq")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("7_aru5t")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4eqp"]
+render_priority = 0
+shader = ExtResource("6_v4smq")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("10_4jebr")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_btb44"]
+script/source = "extends Node3D
+
+func _on_area_3d_body_entered(body):
+	if body==get_tree().get_first_node_in_group(\"Player\"):
+		# quick way to fix collider bug, replace this later
+		$Area3D.queue_free()
+		$cry.play()
+		Global.caught(10,$sprite,self)
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdpqc"]
+render_priority = 0
+shader = ExtResource("10_rxryx")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/albedoTex = ExtResource("11_to7he")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mwu63"]
+size = Vector3(0.5, 1.5, 0.5)
 
 [node name="test" type="Node3D"]
 
@@ -42,4 +118,65 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 28.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -29.5)
 
 [node name="level_manipulator" parent="." instance=ExtResource("4_bgdvl")]
+background_music_id = 2
+level_slogan = "I am Garalina and I send you to HELLLLLLLLLLLLL!"
 enable_fog = true
+ambient_color = Color(1, 0, 0, 1)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(2.016, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_xm7m7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = ExtResource("5_vidyn")
+surface_material_override/0 = SubResource("ShaderMaterial_xg55r")
+
+[node name="interaction" parent="StaticBody3D" instance=ExtResource("8_dvk0l")]
+dialogue_id = "hell"
+textbox_background = 2
+big_textbox = true
+
+[node name="level_root" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -8)
+
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="mesh0" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("9_ygrv3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_n4eqp")
+
+[node name="Care B" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.5928, 9.53674e-07, -5.73292)
+script = SubResource("GDScript_btb44")
+
+[node name="sprite" type="Sprite3D" parent="Care B"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_hdpqc")
+offset = Vector2(0, 32)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("11_to7he")
+
+[node name="Area3D" type="Area3D" parent="Care B"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Care B/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_mwu63")
+
+[node name="cry" type="AudioStreamPlayer3D" parent="Care B"]
+stream = ExtResource("12_s26dm")
+volume_db = 1.0
+
+[node name="warp" parent="." instance=ExtResource("15_cj4vl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5064, -4.76837e-07, -10.0427)
+diagonal_entrance = false
+warp_direction = 3
+scene = "res://scenes/test-plane.tscn"
+
+[connection signal="body_entered" from="Care B/Area3D" to="Care B" method="_on_area_3d_body_entered"]

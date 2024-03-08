@@ -339,7 +339,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
 diagonal_entrance = null
 directions = null
 warp_direction = 3
-scene = "res://scenes/test-plane.tscn"
+scene = "res://scenes/rooms/sprite_room.tscn"
 loading_preset = "evencare_noload"
 
 [node name="level_manipulator" parent="." instance=ExtResource("6_vuu81")]
