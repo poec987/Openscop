@@ -25,18 +25,18 @@ shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [node name="workzone" type="Node3D"]
 
+[node name="player_root" parent="." instance=ExtResource("2_m4jqv")]
+
 [node name="level_manipulator" parent="." instance=ExtResource("1_ig67g")]
 background_music_id = 1
 sky_and_fog_color = Vector4(255, 255, 255, 0)
 ambient_color = Color(1, 1, 1, 1)
 
-[node name="player_root" parent="level_manipulator" instance=ExtResource("2_m4jqv")]
+[node name="level_root" type="Node3D" parent="."]
 
-[node name="level_root" type="Node3D" parent="level_manipulator"]
+[node name="visual_mesh" type="Node3D" parent="level_root"]
 
-[node name="visual_mesh" type="Node3D" parent="level_manipulator/level_root"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level_manipulator/level_root/visual_mesh"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.458315, 0, -3.33648)
 mesh = ExtResource("3_6tdcf")
 surface_material_override/0 = SubResource("ShaderMaterial_gnsvx")

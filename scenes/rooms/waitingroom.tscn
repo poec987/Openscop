@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1evdrl0tbjmu"]
+[gd_scene load_steps=9 format=3 uid="uid://b1evdrl0tbjmu"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_nwcat"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_t7doa"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_qflsr"]
 [ext_resource type="Texture2D" uid="uid://5mfj3hykhve1" path="res://graphics/3d/room_mesh/waitingroom/texture_0.png" id="5_7n7iq"]
 [ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="6_b02sb"]
+[ext_resource type="PackedScene" uid="uid://bhihbtfusi3ks" path="res://scenes/objects/level_objects/darkener.tscn" id="7_ysfhk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yyoh0"]
 render_priority = 0
@@ -29,6 +30,9 @@ shader_parameter/masked_color = Color(1, 1, 1, 1)
 [node name="level_manipulator" parent="." instance=ExtResource("1_nwcat")]
 level_slogan = "This is probably going to take a while."
 footstep_sound = 3
+allow_front_movement = false
+allow_vertical_movement = false
+camera_distance = 10.0
 fog_radius = 5.0
 
 [node name="player_root" parent="." instance=ExtResource("2_t7doa")]
@@ -42,32 +46,45 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.833483, -1.90735e-06
 mesh = ExtResource("3_ux568")
 surface_material_override/0 = SubResource("ShaderMaterial_yyoh0")
 
-[node name="piece_root" parent="level_root" instance=ExtResource("6_b02sb")]
+[node name="pieces" type="Node3D" parent="."]
+
+[node name="piece_root" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.55095, 0, 1.71424)
 
-[node name="piece_root" parent="." instance=ExtResource("6_b02sb")]
+[node name="piece_root2" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.02881, 0, 1.71424)
 
-[node name="piece_root2" parent="." instance=ExtResource("6_b02sb")]
+[node name="piece_root3" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.719, 0, 1.71424)
 
-[node name="piece_root3" parent="." instance=ExtResource("6_b02sb")]
+[node name="piece_root4" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3779, 0, 1.71424)
 
-[node name="piece_root4" parent="." instance=ExtResource("6_b02sb")]
+[node name="piece_root5" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8589, 0, 1.71424)
 
-[node name="piece_root5" parent="." instance=ExtResource("6_b02sb")]
+[node name="piece_root6" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4936, 0, 1.71424)
 
-[node name="piece_root6" parent="." instance=ExtResource("6_b02sb")]
+[node name="piece_root7" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9714, 0, 1.71424)
 
-[node name="piece_root7" parent="." instance=ExtResource("6_b02sb")]
+[node name="piece_root8" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6616, 0, 1.71424)
 
-[node name="piece_root8" parent="." instance=ExtResource("6_b02sb")]
+[node name="piece_root9" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3205, 0, 1.71424)
 
-[node name="piece_root9" parent="." instance=ExtResource("6_b02sb")]
+[node name="piece_root10" parent="pieces" instance=ExtResource("6_b02sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8015, 0, 1.71424)
+
+[node name="darkener" parent="." instance=ExtResource("7_ysfhk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+
+[node name="darkener2" parent="." instance=ExtResource("7_ysfhk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -4)
+darkener_direction = 3
+
+[node name="darkener3" parent="." instance=ExtResource("7_ysfhk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 1.5)
+darkener_direction = 1

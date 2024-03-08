@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bxr4ceswpfl0g"]
+[gd_scene load_steps=31 format=3 uid="uid://bxr4ceswpfl0g"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="3_0q3dl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="4_2kieq"]
@@ -23,10 +23,6 @@ shader = ExtResource("3_0q3dl")
 shader_parameter/effect = null
 shader_parameter/ntsc_enable = null
 
-[sub_resource type="LabelSettings" id="LabelSettings_pb015"]
-font = ExtResource("4_8pwy7")
-font_color = Color(0, 0, 0, 1)
-
 [sub_resource type="GDScript" id="GDScript_26wy2"]
 script/source = "extends Sprite2D
 
@@ -39,6 +35,10 @@ func _process(delta):
 	self.visible = !(int(timer)%2)
 "
 
+[sub_resource type="LabelSettings" id="LabelSettings_pb015"]
+font = ExtResource("4_8pwy7")
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Gradient" id="Gradient_xo8nd"]
 colors = PackedColorArray(0.772549, 0.137255, 1, 1, 0, 0, 0, 1)
 
@@ -49,7 +49,7 @@ width = 32
 [sub_resource type="Environment" id="Environment_wbo6w"]
 background_color = Color(1, 1, 1, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.705882, 0.027451, 1, 1)
+ambient_light_color = Color(0.501961, 0, 0.717647, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_117g6"]
 render_priority = 0
@@ -107,6 +107,23 @@ render_priority = 0
 shader = ExtResource("10_gu5ww")
 shader_parameter/modulate_color = Color(1, 0.537255, 1, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_unqot"]
+render_priority = 0
+shader = ExtResource("7_qmxk7")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("11_7r1ny")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
 [sub_resource type="GDScript" id="GDScript_xt5qy"]
 script/source = "extends Sprite3D
 
@@ -160,6 +177,11 @@ audio_listener_enable_3d = true
 size = Vector2i(320, 240)
 render_target_update_mode = 4
 
+[node name="press_start" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+texture = ExtResource("5_ox8jy")
+centered = false
+script = SubResource("GDScript_26wy2")
+
 [node name="no_filter_view" type="SubViewportContainer" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -194,11 +216,6 @@ offset_right = 228.0
 offset_bottom = 226.0
 text = "© 1997 Garalina"
 label_settings = SubResource("LabelSettings_pb015")
-
-[node name="press_start" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
-texture = ExtResource("5_ox8jy")
-centered = false
-script = SubResource("GDScript_26wy2")
 
 [node name="nifty" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["Nifty"]]
 process_mode = 3
@@ -293,6 +310,7 @@ spot_range = 1.0
 
 [node name="gift" type="Sprite3D" parent="title_root"]
 transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 0, -0.185306, -0.719129)
+material_override = SubResource("ShaderMaterial_unqot")
 pixel_size = 0.002
 double_sided = false
 texture_filter = 0

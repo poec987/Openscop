@@ -44,6 +44,8 @@ func _parse_command(input : Array):
 			Global.caught()
 			console_log("[color=blue]Playing CAUGHT animation...[/color]")
 			$ConsoleContainer/Input.clear()
+		"!toggle_debug":
+			Global.debug = !Global.debug
 		_:
 			console_log("[color=red]Invalid Command[/color]")
 		

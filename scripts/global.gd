@@ -1,6 +1,6 @@
 extends Node
 #GLOBAL GAME VARS
-var debug = true
+var debug = false
 var keyboard_RAM=""
 #ROOM
 var room_name ="test"
