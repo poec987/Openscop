@@ -24,9 +24,15 @@ func get_screen():
 
 func selection_sound(variable):
 	if variable%2!=0:
-		$select_up.play()
+		if Global.gen!=6:
+			$select_up.play()
+		else:
+			$select_down.play()
 	else:
-		$select_down.play()
+		if Global.gen!=6:
+			$select_down.play()
+		else:
+			$select_up.play()
 
 func _ready():
 	$main_pausemenu/visible_group/Select.play()
@@ -46,7 +52,7 @@ func _process(delta):
 		active_menu = [false,false,false,false,false]
 		
 	if Input.is_action_just_pressed("pressed_start") && Global.control_mode!=1 && get_tree().get_first_node_in_group("HUD_pausemenu").can_unpause && Global.can_pause:
-		if $current_menu.get_child_count()==0:
+		if $current_menu.get_child_count()==0 && Global.gen>2:
 			Global.game_paused=!Global.game_paused
 	
 	
