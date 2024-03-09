@@ -111,7 +111,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_xs246")
 
 [node name="interaction" parent="level_root" instance=ExtResource("7_x70fr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.63476, 0, 0.502769)
-dialogue_id = "waitingroom"
+dialogue_id = "Authorized personnel only."
 textbox_background = 1
 
 [node name="pieces" type="Node3D" parent="."]

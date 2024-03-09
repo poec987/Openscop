@@ -46,6 +46,7 @@ void vertex()
 		if (fog && fog_enable){
 			COLOR = COLOR.rgba*vec4( fog_func, fog_func, fog_func, 1.0);
 		}
+
 		if (billboard) {
 			MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0]*2.0, INV_VIEW_MATRIX[1]*2.0, INV_VIEW_MATRIX[2]*2.0, MODEL_MATRIX[3]);
 		}

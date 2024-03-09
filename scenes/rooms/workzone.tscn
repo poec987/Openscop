@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_5hdli"]
 [ext_resource type="Texture2D" uid="uid://cy2bhbpyilwt6" path="res://graphics/3d/room_mesh/work_zone/level2.png" id="5_dbvuk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gnsvx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cunor"]
 render_priority = 0
 shader = ExtResource("4_5hdli")
 shader_parameter/billboard = false
@@ -29,6 +29,12 @@ shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_ig67g")]
 background_music_id = 1
+allow_horizontal_movement = false
+allow_front_movement = false
+allow_vertical_movement = false
+camera_height = 4.25
+camera_distance = 10.45
+camera_angle = -19.0
 sky_and_fog_color = Vector4(255, 255, 255, 0)
 ambient_color = Color(1, 1, 1, 1)
 
@@ -37,6 +43,6 @@ ambient_color = Color(1, 1, 1, 1)
 [node name="visual_mesh" type="Node3D" parent="level_root"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.458315, 0, -3.33648)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.22, 0, 0)
 mesh = ExtResource("3_6tdcf")
-surface_material_override/0 = SubResource("ShaderMaterial_gnsvx")
+surface_material_override/0 = SubResource("ShaderMaterial_cunor")
