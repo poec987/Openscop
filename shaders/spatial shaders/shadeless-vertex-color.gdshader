@@ -63,13 +63,13 @@ void vertex()
 		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
 		MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
 	}
-	COLOR.a = 0.25;
+	//COLOR.a = 0.25;
 	COLOR.rgb = mix(vec3(dot(COLOR.rgb, vec3(0.299, 0.587, 0.114))), COLOR.rgb, 1.0);
 	COLOR.rgb = mix(vec3(1.0), COLOR.rgb, 1.75);
 	COLOR.r = clamp(COLOR.r,0.0,1.0);
 	COLOR.g = clamp(COLOR.g,0.0,1.0);
 	COLOR.b = clamp(COLOR.b,0.0,1.0);
-	//COLOR.rgb = vec3(COLOR.r*0.75,COLOR.g*0.75,COLOR.b*0.75);
+	COLOR.rgb = vec3(COLOR.r*0.75,COLOR.g*0.75,COLOR.b*0.75);
 }
 
 void fragment()

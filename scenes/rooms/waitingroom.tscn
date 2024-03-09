@@ -21,11 +21,6 @@ shader_parameter/fog = true
 shader_parameter/albedoTex = ExtResource("5_7n7iq")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/vertex_color_as_mask = false
-shader_parameter/invert = false
-shader_parameter/add_blend_mode = false
-shader_parameter/multiply_blend_mode = false
-shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xs246"]
 render_priority = 0
@@ -37,11 +32,6 @@ shader_parameter/tint_color = Color(0.639216, 0.639216, 0.639216, 1)
 shader_parameter/fog = true
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/vertex_color_as_mask = false
-shader_parameter/invert = false
-shader_parameter/add_blend_mode = false
-shader_parameter/multiply_blend_mode = false
-shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [node name="waitingroom" type="Node3D"]
 

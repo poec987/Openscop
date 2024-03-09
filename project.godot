@@ -184,7 +184,7 @@ allow_animation={
 }
 precision_multiplier={
 "type": "float",
-"value": 1.0
+"value": 1.5
 }
 player_pos={
 "type": "vec3",
