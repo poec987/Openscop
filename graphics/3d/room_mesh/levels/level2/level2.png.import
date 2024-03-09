@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cy2bhbpyilwt6"
-path="res://.godot/imported/level2.png-b41b5e163d87a54f14097d3747ac9d7a.ctex"
+path="res://.godot/imported/level2.png-842c5e91b49be47f72b193a9549fa7ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/3d/room_mesh/work_zone/level2.png"
-dest_files=["res://.godot/imported/level2.png-b41b5e163d87a54f14097d3747ac9d7a.ctex"]
+source_file="res://graphics/3d/room_mesh/levels/level2/level2.png"
+dest_files=["res://.godot/imported/level2.png-842c5e91b49be47f72b193a9549fa7ba.ctex"]
 
 [params]
 

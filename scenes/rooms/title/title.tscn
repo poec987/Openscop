@@ -116,11 +116,6 @@ shader_parameter/fog = false
 shader_parameter/albedoTex = ExtResource("8_57nga")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/vertex_color_as_mask = false
-shader_parameter/invert = false
-shader_parameter/add_blend_mode = false
-shader_parameter/multiply_blend_mode = false
-shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [sub_resource type="GDScript" id="GDScript_ue0wc"]
 script/source = "extends MeshInstance3D
@@ -167,11 +162,6 @@ shader_parameter/fog = false
 shader_parameter/albedoTex = ExtResource("11_7r1ny")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/vertex_color_as_mask = false
-shader_parameter/invert = false
-shader_parameter/add_blend_mode = false
-shader_parameter/multiply_blend_mode = false
-shader_parameter/masked_color = Color(1, 1, 1, 1)
 
 [sub_resource type="GDScript" id="GDScript_xt5qy"]
 script/source = "extends Sprite3D
