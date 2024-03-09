@@ -3,29 +3,26 @@
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="1_5kjov"]
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="2_hsaov"]
 [ext_resource type="ArrayMesh" uid="uid://dobw7vsad33u8" path="res://graphics/3d/room_mesh/levels/level2/workzone.obj" id="3_kkunm"]
-[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_35oey"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="4_s7ahk"]
 [ext_resource type="Texture2D" uid="uid://cy2bhbpyilwt6" path="res://graphics/3d/room_mesh/levels/level2/level2.png" id="5_hx0pp"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo2w4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_626pl"]
 render_priority = 0
-shader = ExtResource("4_35oey")
-shader_parameter/billboard = false
-shader_parameter/y_billboard = false
-shader_parameter/transparent_color = Color(1, 0, 1, 1)
-shader_parameter/tint_color = Color(1, 1, 1, 1)
-shader_parameter/fog = false
-shader_parameter/albedoTex = ExtResource("5_hx0pp")
+shader = ExtResource("4_s7ahk")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/albedoTex = ExtResource("5_hx0pp")
 
 [node name="workzone" type="Node3D"]
 
 [node name="player_root" parent="." instance=ExtResource("1_5kjov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0, 0)
 
 [node name="level_manipulator" parent="." instance=ExtResource("2_hsaov")]
 background_music_id = 1
-allow_horizontal_movement = false
+limit_camera_horizontal = true
+horizontal_limit = Vector2(-0.22, -0.22)
 allow_front_movement = false
 allow_vertical_movement = false
 camera_height = 4.25
@@ -40,4 +37,4 @@ ambient_color = Color(1, 1, 1, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
 mesh = ExtResource("3_kkunm")
-surface_material_override/0 = SubResource("ShaderMaterial_bo2w4")
+surface_material_override/0 = SubResource("ShaderMaterial_626pl")

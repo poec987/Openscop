@@ -5,25 +5,20 @@ const CAMERA_SPEED = 3.0
 @onready var cam = $cam_anchor/PSXLayer 
 @onready var player = get_node("../player")
 
-func _ready():
-	if Global.camera_mode==0:
-		#EACH OF THESE CHECKS IF THE CAMERA IS TOO FAR FROM PLAYER DEPENDING ON SPECIFIED DISTNACE, AND IF CAMERA IS ALLOWED TO MOVE ON SPECIFIC AXIS.
-		#THEN MOVE CAMERA TOWARDS PLAYER
-		#LOTS OF FUNKY MATHEMATICS I FORGOT HOW THEY WORK
-		if Global.cam_move_limit_x.x!=0.0 || Global.cam_move_limit_x.y!=0.0:
-			position.x = clamp(position.x,Global.cam_move_limit_x.x,Global.cam_move_limit_x.y)
+#func _ready():
 	
-		if Global.cam_move_limit_z.x!=0.0 || Global.cam_move_limit_z.y!=0.0:
-			position.z = clamp(position.z,Global.cam_move_limit_z.x,Global.cam_move_limit_z.y)
-	
-		if Global.cam_move_limit_y.x!=0.0 || Global.cam_move_limit_y.y!=0.0:
-			position.y = clamp(position.y,Global.cam_move_limit_y.x,Global.cam_move_limit_y.y)
 func _setup():
 	#SETS UP CAMERA ACCORDING TO ROOM, SPECIFIED PROPERTIES
 	if Global.camera_mode==0:
 		cam_anchor.position.z = Global.camera_dist_hor
 		cam_anchor.position.y = Global.camera_dist_ver
 		cam_anchor.rotation.x = (Global.camera_rot*0.01)*2
+		if Global.cam_move_limit_x.x!=0.0 || Global.cam_move_limit_x.y!=0.0:
+			position.x = clamp(position.x,Global.cam_move_limit_x.x,Global.cam_move_limit_x.y)
+		if Global.cam_move_limit_z.x!=0.0 || Global.cam_move_limit_z.y!=0.0:
+			position.z = clamp(position.z,Global.cam_move_limit_z.x,Global.cam_move_limit_z.y)
+		if Global.cam_move_limit_y.x!=0.0 || Global.cam_move_limit_y.y!=0.0:
+			position.y = clamp(position.y,Global.cam_move_limit_y.x,Global.cam_move_limit_y.y)
 	#print_debug("cam_pos: ", cam_anchor.global_position)
 
 func _process(delta):

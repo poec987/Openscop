@@ -2,6 +2,7 @@ extends Node3D
 var title_stage = 0
 var timer:int = 0
 const READING_CARD_WAIT = 5.0
+var selected_file = 0
 func _ready():
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select/buttons_group/GoBack.play()
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select/buttons_group/SelectFile.play()
@@ -43,3 +44,16 @@ func _physics_process(_delta):
 		scale_logo_2.tween_property($title_root/title_mesh_root/title_mesh,"scale:y",1.0,1.0).set_trans(Tween.TRANS_BACK)
 		await scale_logo_2.finished
 		title_stage=0
+		
+	if title_stage==1:
+		if Input.is_action_just_pressed("pressed_down"):
+			selected_file+=1
+		if Input.is_action_just_pressed("pressed_up"):
+			selected_file-=1
+		selected_file = clamp(selected_file,0,2)
+		if selected_file==0:
+			$cursor.position=Vector2(57,51)
+		if selected_file==1:
+			$cursor.position=Vector2(260,88)
+		if selected_file==2:
+			$cursor.position=Vector2(57,125)

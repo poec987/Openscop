@@ -313,7 +313,6 @@ texture = ExtResource("4_st8hs")
 
 [node name="file_select" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
 texture_filter = 1
-position = Vector2(320, 0)
 
 [node name="files" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select"]
 
@@ -387,6 +386,7 @@ metadata/_edit_use_anchors_ = true
 [node name="SelectFile" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select/buttons_group"]
 position = Vector2(60, 201)
 sprite_frames = SubResource("SpriteFrames_2pj45")
+frame = 1
 
 [node name="SelectFile" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select/buttons_group/SelectFile"]
 offset_left = 11.0
