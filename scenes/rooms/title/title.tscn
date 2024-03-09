@@ -213,6 +213,7 @@ size = Vector2i(320, 240)
 render_target_update_mode = 4
 
 [node name="Dither" type="SubViewportContainer" parent="PSXLayer/NTSC/NTSC_viewport"]
+texture_filter = 1
 material = ExtResource("4_2kieq")
 anchors_preset = 15
 anchor_right = 1.0
@@ -321,6 +322,7 @@ modulate = Color(1, 1, 1, 0.164706)
 texture = ExtResource("4_st8hs")
 
 [node name="file_select" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+texture_filter = 1
 position = Vector2(320, 0)
 
 [node name="files" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select"]
@@ -342,7 +344,7 @@ text = "Empty Game
 label_settings = SubResource("LabelSettings_3di54")
 
 [node name="file1" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select/files"]
-position = Vector2(66, 59)
+position = Vector2(66, 37)
 
 [node name="file_select" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select/files/file1"]
 position = Vector2(26, 22)
@@ -360,7 +362,7 @@ text = "Empty Game
 label_settings = SubResource("LabelSettings_3di54")
 
 [node name="file2" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select/files"]
-position = Vector2(0, 94)
+position = Vector2(0, 74)
 
 [node name="file_select" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/file_select/files/file2"]
 position = Vector2(26, 22)
