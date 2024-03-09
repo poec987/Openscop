@@ -29,23 +29,14 @@ func _process(delta):
 		#EACH OF THESE CHECKS IF THE CAMERA IS TOO FAR FROM PLAYER DEPENDING ON SPECIFIED DISTNACE, AND IF CAMERA IS ALLOWED TO MOVE ON SPECIFIC AXIS.
 		#THEN MOVE CAMERA TOWARDS PLAYER
 		#LOTS OF FUNKY MATHEMATICS I FORGOT HOW THEY WORK
-		
 		if (abs(position.x-player.position.x) > Global.camera_limit_x) && Global.camera_move_x:
 			position.x -= ((((position.x-player.position.x) / abs(position.x-player.position.x)))) * delta * abs(player.velocity.x)
-			if Global.cam_move_limit_x.x!=0.0 || Global.cam_move_limit_x.y!=0.0:
-				position.x = clamp(position.x,Global.cam_move_limit_x.x,Global.cam_move_limit_x.y)
-		
 		if (abs(position.z-player.position.z) > Global.camera_limit_z) && Global.camera_move_z:
 			position.z -= ((((position.z-player.position.z) / abs(position.z-player.position.z)))) * delta * abs(player.velocity.z)
-			if Global.cam_move_limit_z.x!=0.0 || Global.cam_move_limit_z.y!=0.0:
-				position.z = clamp(position.z,Global.cam_move_limit_z.x,Global.cam_move_limit_z.y)
-		
 		if (abs(position.y-player.position.y) > Global.camera_limit_y) && Global.camera_move_y:
 			position.y -= ((((position.y-player.position.y) / abs(position.y-player.position.y)))) * delta * abs(player.velocity.y)
-			if Global.cam_move_limit_y.x!=0.0 || Global.cam_move_limit_y.y!=0.0:
-				position.y = clamp(position.y,Global.cam_move_limit_y.x,Global.cam_move_limit_y.y)
-		
 		# set the pos and rot of the camera to follow the cam anchor
+	_setup()
 	if Global.control_mode<4:
 		cam.set_cam_pos(cam_anchor.global_position, cam_anchor.global_rotation)
 	elif Global.control_mode>=4 && Global.control_mode<=5:
