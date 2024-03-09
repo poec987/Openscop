@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1evdrl0tbjmu"]
+[gd_scene load_steps=12 format=3 uid="uid://b1evdrl0tbjmu"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_nwcat"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_t7doa"]
@@ -6,6 +6,8 @@
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_qflsr"]
 [ext_resource type="Texture2D" uid="uid://5mfj3hykhve1" path="res://graphics/3d/room_mesh/waitingroom/texture_0.png" id="5_7n7iq"]
 [ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="6_b02sb"]
+[ext_resource type="ArrayMesh" uid="uid://dsw2hiadw0wj6" path="res://graphics/3d/models/chair.obj" id="6_dkiu3"]
+[ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="7_x70fr"]
 [ext_resource type="PackedScene" uid="uid://bhihbtfusi3ks" path="res://scenes/objects/level_objects/darkener.tscn" id="7_ysfhk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yyoh0"]
@@ -25,6 +27,22 @@ shader_parameter/add_blend_mode = false
 shader_parameter/multiply_blend_mode = false
 shader_parameter/masked_color = Color(1, 1, 1, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xs246"]
+render_priority = 0
+shader = ExtResource("4_qflsr")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(0.639216, 0.639216, 0.639216, 1)
+shader_parameter/fog = true
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
 [node name="waitingroom" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_nwcat")]
@@ -34,7 +52,7 @@ allow_front_movement = false
 allow_vertical_movement = false
 camera_distance = 10.0
 enable_fog = true
-fog_radius = 10.0
+fog_radius = 15.0
 
 [node name="player_root" parent="." instance=ExtResource("2_t7doa")]
 
@@ -46,6 +64,55 @@ fog_radius = 10.0
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.833483, -1.90735e-06, -0.660106)
 mesh = ExtResource("3_ux568")
 surface_material_override/0 = SubResource("ShaderMaterial_yyoh0")
+
+[node name="chairs" type="Node3D" parent="level_root/visual_mesh"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="level_root/visual_mesh/chairs"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 3.81429, 0, -2.44375)
+mesh = ExtResource("6_dkiu3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xs246")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="level_root/visual_mesh/chairs"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 3.81429, 0, -1.48315)
+mesh = ExtResource("6_dkiu3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xs246")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="level_root/visual_mesh/chairs"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 3.81429, 0, -0.526873)
+mesh = ExtResource("6_dkiu3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xs246")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="level_root/visual_mesh/chairs"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 2.53828, 0, -0.528477)
+mesh = ExtResource("6_dkiu3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xs246")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="level_root/visual_mesh/chairs"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 2.52795, 0, -1.47631)
+mesh = ExtResource("6_dkiu3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xs246")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="level_root/visual_mesh/chairs"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 1.34223, 4.76837e-07, -0.519411)
+mesh = ExtResource("6_dkiu3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xs246")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="level_root/visual_mesh/chairs"]
+transform = Transform3D(-0.8, 0, -6.99382e-08, 0, 0.8, 0, 6.99382e-08, 0, -0.8, 1.34223, 0, -1.48053)
+mesh = ExtResource("6_dkiu3")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xs246")
+
+[node name="interaction" parent="level_root" instance=ExtResource("7_x70fr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.63476, 0, 0.502769)
+dialogue_id = "waitingroom"
+textbox_background = 1
 
 [node name="pieces" type="Node3D" parent="."]
 

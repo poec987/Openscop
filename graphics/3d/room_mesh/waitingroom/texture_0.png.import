@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5mfj3hykhve1"
-path.s3tc="res://.godot/imported/texture_0.png-5b563475b6f7361c636201a86b9b225e.s3tc.ctex"
+path="res://.godot/imported/texture_0.png-5b563475b6f7361c636201a86b9b225e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://graphics/3d/room_mesh/waitingroom/texture_0.png"
-dest_files=["res://.godot/imported/texture_0.png-5b563475b6f7361c636201a86b9b225e.s3tc.ctex"]
+dest_files=["res://.godot/imported/texture_0.png-5b563475b6f7361c636201a86b9b225e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
