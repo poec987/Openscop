@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cv70ivcq73qth"
+path="res://.godot/imported/corner-room.obj-2feabd04cc2b9abd4f66d18f109f219f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/corner-room.obj-2feabd04cc2b9abd4f66d18f109f219f.mesh"]
+
+source_file="res://graphics/3d/room_mesh/even_care/corner-room/corner-room.obj"
+dest_files=["res://.godot/imported/corner-room.obj-2feabd04cc2b9abd4f66d18f109f219f.mesh", "res://.godot/imported/corner-room.obj-2feabd04cc2b9abd4f66d18f109f219f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

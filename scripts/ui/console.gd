@@ -51,6 +51,9 @@ func _parse_command(input : Array):
 			console_log("[color=blue]Changing character...")
 		"!toggle_debug":
 			Global.debug = !Global.debug
+		"!ws":
+			DisplayServer.window_set_size(Vector2i(input[1].to_int(), input[2].to_int()))
+			console_log("[color=blue]Setting the window size to "+input[1]+"x"+input[2])
 		_:
 			console_log("[color=red]Invalid Command[/color]")
 		

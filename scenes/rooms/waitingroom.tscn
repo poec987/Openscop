@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_qflsr"]
 [ext_resource type="Texture2D" uid="uid://5mfj3hykhve1" path="res://graphics/3d/room_mesh/waitingroom/texture_0.png" id="5_7n7iq"]
 [ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="6_b02sb"]
-[ext_resource type="PackedScene" uid="uid://bhihbtfusi3ks" path="res://scenes/objects/level_objects/darkener.tscn" id="7_ysfhk"]
+[ext_resource type="PackedScene" path="res://scenes/objects/level_objects/darkener.tscn" id="7_ysfhk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yyoh0"]
 render_priority = 0

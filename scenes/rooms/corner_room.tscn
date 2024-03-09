@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://rxk52yfriqtk"]
+
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_tfrug"]
+[ext_resource type="Texture2D" uid="uid://bt73h04g80cpv" path="res://gift.png" id="2_6xg0h"]
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="3_12pkv"]
+[ext_resource type="ArrayMesh" uid="uid://cv70ivcq73qth" path="res://graphics/3d/room_mesh/even_care/corner-room/corner-room.obj" id="4_r6sgb"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="5_vl3xs"]
+[ext_resource type="Texture2D" uid="uid://bphorfy463dwa" path="res://graphics/3d/room_mesh/even_care/corner-room/corner-room.png" id="6_xfmko"]
+[ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="8_x13it"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjnsd"]
+render_priority = 0
+shader = ExtResource("5_vl3xs")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("6_xfmko")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/vertex_color_as_mask = false
+shader_parameter/invert = false
+shader_parameter/add_blend_mode = false
+shader_parameter/multiply_blend_mode = false
+shader_parameter/masked_color = Color(1, 1, 1, 1)
+
+[node name="sprite_room" type="Node3D"]
+
+[node name="level_manipulator" parent="." instance=ExtResource("1_tfrug")]
+background_music_id = 1
+level_slogan = "Petscop is SO REAL FRFR ONG"
+texture_background = true
+texture = ExtResource("2_6xg0h")
+sky_and_fog_color = Vector4(1, 1, 1, 0)
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+
+[node name="player_root" parent="." instance=ExtResource("3_12pkv")]
+
+[node name="level_root" type="Node3D" parent="."]
+
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="mesh0" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("4_r6sgb")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_rjnsd")
+
+[node name="warp" parent="." instance=ExtResource("8_x13it")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -1.61801)
+all_directions = true
+scene = "res://scenes/test.tscn"
