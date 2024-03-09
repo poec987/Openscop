@@ -26,6 +26,7 @@ shader_parameter/masked_color = Color(1, 1, 1, 1)
 [node name="workzone" type="Node3D"]
 
 [node name="player_root" parent="." instance=ExtResource("2_m4jqv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0, 0)
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_ig67g")]
 background_music_id = 1
@@ -43,6 +44,6 @@ ambient_color = Color(1, 1, 1, 1)
 [node name="visual_mesh" type="Node3D" parent="level_root"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.22, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = ExtResource("3_6tdcf")
 surface_material_override/0 = SubResource("ShaderMaterial_cunor")
