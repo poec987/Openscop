@@ -39,6 +39,7 @@ var save_name = ""
 
 #SAVEDATA
 var gen = 8
+var corrupt = false
 var key = 0
 var current_character = 0
 # 0 = guardian
@@ -136,9 +137,9 @@ func save_data():
 			"current_room": get_tree().get_current_scene().scene_file_path
 		},
 		"game": {
-			"save_filename": save_name,
 			"pets": pets,
-			"retrace_steps":retrace_steps
+			"retrace_steps":retrace_steps,
+			"corrupted":corrupt
 		},
 		"player": {
 			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction],
@@ -154,6 +155,9 @@ func save_general():
 	var save_general = {
 		"general": {
 			"gen":gen,
+			#"save_filenames": ["","",""],
+			#"save_pieces": [[],[],[]],
+			#"save_corrupted": [false,false,false],
 		},
 	}
 	return save_general
@@ -174,16 +178,17 @@ func load_game(slot):
 	gen = save_game["game"]["gen"]
 	pets = save_game["game"]["pets"]
 	retrace_steps = save_game["game"]["retrace_steps"]
+	corrupt = save_game["game"]["corrupt"]
 	player_array = Vector4(save_game["player"]["coords"][0],save_game["player"]["coords"][1],save_game["player"]["coords"][2],save_game["player"]["coords"][3])
 	pieces_amount = save_game["player"]["pieces"]
 	control_mode = save_game["player"]["control_mode"]
 	key = save_game["player"]["key"]
-	save_name = save_game["game"]["save_filename"]
 	warp_to(save_game["room"]["current_room"],"evencare")
 	
 	if FileAccess.file_exists("user://savedata/global_save.save"):
 		var save_global = JSON.parse_string((FileAccess.open("user://savedata/global_save.save",FileAccess.READ)).get_as_text())
 		gen = save_global["general"]["gen"]
+		save_name = save_game["ganeral"]["save_filenames"][slot]
 
 func create_keyboard(background,ask,fade):
 	var keyboard_scene = preload("res://scenes/objects/menu/keyboard.tscn")
