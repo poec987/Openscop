@@ -5,9 +5,8 @@ const DEFAULT_ANSWER_WAIT = 0.5
 var pink = false
 
 var went_down = false
-
 var answer_finished = false
-
+var answer = ""
 @onready var material = $answer_origin/answer
 
 func _process(delta):
@@ -22,13 +21,14 @@ func _process(delta):
 	if Global.keyboard_RAM!="":
 		answer_finished = false
 		if $answer_origin.position.y<5:
-			var go_up = create_tween()
-			go_up.tween_property($answer_origin,"position:y",5.0,ANIM_SPEEDS)
-			await go_up.finished
-			answer_processing(Global.keyboard_RAM)
-			$answer_wait.start()
-			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-			went_down=false
+			if material.texture.get_path()!= answer_processing(Global.keyboard_RAM):
+				var go_up = create_tween()
+				go_up.tween_property($answer_origin,"position:y",10.0,ANIM_SPEEDS)
+				await go_up.finished
+				material.texture = load(answer)
+				material.get_material_override().set_shader_parameter("albedoTex", material.texture)
+				$answer_wait.start()
+				went_down=false
 		else:
 			answer_processing(Global.keyboard_RAM)
 			$answer_wait.start()
@@ -45,22 +45,24 @@ func answer_processing(keyboard_answer):
 	if !pink:
 		if question=="where was the windmill":
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
-			set_answer("res://graphics/sprites/objects/tool/answer_windmill.png")
+			set_answer()
+			answer = "res://graphics/sprites/objects/tool/answer_windmill.png"
 		elif !answer_finished:
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
-			set_answer("res://graphics/sprites/objects/tool/answer_idontknow.png")
+			set_answer()
+			answer = "res://graphics/sprites/objects/tool/answer_idontknow.png"
 	else:
 		if question=="poop":
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
-			set_answer("res://graphics/sprites/objects/tool/answer_windmill.png")
+			set_answer()
+			answer = "res://graphics/sprites/objects/tool/answer_windmill.png"
 		elif !answer_finished:
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT
-			set_answer("res://graphics/sprites/objects/tool/answer_idontknow.png")
+			set_answer()
+			answer = "res://graphics/sprites/objects/tool/answer_idontknow.png"
 			
-func set_answer(filepath):
+func set_answer():
 	answer_finished = true
-	material.texture = load(filepath)
-	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 	
 func watch_windmill():
 	var go_up = create_tween()
