@@ -182,10 +182,9 @@ func load_game(slot):
 	if not FileAccess.file_exists("user://savedata/saveslot"+str(slot)+".save"):
 		return
 	var save_game = JSON.parse_string((FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.READ)).get_as_text())
-	gen = save_game["game"]["gen"]
 	pets = save_game["game"]["pets"]
 	retrace_steps = save_game["game"]["retrace_steps"]
-	corrupt = save_game["game"]["corrupt"]
+	corrupt = save_game["game"]["corrupted"]
 	player_array = Vector4(save_game["player"]["coords"][0],save_game["player"]["coords"][1],save_game["player"]["coords"][2],save_game["player"]["coords"][3])
 	pieces_amount = save_game["player"]["pieces"]
 	control_mode = save_game["player"]["control_mode"]
