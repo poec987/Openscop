@@ -25,7 +25,7 @@ func _parse_command(input : Array):
 			console_log("[color=green]Saving game data to slot 2...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!save_game_2":
-			Global.save_game(1)
+			Global.save_game(2)
 			console_log("[color=green]Saving game data to slot 3...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!load_game_0":

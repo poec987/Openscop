@@ -28,6 +28,7 @@ data = PackedVector3Array(2.5, 0, -0.5, -0.5, 0, -0.5, 2.5, 1, -0.5, 2.5, 1, -0.
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_mp0t8")]
 room_name = "evencare"
+background_music_id = 1
 fade_color = Color(1, 1, 1, 1)
 limit_camera_horizontal = true
 horizontal_limit = Vector2(2, 100)

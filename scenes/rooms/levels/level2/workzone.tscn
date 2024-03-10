@@ -20,7 +20,7 @@ shader_parameter/albedoTex = ExtResource("5_hx0pp")
 [node name="player_root" parent="." instance=ExtResource("1_5kjov")]
 
 [node name="level_manipulator" parent="." instance=ExtResource("2_hsaov")]
-background_music_id = 1
+background_music_id = 2
 limit_camera_horizontal = true
 horizontal_limit = Vector2(-0.22, -0.22)
 allow_front_movement = false

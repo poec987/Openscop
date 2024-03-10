@@ -83,6 +83,11 @@ var pieces = [0,1,2,3,4,
 #4 = PINK PIECE
 
 func _ready():
+	if not FileAccess.file_exists("user://savedata/global_save.save"):
+		save_global()
+	else:
+		load_global()
+
 	var directory = DirAccess.open("user://")
 	#GAME BOOTUP
 	#CHECKS IF CUSTOM SHEETS DIRECTORY DOESNT EXIST SO IT CAN CREATE IT
@@ -139,6 +144,7 @@ func save_data():
 		"game": {
 			"pets": pets,
 			"retrace_steps":retrace_steps,
+			"save_name": save_name,
 			"corrupted":corrupt
 		},
 		"player": {
@@ -166,11 +172,12 @@ func save_game(slot):
 	var save_game = FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.WRITE)
 	var json_data = JSON.stringify(save_data())
 	save_game.store_line(json_data)
-	var save_main = FileAccess.open("user://savedata/global_save.save",FileAccess.WRITE)
-	json_data = ""
-	json_data = JSON.stringify(save_general())
-	save_main.store_line(json_data)
 	
+func save_global():	
+	var save_global = FileAccess.open("user://savedata/global_save.save",FileAccess.WRITE)
+	var json_data = JSON.stringify(save_general())
+	save_global.store_line(json_data)
+
 func load_game(slot):
 	if not FileAccess.file_exists("user://savedata/saveslot"+str(slot)+".save"):
 		return
@@ -183,12 +190,14 @@ func load_game(slot):
 	pieces_amount = save_game["player"]["pieces"]
 	control_mode = save_game["player"]["control_mode"]
 	key = save_game["player"]["key"]
+	save_name = save_game["game"]["save_name"]
 	warp_to(save_game["room"]["current_room"],"evencare")
 	
+	
+func load_global():
 	if FileAccess.file_exists("user://savedata/global_save.save"):
 		var save_global = JSON.parse_string((FileAccess.open("user://savedata/global_save.save",FileAccess.READ)).get_as_text())
 		gen = save_global["general"]["gen"]
-		save_name = save_game["ganeral"]["save_filenames"][slot]
 
 func create_keyboard(background,ask,fade):
 	var keyboard_scene = preload("res://scenes/objects/menu/keyboard.tscn")
