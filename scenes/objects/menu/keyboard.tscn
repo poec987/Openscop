@@ -12,6 +12,7 @@ font = ExtResource("2_ravhw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_exkdt"]
 shader = ExtResource("3_hca6n")
+shader_parameter/invert = false
 
 [node name="keyboard" type="Node2D"]
 process_mode = 3

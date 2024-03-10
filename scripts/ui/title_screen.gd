@@ -1,6 +1,6 @@
 extends Node3D
 
-var title_stage = 0
+@export var title_stage = 0
 
 var timer:int = 0
 const READING_CARD_WAIT = 5.0
@@ -16,7 +16,8 @@ var cont_option = true
 func _ready():
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group/GoBack.play()
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group/SelectFile.play()
-
+	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Finish.play()
+	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select.play()
 
 func _physics_process(_delta):
 	timer += 1
@@ -25,6 +26,7 @@ func _physics_process(_delta):
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/press_start.visible = bool(int(timer < 24) * int(title_stage==0))
 	
 	if Input.is_action_just_pressed("pressed_start") && title_stage==0:
+		selected_file=0
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/press_start.frame_coords.y = 1
 		$reading_card_timer.wait_time = READING_CARD_WAIT+randf_range(0.0,2.0)
 		$reading_card_timer.start()
@@ -60,13 +62,16 @@ func _physics_process(_delta):
 				overlay_move.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/overlay,"color:a",0.5,0.5)
 				await overlay_move.finished
 				title_stage = 3
+			else:
+				title_stage=4
+				Global.create_keyboard(3,false,false)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",20.0,0.5).set_trans(Tween.TRANS_SINE)
 		selected_file = clamp(selected_file,0,2)
 		
 		if Input.is_action_just_pressed("pressed_triangle"):
 			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/Copyright,"position:x",96.0,1.0).set_trans(Tween.TRANS_BACK)
 			var move_files = create_tween()
 			move_files.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select,"position:x",320.0,1.0).set_trans(Tween.TRANS_BACK)
-			selected_file=0
 			$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/press_start.frame_coords.y = 0
 			create_tween().tween_property($title_root,"position:x",3.924,1.0).set_trans(Tween.TRANS_BACK)
 			var scale_logo = create_tween().set_parallel()
@@ -108,6 +113,16 @@ func _physics_process(_delta):
 			$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/continue_menu/cursor.position=Vector2(234,92)
 		else:
 			$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/continue_menu/cursor.position=Vector2(215,132)
+	
+	if title_stage==4:
+		if Global.keyboard_RAM!="":
+			Global.save_name = Global.keyboard_RAM
+			Global.save_game(selected_file)
+			check_files()
+			Global.keyboard_RAM=""
+		if Input.is_action_just_pressed("pressed_triangle"):
+			var move_buttons = create_tween()
+			move_buttons.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",0.0,0.5).set_trans(Tween.TRANS_SINE)
 
 	if selected_file==0:
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0/cursor.visible=true
@@ -155,3 +170,7 @@ func check_files():
 	else:
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2/Label.text = "Empty Game"
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2/corrupt.visible = false
+
+
+func _on_select_animation_finished():
+	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/GoBack.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bxr4ceswpfl0g"]
+[gd_scene load_steps=52 format=3 uid="uid://bxr4ceswpfl0g"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="3_0q3dl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="4_2kieq"]
@@ -103,6 +103,28 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8duph"]
+atlas = ExtResource("13_ii7lo")
+region = Rect2(0, 102, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd4lf"]
+atlas = ExtResource("13_ii7lo")
+region = Rect2(136, 102, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d3c5o"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_8duph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd4lf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="LabelSettings" id="LabelSettings_pb015"]
 font = ExtResource("4_8pwy7")
 font_color = Color(0, 0, 0, 1)
@@ -195,6 +217,7 @@ shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
 [node name="title" type="Node3D"]
+process_mode = 3
 script = ExtResource("15_xfy13")
 
 [node name="PSXLayer" type="CanvasLayer" parent="."]
@@ -333,9 +356,9 @@ vframes = 2
 
 [node name="file_select" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
 texture_filter = 1
-position = Vector2(320, 0)
 
 [node name="files" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
+visible = false
 
 [node name="file0" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files"]
 
@@ -354,8 +377,6 @@ text = "Empty Game
 label_settings = SubResource("LabelSettings_3di54")
 
 [node name="cursor" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
-z_index = 1
-z_as_relative = false
 material = SubResource("ShaderMaterial_awjvd")
 position = Vector2(57, 51)
 texture = ExtResource("13_ux0ac")
@@ -388,8 +409,6 @@ text = "Empty Game
 label_settings = SubResource("LabelSettings_3di54")
 
 [node name="cursor" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
-z_index = 1
-z_as_relative = false
 material = SubResource("ShaderMaterial_awjvd")
 position = Vector2(194, 51)
 texture = ExtResource("13_ux0ac")
@@ -421,8 +440,6 @@ text = "Empty Game
 label_settings = SubResource("LabelSettings_3di54")
 
 [node name="cursor" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
-z_index = 1
-z_as_relative = false
 material = SubResource("ShaderMaterial_awjvd")
 position = Vector2(57, 51)
 texture = ExtResource("13_ux0ac")
@@ -437,6 +454,7 @@ texture = ExtResource("16_y530i")
 centered = false
 
 [node name="buttons_group" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
+visible = false
 
 [node name="GoBack" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group"]
 position = Vector2(210, 201)
@@ -465,6 +483,48 @@ offset_bottom = 25.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_8pwy7")
 text = "Select File
+"
+
+[node name="buttons_group2" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
+
+[node name="GoBack" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2"]
+position = Vector2(217, 205)
+sprite_frames = SubResource("SpriteFrames_so3dh")
+
+[node name="Label2" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/GoBack"]
+offset_left = 8.0
+offset_top = -1.0
+offset_right = 109.0
+offset_bottom = 25.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_8pwy7")
+text = "Go Back"
+metadata/_edit_use_anchors_ = true
+
+[node name="Select" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2"]
+position = Vector2(56, 204)
+sprite_frames = SubResource("SpriteFrames_2pj45")
+frame = 1
+
+[node name="Select" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select"]
+offset_left = 9.0
+offset_right = 110.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_8pwy7")
+text = "Select"
+
+[node name="Finish" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2"]
+position = Vector2(142, 204)
+sprite_frames = SubResource("SpriteFrames_d3c5o")
+
+[node name="Finish" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Finish"]
+offset_left = 5.0
+offset_right = 106.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_8pwy7")
+text = "Finish
 "
 
 [node name="continue_menu" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
@@ -496,6 +556,15 @@ offset_right = 228.0
 offset_bottom = 226.0
 text = "© 1997 Garalina"
 label_settings = SubResource("LabelSettings_pb015")
+
+[node name="keyboard" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["HUD_keyboard"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+visible = false
+modulate = Color(1, 1, 1, 0.490196)
+z_index = 1
+texture = ExtResource("4_st8hs")
+centered = false
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(0.967268, 0, -0.253758, 0, 1, 0, 0.253758, 0, 0.967268, 3.67449, 3.07897, 7.82394)
@@ -549,3 +618,5 @@ layer = -1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, -16)
 mesh = SubResource("QuadMesh_bce2q")
 surface_material_override/0 = SubResource("ShaderMaterial_drlcc")
+
+[connection signal="animation_finished" from="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select" to="." method="_on_select_animation_finished"]
