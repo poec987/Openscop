@@ -21,7 +21,7 @@ func _process(delta):
 	if Global.keyboard_RAM!="":
 		answer_finished = false
 		if $answer_origin.position.y<5:
-			if material.texture.get_path()!= answer_processing(Global.keyboard_RAM):
+			if material.texture.get_path()!= answer:
 				var go_up = create_tween()
 				go_up.tween_property($answer_origin,"position:y",10.0,ANIM_SPEEDS)
 				await go_up.finished
