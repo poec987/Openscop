@@ -28,7 +28,7 @@ const float alpha_scissor = 0.25;
 void vertex()
 {
 	UV = UV * uv_scale + uv_offset;
-	
+	COLOR.rgb = COLOR.rgb*COLOR.rgb*COLOR.rgb;
 	if (fog && fog_enable) {
 		world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 		float min_dist = length(player_pos - world_vertex);
@@ -63,13 +63,6 @@ void vertex()
 		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
 		MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
 	}
-	if (!fog){
-		COLOR.rgb = mix(vec3(dot(COLOR.rgb, vec3(0.299, 0.587, 0.114))), COLOR.rgb, 1.0);
-		COLOR.rgb = mix(vec3(1.0), COLOR.rgb, 1.75);
-		COLOR.r = clamp(COLOR.r,0.0,1.0);
-		COLOR.g = clamp(COLOR.g,0.0,1.0);
-		COLOR.b = clamp(COLOR.b,0.0,1.0);
-	}
 
 }
 
@@ -78,7 +71,7 @@ void fragment()
 	vec4 texture_color = texture(albedoTex, UV);
 	
 	if (fog) {
-		ALBEDO = mix(fog_color,(texture_color*2.0*tint_color),COLOR).rgb;
+		ALBEDO = mix(fog_color,(texture_color*tint_color),COLOR).rgb;
 	} else {
 		ALBEDO = ((texture_color*4.0)*tint_color*(COLOR/3.75)).rgb;
 		//ALBEDO = vec3(ALBEDO.r/2.0,ALBEDO.g/2.0,ALBEDO.b/2.0);

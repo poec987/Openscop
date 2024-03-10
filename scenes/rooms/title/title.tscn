@@ -103,6 +103,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_pb015"]
+font = ExtResource("4_8pwy7")
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Environment" id="Environment_wbo6w"]
 background_color = Color(1, 1, 1, 1)
 ambient_light_source = 2
@@ -175,10 +179,6 @@ func _process(delta):
 	rotation.z = cos(2 * timer * PI) * 0.2
 	timer += delta
 "
-
-[sub_resource type="LabelSettings" id="LabelSettings_pb015"]
-font = ExtResource("4_8pwy7")
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_bce2q"]
 size = Vector2(20, 20)
@@ -489,6 +489,14 @@ offset_right = 320.0
 offset_bottom = 240.0
 color = Color(1, 1, 1, 0)
 
+[node name="Copyright" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+offset_left = 96.0
+offset_top = 207.0
+offset_right = 228.0
+offset_bottom = 226.0
+text = "© 1997 Garalina"
+label_settings = SubResource("LabelSettings_pb015")
+
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(0.967268, 0, -0.253758, 0, 1, 0, 0.253758, 0, 0.967268, 3.67449, 3.07897, 7.82394)
 current = true
@@ -536,14 +544,6 @@ script = SubResource("GDScript_xt5qy")
 layer = -1
 
 [node name="reading_card_timer" type="Timer" parent="."]
-
-[node name="Copyright" type="Label" parent="."]
-offset_left = 96.0
-offset_top = 207.0
-offset_right = 228.0
-offset_bottom = 226.0
-text = "© 1997 Garalina"
-label_settings = SubResource("LabelSettings_pb015")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, -16)

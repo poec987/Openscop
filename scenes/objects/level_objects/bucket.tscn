@@ -2,13 +2,18 @@
 
 [ext_resource type="ArrayMesh" uid="uid://dltibstgb03js" path="res://graphics/3d/models/bucket.obj" id="1_2xqt0"]
 [ext_resource type="Script" path="res://scripts/objects/level_objects/bucket.gd" id="1_goka3"]
-[ext_resource type="Shader" path="res://shaders/spatial shaders/bucket.gdshader" id="2_vwlvu"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="3_25son"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v5yxp"]
 render_priority = 0
-shader = ExtResource("2_vwlvu")
+shader = ExtResource("3_25son")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
 shader_parameter/tint_color = Color(1, 1, 1, 1)
-shader_parameter/fog = false
+shader_parameter/fog = true
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sqwr5"]
 size = Vector3(1, 0, 0)
