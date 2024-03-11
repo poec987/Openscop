@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bxr4ceswpfl0g"]
+[gd_scene load_steps=55 format=3 uid="uid://bxr4ceswpfl0g"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="3_0q3dl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="4_2kieq"]
@@ -23,8 +23,10 @@
 [ext_resource type="Texture2D" uid="uid://bqurrtjharll2" path="res://graphics/sprites/ui/file_frame.png" id="14_0xn05"]
 [ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="15_xfy13"]
 [ext_resource type="Texture2D" uid="uid://db0o2h6o26u18" path="res://graphics/sprites/ui/panic.png" id="16_y530i"]
+[ext_resource type="FontFile" uid="uid://blsucq8kjvjgn" path="res://graphics/sprites/ui/title_counter.fnt" id="17_85u0m"]
 [ext_resource type="Texture2D" uid="uid://jhmvmjramd1o" path="res://graphics/sprites/ui/file_options.png" id="17_ie4qc"]
 [ext_resource type="Texture2D" uid="uid://cn84kgq0kgbp" path="res://graphics/sprites/ui/continue_cursor.png" id="18_sa4k6"]
+[ext_resource type="Texture2D" uid="uid://df5w1upymlb1w" path="res://graphics/sprites/ui/title_piece.png" id="18_ynrnt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("3_0q3dl")
@@ -58,6 +60,9 @@ func _process(delta):
 	else:
 		current_frame=1
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_ho4vs"]
+font = ExtResource("17_85u0m")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gex5d"]
 atlas = ExtResource("13_ii7lo")
@@ -356,9 +361,9 @@ vframes = 2
 
 [node name="file_select" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
 texture_filter = 1
+position = Vector2(320, 0)
 
 [node name="files" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
-visible = false
 
 [node name="file0" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files"]
 
@@ -367,7 +372,7 @@ position = Vector2(26, 22)
 texture = ExtResource("14_0xn05")
 centered = false
 
-[node name="Label" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
+[node name="file_name" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
 offset_left = 90.0
 offset_top = 67.0
 offset_right = 166.0
@@ -390,6 +395,18 @@ position = Vector2(88, 48)
 texture = ExtResource("16_y530i")
 centered = false
 
+[node name="counter" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
+offset_left = 180.0
+offset_top = 68.0
+offset_right = 220.0
+offset_bottom = 83.0
+text = "00000"
+label_settings = SubResource("LabelSettings_ho4vs")
+
+[node name="piece" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0"]
+position = Vector2(170, 73)
+texture = ExtResource("18_ynrnt")
+
 [node name="file1" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files"]
 position = Vector2(66, 37)
 
@@ -399,7 +416,7 @@ texture = ExtResource("14_0xn05")
 centered = false
 flip_h = true
 
-[node name="Label" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
+[node name="file_name" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
 offset_left = 77.0
 offset_top = 67.0
 offset_right = 164.0
@@ -422,6 +439,18 @@ position = Vector2(25, 48)
 texture = ExtResource("16_y530i")
 centered = false
 
+[node name="counter" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
+offset_left = 50.0
+offset_top = 68.0
+offset_right = 90.0
+offset_bottom = 83.0
+text = "00000"
+label_settings = SubResource("LabelSettings_ho4vs")
+
+[node name="piece" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
+position = Vector2(40, 73)
+texture = ExtResource("18_ynrnt")
+
 [node name="file2" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files"]
 position = Vector2(0, 74)
 
@@ -430,7 +459,7 @@ position = Vector2(26, 22)
 texture = ExtResource("14_0xn05")
 centered = false
 
-[node name="Label" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
+[node name="file_name" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
 offset_left = 90.0
 offset_top = 67.0
 offset_right = 166.0
@@ -453,8 +482,21 @@ position = Vector2(88, 48)
 texture = ExtResource("16_y530i")
 centered = false
 
-[node name="buttons_group" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
+[node name="counter" type="Label" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
 visible = false
+offset_left = 180.0
+offset_top = 68.0
+offset_right = 220.0
+offset_bottom = 83.0
+text = "00000"
+label_settings = SubResource("LabelSettings_ho4vs")
+
+[node name="piece" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2"]
+visible = false
+position = Vector2(170, 73)
+texture = ExtResource("18_ynrnt")
+
+[node name="buttons_group" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
 
 [node name="GoBack" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group"]
 position = Vector2(210, 201)
@@ -486,6 +528,7 @@ text = "Select File
 "
 
 [node name="buttons_group2" type="Node2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select"]
+position = Vector2(0, 40)
 
 [node name="GoBack" type="AnimatedSprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2"]
 position = Vector2(217, 205)
@@ -619,4 +662,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, -16)
 mesh = SubResource("QuadMesh_bce2q")
 surface_material_override/0 = SubResource("ShaderMaterial_drlcc")
 
-[connection signal="animation_finished" from="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select" to="." method="_on_select_animation_finished"]
+[connection signal="animation_looped" from="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select" to="." method="_on_select_animation_looped"]

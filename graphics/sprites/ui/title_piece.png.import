@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h5laclww3g3r"
-path="res://.godot/imported/keyboard_mask.png-df709ea18780352ad00615f22e58d084.ctex"
+uid="uid://df5w1upymlb1w"
+path="res://.godot/imported/title_piece.png-732c121a99235123c5c28a035427249e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/sprites/ui/keyboard_mask.png"
-dest_files=["res://.godot/imported/keyboard_mask.png-df709ea18780352ad00615f22e58d084.ctex"]
+source_file="res://graphics/sprites/ui/title_piece.png"
+dest_files=["res://.godot/imported/title_piece.png-732c121a99235123c5c28a035427249e.ctex"]
 
 [params]
 

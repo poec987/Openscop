@@ -95,7 +95,11 @@ func _process(_delta):
 						$keyboard_background/keyboard_string.text+=characters[cursor_pos.y][cursor_pos.x][0]
 						$keyboard_background/keyboard_string.text+="?"
 					else:
-						$keyboard_background/keyboard_string.text+=characters[cursor_pos.y][cursor_pos.x][0]
+						if background!=3:
+							$keyboard_background/keyboard_string.text+=characters[cursor_pos.y][cursor_pos.x][0]
+						else:
+							if $keyboard_background/keyboard_string.text.length()<18:
+								$keyboard_background/keyboard_string.text+=characters[cursor_pos.y][cursor_pos.x][0]
 			else:
 				if ask:
 					if $keyboard_background/keyboard_string.text.length()>6:
@@ -116,6 +120,7 @@ func _process(_delta):
 			await disappear.finished
 			queue_free()
 			self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().title_stage = 1
+			#Console.console_log(self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().title_stage)
 	if Input.is_action_just_pressed("pressed_start") && !deactivate:
 		#Whenever you use "Global.keyboard_RAM" on any other script
 		#please ALWAYS clean it immediately after using.
