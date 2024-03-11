@@ -35,7 +35,7 @@ func _physics_process(_delta):
 		check_files()
 		await $reading_card_timer.timeout
 		create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/Copyright,"position:x",-224.0,1.0).set_trans(Tween.TRANS_BACK)
-		create_tween().tween_property($pressed_start,"position:x",-224.0,1.0).set_trans(Tween.TRANS_BACK)
+		create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/press_start,"position:x",-224.0,1.0).set_trans(Tween.TRANS_BACK)
 		create_tween().tween_property($title_root,"position:x",3.5,1.0).set_trans(Tween.TRANS_BACK)
 		var scale_logo = create_tween().set_parallel()
 		scale_logo.tween_property($title_root/title_mesh_root/title_mesh,"scale:y",0.75,0.5).set_trans(Tween.TRANS_SINE)
