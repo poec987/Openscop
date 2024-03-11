@@ -78,11 +78,11 @@ func _physics_process(_delta):
 				title_stage=4
 				Global.create_keyboard(3,false,false)
 				$selected.play()
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0,"position:x",-240.0,0.35).set_trans(Tween.TRANS_SINE)
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1,"position:x",306.0,0.35).set_trans(Tween.TRANS_SINE)
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2,"position:x",-240.0,0.35).set_trans(Tween.TRANS_SINE)
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",50.0,0.35).set_trans(Tween.TRANS_SINE)
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2,"position:y",0.0,0.35).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0,"position:x",-240.0,0.45).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1,"position:x",306.0,0.45).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2,"position:x",-240.0,0.45).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",50.0,0.45).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2,"position:y",0.0,0.45).set_trans(Tween.TRANS_SINE)
 		selected_file = clamp(selected_file,0,2)
 		
 		if Input.is_action_just_pressed("pressed_triangle"):
@@ -176,13 +176,13 @@ func _physics_process(_delta):
 func bounce_file_up(yes: bool = false):
 	var bounce = create_tween()
 	if yes:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-75,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-10.0,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
 	else:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",75,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)	
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",10.0,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)	
 	if yes:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",75,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",10.0,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
 	else:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-75,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-10.0,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
 
 func check_files():
 	if FileAccess.file_exists("user://savedata/saveslot0.save"):

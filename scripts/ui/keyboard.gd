@@ -36,9 +36,9 @@ func _ready():
 	if background!=3:
 		create_tween().tween_property(self,"position:y",0.0,APPEAR_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
 	else:
-		create_tween().tween_property(self,"position:y",-15.0,APPEAR_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
 		await $Timer.timeout
 		$whoosh.play()
+		create_tween().tween_property(self,"position:y",-15.0,APPEAR_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
 func _process(_delta):
 	$keyboard_background.frame_coords.x=background
 	if !loaded:
