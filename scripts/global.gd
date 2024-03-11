@@ -119,20 +119,21 @@ func create_textbox(background,big_textbox,text):
 		get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).add_child(dialogue_instance)
 
 func warp_to(scene,preset):
-	can_pause=false
-	#print(level_data)
-	get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=Color(level_data[preset]["fade_color"][0],level_data[preset]["fade_color"][1],level_data[preset]["fade_color"][2],0.)
-	var fade_in = create_tween()
-	fade_in.tween_property(get_tree().get_first_node_in_group("loading_overlay").get_child(0),"color:a",1.0,0.5)
-	await fade_in.finished
-	get_tree().paused=true
-	if level_data[preset]["loading_file"]!=null:
-		bg_music.stop()
-		get_tree().get_first_node_in_group("loading_overlay").get_child(1).set_texture(load("res://graphics/sprites/ui/loading_screen/"+level_data[preset]["loading_file"]+".png"))
-	get_tree().get_first_node_in_group("loading_overlay").get_child(2).wait_time =float(level_data[preset]["wait_time"])+randf_range(0.,float(level_data[preset]["wait_time"])/4)
-	get_tree().get_first_node_in_group("loading_overlay").get_child(2).start()
-	await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
-	get_tree().change_scene_to_file(scene)
+	if get_tree().get_first_node_in_group("loading_overlay").get_child(0).color.a==0.0:
+		can_pause=false
+		#print(level_data)
+		get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=Color(level_data[preset]["fade_color"][0],level_data[preset]["fade_color"][1],level_data[preset]["fade_color"][2],0.)
+		var fade_in = create_tween()
+		fade_in.tween_property(get_tree().get_first_node_in_group("loading_overlay").get_child(0),"color:a",1.0,0.5)
+		await fade_in.finished
+		get_tree().paused=true
+		if level_data[preset]["loading_file"]!=null:
+			bg_music.stop()
+			get_tree().get_first_node_in_group("loading_overlay").get_child(1).set_texture(load("res://graphics/sprites/ui/loading_screen/"+level_data[preset]["loading_file"]+".png"))
+		get_tree().get_first_node_in_group("loading_overlay").get_child(2).wait_time =float(level_data[preset]["wait_time"])+randf_range(0.,float(level_data[preset]["wait_time"])/4)
+		get_tree().get_first_node_in_group("loading_overlay").get_child(2).start()
+		await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
+		get_tree().change_scene_to_file(scene)
 	
 func save_data():
 	var save_data = {
@@ -169,9 +170,11 @@ func save_general():
 	return save_general
 
 func save_game(slot):
+	Console.console_log("[color=green]Saving game data to slot "+str(slot)+"...[/color]")
 	var save_game = FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.WRITE)
 	var json_data = JSON.stringify(save_data())
 	save_game.store_line(json_data)
+	Console.console_log("[color=blue]Saved game data to slot "+str(slot)+" sucessfully![/color]")
 	
 func save_global():	
 	var save_global = FileAccess.open("user://savedata/global_save.save",FileAccess.WRITE)
@@ -179,6 +182,7 @@ func save_global():
 	save_global.store_line(json_data)
 
 func load_game(slot):
+	Console.console_log("[color=green]Loading game data from slot "+slot+"...[/color]")
 	if not FileAccess.file_exists("user://savedata/saveslot"+str(slot)+".save"):
 		return
 	var save_game = JSON.parse_string((FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.READ)).get_as_text())
@@ -191,7 +195,7 @@ func load_game(slot):
 	key = save_game["player"]["key"]
 	save_name = save_game["game"]["save_name"]
 	warp_to(save_game["room"]["current_room"],"evencare")
-	
+	Console.console_log("[color=blue]Loaded game data from slot "+slot+" sucessfully![/color]")
 	
 func load_global():
 	if FileAccess.file_exists("user://savedata/global_save.save"):

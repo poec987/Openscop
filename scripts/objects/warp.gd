@@ -22,7 +22,8 @@ func _process(_delta):
 		$visual.visible=true
 	else:
 		$visual.visible=Global.debug
-		
+		#if global_position.distance_to(get_tree().get_first_node_in_group("Player").global_position)<0.75:
+			#_on_warp_area_body_entered(get_tree().get_first_node_in_group("Player"))
 	if !all_directions:
 		$visual.frame_coords.x=clamp(warp_direction,0,3)
 	if all_directions:
@@ -31,8 +32,16 @@ func _process(_delta):
 	if !all_directions:
 		if warp_direction==0 || warp_direction==3:
 			$warp_area/warp.get_shape().size = Vector3(2.,2.,0.)
+			if warp_direction==3:
+				$backup_warp.rotation.y=deg_to_rad(180)
+			else:
+				$backup_warp.rotation.y=0.0
 		elif warp_direction==1 || warp_direction==2:
 			$warp_area/warp.get_shape().size = Vector3(0.,2.,2.)
+			if warp_direction==2:
+				$backup_warp.rotation.y=deg_to_rad(-90)
+			else:
+				$backup_warp.rotation.y=deg_to_rad(90)
 		
 	
 	warp_direction=clamp(warp_direction,0,3)

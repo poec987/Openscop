@@ -13,6 +13,27 @@
 		"Oh... It worked?",
 		"... Is ... This.... Working.",
 		"Does. This! Work? Now"	
+	],
+
+	"evencare_0": [
+		"It's a picture of two friends, \n[color=#FF0000]Toneth[/color] and [color=#00FF00]Randice[/color].",
+		"Are they not cute? Give them a\nchance!"
+	],
+
+	"evencare_1": [
+		"This door is locked.",
+		"Or not, but you don't know how \nto open doors."
+	],
+
+	"evencare_2": [
+		"When you're choosing a pet, find \nsomebody that you like.",
+		"You don't have to love them \nright away."
+	],
+
+	"evencare_3": [
+		"Don't be discouraged if they run \n",
+		"from you! They really do want a\n",
+		"home."
 	]
 
 }

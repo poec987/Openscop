@@ -1,11 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://0tdm55supfpn"]
+[gd_scene load_steps=8 format=3 uid="uid://0tdm55supfpn"]
 
 [ext_resource type="Script" path="res://scripts/objects/warp.gd" id="1_i7iyg"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="2_nwd8i"]
 [ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="3_83l72"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8evx7"]
-size = Vector3(2, 2, 0)
+size = Vector3(0, 2, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pi83i"]
 render_priority = 0
@@ -18,11 +18,11 @@ shader_parameter/fog = false
 shader_parameter/albedoTex = ExtResource("3_83l72")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/vertex_color_as_mask = false
-shader_parameter/invert = false
-shader_parameter/add_blend_mode = false
-shader_parameter/multiply_blend_mode = false
-shader_parameter/masked_color = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ohx2b"]
+size = Vector3(2, 2, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_43pdk"]
 
 [node name="warp" type="Node3D"]
 script = ExtResource("1_i7iyg")
@@ -43,4 +43,18 @@ texture = ExtResource("3_83l72")
 hframes = 5
 vframes = 5
 
+[node name="backup_warp" type="Node3D" parent="."]
+
+[node name="warp_area" type="Area3D" parent="backup_warp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="warp" type="CollisionShape3D" parent="backup_warp/warp_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_ohx2b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="backup_warp/warp_area"]
+visible = false
+mesh = SubResource("BoxMesh_43pdk")
+
 [connection signal="body_entered" from="warp_area" to="." method="_on_warp_area_body_entered"]
+[connection signal="body_entered" from="backup_warp/warp_area" to="." method="_on_warp_area_body_entered"]

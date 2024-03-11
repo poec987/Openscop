@@ -417,23 +417,6 @@ offset_right = 320.0
 offset_bottom = 240.0
 color = Color(0.996078, 0.847059, 0.996078, 0)
 
-[node name="loading" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["loading_overlay"]]
-process_mode = 3
-script = ExtResource("19_8h6l3")
-
-[node name="fade_in" type="ColorRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
-visible = false
-z_index = 10
-offset_right = 320.0
-offset_bottom = 240.0
-
-[node name="loading_screen" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
-z_index = 11
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="loading_timer" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
-
 [node name="nifty" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["Nifty"]]
 process_mode = 3
 visible = false
@@ -498,6 +481,23 @@ frame = 3
 [node name="overlay" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/school"]
 texture = ExtResource("21_lx5qg")
 centered = false
+
+[node name="loading" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view" groups=["loading_overlay"]]
+process_mode = 3
+script = ExtResource("19_8h6l3")
+
+[node name="fade_in" type="ColorRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
+visible = false
+z_index = 10
+offset_right = 320.0
+offset_bottom = 240.0
+
+[node name="loading_screen" type="TextureRect" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
+z_index = 11
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="loading_timer" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
 
 [node name="player_camera" type="Camera3D" parent="NTSC/NTSC_viewport/Dither/dither_view"]
 transform = Transform3D(-4.37114e-08, -0.309017, 0.951057, 0, 0.951057, 0.309017, -1, 1.35076e-08, -4.1572e-08, 8, 2.62875, 0)

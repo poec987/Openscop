@@ -18,34 +18,29 @@ func _parse_command(input : Array):
 			$ConsoleContainer/Input.clear()
 		"!save_game_0":
 			Global.save_game(0)
-			console_log("[color=green]Saving game data to slot 1...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!save_game_1":
 			Global.save_game(1)
-			console_log("[color=green]Saving game data to slot 2...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!save_game_2":
 			Global.save_game(2)
-			console_log("[color=green]Saving game data to slot 3...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!load_game_0":
 			Global.load_game(0)
-			console_log("[color=green]Loading game data from slot 1...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!load_game_1":
 			Global.load_game(1)
-			console_log("[color=green]Loading game data from slot 2...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!load_game_2":
 			Global.load_game(2)
-			console_log("[color=green]Loading game data from slot 3...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!caught":
 			Global.caught()
-			console_log("[color=blue]Playing CAUGHT animation...[/color]")
 			$ConsoleContainer/Input.clear()
 		"!toggle_debug":
 			Global.debug = !Global.debug
+		"!shutup":
+			Global.bg_music.stop()
 		_:
 			console_log("[color=red]Invalid Command[/color]")
 		
