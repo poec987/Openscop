@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://d07uqvqx48ugo" path="res://graphics/sprites/objects/interaction.png" id="2_6yoqe"]
 [ext_resource type="AudioStream" uid="uid://cokbp5ew0dhdr" path="res://sfx/textbox/interactpopup.wav" id="4_0xbfh"]
 
-
 [sub_resource type="QuadMesh" id="QuadMesh_pbefp"]
 center_offset = Vector3(0, 0.5, 0)
 
