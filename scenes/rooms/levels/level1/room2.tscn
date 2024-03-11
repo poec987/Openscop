@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://2i1xno83yikd"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_gov0q"]
-[ext_resource type="Texture2D" uid="uid://cjwvkldagl3km" path="res://graphics/sprites/ui/backgrounds/level1_1.png" id="2_yxohf"]
+[ext_resource type="Texture2D" uid="uid://dy7on8lrv3yoc" path="res://graphics/sprites/ui/backgrounds/level1_2.png" id="2_3a37s"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="3_tiyqs"]
 [ext_resource type="ArrayMesh" uid="uid://jralbpxoorbu" path="res://graphics/3d/room_mesh/levels/level1/evencare2.obj" id="4_s66oy"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="5_4kqnw"]
@@ -40,11 +40,12 @@ allow_front_movement = false
 camera_height = 4.5
 camera_distance = 11.5
 texture_background = true
-texture = ExtResource("2_yxohf")
+texture = ExtResource("2_3a37s")
 scroll_speed = 0.5
 sky_and_fog_color = Vector4(1, 1, 1, 0)
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
+preset = 1
 
 [node name="player_root" parent="." instance=ExtResource("3_tiyqs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)

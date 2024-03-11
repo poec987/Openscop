@@ -45,6 +45,7 @@ scroll_speed = 0.5
 sky_and_fog_color = Vector4(1, 1, 1, 0)
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0
+preset = 1
 
 [node name="level_root" type="Node3D" parent="."]
 

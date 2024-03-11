@@ -22,8 +22,7 @@ func _process(_delta):
 		$visual.visible=true
 	else:
 		$visual.visible=Global.debug
-		#if global_position.distance_to(get_tree().get_first_node_in_group("Player").global_position)<0.75:
-			#_on_warp_area_body_entered(get_tree().get_first_node_in_group("Player"))
+
 	if !all_directions:
 		$visual.frame_coords.x=clamp(warp_direction,0,3)
 	if all_directions:

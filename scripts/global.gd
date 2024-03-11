@@ -217,19 +217,21 @@ func strip_bbcode(source:String) -> String:
 	regex.compile("\\[.+?\\]")
 	return regex.sub(source, "", true)
 	
-func caught(id:int = -1,pet:Node = null,pet_origin:Node = null):
+func caught(id:int = -1,pet:Node = null,pet_origin:Node = null,disable_rotation: bool = false):
 	if get_tree().get_first_node_in_group("HUD_caught").get_child_count()==0:
 		get_tree().get_first_node_in_group("HUD_caught").add_child(preload("res://scenes/HUD/caught.tscn").instantiate())
 	if id!=-1:
 		pets[id]=true
 	if pet!=null:
 		pet.set_billboard_mode(0)
-		pet.get_material_override().set_shader_parameter("billboard",false)
+		if !disable_rotation:
+			pet.get_material_override().set_shader_parameter("billboard",false)
 		var shrink_animator = create_tween().set_parallel()
 		shrink_animator.tween_property(pet,"scale",Vector3.ZERO,2.5)
 		var original_offset = pet.offset.y
 		shrink_animator.tween_property(pet,"offset:y",original_offset*2,2.5).set_trans(Tween.TRANS_LINEAR)
-		shrink_animator.tween_property(pet,"rotation:y",deg_to_rad(360),2.5)
+		if !disable_rotation:
+			shrink_animator.tween_property(pet,"rotation:y",deg_to_rad(360),2.5)
 		await shrink_animator.finished
 		if pet_origin!=null:
 			pet_origin.queue_free()

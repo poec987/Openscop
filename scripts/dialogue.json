@@ -5,7 +5,7 @@
 		"This is a short line of text.",
 		"You're reading a very long line of text right now, hello there!",
 		"This is the 1st line of the text.\nThis is the second line of the text.",
-		"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis doloremque molestiae voluptates consequatur doloribus molestias quos, obcaecati temporibus quod ducimus facere. Ratione quibusdam eius, aperiam voluptatibus excepturi cumque voluptates aspernatur?"
+		"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis doloremque molestiae voluptates consequatur doloribus molestias quos?"
 	],
 
 	"dots_test": [
@@ -31,9 +31,7 @@
 	],
 
 	"evencare_3": [
-		"Don't be discouraged if they run \n",
-		"from you! They really do want a\n",
-		"home."
+		"Don't be discouraged if they run \nfrom you! They really do want a \nhome."
 	]
 
 }

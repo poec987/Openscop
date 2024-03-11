@@ -34,6 +34,8 @@ func _ready():
 	$height_offset.position.y = height_offset
 	origin = symbol_root.position.y
 	animate()
+	if Global.gen<=2:
+		queue_free()
 	
 func _process(_delta):
 	if global_position.distance_to(get_tree().get_first_node_in_group("Player").global_position)<min_distance:
