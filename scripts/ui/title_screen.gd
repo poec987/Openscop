@@ -35,6 +35,7 @@ func _physics_process(_delta):
 		check_files()
 		await $reading_card_timer.timeout
 		create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/Copyright,"position:x",-224.0,1.0).set_trans(Tween.TRANS_BACK)
+		create_tween().tween_property($pressed_start,"position:x",-224.0,1.0).set_trans(Tween.TRANS_BACK)
 		create_tween().tween_property($title_root,"position:x",3.5,1.0).set_trans(Tween.TRANS_BACK)
 		var scale_logo = create_tween().set_parallel()
 		scale_logo.tween_property($title_root/title_mesh_root/title_mesh,"scale:y",0.75,0.5).set_trans(Tween.TRANS_SINE)
@@ -77,11 +78,11 @@ func _physics_process(_delta):
 				title_stage=4
 				Global.create_keyboard(3,false,false)
 				$selected.play()
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0,"position:x",-240.0,0.5).set_trans(Tween.TRANS_SINE)
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1,"position:x",306.0,0.5).set_trans(Tween.TRANS_SINE)
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2,"position:x",-240.0,0.5).set_trans(Tween.TRANS_SINE)
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",50.0,0.5).set_trans(Tween.TRANS_SINE)
-				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2,"position:y",0.0,0.5).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0,"position:x",-240.0,0.35).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1,"position:x",306.0,0.35).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2,"position:x",-240.0,0.35).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",50.0,0.35).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2,"position:y",0.0,0.35).set_trans(Tween.TRANS_SINE)
 		selected_file = clamp(selected_file,0,2)
 		
 		if Input.is_action_just_pressed("pressed_triangle"):
@@ -175,13 +176,13 @@ func _physics_process(_delta):
 func bounce_file_up(yes: bool = false):
 	var bounce = create_tween()
 	if yes:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-5,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-75,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
 	else:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",5,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)	
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",75,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)	
 	if yes:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",5,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",75,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
 	else:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-5,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-75,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
 
 func check_files():
 	if FileAccess.file_exists("user://savedata/saveslot0.save"):
