@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="9_ymcnb"]
 [ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="10_rtvgo"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dkdex"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8mte3"]
 render_priority = 0
 shader = ExtResource("5_4kqnw")
 shader_parameter/billboard = false
@@ -55,7 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.9)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
 mesh = ExtResource("4_s66oy")
-surface_material_override/0 = SubResource("ShaderMaterial_dkdex")
+surface_material_override/0 = SubResource("ShaderMaterial_8mte3")
 
 [node name="collision_body" type="StaticBody3D" parent="level_root"]
 

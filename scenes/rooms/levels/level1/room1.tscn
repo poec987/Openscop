@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="9_i118c"]
 [ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="10_wep4k"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6g3fn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ayyc"]
 render_priority = 0
 shader = ExtResource("3_mm86x")
 shader_parameter/billboard = false
@@ -52,7 +52,7 @@ environment_darkness = 1.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
 mesh = ExtResource("2_ompi6")
-surface_material_override/0 = SubResource("ShaderMaterial_6g3fn")
+surface_material_override/0 = SubResource("ShaderMaterial_3ayyc")
 
 [node name="collision_body" type="StaticBody3D" parent="level_root"]
 
