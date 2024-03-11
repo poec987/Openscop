@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bxr4ceswpfl0g"]
+[gd_scene load_steps=61 format=3 uid="uid://bxr4ceswpfl0g"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="3_0q3dl"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="4_2kieq"]
@@ -27,6 +27,12 @@
 [ext_resource type="Texture2D" uid="uid://jhmvmjramd1o" path="res://graphics/sprites/ui/file_options.png" id="17_ie4qc"]
 [ext_resource type="Texture2D" uid="uid://cn84kgq0kgbp" path="res://graphics/sprites/ui/continue_cursor.png" id="18_sa4k6"]
 [ext_resource type="Texture2D" uid="uid://df5w1upymlb1w" path="res://graphics/sprites/ui/title_piece.png" id="18_ynrnt"]
+[ext_resource type="AudioStream" uid="uid://c0sj0jbpfjhx5" path="res://music/petscop.wav" id="28_r2eg8"]
+[ext_resource type="AudioStream" uid="uid://cq4h8l88k5vki" path="res://sfx/titlescreen/press_start.wav" id="29_2bf6r"]
+[ext_resource type="AudioStream" uid="uid://tq4q7f5d8se0" path="res://sfx/titlescreen/whistle.wav" id="30_c5c23"]
+[ext_resource type="AudioStream" uid="uid://ulxb67odxfbx" path="res://sfx/titlescreen/next_file.wav" id="31_2fnn4"]
+[ext_resource type="AudioStream" uid="uid://bo6aw0ddeaauo" path="res://sfx/titlescreen/choose_file.wav" id="32_isfcc"]
+[ext_resource type="AudioStream" uid="uid://ch1mtix8c04ar" path="res://sfx/titlescreen/whoosh.wav" id="33_1fxdv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("3_0q3dl")
@@ -661,5 +667,28 @@ layer = -1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, -16)
 mesh = SubResource("QuadMesh_bce2q")
 surface_material_override/0 = SubResource("ShaderMaterial_drlcc")
+
+[node name="song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_r2eg8")
+
+[node name="pressed_start" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("29_2bf6r")
+volume_db = 2.0
+
+[node name="whistle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("30_c5c23")
+volume_db = 2.0
+
+[node name="file" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("31_2fnn4")
+volume_db = 2.0
+
+[node name="selected" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("32_isfcc")
+volume_db = 2.0
+
+[node name="whoosh" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("33_1fxdv")
+volume_db = 2.0
 
 [connection signal="animation_looped" from="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select" to="." method="_on_select_animation_looped"]

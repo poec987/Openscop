@@ -3,7 +3,7 @@ extends Node3D
 @export var title_stage = 0
 
 var timer:int = 0
-const READING_CARD_WAIT = 5.0
+const READING_CARD_WAIT = 2.5
 
 
 var file_data = {}
@@ -18,7 +18,8 @@ func _ready():
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group/SelectFile.play()
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Finish.play()
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select.play()
-
+	if Global.room_name=="garalina":
+		$song.play()
 func _physics_process(_delta):
 	timer += 1
 	if timer == 30:
@@ -26,6 +27,7 @@ func _physics_process(_delta):
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/press_start.visible = bool(int(timer < 24) * int(title_stage==0))
 	
 	if Input.is_action_just_pressed("pressed_start") && title_stage==0:
+		$pressed_start.play()
 		selected_file=0
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/press_start.frame_coords.y = 1
 		$reading_card_timer.wait_time = READING_CARD_WAIT+randf_range(0.0,2.0)
@@ -41,6 +43,7 @@ func _physics_process(_delta):
 		var scale_logo_2 = create_tween().set_parallel()
 		scale_logo_2.tween_property($title_root/title_mesh_root/title_mesh,"scale:y",1.5,0.25).set_trans(Tween.TRANS_SINE)
 		scale_logo_2.tween_property($title_root/title_mesh_root/title_mesh,"scale:x",0.25,0.25).set_trans(Tween.TRANS_SINE)
+		$whistle.play()
 		create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select,"position:x",0.0,1.0).set_trans(Tween.TRANS_BACK)
 		await scale_logo_2.finished
 		title_stage=1
@@ -54,11 +57,13 @@ func _physics_process(_delta):
 			selected_file+=1
 			if selected_file<=2:
 				bounce_file_up()
+				$file.play()
 			
 		if Input.is_action_just_pressed("pressed_up"):
 			selected_file-=1
 			if selected_file>=0:
 				bounce_file_up(true)
+				$file.play()
 		
 		if Input.is_action_just_pressed("pressed_action"):
 			if FileAccess.file_exists("user://savedata/saveslot"+str(selected_file)+".save"):
@@ -70,8 +75,8 @@ func _physics_process(_delta):
 				title_stage = 3
 			else:
 				title_stage=4
-				
 				Global.create_keyboard(3,false,false)
+				$selected.play()
 				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0,"position:x",-240.0,0.5).set_trans(Tween.TRANS_SINE)
 				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1,"position:x",306.0,0.5).set_trans(Tween.TRANS_SINE)
 				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2,"position:x",-240.0,0.5).set_trans(Tween.TRANS_SINE)
@@ -110,6 +115,7 @@ func _physics_process(_delta):
 
 		if Input.is_action_just_pressed("pressed_action"):
 			if cont_option:
+				$pressed_start.play()
 				Global.load_game(selected_file)
 			else:
 				DirAccess.remove_absolute("user://savedata/saveslot"+str(selected_file)+".save")	

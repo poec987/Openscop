@@ -3,7 +3,7 @@ extends Node
 var debug = false
 var keyboard_RAM=""
 #ROOM
-var room_name ="test"
+var room_name ="garalina"
 var loading_preset = ""
 var fog_radius = 13.5
 var fog_color = Vector4(0.0,0.0,0.0,0.0)
