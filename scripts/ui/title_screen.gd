@@ -72,15 +72,9 @@ func _physics_process(_delta):
 				title_stage=4
 				
 				Global.create_keyboard(3,false,false)
-				#var colorful_0 = create_tween().set_loops()
-				#colorful_0.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0/file_select,"modulate",Color(1.0,0.75,1.0),0.5).set_trans(Tween.TRANS_SINE)
-				#colorful_0.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0/file_select,"modulate",Color(1.0,1.0,1.0),0.5).set_trans(Tween.TRANS_SINE)
-				#var colorful_1 = create_tween().set_loops()
-				#colorful_1.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1/file_select,"modulate",Color(1.0,0.75,1.0),0.5).set_trans(Tween.TRANS_SINE)
-				#colorful_1.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1/file_select,"modulate",Color(1.0,1.0,1.0),0.5).set_trans(Tween.TRANS_SINE)
-				#var colorful_2 = create_tween().set_loops()
-				#colorful_2.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2/file_select,"modulate",Color(1.0,0.75,1.0),0.5).set_trans(Tween.TRANS_SINE)
-				#colorful_2.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2/file_select,"modulate",Color(1.0,1.0,1.0),0.5).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0,"position:x",-240.0,0.5).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1,"position:x",306.0,0.5).set_trans(Tween.TRANS_SINE)
+				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2,"position:x",-240.0,0.5).set_trans(Tween.TRANS_SINE)
 				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",50.0,0.5).set_trans(Tween.TRANS_SINE)
 				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2,"position:y",0.0,0.5).set_trans(Tween.TRANS_SINE)
 		selected_file = clamp(selected_file,0,2)
@@ -140,7 +134,9 @@ func _physics_process(_delta):
 		if Input.is_action_pressed("pressed_triangle"):
 			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",0.0,0.5).set_trans(Tween.TRANS_SINE)
 			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2,"position:y",50.0,0.5).set_trans(Tween.TRANS_SINE)
-
+			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0,"position:x",0.0,0.5).set_trans(Tween.TRANS_SINE)
+			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1,"position:x",66.0,0.5).set_trans(Tween.TRANS_SINE)
+			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2,"position:x",0.0,0.5).set_trans(Tween.TRANS_SINE)
 	if title_stage>2:
 		if (timer/3)%2:
 			if selected_file==0:
