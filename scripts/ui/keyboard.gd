@@ -124,21 +124,22 @@ func _process(_delta):
 			self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().title_stage = 1
 			#Console.console_log(self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().title_stage)
 	if Input.is_action_just_pressed("pressed_start") && !deactivate:
-		#Whenever you use "Global.keyboard_RAM" on any other script
-		#please ALWAYS clean it immediately after using.
-		if Global.keyboard_RAM=="":
-			if !ask:
-				if background==3:
-					Global.keyboard_RAM=(($keyboard_background/keyboard_string.text).right(-11))
-					Console.console_log(Global.keyboard_RAM)
+		if ask && $keyboard_background/keyboard_string.text.length()>6 || background==3 && $keyboard_background/keyboard_string.text.length()>11 || background!=3 && !ask && $keyboard_background/keyboard_string.text.length()>0:
+			#Whenever you use "Global.keyboard_RAM" on any other script
+			#please ALWAYS clean it immediately after using.
+			if Global.keyboard_RAM=="":
+				if !ask:
+					if background==3:
+						Global.keyboard_RAM=(($keyboard_background/keyboard_string.text).right(-11))
+						Console.console_log(Global.keyboard_RAM)
+					else:
+						Global.keyboard_RAM=$keyboard_background/keyboard_string.text
 				else:
-					Global.keyboard_RAM=$keyboard_background/keyboard_string.text
-			else:
-				Global.keyboard_RAM=(($keyboard_background/keyboard_string.text).right(-5)).left(-1)
-		create_tween().tween_property($fade,"color:a",0.0,APPEAR_ANIM_SPEED)
-		get_tree().paused=false
-		var disappear = create_tween()
-		disappear.tween_property(self,"position:y",240.0,APPEAR_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
-		await disappear.finished
-		Global.can_pause=true
-		queue_free()
+					Global.keyboard_RAM=(($keyboard_background/keyboard_string.text).right(-5)).left(-1)
+			create_tween().tween_property($fade,"color:a",0.0,APPEAR_ANIM_SPEED)
+			get_tree().paused=false
+			var disappear = create_tween()
+			disappear.tween_property(self,"position:y",240.0,APPEAR_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
+			await disappear.finished
+			Global.can_pause=true
+			queue_free()

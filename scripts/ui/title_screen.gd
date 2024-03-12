@@ -87,6 +87,7 @@ func _physics_process(_delta):
 		
 		if Input.is_action_just_pressed("pressed_triangle"):
 			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/Copyright,"position:x",96.0,1.0).set_trans(Tween.TRANS_BACK)
+			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/press_start,"position:x",0.0,1.0).set_trans(Tween.TRANS_BACK)
 			var move_files = create_tween()
 			move_files.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select,"position:x",320.0,1.0).set_trans(Tween.TRANS_BACK)
 			$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/press_start.frame_coords.y = 0
@@ -135,16 +136,22 @@ func _physics_process(_delta):
 	if title_stage==4:
 		if Global.keyboard_RAM!="":
 			Global.save_name = Global.keyboard_RAM
-			Global.save_game(selected_file)
+			write_blank_save(selected_file)
 			check_files()
 			Global.keyboard_RAM=""
+			title_stage=1
+			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",0.0,0.5).set_trans(Tween.TRANS_SINE)
+			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2,"position:y",50.0,0.5).set_trans(Tween.TRANS_SINE)
+			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0,"position:x",0.0,0.5).set_trans(Tween.TRANS_SINE)
+			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1,"position:x",66.0,0.5).set_trans(Tween.TRANS_SINE)
+			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2,"position:x",0.0,0.5).set_trans(Tween.TRANS_SINE)
 		if Input.is_action_pressed("pressed_triangle"):
 			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group,"position:y",0.0,0.5).set_trans(Tween.TRANS_SINE)
 			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2,"position:y",50.0,0.5).set_trans(Tween.TRANS_SINE)
 			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0,"position:x",0.0,0.5).set_trans(Tween.TRANS_SINE)
 			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1,"position:x",66.0,0.5).set_trans(Tween.TRANS_SINE)
 			create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2,"position:x",0.0,0.5).set_trans(Tween.TRANS_SINE)
-	if title_stage>2:
+	if title_stage>3:
 		if (timer/3)%2:
 			if selected_file==0:
 				$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0/file_select.modulate = Color(1.0,1.0,1.0)
@@ -221,3 +228,30 @@ func check_files():
 		
 func _on_select_animation_looped():
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/GoBack.play()
+
+func write_blank_save(slot):
+	var save_data = {
+		"room": {
+			"room_name":"giftplane",
+			"loading_preset":"giftplane",
+			"current_room": "_PLACEHOLDER_"
+		},
+		"game": {
+			"pets": [false,false,false,false,false,false,false,false,false,false],
+			"retrace_steps":false,
+			"save_name": Global.save_name,
+			"corrupted": false
+		},
+		"player": {
+			"coords":[0.0,0.0,0.0,1],
+			"pieces":[0,Global.pieces_amount[1],Global.pieces_amount[2],Global.pieces_amount[3],Global.pieces_amount[4]],
+			"character":0,
+			"control_mode":0,
+			"key":false
+		}
+	}
+	Console.console_log("[color=green]Creating blank game data to slot "+str(slot)+"...[/color]")
+	var save_game = FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.WRITE)
+	var json_data = JSON.stringify(save_data)
+	save_game.store_line(json_data)
+	Console.console_log("[color=blue]Created blank data to slot "+str(slot)+" sucessfully![/color]")
