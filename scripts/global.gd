@@ -182,7 +182,7 @@ func save_global():
 	save_global.store_line(json_data)
 
 func load_game(slot):
-	Console.console_log("[color=green]Loading game data from slot "+slot+"...[/color]")
+	Console.console_log("[color=green]Loading game data from slot "+str(slot)+"...[/color]")
 	if not FileAccess.file_exists("user://savedata/saveslot"+str(slot)+".save"):
 		return
 	var save_game = JSON.parse_string((FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.READ)).get_as_text())
@@ -195,7 +195,7 @@ func load_game(slot):
 	key = save_game["player"]["key"]
 	save_name = save_game["game"]["save_name"]
 	warp_to(save_game["room"]["current_room"],"evencare")
-	Console.console_log("[color=blue]Loaded game data from slot "+slot+" sucessfully![/color]")
+	Console.console_log("[color=blue]Loaded game data from slot "+str(slot)+" sucessfully![/color]")
 	
 func load_global():
 	if FileAccess.file_exists("user://savedata/global_save.save"):
