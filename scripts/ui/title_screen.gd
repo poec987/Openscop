@@ -14,6 +14,7 @@ var cont_option = true
 
 
 func _ready():
+	bg_music.stop()
 	get_tree().paused = false
 	Global.game_paused = false
 	Global.can_pause = true
@@ -183,7 +184,10 @@ func _physics_process(_delta):
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0/cursor.visible=false
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1/cursor.visible=false
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2/cursor.visible=true
-
+	
+	if get_tree().get_first_node_in_group("loading_overlay").get_child(1).get_texture!=null:
+		$song.stop()
+	
 func bounce_file_up(yes: bool = false):
 	var bounce = create_tween()
 	if yes:
