@@ -15,6 +15,8 @@ func _ready():
 			var sphere = SphereShape3D.new()
 			sphere.radius = 0.5
 			$warp_area/warp.set_shape(sphere)
+		if Global.gen==1:
+			queue_free()
 
 func _process(_delta):
 	
