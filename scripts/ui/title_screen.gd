@@ -121,6 +121,7 @@ func _physics_process(_delta):
 
 		if Input.is_action_just_pressed("pressed_action"):
 			if cont_option:
+				title_stage=-1
 				$pressed_start.play()
 				Global.save_slot = selected_file
 				Global.load_game(selected_file)
