@@ -14,6 +14,9 @@ var cont_option = true
 
 
 func _ready():
+	get_tree().paused = false
+	Global.game_paused = false
+	Global.can_pause = true
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group/GoBack.play()
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group/SelectFile.play()
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Finish.play()
@@ -118,6 +121,7 @@ func _physics_process(_delta):
 		if Input.is_action_just_pressed("pressed_action"):
 			if cont_option:
 				$pressed_start.play()
+				Global.save_slot = selected_file
 				Global.load_game(selected_file)
 			else:
 				DirAccess.remove_absolute("user://savedata/saveslot"+str(selected_file)+".save")	

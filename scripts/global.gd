@@ -26,6 +26,7 @@ var cam_move_limit_z = Vector2.ZERO
 
 #GAME
 var control_mode = 0
+var save_slot = 0
 #0 = normal controls
 #1 = P2toTALK
 #2 = Retrace steps.
@@ -51,7 +52,7 @@ var pieces_amount = [0,0,0,0,0]
 
 var player_array = Vector4(0.,0.,0.,0)
 var player_brightness = 1.0
-var pets = [false,false,false,false,false,false,false,false,false,false]
+var pets = [false,false,false,false,false,false,true,false,false,false]
 var fog_focus = 0
 #0 = follow player
 #

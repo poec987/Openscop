@@ -49,14 +49,19 @@ func _process(_delta):
 		if selected_option==0:
 			queue_free()
 		if selected_option==1:
+			Global.save_game(Global.save_slot)
+			Global.save_global()
 			$selected.play()
 			$overlay.frame_coords.x=selected_option
-			create_tween().tween_property(self,\"fade\",1.1,0.5)
+			var fade_out = create_tween()
+			fade_out.tween_property(self,\"fade\",1.0,1.0)
+			await fade_out.finished
+			get_tree().change_scene_to_file(\"res://scenes/rooms/title/title.tscn\")
 		if selected_option==2:
 			$selected2.play()
 			$just_quit_menu.visible = true
 			$buttons.visible=false
-	
+	$pink_fade.color.a=fade
 	for buttons in $buttons.get_children():
 		if buttons.name!=\"selected2\" && buttons.name!=\"pink_fade\" && buttons.name!=\"just_quit_menu\" && buttons.name!=\"select_up\" && buttons.name!=\"select_down\" && buttons.name!=\"selected\"  && buttons.name!=\"bg\":
 			if $buttons.get_child(selected_option)!=buttons:
@@ -112,7 +117,13 @@ func _process(_delta):
 				just_quit=false
 				$just_quit_menu.visible=false
 				$buttons.visible=true
-		
+		if Input.is_action_just_pressed(\"pressed_action\") && just_quit:
+			Global.save_global()
+			$overlay.frame_coords.x=selected_option
+			var fade_out = create_tween()
+			fade_out.tween_property(self,\"fade\",1.0,1.0)
+			await fade_out.finished
+			get_tree().change_scene_to_file(\"res://scenes/rooms/title/title.tscn\")
 "
 
 [node name="quit_button" type="Node2D"]
@@ -161,7 +172,7 @@ offset_left = -18.0
 offset_top = -171.0
 offset_right = 302.0
 offset_bottom = 69.0
-color = Color(0.996078, 0.847059, 0.996078, 0)
+color = Color(1, 1, 1, 0)
 
 [node name="select_up" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_fu8ut")

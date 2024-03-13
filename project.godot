@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.1", "GL Compatibility")
 run/max_fps=30
 config/icon="res://gift.png"
 
+[audio]
+
+general/3d_panning_strength=2.0
+
 [autoload]
 
 Global="*res://scripts/global.gd"
@@ -174,6 +178,7 @@ common/physics_ticks_per_second=30
 
 [rendering]
 
+textures/canvas_textures/default_texture_repeat=1
 shading/overrides/force_vertex_shading=true
 
 [shader_globals]
