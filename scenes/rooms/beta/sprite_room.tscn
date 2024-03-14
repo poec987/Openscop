@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://1pfs5mogg53a"]
+
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_showx"]
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_flpe5"]
+[ext_resource type="ArrayMesh" uid="uid://ctq5lu2ehk2h4" path="res://graphics/3d/room_mesh/sprite/sprite.obj" id="3_p0tqq"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_ho0fy"]
+[ext_resource type="Texture2D" uid="uid://5pbfoo5v4s1w" path="res://graphics/3d/room_mesh/sprite/texture_1.png" id="5_1x6hx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mjgkd"]
+render_priority = 0
+shader = ExtResource("4_ho0fy")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("5_1x6hx")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[node name="sprite_room" type="Node3D"]
+
+[node name="level_manipulator" parent="." instance=ExtResource("1_showx")]
+sky_and_fog_color = Vector4(1, 1, 1, 0)
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+
+[node name="player_root" parent="." instance=ExtResource("2_flpe5")]
+
+[node name="level_root" type="Node3D" parent="."]
+
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="mesh0" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("3_p0tqq")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_mjgkd")

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://svkng11lel4j"
+path="res://.godot/imported/layer3.obj-d8cba9c7ba54b8a025a3d95cac2174a8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/layer3.obj-d8cba9c7ba54b8a025a3d95cac2174a8.mesh"]
+
+source_file="res://graphics/3d/room_mesh/levels/sort-test/layer3.obj"
+dest_files=["res://.godot/imported/layer3.obj-d8cba9c7ba54b8a025a3d95cac2174a8.mesh", "res://.godot/imported/layer3.obj-d8cba9c7ba54b8a025a3d95cac2174a8.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
