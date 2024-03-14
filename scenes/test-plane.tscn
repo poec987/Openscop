@@ -56,13 +56,13 @@ var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a scre
 \"Alongside my friends. Whom I'd \\nlike to thank individually here.\",
 \"And now...\",
 \"The [color=#00FF00]MMOscop[/color]/[color=#0000FF]Openscop[/color] Team:\",
-\"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nGeometricentric, Izzint, \\nJuanB7, Lewgus...\",
-\"Maxine, Wowzaboi.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
+\"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nCheddar, Geometricentric, \\nIzzint, JuanB7...\",
+\"Lewgus, Maxine, Wowzaboi.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
 \"[color=#00FFFF]The Level Recreation Team:[/color]\\nCheddar, Geometricentric, \\nIzzint, Lewgus.\",
-\"[color=#00FFFF]The Texture Recreation Team:[/color]\\nBetah, Izzint, Lewgus.\",
+\"[color=#00FFFF]The Texture Recreation Team:[/color]\\nCheddar, Betah, Izzint, Lewgus.\",
 \"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Unnaturalistic.\",
 \"[color=#00FFFF]Sound/Music Ripping Team:[/color]\\nCheddar, BrowserTG5, \\nGeometricentric, Lewgus.\",
-\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, \\nJerzygorsky, Unnaturalistic, \\nParsley, WestCraft15.\",
+\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, Izzint, \\nJerzygorsky, Unnaturalistic, \\nParsley, WestCraft15.\",
 \"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Ronicalter, TL/24,Tom.\",
 \"[color=#47B6FF]Shoutouts to:\\n[/color]PoeDev, ZLD1.\",
 \"Shoutouts to you all!\\nY'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!\",
@@ -70,18 +70,21 @@ var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a scre
 \"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pause menu buttons, \\ntitle screen UI, pet menu names.\",
 \"[color=#38733c]Anthony Domenico:[/color] Care, bucket, \\nloading screens, music, textbox \\nbackgrounds, SFX.\",
 \"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian, p2totalk \\nbuttons, pieces.\",
-\"[color=#38733c]Cheddar:[/color] Care B, bucket, logo, \\ngift plane road, Nifty, \\npieces, tool answers.\",
+\"[color=#38733c]Cheddar:[/color] Care B, bucket, Even \\nCare rooms and tiles, logo, \\nGift Plane room and tiles, Nifty, \\npieces, Sort-Test model...\",
+\"Tool answers.\",
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
-\"[color=#38733c]Geometricentric:[/color] Amber, Care, \\ncone piece, CAUGHT sprite, Gift \\nPlane loading screen, gift sprite and icon...\",
+\"[color=#38733c]Geometricentric:[/color] Amber, Care, \\ncone piece, CAUGHT sprite, Gift \\nPlane loading screen and tiles, \\ngift sprite and icon...\",
 \"Interaction symbol texture, \\nkeyboard, Pen, sprite room, \\nTool answers, waiting room.\",
 \"[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
-\"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]JuanB7:[/color] Marvin, Paul, Pause \\nmenu.\",
+\"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]JuanB7:[/color] Marvin, Paul, Pause \\nmenu.\\n[color=#38733c]Lewgus:[/color] Even Care tiles.\",
 \"[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\\n[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
+\"[color=#38733c]PoeDev:[/color] Even Care \\nconnector room.\",
 \"[color=#38733c]WestCraft15:[/color] Logo animation.\",
 \"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
-\"[color=#80aab3]Osyu:[/color] Keyboard, p2totalk \\nbuttons, pet menu, pet menu \\nboxes, pets.\\n[color=#80aab3]Releskowitz: [/color]Pause menu.\",
-\"[color=#80aab3]The New Orchestra: [/color]Keyboard, \\npause menu.\\n[color=#80aab3]Ugng: [/color]Pause menu.\\n[color=#80aab3]Wirelex:[/color] Pause menu, School HUD.\",
+\"[color=#80aab3]Osyu:[/color] Keyboard, p2totalk \\nbuttons, file select , pet \\nmenu, pet menu boxes, pets.\",
+\"[color=#80aab3]Releskowitz: [/color]Pause menu.\",
+\"[color=#80aab3]The New Orchestra: [/color]Keyboard, \\nfile select, pause menu.\\n[color=#80aab3]Ugng: [/color]Pause menu.\\n[color=#80aab3]Wirelex:[/color] Pause menu, School HUD.\",
 \"If it wasn't for our amazing \\nteam this project would've never \\nbeen possible.\",
 \"This is an easter egg.\\n[color=#007108]Coded Between:[/color]\\n[color=#0071ff]Feb 23rd 2024.[/color]\\n[color=#0071ff]Feb 24th 2024.[/color]\",
 \"- Cheddar\"
@@ -353,7 +356,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.637193, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
+transform = Transform3D(8.27248e-12, 0, 0, 0, 8.27248e-12, 0, 0, 0, 8.27248e-12, 0, 1.5, 0)
 mesh = SubResource("QuadMesh_pbefp")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_ufk43")
