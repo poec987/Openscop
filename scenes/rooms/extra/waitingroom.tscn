@@ -122,7 +122,7 @@ mesh = ExtResource("8_dvo6w")
 shape = SubResource("ConcavePolygonShape3D_solim")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="level_root/collision_body"]
-transform = Transform3D(3.24, 0, 0, 0, 1, 0, 0, 0, 2.352, 2.5, 0, 0)
+transform = Transform3D(3, 0, 0, 0, 0.85, 0, 0, 0, 2, 2.5, 0, 0)
 shape = SubResource("BoxShape3D_qr8u3")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="level_root/collision_body"]
@@ -166,7 +166,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4.5)
 darkener_width = 2.0
 
 [node name="darkener2" parent="." instance=ExtResource("7_ysfhk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3.5)
 darkener_direction = 3
 
 [node name="darkener3" parent="." instance=ExtResource("7_ysfhk")]
