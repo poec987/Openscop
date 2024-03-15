@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bt0y27sbyalmu"
+path="res://.godot/imported/gift_plane7.obj-735d021ccd6f6c386c6ca171c7cec97c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/gift_plane7.obj-735d021ccd6f6c386c6ca171c7cec97c.mesh"]
+
+source_file="res://graphics/3d/room_mesh/levels/gift_plane/gift_plane7.obj"
+dest_files=["res://.godot/imported/gift_plane7.obj-735d021ccd6f6c386c6ca171c7cec97c.mesh", "res://.godot/imported/gift_plane7.obj-735d021ccd6f6c386c6ca171c7cec97c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

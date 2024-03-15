@@ -1,0 +1,133 @@
+[gd_scene load_steps=20 format=3 uid="uid://01toj5iidcek"]
+
+[ext_resource type="ArrayMesh" uid="uid://bkep2pcnqwibe" path="res://graphics/3d/room_mesh/levels/gift_plane/gift_plane1.obj" id="1_8n3ds"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="2_6l8jj"]
+[ext_resource type="Texture2D" uid="uid://c83qn42gsyt8k" path="res://graphics/3d/room_mesh/levels/gift_plane/texture_2.png" id="3_oiwau"]
+[ext_resource type="ArrayMesh" uid="uid://2xwidb1b1va4" path="res://graphics/3d/room_mesh/levels/gift_plane/gift_plane2.obj" id="4_70i0q"]
+[ext_resource type="ArrayMesh" uid="uid://ci3yi2q3llglr" path="res://graphics/3d/room_mesh/levels/gift_plane/gift_plane6.obj" id="5_l5wt2"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-alpha.gdshader" id="5_t1tcf"]
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="6_ljwhy"]
+[ext_resource type="ArrayMesh" uid="uid://bt0y27sbyalmu" path="res://graphics/3d/room_mesh/levels/gift_plane/gift_plane7.obj" id="6_virnu"]
+[ext_resource type="ArrayMesh" uid="uid://xejtbxhsny7g" path="res://graphics/3d/room_mesh/levels/gift_plane/gift_plane3.obj" id="6_x5bxq"]
+[ext_resource type="ArrayMesh" uid="uid://dqg8gtb3djiqx" path="res://graphics/3d/room_mesh/levels/gift_plane/gift_plane4.obj" id="7_40pcq"]
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="7_d0f5f"]
+[ext_resource type="ArrayMesh" uid="uid://dbw31isv8bvde" path="res://graphics/3d/room_mesh/levels/gift_plane/gift_plane5.obj" id="8_yof0v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_txfac"]
+render_priority = 0
+shader = ExtResource("2_6l8jj")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/albedoTex = ExtResource("3_oiwau")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_via2g"]
+render_priority = 0
+shader = ExtResource("2_6l8jj")
+shader_parameter/modulate_color = Color(0.490196, 0.627451, 1, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sc65l"]
+render_priority = 0
+shader = ExtResource("2_6l8jj")
+shader_parameter/modulate_color = Color(0.431373, 0.54902, 0.878431, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ygn80"]
+render_priority = 0
+shader = ExtResource("2_6l8jj")
+shader_parameter/modulate_color = Color(0.560784, 0.670588, 0.321569, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7nrf"]
+render_priority = 0
+shader = ExtResource("5_t1tcf")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_oiwau")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0k2q"]
+render_priority = 0
+shader = ExtResource("5_t1tcf")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_oiwau")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4edc"]
+render_priority = 0
+shader = ExtResource("5_t1tcf")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_oiwau")
+
+[node name="giftplane" type="Node3D"]
+
+[node name="level_root" type="Node3D" parent="."]
+
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="opaque" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("1_8n3ds")
+surface_material_override/0 = SubResource("ShaderMaterial_txfac")
+
+[node name="opaque2" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("8_yof0v")
+surface_material_override/0 = SubResource("ShaderMaterial_via2g")
+
+[node name="opaque3" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("5_l5wt2")
+surface_material_override/0 = SubResource("ShaderMaterial_sc65l")
+
+[node name="opaque4" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("6_virnu")
+surface_material_override/0 = SubResource("ShaderMaterial_ygn80")
+
+[node name="alpha" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_x7nrf")
+
+[node name="alpha2" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_x7nrf")
+
+[node name="alpha3" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_v0k2q")
+
+[node name="alpha4" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_v0k2q")
+
+[node name="alpha5" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_v0k2q")
+
+[node name="alpha6" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_v0k2q")
+
+[node name="alpha8" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -13)
+mesh = ExtResource("7_40pcq")
+surface_material_override/0 = SubResource("ShaderMaterial_g4edc")
+
+[node name="level_manipulator" parent="." instance=ExtResource("6_ljwhy")]
+enable_fog = true
+sky_and_fog_color = Vector4(1, 1, 1, 0)
+fog_radius = 100.0
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+
+[node name="player_root" parent="." instance=ExtResource("7_d0f5f")]
