@@ -158,5 +158,15 @@ func _ready():
 		if texture!=null:
 			$background/texture.texture=texture
 		$background/texture.get_material().set_shader_parameter("scroll_speed",scroll_speed)
-	bg_music.play_track(background_music_id)
+
+	if preset==1:
+		if Global.gen<=2:
+			background_music_id=0
+		if Global.gen<=3:
+			$background/color.visible=true
+			$background/texture.visible=false
+			$background/color.color=Color(1.0,1.0,1.0,1.0)
+		if Global.gen==3 || Global.gen==4:
+			background_music_id=2
 	
+	bg_music.play_track(background_music_id)

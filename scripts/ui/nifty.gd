@@ -19,6 +19,7 @@ func _process(_delta):
 				loaded = true
 		if Input.is_action_pressed("pressed_start"):
 			$pencil.position=Vector2i(32,240)
+			$nifty.play()
 			get_tree().paused = false
 			Global.can_pause=true
 			for mesh_object in get_tree().get_root().get_child(4).find_child("level_root").find_child("visual_mesh").get_children():

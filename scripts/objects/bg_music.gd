@@ -1,7 +1,8 @@
 extends AudioStreamPlayer
 var tracks = [
 	"",
-	"res://music/level2.mp3"
+	"res://music/level1.wav",
+	"res://music/level2.wav"
 ]
 
 

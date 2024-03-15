@@ -10,7 +10,8 @@ var random_sound = 0
 
 func _ready():
 	$piece_sprite.frame_coords.y = Global.pieces[get_parent().get_node(str(self.name)).get_index()]
-
+	if Global.gen<=2:
+		queue_free()
 
 func _process(delta):
 	current_frame+=ANIM_SPEED*delta

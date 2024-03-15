@@ -3,7 +3,7 @@ extends Node
 var debug = false
 var keyboard_RAM=""
 #ROOM
-var room_name ="test"
+var room_name ="garalina"
 var loading_preset = ""
 var fog_radius = 13.5
 var fog_color = Vector4(0.0,0.0,0.0,0.0)
@@ -26,6 +26,7 @@ var cam_move_limit_z = Vector2.ZERO
 
 #GAME
 var control_mode = 0
+var save_slot = 0
 #0 = normal controls
 #1 = P2toTALK
 #2 = Retrace steps.
@@ -51,7 +52,7 @@ var pieces_amount = [0,0,0,0,0]
 
 var player_array = Vector4(0.,0.,0.,0)
 var player_brightness = 1.0
-var pets = [false,false,false,false,false,false,false,false,false,false]
+var pets = [false,false,false,false,false,false,true,false,false,false]
 var fog_focus = 0
 #0 = follow player
 #
@@ -83,6 +84,11 @@ var pieces = [0,1,2,3,4,
 #4 = PINK PIECE
 
 func _ready():
+	if not FileAccess.file_exists("user://savedata/global_save.save"):
+		save_global()
+	else:
+		load_global()
+
 	var directory = DirAccess.open("user://")
 	#GAME BOOTUP
 	#CHECKS IF CUSTOM SHEETS DIRECTORY DOESNT EXIST SO IT CAN CREATE IT
@@ -114,20 +120,21 @@ func create_textbox(background,big_textbox,text):
 		get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).add_child(dialogue_instance)
 
 func warp_to(scene,preset):
-	can_pause=false
-	#print(level_data)
-	get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=Color(level_data[preset]["fade_color"][0],level_data[preset]["fade_color"][1],level_data[preset]["fade_color"][2],0.)
-	var fade_in = create_tween()
-	fade_in.tween_property(get_tree().get_first_node_in_group("loading_overlay").get_child(0),"color:a",1.0,0.5)
-	await fade_in.finished
-	get_tree().paused=true
-	if level_data[preset]["loading_file"]!=null:
-		bg_music.stop()
-		get_tree().get_first_node_in_group("loading_overlay").get_child(1).set_texture(load("res://graphics/sprites/ui/loading_screen/"+level_data[preset]["loading_file"]+".png"))
-	get_tree().get_first_node_in_group("loading_overlay").get_child(2).wait_time =float(level_data[preset]["wait_time"])+randf_range(0.,float(level_data[preset]["wait_time"])/4)
-	get_tree().get_first_node_in_group("loading_overlay").get_child(2).start()
-	await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
-	get_tree().change_scene_to_file(scene)
+	if get_tree().get_first_node_in_group("loading_overlay").get_child(0).color.a==0.0:
+		can_pause=false
+		#print(level_data)
+		get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=Color(level_data[preset]["fade_color"][0],level_data[preset]["fade_color"][1],level_data[preset]["fade_color"][2],0.)
+		var fade_in = create_tween()
+		fade_in.tween_property(get_tree().get_first_node_in_group("loading_overlay").get_child(0),"color:a",1.0,0.5)
+		await fade_in.finished
+		get_tree().paused=true
+		if level_data[preset]["loading_file"]!=null:
+			bg_music.stop()
+			get_tree().get_first_node_in_group("loading_overlay").get_child(1).set_texture(load("res://graphics/sprites/ui/loading_screen/"+level_data[preset]["loading_file"]+".png"))
+		get_tree().get_first_node_in_group("loading_overlay").get_child(2).wait_time =float(level_data[preset]["wait_time"])+randf_range(0.,float(level_data[preset]["wait_time"])/4)
+		get_tree().get_first_node_in_group("loading_overlay").get_child(2).start()
+		await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
+		get_tree().change_scene_to_file(scene)
 	
 func save_data():
 	var save_data = {
@@ -139,6 +146,7 @@ func save_data():
 		"game": {
 			"pets": pets,
 			"retrace_steps":retrace_steps,
+			"save_name": save_name,
 			"corrupted":corrupt
 		},
 		"player": {
@@ -163,32 +171,37 @@ func save_general():
 	return save_general
 
 func save_game(slot):
+	Console.console_log("[color=green]Saving game data to slot "+str(slot)+"...[/color]")
 	var save_game = FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.WRITE)
 	var json_data = JSON.stringify(save_data())
 	save_game.store_line(json_data)
-	var save_main = FileAccess.open("user://savedata/global_save.save",FileAccess.WRITE)
-	json_data = ""
-	json_data = JSON.stringify(save_general())
-	save_main.store_line(json_data)
+	Console.console_log("[color=blue]Saved game data to slot "+str(slot)+" sucessfully![/color]")
 	
+func save_global():	
+	var save_global = FileAccess.open("user://savedata/global_save.save",FileAccess.WRITE)
+	var json_data = JSON.stringify(save_general())
+	save_global.store_line(json_data)
+
 func load_game(slot):
+	Console.console_log("[color=green]Loading game data from slot "+str(slot)+"...[/color]")
 	if not FileAccess.file_exists("user://savedata/saveslot"+str(slot)+".save"):
 		return
 	var save_game = JSON.parse_string((FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.READ)).get_as_text())
-	gen = save_game["game"]["gen"]
 	pets = save_game["game"]["pets"]
 	retrace_steps = save_game["game"]["retrace_steps"]
-	corrupt = save_game["game"]["corrupt"]
+	corrupt = save_game["game"]["corrupted"]
 	player_array = Vector4(save_game["player"]["coords"][0],save_game["player"]["coords"][1],save_game["player"]["coords"][2],save_game["player"]["coords"][3])
 	pieces_amount = save_game["player"]["pieces"]
 	control_mode = save_game["player"]["control_mode"]
 	key = save_game["player"]["key"]
+	save_name = save_game["game"]["save_name"]
 	warp_to(save_game["room"]["current_room"],"evencare")
+	Console.console_log("[color=blue]Loaded game data from slot "+str(slot)+" sucessfully![/color]")
 	
+func load_global():
 	if FileAccess.file_exists("user://savedata/global_save.save"):
 		var save_global = JSON.parse_string((FileAccess.open("user://savedata/global_save.save",FileAccess.READ)).get_as_text())
 		gen = save_global["general"]["gen"]
-		save_name = save_game["ganeral"]["save_filenames"][slot]
 
 func create_keyboard(background,ask,fade):
 	var keyboard_scene = preload("res://scenes/objects/menu/keyboard.tscn")
@@ -205,19 +218,21 @@ func strip_bbcode(source:String) -> String:
 	regex.compile("\\[.+?\\]")
 	return regex.sub(source, "", true)
 	
-func caught(id:int = -1,pet:Node = null,pet_origin:Node = null):
+func caught(id:int = -1,pet:Node = null,pet_origin:Node = null,disable_rotation: bool = false):
 	if get_tree().get_first_node_in_group("HUD_caught").get_child_count()==0:
 		get_tree().get_first_node_in_group("HUD_caught").add_child(preload("res://scenes/HUD/caught.tscn").instantiate())
 	if id!=-1:
 		pets[id]=true
 	if pet!=null:
 		pet.set_billboard_mode(0)
-		pet.get_material_override().set_shader_parameter("billboard",false)
+		if !disable_rotation:
+			pet.get_material_override().set_shader_parameter("billboard",false)
 		var shrink_animator = create_tween().set_parallel()
 		shrink_animator.tween_property(pet,"scale",Vector3.ZERO,2.5)
 		var original_offset = pet.offset.y
 		shrink_animator.tween_property(pet,"offset:y",original_offset*2,2.5).set_trans(Tween.TRANS_LINEAR)
-		shrink_animator.tween_property(pet,"rotation:y",deg_to_rad(360),2.5)
+		if !disable_rotation:
+			shrink_animator.tween_property(pet,"rotation:y",deg_to_rad(360),2.5)
 		await shrink_animator.finished
 		if pet_origin!=null:
 			pet_origin.queue_free()

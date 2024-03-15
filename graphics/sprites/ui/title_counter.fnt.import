@@ -1,0 +1,16 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://blsucq8kjvjgn"
+path="res://.godot/imported/title_counter.fnt-7674c60c0e2e5a1da3da1f0a9133bddf.fontdata"
+
+[deps]
+
+source_file="res://graphics/sprites/ui/title_counter.fnt"
+dest_files=["res://.godot/imported/title_counter.fnt-7674c60c0e2e5a1da3da1f0a9133bddf.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
