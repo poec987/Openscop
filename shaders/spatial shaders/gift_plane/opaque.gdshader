@@ -36,7 +36,7 @@ void vertex()
 {
 	world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	float min_dist = length(player_pos - world_vertex);
-	float fog_func = ( 0.85 - clamp((min_dist/0.85)/sphere_size, 0.0, 1.0) );
+	float fog_func = ( 1.0 - clamp((min_dist)/100.0, 0.0, 1.0) );
 	COLOR = vec4( fog_func, fog_func, fog_func, 1.0);
 
 #if !defined(NO_TEXTURE) && !defined(METAL)  // METAL doesn't use UV, so no need to pan UVs
@@ -54,6 +54,7 @@ void fragment()
 {
 	ALBEDO = COLOR.rgb;
 	vec2 texture_uv = UV;
+	vec4 color_base = mix(fog_color , modulate_color, COLOR.r);
 	vec4 texture_color = texture(albedoTex, texture_uv);
 	if (fog_enable) {
 		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR).rgb;

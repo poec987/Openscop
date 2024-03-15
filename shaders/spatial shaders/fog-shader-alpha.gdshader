@@ -34,7 +34,7 @@ void fragment() {
 		ALPHA = 0.0;
 		
 	if (fog_enable) {
-		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR.r).rgb;
+		ALBEDO = mix(fog_color,(texture_color*modulate_color), COLOR).rgb;
 	} else {
 		ALBEDO = (texture_color*modulate_color).rgb;
 	}
