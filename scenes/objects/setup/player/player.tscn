@@ -91,6 +91,7 @@ debug_shape_thickness = 5
 stream = ExtResource("5_nm087")
 attenuation_model = 3
 volume_db = -80.0
+panning_strength = 4.0
 
 [node name="p2_talk_buttons" type="Label3D" parent="player"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.8, 0)

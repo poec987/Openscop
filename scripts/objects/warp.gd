@@ -15,6 +15,8 @@ func _ready():
 			var sphere = SphereShape3D.new()
 			sphere.radius = 0.5
 			$warp_area/warp.set_shape(sphere)
+		if Global.gen==1:
+			queue_free()
 
 func _process(_delta):
 	
@@ -22,7 +24,7 @@ func _process(_delta):
 		$visual.visible=true
 	else:
 		$visual.visible=Global.debug
-		
+
 	if !all_directions:
 		$visual.frame_coords.x=clamp(warp_direction,0,3)
 	if all_directions:
@@ -31,8 +33,16 @@ func _process(_delta):
 	if !all_directions:
 		if warp_direction==0 || warp_direction==3:
 			$warp_area/warp.get_shape().size = Vector3(2.,2.,0.)
+			if warp_direction==3:
+				$backup_warp.rotation.y=deg_to_rad(180)
+			else:
+				$backup_warp.rotation.y=0.0
 		elif warp_direction==1 || warp_direction==2:
 			$warp_area/warp.get_shape().size = Vector3(0.,2.,2.)
+			if warp_direction==2:
+				$backup_warp.rotation.y=deg_to_rad(-90)
+			else:
+				$backup_warp.rotation.y=deg_to_rad(90)
 		
 	
 	warp_direction=clamp(warp_direction,0,3)

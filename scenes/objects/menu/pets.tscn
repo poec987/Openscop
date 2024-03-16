@@ -127,6 +127,15 @@ func _process(delta):
 				$action_input_cap.start()
 				animated = true
 				reading_bio=false
+				var go_down = create_tween()
+				go_down.tween_property($buttons_group,\"position:y\",45,0.5).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+				await go_down.finished
+				var go_up = create_tween()
+				go_up.tween_property($buttons_group,\"position:y\",45,0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+				await go_up.finished
+				$buttons_group/SelectPet/AdvanceText.visible = reading_bio
+				$buttons_group/SelectPet/SelectPet.visible = !reading_bio
+				create_tween().tween_property($buttons_group,\"position:y\",0,0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	if Input.is_action_just_pressed(\"pressed_triangle\") && $triangle_input_cap.time_left<1.0:
 		if get_node(\"pet_textbox\").get_child_count()!=0 && spawned_textbox:
 			get_node(\"pet_textbox\").get_child(0).queue_free()

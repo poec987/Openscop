@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://bhpyh18sy6h5w"]
+
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_lpqwa"]
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_lct6m"]
+[ext_resource type="ArrayMesh" uid="uid://bt8f0l1t3pjd8" path="res://graphics/3d/room_mesh/levels/sort-test/layer1.obj" id="3_72qws"]
+[ext_resource type="Shader" path="res://scenes/rooms/beta/sort-test.gdshader" id="4_ecgpx"]
+[ext_resource type="Texture2D" uid="uid://cqdofcwa1srhs" path="res://graphics/3d/room_mesh/levels/level1/evencare.png" id="4_i51bh"]
+[ext_resource type="ArrayMesh" uid="uid://b711ul6t1aals" path="res://graphics/3d/room_mesh/levels/sort-test/layer2.obj" id="6_kolx0"]
+[ext_resource type="ArrayMesh" uid="uid://svkng11lel4j" path="res://graphics/3d/room_mesh/levels/sort-test/layer3.obj" id="7_tjtwr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4m1hu"]
+render_priority = 0
+shader = ExtResource("4_ecgpx")
+shader_parameter/depth_offset = -1.0
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/albedoTex = ExtResource("4_i51bh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k57v1"]
+render_priority = 0
+shader = ExtResource("4_ecgpx")
+shader_parameter/depth_offset = 1.0
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/albedoTex = ExtResource("4_i51bh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4egte"]
+render_priority = 0
+shader = ExtResource("4_ecgpx")
+shader_parameter/depth_offset = 2.0
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/albedoTex = ExtResource("4_i51bh")
+
+[node name="sort-test" type="Node3D"]
+
+[node name="level_manipulator" parent="." instance=ExtResource("1_lpqwa")]
+room_name = "sort-test-"
+limit_camera_horizontal = true
+horizontal_limit = Vector2(1.5, 900)
+allow_front_movement = false
+allow_vertical_movement = false
+camera_distance = 9.5
+sky_and_fog_color = Vector4(1, 1, 1, 0)
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+
+[node name="player_root" parent="." instance=ExtResource("2_lct6m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
+
+[node name="level_root" type="Node3D" parent="."]
+
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="layer1" type="MeshInstance3D" parent="level_root/visual_mesh"]
+sorting_offset = 10.0
+sorting_use_aabb_center = false
+mesh = ExtResource("3_72qws")
+surface_material_override/0 = SubResource("ShaderMaterial_4m1hu")
+
+[node name="layer2" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("6_kolx0")
+surface_material_override/0 = SubResource("ShaderMaterial_k57v1")
+
+[node name="layer3" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("7_tjtwr")
+surface_material_override/0 = SubResource("ShaderMaterial_4egte")

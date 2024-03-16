@@ -7,7 +7,6 @@ varying vec3 world_vertex;
 uniform bool billboard = false;
 uniform bool y_billboard = false;
 uniform sampler2D albedoTex : source_color, filter_nearest, repeat_enable;
-
 uniform vec4 transparent_color : source_color = vec4(1.0,0.0,1.0,1.0);
 uniform vec4 tint_color : source_color = vec4(1.0,1.0,1.0,1.0);
 
@@ -22,20 +21,13 @@ group_uniforms uv_mofification;
 
 	uniform vec2 uv_scale = vec2(1.0, 1.0);
 	uniform vec2 uv_offset = vec2(0.0, 0.0);
-	
-group_uniforms advanced_vertex_colors;
-	uniform bool vertex_color_as_mask = false;
-	uniform bool invert = false;
-	uniform bool add_blend_mode = false;
-	uniform bool multiply_blend_mode = false;
-	uniform vec4 masked_color : source_color = vec4(1.0,1.0,1.0,1.0);
 
 const float alpha_scissor = 0.25;
 
 void vertex()
 {
 	UV = UV * uv_scale + uv_offset;
-	
+	COLOR.rgb = COLOR.rgb*COLOR.rgb*COLOR.rgb;
 	if (fog && fog_enable) {
 		world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 		float min_dist = length(player_pos - world_vertex);
@@ -46,6 +38,7 @@ void vertex()
 		if (fog && fog_enable){
 			COLOR = COLOR.rgba*vec4( fog_func, fog_func, fog_func, 1.0);
 		}
+
 		if (billboard) {
 			MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0]*2.0, INV_VIEW_MATRIX[1]*2.0, INV_VIEW_MATRIX[2]*2.0, MODEL_MATRIX[3]);
 		}
@@ -69,34 +62,19 @@ void vertex()
 		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
 		MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0), vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
 	}
+
 }
 
 void fragment()
 {
 	vec4 texture_color = texture(albedoTex, UV);
 	
-	if (vertex_color_as_mask)
-	{
-		ALBEDO = (texture_color * tint_color).rgb;
-		float mask = length(COLOR.rgb);
-		if (invert)
-			mask = max(1.0 - mask, 0.0);
-
-		if (add_blend_mode && !multiply_blend_mode)
-			ALBEDO = mix(ALBEDO, ALBEDO + masked_color.rgb, mask);
-		else if (!add_blend_mode && multiply_blend_mode)
-			ALBEDO = mix(ALBEDO, ALBEDO * masked_color.rgb, mask);
-		else if (add_blend_mode && multiply_blend_mode)
-			ALBEDO = mix(ALBEDO, ALBEDO * masked_color.rgb + ALBEDO, mask);
-		else
-			ALBEDO = mix(ALBEDO, masked_color.rgb, mask);
+	if (fog) {
+		ALBEDO = mix(fog_color,(texture_color*tint_color),COLOR).rgb;
+	} else {
+		ALBEDO = ((texture_color*4.0)*tint_color*(COLOR/3.75)).rgb;
+		//ALBEDO = vec3(ALBEDO.r/2.0,ALBEDO.g/2.0,ALBEDO.b/2.0);
 	}
-	else
-		if (fog) {
-			ALBEDO = mix(fog_color,(texture_color*2.0*tint_color),COLOR).rgb;
-		} else {
-			ALBEDO = (texture_color*tint_color*COLOR).rgb;
-		}
 	
 		
 	if (length(texture_color - transparent_color) < 0.1)
