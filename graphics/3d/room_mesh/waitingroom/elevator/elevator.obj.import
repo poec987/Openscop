@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://be6xlwc4rv1xf"
+path="res://.godot/imported/elevator.obj-78d340813f96324217ee60eb1a73a09e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/elevator.obj-78d340813f96324217ee60eb1a73a09e.mesh"]
+
+source_file="res://graphics/3d/room_mesh/waitingroom/elevator/elevator.obj"
+dest_files=["res://.godot/imported/elevator.obj-78d340813f96324217ee60eb1a73a09e.mesh", "res://.godot/imported/elevator.obj-78d340813f96324217ee60eb1a73a09e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlmay5i3i01d8"]
+
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="1_7auky"]
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="2_0e0yh"]
+[ext_resource type="ArrayMesh" uid="uid://be6xlwc4rv1xf" path="res://graphics/3d/room_mesh/waitingroom/elevator/elevator.obj" id="3_m10o8"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="4_sqaue"]
+[ext_resource type="Texture2D" uid="uid://dosb8r8v4y4s8" path="res://graphics/3d/room_mesh/waitingroom/elevator/elevator.png" id="5_m03g4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8hqf"]
+render_priority = 0
+shader = ExtResource("4_sqaue")
+shader_parameter/modulate_color = Color(0.521569, 0.521569, 0.521569, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+shader_parameter/albedoTex = ExtResource("5_m03g4")
+
+[node name="elevator" type="Node3D"]
+
+[node name="player_root" parent="." instance=ExtResource("1_7auky")]
+
+[node name="level_manipulator" parent="." instance=ExtResource("2_0e0yh")]
+footstep_sound = 2
+allow_horizontal_movement = false
+allow_front_movement = false
+allow_vertical_movement = false
+camera_height = 4.0
+camera_distance = 8.0
+enable_fog = true
+fog_radius = 8.0
+
+[node name="level_root" type="Node3D" parent="."]
+
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("3_m10o8")
+surface_material_override/0 = SubResource("ShaderMaterial_d8hqf")
