@@ -345,7 +345,7 @@ texture = ExtResource("3_uabo5")
 environment_darkness = 0.5
 
 [node name="test_plane_specific" type="Node3D" parent="level_manipulator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 260)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2600, 0, 2600)
 visible = false
 script = SubResource("GDScript_ver1u")
 
@@ -377,7 +377,7 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("3_8wwrg")
 hframes = 4
-vframes = 2
+vframes = 4
 script = SubResource("GDScript_jvya2")
 
 [node name="Timer" type="Timer" parent="level_manipulator/test_plane_specific/me"]
@@ -393,7 +393,7 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("3_8wwrg")
 hframes = 4
-vframes = 2
+vframes = 4
 frame = 4
 
 [node name="mrfas" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
@@ -405,7 +405,7 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("3_8wwrg")
 hframes = 4
-vframes = 2
+vframes = 4
 frame = 5
 
 [node name="max" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
@@ -417,8 +417,33 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("3_8wwrg")
 hframes = 4
-vframes = 2
+vframes = 4
 frame = 6
+
+[node name="causeofpastas" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+material_override = SubResource("ShaderMaterial_y0djn")
+offset = Vector2(0, 40)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_8wwrg")
+hframes = 4
+vframes = 4
+frame = 8
+
+[node name="lewgus" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+visible = false
+material_override = SubResource("ShaderMaterial_y0djn")
+offset = Vector2(0, 40)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_8wwrg")
+hframes = 4
+vframes = 4
+frame = 8
 
 [node name="grass" type="Node3D" parent="level_manipulator/test_plane_specific"]
 
