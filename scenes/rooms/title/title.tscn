@@ -36,8 +36,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("3_0q3dl")
-shader_parameter/effect = null
-shader_parameter/ntsc_enable = null
 
 [sub_resource type="Gradient" id="Gradient_xo8nd"]
 colors = PackedColorArray(0.772549, 0.137255, 1, 1, 0, 0, 0, 1)
