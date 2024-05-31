@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://01toj5iidcek"]
+[gd_scene load_steps=21 format=3 uid="uid://01toj5iidcek"]
 
 [ext_resource type="ArrayMesh" uid="uid://bkep2pcnqwibe" path="res://graphics/3d/room_mesh/levels/gift_plane/gift_plane1.obj" id="1_8n3ds"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="2_6l8jj"]
@@ -22,6 +22,28 @@ shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 shader_parameter/albedoTex = ExtResource("3_oiwau")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ygn80"]
+render_priority = 0
+shader = ExtResource("2_6l8jj")
+shader_parameter/modulate_color = Color(0.560784, 0.670588, 0.321569, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gr6go"]
+render_priority = 0
+shader = ExtResource("5_t1tcf")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_oiwau")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rif4m"]
+render_priority = 0
+shader = ExtResource("5_t1tcf")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_oiwau")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_via2g"]
 render_priority = 0
 shader = ExtResource("2_6l8jj")
@@ -38,34 +60,15 @@ shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ygn80"]
+[sub_resource type="QuadMesh" id="QuadMesh_nj75l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2r4o4"]
 render_priority = 0
 shader = ExtResource("2_6l8jj")
-shader_parameter/modulate_color = Color(0.560784, 0.670588, 0.321569, 1)
+shader_parameter/modulate_color = Color(0.351563, 0.355469, 0.882813, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kxpv6"]
-render_priority = 0
-shader = ExtResource("5_t1tcf")
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/transparent_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("3_oiwau")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0k2q"]
-render_priority = 0
-shader = ExtResource("5_t1tcf")
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/transparent_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("3_oiwau")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4edc"]
-render_priority = 0
-shader = ExtResource("5_t1tcf")
-shader_parameter/modulate_color = Color(1, 1, 1, 1)
-shader_parameter/transparent_color = Color(1, 0, 1, 1)
-shader_parameter/albedoTex = ExtResource("3_oiwau")
 
 [node name="giftplane" type="Node3D"]
 
@@ -77,51 +80,170 @@ shader_parameter/albedoTex = ExtResource("3_oiwau")
 mesh = ExtResource("1_8n3ds")
 surface_material_override/0 = SubResource("ShaderMaterial_txfac")
 
-[node name="opaque2" type="MeshInstance3D" parent="level_root/visual_mesh"]
-mesh = ExtResource("8_yof0v")
-surface_material_override/0 = SubResource("ShaderMaterial_via2g")
-
-[node name="opaque3" type="MeshInstance3D" parent="level_root/visual_mesh"]
-mesh = ExtResource("5_l5wt2")
-surface_material_override/0 = SubResource("ShaderMaterial_sc65l")
-
 [node name="opaque4" type="MeshInstance3D" parent="level_root/visual_mesh"]
 mesh = ExtResource("6_virnu")
 surface_material_override/0 = SubResource("ShaderMaterial_ygn80")
 
-[node name="alpha" type="MeshInstance3D" parent="level_root/visual_mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1)
+[node name="fence" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
 mesh = ExtResource("4_70i0q")
-surface_material_override/0 = SubResource("ShaderMaterial_kxpv6")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
 
-[node name="alpha2" type="MeshInstance3D" parent="level_root/visual_mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+[node name="fence2" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 mesh = ExtResource("4_70i0q")
-surface_material_override/0 = SubResource("ShaderMaterial_kxpv6")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
 
-[node name="alpha3" type="MeshInstance3D" parent="level_root/visual_mesh"]
-mesh = ExtResource("6_x5bxq")
-surface_material_override/0 = SubResource("ShaderMaterial_v0k2q")
+[node name="fence3" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
 
-[node name="alpha4" type="MeshInstance3D" parent="level_root/visual_mesh"]
+[node name="fence4" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence5" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence6" type="MeshInstance3D" parent="level_root/visual_mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-mesh = ExtResource("6_x5bxq")
-surface_material_override/0 = SubResource("ShaderMaterial_v0k2q")
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
 
-[node name="alpha5" type="MeshInstance3D" parent="level_root/visual_mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-mesh = ExtResource("6_x5bxq")
-surface_material_override/0 = SubResource("ShaderMaterial_v0k2q")
+[node name="fence7" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
 
-[node name="alpha6" type="MeshInstance3D" parent="level_root/visual_mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-mesh = ExtResource("6_x5bxq")
-surface_material_override/0 = SubResource("ShaderMaterial_v0k2q")
+[node name="fence8" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
 
-[node name="alpha8" type="MeshInstance3D" parent="level_root/visual_mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -13)
+[node name="fence9" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence10" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence11" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence12" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence13" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence14" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence15" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence16" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence17" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence18" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence19" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence20" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -2)
+mesh = ExtResource("4_70i0q")
+surface_material_override/0 = SubResource("ShaderMaterial_gr6go")
+
+[node name="fence21" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.5, 0, -6)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_rif4m")
+
+[node name="fence22" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 22.5, 0, -6)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_rif4m")
+
+[node name="fence23" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.5, 0, -8)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_rif4m")
+
+[node name="fence24" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 22.5, 0, -8)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_rif4m")
+
+[node name="fence25" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.5, 0, -10)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_rif4m")
+
+[node name="fence26" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 22.5, 0, -10)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_rif4m")
+
+[node name="fence27" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.5, 0, -12)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_rif4m")
+
+[node name="fence28" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 22.5, 0, -12)
+mesh = ExtResource("6_x5bxq")
+surface_material_override/0 = SubResource("ShaderMaterial_rif4m")
+
+[node name="fence29" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 21.5, 1, -13)
 mesh = ExtResource("7_40pcq")
-surface_material_override/0 = SubResource("ShaderMaterial_g4edc")
+surface_material_override/0 = SubResource("ShaderMaterial_rif4m")
+
+[node name="opaque2" type="MeshInstance3D" parent="level_root"]
+mesh = ExtResource("8_yof0v")
+skeleton = NodePath("../visual_mesh")
+surface_material_override/0 = SubResource("ShaderMaterial_via2g")
+
+[node name="opaque3" type="MeshInstance3D" parent="level_root"]
+mesh = ExtResource("5_l5wt2")
+skeleton = NodePath("../visual_mesh")
+surface_material_override/0 = SubResource("ShaderMaterial_sc65l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level_root"]
+transform = Transform3D(8.7, 0, 0, 0, 1, 0, 0, 0, 1, 21.5, 0.5, -20.5)
+mesh = SubResource("QuadMesh_nj75l")
+skeleton = NodePath("../visual_mesh")
+surface_material_override/0 = SubResource("ShaderMaterial_2r4o4")
 
 [node name="level_manipulator" parent="." instance=ExtResource("6_ljwhy")]
 enable_fog = true
