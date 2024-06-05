@@ -44,8 +44,11 @@ func _ready():
 		$\"../level_root/visual_mesh/MeshInstance3D\".visible = false
 		$\"../warp\".queue_free()
 		$\"../warp2\".queue_free()
+		$\"../warp3\".queue_free()
+		$\"../warp4\".queue_free()
 	else:
 		$\"../level_root/visual_mesh/MeshInstance3D2\".visible = false
+		$\"../warp5\".queue_free()
 "
 
 [node name="room6" type="Node3D"]
@@ -56,6 +59,8 @@ background_music_id = 1
 fade_color = Color(1, 1, 1, 1)
 limit_camera_horizontal = true
 horizontal_limit = Vector2(-1, -1)
+limit_camera_front = true
+front_limit = Vector2(0.1, 0.1)
 allow_front_movement = false
 camera_height = 4.5
 camera_distance = 13.5
@@ -103,6 +108,25 @@ warp_direction = 1
 scene = "res://scenes/rooms/levels/level1/room5.tscn"
 loading_preset = "evencare_noload"
 coordinate_and_direction = Vector4(-23.5, 0, 3, 0)
+
+[node name="warp3" parent="." instance=ExtResource("7_rijqw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 2.5)
+scene = "res://scenes/rooms/levels/level1/room7.tscn"
+loading_preset = "evencare_noload"
+coordinate_and_direction = Vector4(1.5, 0, -15.5, 0)
+
+[node name="warp5" parent="." instance=ExtResource("7_rijqw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 2.5)
+all_directions = true
+scene = "res://scenes/rooms/levels/level1/room7.tscn"
+loading_preset = "evencare_noload"
+coordinate_and_direction = Vector4(1.5, 0, -15.5, 0)
+
+[node name="warp4" parent="." instance=ExtResource("7_rijqw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 3.5)
+scene = "res://scenes/rooms/levels/level1/room7.tscn"
+loading_preset = "evencare_noload"
+coordinate_and_direction = Vector4(1.5, 0, -15.5, 0)
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_ct2kt")

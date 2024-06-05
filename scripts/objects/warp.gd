@@ -17,6 +17,8 @@ func _ready():
 			$warp_area/warp.set_shape(sphere)
 		if Global.gen==1:
 			queue_free()
+		if all_directions:
+			$backup_warp.queue_free()
 
 func _process(_delta):
 	
