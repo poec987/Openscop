@@ -13,6 +13,7 @@ extends Node
 
 
 @export_subgroup("Limit Camera")
+@export var freeze_cam_on_zero = false
 @export var limit_camera_horizontal = false
 @export var horizontal_limit = Vector2.ZERO
 @export var limit_camera_front = false
