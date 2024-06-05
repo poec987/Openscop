@@ -126,4 +126,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 0, -5)
 warp_direction = 1
 scene = "res://scenes/rooms/levels/level1/room2.tscn"
 loading_preset = "evencare_noload"
-coordinate_and_direction = Vector4(1, 0, 0, 1)
+coordinate_and_direction = Vector4(1, 0, 0.1, 1)

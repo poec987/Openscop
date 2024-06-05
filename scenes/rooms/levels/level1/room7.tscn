@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfv3s441l45tc"]
+
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_i2bb1"]
+[ext_resource type="Texture2D" uid="uid://cjwvkldagl3km" path="res://graphics/sprites/ui/backgrounds/level1_1.png" id="2_s5gjr"]
+
+[node name="room7" type="Node3D"]
+
+[node name="level_manipulator" parent="." instance=ExtResource("1_i2bb1")]
+room_name = "level1-room1"
+background_music_id = 1
+fade_color = Color(1, 1, 1, 1)
+limit_camera_horizontal = true
+horizontal_limit = Vector2(-1, -1)
+allow_front_movement = false
+camera_height = 4.5
+camera_distance = 13.5
+texture_background = true
+texture = ExtResource("2_s5gjr")
+scroll_speed = 0.5
+sky_and_fog_color = Vector4(1, 1, 1, 0)
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+preset = 1
+
+[node name="level_root" type="Node3D" parent="."]
+
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
