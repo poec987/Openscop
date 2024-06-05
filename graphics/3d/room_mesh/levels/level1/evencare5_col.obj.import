@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b1uc8opfjc2kl"
+path="res://.godot/imported/evencare5_col.obj-206292c6eb382cb79343e0838519c8f9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/evencare5_col.obj-206292c6eb382cb79343e0838519c8f9.mesh"]
+
+source_file="res://graphics/3d/room_mesh/levels/level1/evencare5_col.obj"
+dest_files=["res://.godot/imported/evencare5_col.obj-206292c6eb382cb79343e0838519c8f9.mesh", "res://.godot/imported/evencare5_col.obj-206292c6eb382cb79343e0838519c8f9.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

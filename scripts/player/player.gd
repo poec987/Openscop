@@ -193,7 +193,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("default_char"):
 		reset_sheet()
 	if Input.is_action_just_pressed("change_mode"):
-		if Global.control_mode%2==0:
+		if int(Global.control_mode)%2==0:
 			Global.control_mode+=1
 		else:
 			Global.control_mode-=1
