@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=3 uid="uid://cbadp3y6uxb3x"]
+
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_r8gnf"]
+[ext_resource type="Texture2D" uid="uid://cjwvkldagl3km" path="res://graphics/sprites/ui/backgrounds/level1_1.png" id="2_fnxq1"]
+[ext_resource type="ArrayMesh" uid="uid://g6s6nxakr04n" path="res://graphics/3d/room_mesh/levels/level1/evencare5.obj" id="3_y5png"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_mi08p"]
+[ext_resource type="Texture2D" uid="uid://cqdofcwa1srhs" path="res://graphics/3d/room_mesh/levels/level1/evencare.png" id="5_7o8jl"]
+[ext_resource type="ArrayMesh" uid="uid://b1uc8opfjc2kl" path="res://graphics/3d/room_mesh/levels/level1/evencare5_col.obj" id="6_as3al"]
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="7_0t3un"]
+[ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="8_dnuj3"]
+[ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="9_lj1y8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oi3ld"]
+render_priority = 0
+shader = ExtResource("4_mi08p")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("5_7o8jl")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_coerv"]
+data = PackedVector3Array(-1.2, 1, 0.5, -1.2, 0, -2.5, -1.2, 0, 0.5, -22, 1, 4, -22, 0, 6, -22, 1, 6, 0.2, 1, -2.5, 0.2, 0, 0.5, 0.2, 0, -2.5, 2, 1, 0.5, 0.2, 0, 0.5, 0.2, 1, 0.5, -22, 1, 6, 2, 0, 6, 2, 1, 6, 2, 1, 6, 2, 0, 0.5, 2, 1, 0.5, -26, 1, 4, -22, 0, 4, -22, 1, 4, -22, 0, 0.5, -1.2, 1, 0.5, -1.2, 0, 0.5, -22, 0, 2.5, -22, 1, 0.5, -22, 0, 0.5, -26, 0, 2.5, -22, 1, 2.5, -22, 0, 2.5, -1.2, 1, -2.5, -1.2, 0, -2.5, -1.2, 1, 0.5, -22, 0, 4, -22, 0, 6, -22, 1, 4, 0.2, 1, 0.5, 0.2, 0, 0.5, 0.2, 1, -2.5, 2, 0, 0.5, 0.2, 0, 0.5, 2, 1, 0.5, -22, 0, 6, 2, 0, 6, -22, 1, 6, 2, 0, 6, 2, 0, 0.5, 2, 1, 6, -26, 0, 4, -22, 0, 4, -26, 1, 4, -22, 1, 0.5, -1.2, 1, 0.5, -22, 0, 0.5, -22, 1, 2.5, -22, 1, 0.5, -22, 0, 2.5, -26, 1, 2.5, -22, 1, 2.5, -26, 0, 2.5)
+
+[node name="room5" type="Node3D"]
+
+[node name="level_manipulator" parent="." instance=ExtResource("1_r8gnf")]
+room_name = "level1-room1"
+background_music_id = 1
+fade_color = Color(1, 1, 1, 1)
+limit_camera_horizontal = true
+horizontal_limit = Vector2(-20, -3)
+limit_camera_front = true
+front_limit = Vector2(0.1, 0.1)
+allow_front_movement = false
+camera_height = 4.5
+camera_distance = 15.5
+texture_background = true
+texture = ExtResource("2_fnxq1")
+scroll_speed = 0.5
+sky_and_fog_color = Vector4(1, 1, 1, 0)
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+preset = 1
+
+[node name="level_root" type="Node3D" parent="."]
+
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("3_y5png")
+surface_material_override/0 = SubResource("ShaderMaterial_oi3ld")
+
+[node name="collision_body" type="StaticBody3D" parent="level_root"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/collision_body"]
+visible = false
+mesh = ExtResource("6_as3al")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="level_root/collision_body"]
+shape = SubResource("ConcavePolygonShape3D_coerv")
+
+[node name="player_root" parent="." instance=ExtResource("7_0t3un")]
+
+[node name="pieces" type="Node3D" parent="."]
+
+[node name="piece_root" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 1)
+
+[node name="piece_root2" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 1)
+
+[node name="piece_root3" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 1)
+
+[node name="piece_root4" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 1)
+
+[node name="piece_root5" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, 1)
+
+[node name="piece_root6" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 1)
+
+[node name="piece_root7" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0, 1)
+
+[node name="piece_root8" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 0, 1)
+
+[node name="piece_root9" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 0, 1)
+
+[node name="piece_root10" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5, 0, 1)
+
+[node name="piece_root11" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5, 0, 1)
+
+[node name="piece_root12" parent="pieces" instance=ExtResource("8_dnuj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5, 0, 1)
+
+[node name="warp" parent="." instance=ExtResource("9_lj1y8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+warp_direction = 3
+scene = "res://scenes/rooms/levels/level1/room3.tscn"
+loading_preset = "evencare_noload"
+coordinate_and_direction = Vector4(10.5, 0, 2, 3)
+
+[node name="warp2" parent="." instance=ExtResource("9_lj1y8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 0, 3)
+warp_direction = 2
+scene = "res://scenes/rooms/levels/level1/room6.tscn"
+loading_preset = "evencare_noload"
+coordinate_and_direction = Vector4(2.5, 0, 0, 2)
+
+[node name="warp3" parent="." instance=ExtResource("9_lj1y8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, 3)
+warp_direction = 2
+scene = "res://scenes/rooms/levels/level1/room6.tscn"
+loading_preset = "evencare_noload"
+coordinate_and_direction = Vector4(2.5, 0, 0, 2)
