@@ -37,7 +37,7 @@ shader_parameter/albedoTex = ExtResource("5_1ynse")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gb8la"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0rsr"]
 render_priority = 0
 shader = ExtResource("4_fq56i")
 shader_parameter/billboard = false
@@ -59,6 +59,7 @@ func _ready():
 		$\"../level_root/visual_mesh/MeshInstance3D\".visible = false
 		$\"../warp\".queue_free()
 		$\"../warp2\".queue_free()
+		$\"../bucket\".queue_free()
 	else:
 		$\"../level_root/visual_mesh/MeshInstance3D3\".visible = false
 		$\"../warp3\".queue_free()
@@ -96,7 +97,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_fsl1d")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="level_root/visual_mesh"]
 mesh = ExtResource("7_04xq4")
-surface_material_override/0 = SubResource("ShaderMaterial_gb8la")
+surface_material_override/0 = SubResource("ShaderMaterial_k0rsr")
 
 [node name="collision_mesh" type="StaticBody3D" parent="level_root"]
 
