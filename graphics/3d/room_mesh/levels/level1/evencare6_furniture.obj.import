@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://byyurwn0qib2e"
+path="res://.godot/imported/evencare6_furniture.obj-f1e90d9e9adff8444b4e657d31fadbda.mesh"
+
+[deps]
+
+files=["res://.godot/imported/evencare6_furniture.obj-f1e90d9e9adff8444b4e657d31fadbda.mesh"]
+
+source_file="res://graphics/3d/room_mesh/levels/level1/evencare6_furniture.obj"
+dest_files=["res://.godot/imported/evencare6_furniture.obj-f1e90d9e9adff8444b4e657d31fadbda.mesh", "res://.godot/imported/evencare6_furniture.obj-f1e90d9e9adff8444b4e657d31fadbda.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

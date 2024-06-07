@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6dwob7mppos7"]
+[gd_scene load_steps=16 format=3 uid="uid://b6dwob7mppos7"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_mp0t8"]
 [ext_resource type="Texture2D" uid="uid://cjwvkldagl3km" path="res://graphics/sprites/ui/backgrounds/level1_1.png" id="2_66157"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="7_awxg2"]
 [ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="9_i118c"]
 [ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="10_wep4k"]
+[ext_resource type="ArrayMesh" uid="uid://dtoakehmo8je0" path="res://graphics/3d/room_mesh/levels/level1/evencare1_furniture.obj" id="11_2gjaq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ayyc"]
 render_priority = 0
@@ -23,8 +24,8 @@ shader_parameter/albedoTex = ExtResource("4_5yjx3")
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8cf44"]
-data = PackedVector3Array(2.5, 0, -0.5, -0.5, 0, -0.5, 2.5, 1, -0.5, 2.5, 1, -0.5, -0.5, 0, -0.5, -0.5, 1, -0.5, -0.5, 1, 1, -0.5, 0, 1, 14.5, 1, 1, 14.5, 1, 1, -0.5, 0, 1, 14.5, 0, 1, 7.5, 0, -12.5, 4.5, 0, -12.5, 7.5, 1, -12.5, 7.5, 1, -12.5, 4.5, 0, -12.5, 4.5, 1, -12.5, 4.5, 0, -12.5, 4.5, 0, -2.6, 4.5, 1, -12.5, 4.5, 1, -12.5, 4.5, 0, -2.6, 4.5, 1, -2.6, 2.5, 0, -1.5, 2.5, 0, -0.5, 2.5, 1, -1.5, 2.5, 1, -1.5, 2.5, 0, -0.5, 2.5, 1, -0.5, 14.5, 0, -6.5, 7.5, 0, -6.5, 14.5, 1, -6.5, 14.5, 1, -6.5, 7.5, 0, -6.5, 7.5, 1, -6.5, 7.5, 1, -6.5, 7.5, 0, -6.5, 7.5, 1, -12.5, 7.5, 1, -12.5, 7.5, 0, -6.5, 7.5, 0, -12.5, 14.5, 0, -4, 17.5, 0, -4, 14.5, 1, -4, 14.5, 1, -4, 17.5, 0, -4, 17.5, 1, -4, 17.5, 0, -5.5, 14.5, 0, -5.5, 17.5, 1, -5.5, 17.5, 1, -5.5, 14.5, 0, -5.5, 14.5, 1, -5.5, 14.5, 1, -5.5, 14.5, 0, -5.5, 14.5, 1, -6.5, 14.5, 1, -6.5, 14.5, 0, -5.5, 14.5, 0, -6.5, 14.5, 1, 1, 14.5, 0, 1, 14.5, 1, -4, 14.5, 1, -4, 14.5, 0, 1, 14.5, 0, -4, 5.5, 0, -1.5, 2.5, 0, -1.5, 5.5, 1, -1.5, 5.5, 1, -1.5, 2.5, 0, -1.5, 2.5, 1, -1.5, 5.5, 0, -2.6, 5.5, 0, -1.5, 5.5, 1, -2.6, 5.5, 1, -2.6, 5.5, 0, -1.5, 5.5, 1, -1.5, 4.5, 1, -2.6, 4.5, 0, -2.6, 5.5, 1, -2.6, 5.5, 1, -2.6, 4.5, 0, -2.6, 5.5, 0, -2.6)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_u3eia"]
+data = PackedVector3Array(-0.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 0, -0.5, 12.5, 0, 1, -0.5, 1, 1, -0.5, 0, 1, 4.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 4.5, 0, -12.5, 4.5, 0, -2.6, 2.5, 1, -0.5, 2.5, 0, -1.5, 2.5, 0, -0.5, 11, 1, -6.5, 14.5, 0, -6.5, 11, 0, -6.5, 17.5, 1, -4, 12.5, 0, -4, 17.5, 0, -4, 14.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 0, -5.5, 14.5, 0, -6.5, 14.5, 1, -5.5, 14.5, 0, -5.5, 12.5, 1, -4, 12.5, 0, -2, 12.5, 0, -4, 2.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 0, -1.5, 5.5, 1, -1.5, 5.5, 0, -2.6, 5.5, 0, -1.5, 5.5, 0, -2.6, 4.5, 1, -2.6, 4.5, 0, -2.6, 12.5, 1, -0.5, 12.5, 0, 1, 12.5, 0, -0.5, 11, 0, -0.5, 12.5, 1, -0.5, 12.5, 0, -0.5, 11, 0, -2, 11, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 12.5, 0, -2, 12.5, 1, -2, 7.5, 1, -5, 11, 0, -5, 7.5, 0, -5, 7.5, 1, -12.5, 7.5, 0, -5, 7.5, 0, -12.5, 11, 0, -5, 11, 1, -6.5, 11, 0, -6.5, 2.5, 1, -0.5, 2.5, 0, -0.5, -0.5, 1, -0.5, 12.5, 1, 1, -0.5, 1, 1, 12.5, 0, 1, 7.5, 1, -12.5, 7.5, 0, -12.5, 4.5, 1, -12.5, 4.5, 1, -12.5, 4.5, 0, -12.5, 4.5, 1, -2.6, 2.5, 1, -1.5, 2.5, 0, -1.5, 2.5, 1, -0.5, 14.5, 1, -6.5, 14.5, 0, -6.5, 11, 1, -6.5, 12.5, 1, -4, 12.5, 0, -4, 17.5, 1, -4, 17.5, 1, -5.5, 17.5, 0, -5.5, 14.5, 1, -5.5, 14.5, 1, -6.5, 14.5, 1, -5.5, 14.5, 0, -6.5, 12.5, 1, -2, 12.5, 0, -2, 12.5, 1, -4, 5.5, 1, -1.5, 5.5, 0, -1.5, 2.5, 1, -1.5, 5.5, 1, -2.6, 5.5, 0, -2.6, 5.5, 1, -1.5, 5.5, 1, -2.6, 4.5, 1, -2.6, 5.5, 0, -2.6, 12.5, 1, 1, 12.5, 0, 1, 12.5, 1, -0.5, 11, 1, -0.5, 12.5, 1, -0.5, 11, 0, -0.5, 11, 1, -2, 11, 1, -0.5, 11, 0, -2, 11, 0, -2, 12.5, 0, -2, 11, 1, -2, 11, 1, -5, 11, 0, -5, 7.5, 1, -5, 7.5, 1, -5, 7.5, 0, -5, 7.5, 1, -12.5, 11, 1, -5, 11, 1, -6.5, 11, 0, -5)
 
 [sub_resource type="GDScript" id="GDScript_u2il2"]
 script/source = "extends Node3D
@@ -37,6 +38,17 @@ func _ready():
 	else:
 		self.get_child(1).queue_free()
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hc8ke"]
+render_priority = 0
+shader = ExtResource("3_mm86x")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
 
 [node name="room1" type="Node3D"]
 
@@ -74,7 +86,7 @@ visible = false
 mesh = ExtResource("6_4sm3r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="level_root/collision_body"]
-shape = SubResource("ConcavePolygonShape3D_8cf44")
+shape = SubResource("ConcavePolygonShape3D_u3eia")
 
 [node name="player_root" parent="." instance=ExtResource("5_vxrl6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0.1)
@@ -127,3 +139,7 @@ warp_direction = 1
 scene = "res://scenes/rooms/levels/level1/room2.tscn"
 loading_preset = "evencare_noload"
 coordinate_and_direction = Vector4(1, 0, 0.1, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("11_2gjaq")
+surface_material_override/0 = SubResource("ShaderMaterial_hc8ke")

@@ -40,7 +40,7 @@ func _parse_command(input : Array):
 			Global.debug = !Global.debug
 			console_log("[color=blue]DEBUG Toggled[/color]")
 		"!shutup":
-			Global.bg_music.stop()
+			bg_music.stop()
 			console_log("[color=blue]Music is now mute[/color]")
 		"!set_gen_1":
 			Global.gen = 1
