@@ -235,7 +235,7 @@ coordinate_and_direction = Vector4(1.5, 0, 0, 2)
 
 [node name="interaction" parent="." instance=ExtResource("10_vfmp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.65, 0, -12)
-height_offset = 0.75
+height_offset = 1.0
 min_distance = 2.0
 dialogue_id = "evencare_4"
 
