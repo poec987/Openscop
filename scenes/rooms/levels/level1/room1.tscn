@@ -39,7 +39,7 @@ func _ready():
 		self.get_child(1).queue_free()
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hc8ke"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jsg0l"]
 render_priority = 0
 shader = ExtResource("3_mm86x")
 shader_parameter/billboard = false
@@ -57,7 +57,7 @@ room_name = "level1-room1"
 background_music_id = 1
 fade_color = Color(1, 1, 1, 1)
 limit_camera_horizontal = true
-horizontal_limit = Vector2(1.5, 13.5)
+horizontal_limit = Vector2(1.5, 13.2)
 limit_camera_front = true
 front_limit = Vector2(0.1, 0.1)
 allow_front_movement = false
@@ -142,4 +142,4 @@ coordinate_and_direction = Vector4(1, 0, 0.1, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("11_2gjaq")
-surface_material_override/0 = SubResource("ShaderMaterial_hc8ke")
+surface_material_override/0 = SubResource("ShaderMaterial_jsg0l")
