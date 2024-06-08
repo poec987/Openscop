@@ -84,11 +84,6 @@ var pieces = [0,1,2,3,4,
 #4 = PINK PIECE
 
 func _ready():
-	if not FileAccess.file_exists("user://savedata/global_save.save"):
-		save_global()
-	else:
-		load_global()
-
 	var directory = DirAccess.open("user://")
 	#GAME BOOTUP
 	#CHECKS IF CUSTOM SHEETS DIRECTORY DOESNT EXIST SO IT CAN CREATE IT
@@ -98,6 +93,13 @@ func _ready():
 		directory.make_dir("savedata")
 	if !directory.dir_exists("screenshots"):
 		directory.make_dir("screenshots")
+		
+	if not FileAccess.file_exists("user://savedata/global_save.save"):
+		save_global()
+	else:
+		load_global()
+	
+	
 	#LOADS P2TOTALK DICTIONARY
 	p2talkdict = JSON.parse_string((FileAccess.open("res://scripts/p2_talk_data.json", FileAccess.READ)).get_as_text())
 	dialogue = JSON.parse_string((FileAccess.open("res://scripts/dialogue.json", FileAccess.READ)).get_as_text())
