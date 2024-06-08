@@ -661,6 +661,10 @@ script = SubResource("GDScript_xt5qy")
 [node name="background" type="CanvasLayer" parent="."]
 layer = -1
 
+[node name="move_permission" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
 [node name="reading_card_timer" type="Timer" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

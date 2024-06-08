@@ -58,19 +58,23 @@ func _physics_process(_delta):
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file0/file_select.modulate = Color(1.0,1.0,1.0)
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1/file_select.modulate = Color(1.0,1.0,1.0)
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2/file_select.modulate = Color(1.0,1.0,1.0)
-		if Input.is_action_just_pressed("pressed_down"):
+		if Input.is_action_just_pressed("pressed_down") && $move_permission.time_left==0:
 			selected_file+=1
+			$move_permission.set_wait_time(0.25)
+			$move_permission.start()
 			if selected_file<=2:
 				bounce_file_up()
 				$file.play()
 			
-		if Input.is_action_just_pressed("pressed_up"):
+		if Input.is_action_just_pressed("pressed_up") && $move_permission.time_left==0:
 			selected_file-=1
+			$move_permission.set_wait_time(0.25)
+			$move_permission.start()
 			if selected_file>=0:
 				bounce_file_up(true)
 				$file.play()
 		
-		if Input.is_action_just_pressed("pressed_action"):
+		if Input.is_action_just_pressed("pressed_action") && $PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select.position.x==0.0:
 			if FileAccess.file_exists("user://savedata/saveslot"+str(selected_file)+".save"):
 				title_stage=2
 				create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/continue_menu,"position:y",0.0,0.5)
