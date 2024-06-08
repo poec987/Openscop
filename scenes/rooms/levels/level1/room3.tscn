@@ -139,12 +139,10 @@ surface_material_override/0 = SubResource("ShaderMaterial_s1b3k")
 [node name="StaticBody3D" type="StaticBody3D" parent="level_root"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 visible = false
 mesh = ExtResource("6_lxbhh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="level_root/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 shape = SubResource("ConcavePolygonShape3D_7cisn")
 
 [node name="player_root" parent="." instance=ExtResource("6_h42iw")]
