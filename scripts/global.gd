@@ -110,7 +110,7 @@ func get_p2_word(word):
 		if word=="OW K EY":
 			return "OK"
 		else:
-			return str(p2talkdict.find_key(word)).to_lower().capitalize()
+			return str(p2talkdict.find_key(word)).to_lower().capitalize().replace ("1","").replace ("2","").replace ("3","").replace ("4","").replace ("5","").replace ("6","").replace ("7","").replace ("8","").replace ("9","")
 	else:
 		return "Not in Table"
 		
