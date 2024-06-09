@@ -1,3 +1,59 @@
-[gd_scene format=3 uid="uid://dci2pq27hyacb"]
+[gd_scene load_steps=5 format=3 uid="uid://dci2pq27hyacb"]
+
+[ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="1_miqdt"]
+[ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="2_1eamy"]
+[ext_resource type="Texture2D" uid="uid://dujwlec6naqf5" path="res://graphics/sprites/ui/garalina/gen8.png" id="3_2t5xd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_syp2d"]
+shader = ExtResource("1_miqdt")
+shader_parameter/effect = null
+shader_parameter/ntsc_enable = null
 
 [node name="garalina" type="Node2D"]
+
+[node name="PSXLayer" type="CanvasLayer" parent="."]
+
+[node name="NTSC" type="SubViewportContainer" parent="PSXLayer"]
+material = SubResource("ShaderMaterial_syp2d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+metadata/_edit_use_anchors_ = true
+
+[node name="NTSC_viewport" type="SubViewport" parent="PSXLayer/NTSC"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(320, 240)
+render_target_update_mode = 4
+
+[node name="Dither" type="SubViewportContainer" parent="PSXLayer/NTSC/NTSC_viewport"]
+texture_filter = 1
+material = ExtResource("2_1eamy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="dither_view" type="SubViewport" parent="PSXLayer/NTSC/NTSC_viewport/Dither"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(320, 240)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+texture = ExtResource("3_2t5xd")
+centered = false
+hframes = 13
+vframes = 12
