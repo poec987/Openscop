@@ -104,11 +104,13 @@ func _ready():
 	p2talkdict = JSON.parse_string((FileAccess.open("res://scripts/p2_talk_data.json", FileAccess.READ)).get_as_text())
 	dialogue = JSON.parse_string((FileAccess.open("res://scripts/dialogue.json", FileAccess.READ)).get_as_text())
 	level_data = JSON.parse_string((FileAccess.open("res://scripts/level_data.json", FileAccess.READ)).get_as_text())
-
 #FUNCTION THAT CHECKS P2TOTALK DICTIONARY TABLE, CALLED EVERY TIME P2TOTALK IS USED
 func get_p2_word(word):
 	if p2talkdict.find_key(word)!=null:
-		return str(p2talkdict.find_key(word)).to_lower().capitalize()
+		if word=="OW K EY":
+			return "OK"
+		else:
+			return str(p2talkdict.find_key(word)).to_lower().capitalize()
 	else:
 		return "Not in Table"
 		
