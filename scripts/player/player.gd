@@ -381,10 +381,11 @@ func _physics_process(delta):
 #PROCESSES INPUTS SUBMITTED, CHECKS TABLE, AND SPAWNS FLOATING WORD
 func create_word():
 	#CREATES OBJECT OF FLOATING WORD
+	print(word)
 	var word_instance = p2_talk_word.instantiate()
 	#CHECKS P2TOTALK TABLE AND SETS THE TEXT OF FLOATING WORD TO VALUE RETURNED
 	#BY FUNCTION
-	word_instance.text = Global.get_p2_word(word)
+	word_instance.text = Global.get_p2_word(word.rstrip(" "))
 	#SPAWNS P2TOTALK WORD
 	get_node("p2_talk_buttons/P2_talk").add_child(word_instance)
 	
