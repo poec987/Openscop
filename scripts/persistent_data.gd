@@ -40,5 +40,3 @@ func _process(_delta):
 		
 	if Input.is_action_just_pressed("console"):
 		Console.visible = !Console.visible
-	
-	print(InputEvent.get_device())
