@@ -2,6 +2,8 @@ extends Node
 #GLOBAL GAME VARS
 var debug = false
 var keyboard_RAM=""
+var recording = false
+
 #ROOM
 var room_name =""
 var loading_preset = ""
