@@ -38,7 +38,7 @@ shader_parameter/albedoTex = ExtResource("4_i51bh")
 [node name="sort-test" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_lpqwa")]
-room_name = "sort-test-"
+room_name = "sort-test"
 limit_camera_horizontal = true
 horizontal_limit = Vector2(1.5, 900)
 allow_front_movement = false

@@ -24,7 +24,9 @@ func _ready():
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select.play()
 	if Global.room_name=="garalina":
 		$song.play()
+	
 func _physics_process(_delta):
+	
 	timer += 1
 	if timer == 30:
 		timer = 0
@@ -190,8 +192,8 @@ func _physics_process(_delta):
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1/cursor.visible=false
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file2/cursor.visible=true
 	
-	if get_tree().get_first_node_in_group("loading_overlay").get_child(1).get_texture!=null:
-		$song.stop()
+	#if get_tree().get_first_node_in_group("loading_overlay").get_child(1).get_texture!=null:
+		#$song.stop()
 	
 func bounce_file_up(yes: bool = false):
 	var bounce = create_tween()

@@ -3,7 +3,7 @@ extends Node
 var debug = false
 var keyboard_RAM=""
 #ROOM
-var room_name ="garalina"
+var room_name =""
 var loading_preset = ""
 var fog_radius = 13.5
 var fog_color = Vector4(0.0,0.0,0.0,0.0)
@@ -48,7 +48,8 @@ var current_character = 0
 # 2 = Marvin
 var update_sheets = false
 var pieces_amount = [0,0,0,0,0]
-
+var piece_log = {
+}
 
 var player_array = Vector4(0.,0.,0.,0)
 var player_brightness = 1.0
@@ -151,7 +152,8 @@ func save_data():
 			"pets": pets,
 			"retrace_steps":retrace_steps,
 			"save_name": save_name,
-			"corrupted":corrupt
+			"corrupted":corrupt,
+			"piece_log":piece_log
 		},
 		"player": {
 			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction],
@@ -167,9 +169,6 @@ func save_general():
 	var save_general = {
 		"general": {
 			"gen":gen,
-			#"save_filenames": ["","",""],
-			#"save_pieces": [[],[],[]],
-			#"save_corrupted": [false,false,false],
 		},
 	}
 	return save_general
@@ -198,7 +197,9 @@ func load_game(slot):
 	pieces_amount = save_game["player"]["pieces"]
 	control_mode = save_game["player"]["control_mode"]
 	key = save_game["player"]["key"]
+	#current_character = save_game["player"]["character"]
 	save_name = save_game["game"]["save_name"]
+	piece_log = save_game["game"]["piece_log"]
 	warp_to(save_game["room"]["current_room"],"evencare")
 	Console.console_log("[color=blue]Loaded game data from slot "+str(slot)+" sucessfully![/color]")
 	

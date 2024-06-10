@@ -21,6 +21,7 @@ shader_parameter/uv_offset = Vector2(0, 0)
 [node name="sprite_room" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_showx")]
+room_name = "sprite-room"
 sky_and_fog_color = Vector4(1, 1, 1, 0)
 ambient_color = Color(1, 1, 1, 1)
 environment_darkness = 1.0

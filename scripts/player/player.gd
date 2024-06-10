@@ -77,7 +77,7 @@ func _physics_process(delta):
 		#CREATES MOVEMENT VECTORS
 		v = Input.get_action_strength("pressed_down") - Input.get_action_strength("pressed_up")
 		h = Input.get_action_strength("pressed_right") - Input.get_action_strength("pressed_left")
-
+		
 	#DETECTS IF PLAYER IS WALKING BEFORE ANIMATING AND MAKE FOOTSTEP SOUND
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
 		if material.hframes>1 && material.vframes>1:
@@ -136,7 +136,10 @@ func _physics_process(delta):
 	
 	if Global.control_mode==0:
 		#SETS PLAYER VELOCITY ACCORDING TO VECTOR
-		velocity.x = lerp(velocity.x,h*movement_speed,(delta)*ACCELERATION)
+		if Global.current_character==2:
+			velocity.x = lerp(velocity.x,h*-1*movement_speed,(delta)*ACCELERATION)
+		else:
+			velocity.x = lerp(velocity.x,h*movement_speed,(delta)*ACCELERATION)
 		velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
 	else:
 		velocity.x = lerp(velocity.x,0.*movement_speed,(delta)*ACCELERATION)
@@ -166,9 +169,9 @@ func _physics_process(delta):
 			animation_direction=3
 
 		if h < 0:
-			animation_direction=2
+			animation_direction=2-(int(Global.current_character==2))
 		elif h > 0:
-			animation_direction=1
+			animation_direction=1+(int(Global.current_character==2))
 			
 	
 	#DOES HEAD BOPPING
@@ -432,7 +435,7 @@ func return_character():
 	if Global.current_character==2:
 		if Global.update_sheets:
 			material.texture = load("res://graphics/sprites/player/marvin.png")
-		movement_speed = 8
+		movement_speed = 6
 	else:
 		movement_speed = 5
 	character = Global.current_character

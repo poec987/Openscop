@@ -18,7 +18,8 @@ func _process(_delta):
 				print(nifty_code[input_counter])
 				input_counter+=1
 			else:
-				Global.nifty()
+				if Global.room_name!="garalina":
+					Global.nifty()
 		else:
 			input_counter=0
 	
@@ -39,3 +40,5 @@ func _process(_delta):
 		
 	if Input.is_action_just_pressed("console"):
 		Console.visible = !Console.visible
+	
+	print(InputEvent.get_device())

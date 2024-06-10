@@ -74,10 +74,23 @@ color = Color(0.592157, 0.6, 0.6, 1)
 
 [node name="logo_anim_2" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
 visible = false
+z_as_relative = false
 texture = ExtResource("5_1h4hh")
 centered = false
 hframes = 8
 frame = 4
+
+[node name="fade_in" type="ColorRect" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+z_as_relative = false
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(0, 0, 0, 1)
+
+[node name="fade_out" type="ColorRect" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+z_as_relative = false
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(1, 1, 1, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_cnx4t")

@@ -4,6 +4,8 @@ var started = true
 var timer = 0.0
 
 func _ready():
+	Global.room_name="garalina"
+	create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/fade_in,"color:a",0.0,1.75)
 	if Global.gen>3 && Global.gen<12:
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/logo_anim_1.texture =  load("res://graphics/sprites/ui/garalina/gen"+str(Global.gen)+".png")
 	if Global.gen>11:
@@ -32,6 +34,13 @@ func _ready():
 func _process(delta):
 	if started:
 		timer += delta*25
+	
+	if timer>241:
+		var fade_out = create_tween()
+		fade_out.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/fade_out,"color:a",1.0,1.5)
+	
+	if timer>310:
+		get_tree().change_scene_to_file("res://scenes/rooms/title/title.tscn")
 	
 	if timer>153 && get_node_or_null("PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/logo_anim_1")!=null:	
 		$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/logo_anim_1.queue_free()

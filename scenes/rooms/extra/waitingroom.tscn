@@ -42,6 +42,7 @@ data = PackedVector3Array(-5, 0, 3.375, -5, 1, 3.375, -5, 0, -3, -5, 0, -3, -5, 
 [node name="waitingroom" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_nwcat")]
+room_name = "extra-waiting"
 level_slogan = "This is probably going to take a while."
 footstep_sound = 3
 allow_front_movement = false

@@ -10,7 +10,7 @@ var random_sound = 0
 
 func _ready():
 	$piece_sprite.frame_coords.y = Global.pieces[get_parent().get_node(str(self.name)).get_index()]
-	if Global.gen<=2:
+	if Global.gen<=2 || Global.current_character==2 || Global.piece_log.has(Global.room_name) && Global.piece_log[Global.room_name].has(get_parent().get_node(str(self.name)).get_index()):
 		queue_free()
 
 func _process(delta):
@@ -30,6 +30,10 @@ func _on_piece_area_body_entered(body):
 		collected=true
 		random_sound = randi_range(0,2)
 		Global.pieces_amount[Global.current_character]+=1
+		if Global.piece_log.has(Global.room_name):
+			Global.piece_log[Global.room_name].push_back(get_parent().get_node(str(self.name)).get_index())
+		else:
+			Global.piece_log[Global.room_name] = [get_parent().get_node(str(self.name)).get_index()]
 		if random_sound==0:
 			$piece_sound1.play()
 		if random_sound==1:
