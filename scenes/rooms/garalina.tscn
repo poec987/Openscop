@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dci2pq27hyacb"]
+[gd_scene load_steps=8 format=3 uid="uid://dci2pq27hyacb"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="1_miqdt"]
+[ext_resource type="Script" path="res://scenes/rooms/garalina.gd" id="1_nljoc"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="2_1eamy"]
 [ext_resource type="Texture2D" uid="uid://dujwlec6naqf5" path="res://graphics/sprites/ui/garalina/gen8.png" id="3_2t5xd"]
+[ext_resource type="Texture2D" uid="uid://s7ehsrwcpto1" path="res://graphics/sprites/ui/garalina/logo.png" id="5_1h4hh"]
+[ext_resource type="AudioStream" uid="uid://d00ryq8iag6r6" path="res://music/garalina.wav" id="5_cnx4t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_syp2d"]
 shader = ExtResource("1_miqdt")
@@ -10,6 +13,7 @@ shader_parameter/effect = null
 shader_parameter/ntsc_enable = null
 
 [node name="garalina" type="Node2D"]
+script = ExtResource("1_nljoc")
 
 [node name="PSXLayer" type="CanvasLayer" parent="."]
 
@@ -52,8 +56,29 @@ audio_listener_enable_3d = true
 size = Vector2i(320, 240)
 render_target_update_mode = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+[node name="logo_anim_1" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+z_as_relative = false
 texture = ExtResource("3_2t5xd")
 centered = false
 hframes = 13
 vframes = 12
+
+[node name="ColorRect" type="ColorRect" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+z_index = -1
+z_as_relative = false
+offset_left = -10.0
+offset_top = -4.0
+offset_right = 330.0
+offset_bottom = 248.0
+color = Color(0.592157, 0.6, 0.6, 1)
+
+[node name="logo_anim_2" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view"]
+visible = false
+texture = ExtResource("5_1h4hh")
+centered = false
+hframes = 8
+frame = 4
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_cnx4t")
+autoplay = true

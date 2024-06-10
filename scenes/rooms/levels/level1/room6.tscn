@@ -79,7 +79,7 @@ shader_parameter/uv_offset = Vector2(0, 0)
 [node name="room6" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_384vs")]
-room_name = "level1-room1"
+room_name = "level1-room6"
 background_music_id = 1
 fade_color = Color(1, 1, 1, 1)
 limit_camera_horizontal = true

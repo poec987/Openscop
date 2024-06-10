@@ -27,7 +27,7 @@ data = PackedVector3Array(6, 0, -29.5, 6, 1, -17.5, 6, 0, -17.5, 3, 1, -17.5, 4,
 [node name="room4" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_4h1on")]
-room_name = "level1-room1"
+room_name = "level1-room4"
 background_music_id = 1
 fade_color = Color(1, 1, 1, 1)
 limit_camera_horizontal = true

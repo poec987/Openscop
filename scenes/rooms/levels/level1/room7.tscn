@@ -68,7 +68,7 @@ func _ready():
 [node name="room7" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_i2bb1")]
-room_name = "level1-room1"
+room_name = "level1-room7"
 background_music_id = 1
 fade_color = Color(1, 1, 1, 1)
 limit_camera_front = true
