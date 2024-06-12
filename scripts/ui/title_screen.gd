@@ -24,7 +24,7 @@ func _ready():
 	$PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select.play()
 	if Global.room_name=="garalina":
 		$song.play()
-	
+		Global.room_name=="title"
 func _physics_process(_delta):
 	
 	timer += 1
