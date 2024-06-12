@@ -1,0 +1,195 @@
+[gd_scene load_steps=23 format=3 uid="uid://dp3wfqjp2xfie"]
+
+[ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_xtb1g"]
+[ext_resource type="Texture2D" uid="uid://cjwvkldagl3km" path="res://graphics/sprites/ui/backgrounds/level1_1.png" id="2_hf7a6"]
+[ext_resource type="ArrayMesh" uid="uid://c0kig6n5ffev8" path="res://graphics/3d/room_mesh/showcase/showcase.obj" id="3_3fixt"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/shadeless-vertex-color.gdshader" id="4_0vkmf"]
+[ext_resource type="Texture2D" uid="uid://cqdofcwa1srhs" path="res://graphics/3d/room_mesh/levels/level1/evencare.png" id="5_2n5c2"]
+[ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="6_cqmxj"]
+[ext_resource type="ArrayMesh" uid="uid://dxlxmag6iwvqr" path="res://graphics/3d/room_mesh/levels/level1/evencare_drawer.obj" id="6_po64v"]
+[ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="7_etiek"]
+[ext_resource type="PackedScene" uid="uid://c0qk7ipm844jl" path="res://scenes/objects/level_objects/piece.tscn" id="8_cwb3d"]
+[ext_resource type="PackedScene" uid="uid://c6lt1e54fh5bh" path="res://scenes/objects/level_objects/tool.tscn" id="9_n6g46"]
+[ext_resource type="PackedScene" uid="uid://bhihbtfusi3ks" path="res://scenes/objects/level_objects/darkener.tscn" id="10_3qf8t"]
+[ext_resource type="PackedScene" uid="uid://47e5v5kgyi3b" path="res://scenes/objects/level_objects/slope.tscn" id="11_nrk7f"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/sprite3d_fog.gdshader" id="13_r0il0"]
+[ext_resource type="Texture2D" uid="uid://whmjo2a2cyq5" path="res://graphics/sprites/objects/pets/care_b.png" id="14_txs3q"]
+[ext_resource type="AudioStream" uid="uid://ciltmyhu21l1a" path="res://sfx/pets/care_b_cry.wav" id="15_0kjf7"]
+[ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="16_v3k5l"]
+[ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="17_f4mc7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ebtgc"]
+render_priority = 0
+shader = ExtResource("4_0vkmf")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("5_2n5c2")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e8tgv"]
+render_priority = 0
+shader = ExtResource("4_0vkmf")
+shader_parameter/billboard = false
+shader_parameter/y_billboard = false
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/fog = false
+shader_parameter/albedoTex = ExtResource("5_2n5c2")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="GDScript" id="GDScript_cxl1d"]
+script/source = "extends Node3D
+
+func _on_area_3d_body_entered(body):
+	if body==get_tree().get_first_node_in_group(\"Player\"):
+		# quick way to fix collider bug, replace this later
+		$Area3D.queue_free()
+		$cry.play()
+		Global.caught(7,$sprite,self)
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yr5ky"]
+render_priority = 0
+shader = ExtResource("13_r0il0")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/albedoTex = ExtResource("14_txs3q")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rtl4t"]
+size = Vector3(0.5, 1.5, 0.5)
+
+[node name="showcase_plane" type="Node3D"]
+
+[node name="level_manipulator" parent="." instance=ExtResource("1_xtb1g")]
+room_name = "extra-showcase"
+fade_color = Color(1, 1, 1, 1)
+level_slogan = "Welcome to the Openscop showcase!"
+front_limit = Vector2(0, 4)
+camera_height = 4.5
+camera_distance = 9.5
+texture_background = true
+texture = ExtResource("2_hf7a6")
+scroll_speed = 0.5
+sky_and_fog_color = Vector4(0.5, 0.5, 0.5, 0)
+ambient_color = Color(1, 1, 1, 1)
+environment_darkness = 1.0
+preset = 1
+
+[node name="level_root" type="Node3D" parent="."]
+
+[node name="visual_mesh" type="Node3D" parent="level_root"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level_root/visual_mesh"]
+mesh = ExtResource("3_3fixt")
+surface_material_override/0 = SubResource("ShaderMaterial_ebtgc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="level_root/visual_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 11.5)
+mesh = ExtResource("6_po64v")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_e8tgv")
+
+[node name="player_root" parent="." instance=ExtResource("6_cqmxj")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_etiek")
+pitch_scale = 0.95
+autoplay = true
+
+[node name="pieces" type="Node3D" parent="."]
+
+[node name="piece_root" parent="pieces" instance=ExtResource("8_cwb3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
+
+[node name="piece_root2" parent="pieces" instance=ExtResource("8_cwb3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+
+[node name="piece_root3" parent="pieces" instance=ExtResource("8_cwb3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 0)
+
+[node name="tool" parent="." instance=ExtResource("9_n6g46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -1.5)
+
+[node name="darkener" parent="." instance=ExtResource("10_3qf8t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, -3.5)
+darkener_width = 2.0
+darkener_direction = 3
+
+[node name="darkener2" parent="." instance=ExtResource("10_3qf8t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 8.5)
+darkener_width = 2.0
+darkener_direction = 1
+
+[node name="darkener3" parent="." instance=ExtResource("10_3qf8t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, 9.5)
+darkener_width = 2.0
+
+[node name="slope" parent="." instance=ExtResource("11_nrk7f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
+slope_length = 2.0
+slope_direction = 1
+
+[node name="slope2" parent="." instance=ExtResource("11_nrk7f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 5)
+slope_length = 2.0
+slope_direction = 2
+
+[node name="Care B" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, 8)
+script = SubResource("GDScript_cxl1d")
+
+[node name="sprite" type="Sprite3D" parent="Care B"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_yr5ky")
+offset = Vector2(0, 32)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("14_txs3q")
+
+[node name="Area3D" type="Area3D" parent="Care B"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Care B/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_rtl4t")
+
+[node name="cry" type="AudioStreamPlayer3D" parent="Care B"]
+stream = ExtResource("15_0kjf7")
+volume_db = 1.0
+
+[node name="warp" parent="." instance=ExtResource("16_v3k5l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, -3.5)
+warp_direction = 3
+scene = "res://scenes/rooms/extra/showcase_plane.tscn"
+loading_preset = "evencare_noload"
+coordinate_and_direction = Vector4(34.5, 0, -6, 0)
+
+[node name="warp2" parent="." instance=ExtResource("16_v3k5l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5, 0, -3.5)
+warp_direction = 3
+scene = "res://scenes/rooms/extra/showcase_plane.tscn"
+loading_preset = "evencare"
+coordinate_and_direction = Vector4(23.5, 0, -6, 0)
+
+[node name="interaction" parent="." instance=ExtResource("17_f4mc7")]
+dialogue_id = "Hello, welcome to the Openscop Showcase!"
+
+[node name="interaction2" parent="." instance=ExtResource("17_f4mc7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0)
+dialogue_id = "This is TOOL, ask it a question."
+
+[connection signal="body_entered" from="Care B/Area3D" to="Care B" method="_on_area_3d_body_entered"]
