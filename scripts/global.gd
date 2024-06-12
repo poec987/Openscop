@@ -55,7 +55,7 @@ var piece_log = {
 
 var player_array = Vector4(0.,0.,0.,0)
 var player_brightness = 1.0
-var pets = [false,false,false,false,false,false,true,false,false,false]
+var pets = [false,false,false,false,false,false,false,false,false,false]
 var fog_focus = 0
 #0 = follow player
 #

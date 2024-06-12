@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1evdrl0tbjmu"]
+[gd_scene load_steps=22 format=3 uid="uid://b1evdrl0tbjmu"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_nwcat"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_t7doa"]
@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="7_x70fr"]
 [ext_resource type="PackedScene" uid="uid://bhihbtfusi3ks" path="res://scenes/objects/level_objects/darkener.tscn" id="7_ysfhk"]
 [ext_resource type="ArrayMesh" uid="uid://dj8x44lmnw28x" path="res://graphics/3d/room_mesh/waitingroom/waitingroom_col.obj" id="8_dvo6w"]
+[ext_resource type="Texture2D" uid="uid://dujkdvklnd4ms" path="res://graphics/sprites/objects/pets/care_a.png" id="12_te0g5"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/sprite3d_fog.gdshader" id="12_tvx0u"]
+[ext_resource type="AudioStream" uid="uid://ciltmyhu21l1a" path="res://sfx/pets/care_b_cry.wav" id="14_4anyi"]
+[ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="14_ipk8m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yyoh0"]
 render_priority = 0
@@ -39,13 +43,44 @@ data = PackedVector3Array(-5, 0, 3.375, -5, 1, 3.375, -5, 0, -3, -5, 0, -3, -5, 
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qr8u3"]
 
+[sub_resource type="GDScript" id="GDScript_0phj4"]
+script/source = "extends Node3D
+
+func _on_area_3d_body_entered(body):
+	if body==get_tree().get_first_node_in_group(\"Player\"):
+		# quick way to fix collider bug, replace this later
+		$Area3D.queue_free()
+		$cry.play()
+		Global.caught(6,$sprite,self)
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pfx1w"]
+render_priority = 0
+shader = ExtResource("12_tvx0u")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/albedoTex = ExtResource("12_te0g5")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vi7qb"]
+size = Vector3(0.5, 1.5, 0.5)
+
 [node name="waitingroom" type="Node3D"]
 
 [node name="level_manipulator" parent="." instance=ExtResource("1_nwcat")]
 room_name = "extra-waiting"
 level_slogan = "This is probably going to take a while."
 footstep_sound = 3
-allow_front_movement = false
+limit_camera_front = true
+front_limit = Vector2(0.1, 0.1)
 allow_vertical_movement = false
 camera_distance = 10.0
 enable_fog = true
@@ -174,3 +209,46 @@ darkener_direction = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0, 2)
 darkener_width = 2.0
 darkener_direction = 1
+
+[node name="Care B" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95144, 0, 1.2386)
+script = SubResource("GDScript_0phj4")
+
+[node name="sprite" type="Sprite3D" parent="Care B"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_pfx1w")
+offset = Vector2(0, 32)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("12_te0g5")
+
+[node name="Area3D" type="Area3D" parent="Care B"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Care B/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_vi7qb")
+
+[node name="cry" type="AudioStreamPlayer3D" parent="Care B"]
+stream = ExtResource("14_4anyi")
+volume_db = 1.0
+
+[node name="interaction2" parent="." instance=ExtResource("7_x70fr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.5)
+dialogue_id = "textbox_3"
+textbox_background = 2
+big_textbox = true
+
+[node name="interaction3" parent="." instance=ExtResource("7_x70fr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.5)
+dialogue_id = "dots_test"
+textbox_background = 2
+big_textbox = true
+
+[node name="warp" parent="." instance=ExtResource("14_ipk8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0, 2)
+warp_direction = 1
+scene = "res://scenes/rooms/extra/showcase_plane.tscn"
+coordinate_and_direction = Vector4(29, 0, -3.5, 0)
+
+[connection signal="body_entered" from="Care B/Area3D" to="Care B" method="_on_area_3d_body_entered"]

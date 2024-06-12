@@ -1,18 +1,40 @@
 {
 	"textbox_1": [
-		"This is the 1st part of this textbox",
-		"This is the 2nd part of this textbox",
-		"This is a short line of text.",
-		"You're reading a very long line of text right now, hello there!",
-		"This is the 1st line of the text.\nThis is the second line of the text.",
-		"Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis doloremque molestiae voluptates consequatur doloribus molestias quos?"
+		"Hi! Welcome to the Openscop\nShowcase!",
+		"Openscop is an open-source\nrecreation of [color=#FF00FF]Petscop[/color]!",
+		"This project runs on Godot 4.1.1 and is the result of the work of \nwonderful folks.",
+		"It is meant to be used for \nmaking fan videos and also \n[color=#FF00FF]Petscop[/color] fangames.",
+		"What you see here is a small room\nthat showcases most features \nOpenscop can offer.",
+		"Let's start the demonstration...",
+		"P.S: NTSC filter was added on\npost production."
 	],
 
 	"dots_test": [
-		"This has a dot in the middle. It should give a brief pause.",
-		"Oh... It worked?",
-		"... Is ... This.... Working.",
-		"Does. This! Work? Now"	
+		"Wow... What a dark room!\nAnd what a huge textbox, that's\nquite interesting.\nHow much text can fit in here?",
+		"This room was modeled by\n@geometricentric (twitter)\nWho has allowed me to use it for\nthis demo.",
+		"Here we've got some fog,\nand Care is here too.",
+		"Let's investigate this room \ntogether."
+	],
+
+	"textbox_2": [
+		"Oh well, this door is locked!\nWhat might be on the other side?",
+		"On the next major update we will \nfind out.",
+		"This has been a brief showcase of\nwhat Openscop can offer.",
+		"Openscop can be downloaded at:\ngithub.com/TechMan06/Openscop",
+		"Documentation links and project \ncredits can also be found there.",
+		"We hope you enjoy and create\ninteresting fan content with this\nproject.",
+		"We would like to thank you for \nwatching.\nAnd we see you soon!"
+	
+	],
+
+	"textbox_3": [
+		"What you're about to see is the \n\"darkener\" object, it can be \nused to darken the brightness of \nthe player in a dark path.",
+		"Can you become a shadow\nmonster man?"
+	],
+
+	"textbox_4": [
+		"Great, you just collected some pieces.",
+		"Why don't you check the pause menu?"
 	],
 
 	"evencare_0": [
