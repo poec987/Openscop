@@ -1,0 +1,221 @@
+extends Node
+
+var replay = false
+var replay_setup = false
+var recording = false
+var recording_timer = 0
+var recording_reader_p1 = 0
+var recording_reader_p2 = 0
+var recording_data = {}
+var recording_finished = false
+
+var input_sim_r1 = null
+var input_sim_r2 = null
+var input_sim_l1 = null
+var input_sim_l2 = null
+var input_sim_up = null
+var input_sim_down = null
+var input_sim_left = null
+var input_sim_right = null
+var input_sim_action = null
+var input_sim_triangle = null
+var input_sim_circle = null
+var input_sim_square = null
+var input_sim_select = null
+var input_sim_start = null
+
+
+var parsed_input_left = false
+#I AM A FUCKING GENIUS
+	#var input_sim = InputEventAction.new()
+	#InputMap.action_erase_events("pressed_left")
+	#input_sim.set_action("pressed_left")
+	#input_sim.set_pressed(true)
+	#Input.parse_input_event(input_sim)
+
+func start_recording():
+	recording = true
+	Console.console_log("[color=blue]Recording Started.[/color]")
+	
+func stop_recording():
+	recording = false
+	var save_recording = FileAccess.open("user://recordings/rec_test.rec",FileAccess.WRITE)
+	var json_data = JSON.stringify(recording_data)
+	save_recording.store_line(json_data)
+	recording_timer = 0
+	Console.console_log("[color=blue]Recording Stopped.[/color]")
+
+func number_parser(number):
+	if number==1:
+		return true
+	if number==2:
+		return false
+
+#func check_pressed():
+	#if Input.is_action_pressed("pressed_l1") || Input.is_action_pressed("pressed_l2")  || Input.is_action_pressed("pressed_r1")  || Input.is_action_pressed("pressed_r2")  || Input.is_action_pressed("pressed_action") || Input.is_action_pressed("pressed_triangle") || Input.is_action_pressed("pressed_square") || Input.is_action_pressed("pressed_circle") || Input.is_action_pressed("pressed_select") || Input.is_action_pressed("pressed_start")|| Input.is_action_pressed("change_mode") || Input.is_action_pressed("pressed_left") || Input.is_action_pressed("pressed_right") || Input.is_action_pressed("pressed_up") || Input.is_action_pressed("pressed_down"):
+		#return true
+	#else:
+		#return false
+		
+func check_pressed():
+	if Input.is_action_just_pressed("pressed_l1") || Input.is_action_just_pressed("pressed_l2")  || Input.is_action_just_pressed("pressed_r1")  || Input.is_action_just_pressed("pressed_r2")  || Input.is_action_just_pressed("pressed_action") || Input.is_action_just_pressed("pressed_triangle") || Input.is_action_just_pressed("pressed_square") || Input.is_action_just_pressed("pressed_circle") || Input.is_action_just_pressed("pressed_start")|| Input.is_action_just_pressed("pressed_left") || Input.is_action_just_pressed("pressed_right") || Input.is_action_just_pressed("pressed_up") || Input.is_action_just_pressed("pressed_down"):
+		return true
+	else:
+		return false
+
+func check_input():
+	if Input.is_action_just_pressed("pressed_l1") || Input.is_action_just_pressed("pressed_l2")  || Input.is_action_just_pressed("pressed_r1")  || Input.is_action_just_pressed("pressed_r2")  || Input.is_action_just_pressed("pressed_action") || Input.is_action_just_pressed("pressed_triangle") || Input.is_action_just_pressed("pressed_square") || Input.is_action_just_pressed("pressed_circle") || Input.is_action_just_pressed("pressed_select") || Input.is_action_just_pressed("pressed_start") || Input.is_action_just_pressed("pressed_left") || Input.is_action_just_pressed("pressed_right") || Input.is_action_just_pressed("pressed_up") || Input.is_action_just_pressed("pressed_down") || Input.is_action_just_released("pressed_l1") || Input.is_action_just_released("pressed_l2")  || Input.is_action_just_released("pressed_r1")  || Input.is_action_just_released("pressed_r2")  || Input.is_action_just_released("pressed_action") || Input.is_action_just_released("pressed_triangle") || Input.is_action_just_released("pressed_square") || Input.is_action_just_released("pressed_circle") || Input.is_action_just_released("pressed_select") || Input.is_action_just_released("pressed_start")|| Input.is_action_just_released("change_mode") || Input.is_action_just_released("pressed_left") || Input.is_action_just_released("pressed_right") || Input.is_action_just_released("pressed_up") || Input.is_action_just_released("pressed_down"):
+		return true
+	else:
+		return false
+
+func check_input_type(key):
+	if Input.is_action_just_pressed(key):
+		return 1
+	if Input.is_action_just_released(key):
+		return 2
+	if !Input.is_action_just_pressed(key) && !Input.is_action_just_released(key):
+		return 0
+
+func _ready():
+	recording_data["p1_data"] = []
+	recording_data["p2_data"] = []
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
+	if recording:
+		recording_timer+=1
+		if check_input() && Global.control_mode!=1 || Input.is_action_just_pressed("pressed_select") || Input.is_action_just_released("pressed_select"):
+				recording_data["p1_data"].push_back(str(recording_timer)+"_"+str(check_input_type("pressed_r1"))+"_"+str(check_input_type("pressed_r2"))+"_"+str(check_input_type("pressed_l1"))+"_"+str(check_input_type("pressed_l2"))+"_"+str(check_input_type("pressed_up"))+"_"+str(check_input_type("pressed_down"))+"_"+str(check_input_type("pressed_left"))+"_"+str(check_input_type("pressed_right"))+"_"+str(check_input_type("pressed_action"))+"_"+str(check_input_type("pressed_triangle"))+"_"+str(check_input_type("pressed_circle"))+"_"+str(check_input_type("pressed_square"))+"_"+str(check_input_type("pressed_select"))+"_"+str(check_input_type("pressed_start")))
+		if check_pressed() && Global.control_mode==1:
+				recording_data["p2_data"].push_back(str(recording_timer)+"_"+get_tree().get_first_node_in_group("Player").word+"_"+get_tree().get_first_node_in_group("p2_word").text)
+
+	if replay:
+		if !replay_setup:
+			recording_finished = false
+			recording = false
+			recording_timer = 0
+			Console.console_log("[color=green]Loading Recording Data...[/color]")
+			if not FileAccess.file_exists("user://recordings/rec_test.rec"):
+				return
+			recording_data = JSON.parse_string((FileAccess.open("user://recordings/rec_test.rec",FileAccess.READ)).get_as_text())
+			input_sim_r1 = InputEventAction.new()
+			InputMap.action_erase_events("pressed_r1")
+			input_sim_r1.set_action("pressed_r1")
+			input_sim_r2 = InputEventAction.new()
+			InputMap.action_erase_events("pressed_r2")
+			input_sim_r2.set_action("pressed_r2")
+			input_sim_l1 = InputEventAction.new()
+			InputMap.action_erase_events("pressed_l1")
+			input_sim_l1.set_action("pressed_l1")
+			input_sim_l2 = InputEventAction.new()
+			InputMap.action_erase_events("pressed_l2")
+			input_sim_l2.set_action("pressed_l2")
+			input_sim_up = InputEventAction.new()
+			InputMap.action_erase_events("pressed_up")
+			input_sim_up.set_action("pressed_up")
+			input_sim_down = InputEventAction.new()
+			InputMap.action_erase_events("pressed_down")
+			input_sim_down.set_action("pressed_down")
+			input_sim_left = InputEventAction.new()
+			InputMap.action_erase_events("pressed_left")
+			input_sim_left.set_action("pressed_left")
+			input_sim_right = InputEventAction.new()
+			InputMap.action_erase_events("pressed_right")
+			input_sim_right.set_action("pressed_right")
+			input_sim_action = InputEventAction.new()
+			InputMap.action_erase_events("pressed_action")
+			input_sim_action.set_action("pressed_action")
+			input_sim_triangle = InputEventAction.new()
+			InputMap.action_erase_events("pressed_triangle")
+			input_sim_triangle.set_action("pressed_triangle")
+			input_sim_circle = InputEventAction.new()
+			InputMap.action_erase_events("pressed_circle")
+			input_sim_circle.set_action("pressed_circle")
+			input_sim_square = InputEventAction.new()
+			InputMap.action_erase_events("pressed_square")
+			input_sim_square.set_action("pressed_square")
+			input_sim_select = InputEventAction.new()
+			InputMap.action_erase_events("pressed_select")
+			input_sim_select.set_action("pressed_select")
+			input_sim_start = InputEventAction.new()
+			InputMap.action_erase_events("pressed_start")
+			input_sim_start.set_action("pressed_start")
+			replay_setup = true
+		recording_timer+=1
+		
+	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
+		if recording_reader_p1<=recording_data["p1_data"].size()-1:
+			if recording_timer==int((recording_data["p1_data"][recording_reader_p1].split("_"))[0]):
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[1])!=0:
+					input_sim_r1.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[1])))
+					Input.parse_input_event(input_sim_r1)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])!=0:
+					input_sim_r2.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])))
+					Input.parse_input_event(input_sim_r2)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[3])!=0:
+					input_sim_l1.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[3])))
+					Input.parse_input_event(input_sim_l1)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[4])!=0:
+					input_sim_l2.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[4])))
+					Input.parse_input_event(input_sim_l2)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])!=0:
+					input_sim_up.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])))
+					Input.parse_input_event(input_sim_up)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[6])!=0:
+					input_sim_down.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[6])))
+					Input.parse_input_event(input_sim_down)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[7])!=0:
+					input_sim_left.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[7])))
+					Input.parse_input_event(input_sim_left)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[8])!=0:	
+					input_sim_right.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[8])))
+					Input.parse_input_event(input_sim_right)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[9])!=0:	
+					input_sim_action.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[9])))
+					Input.parse_input_event(input_sim_action)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[10])!=0:	
+					input_sim_triangle.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[10])))
+					Input.parse_input_event(input_sim_triangle)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[11])!=0:	
+					input_sim_circle.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[11])))
+					Input.parse_input_event(input_sim_circle)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[12])!=0:
+					input_sim_square.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[12])))	
+					Input.parse_input_event(input_sim_square)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[13])!=0:	
+					input_sim_select.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[13])))
+					Input.parse_input_event(input_sim_select)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[14])!=0:	
+					input_sim_start.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[14])))
+					Input.parse_input_event(input_sim_start)
+				if Console.recording_parse:
+					Console.console_log("[color=green]PLAYER 1[/color][color=yellow]Frame: "+str(recording_timer)+" Data:"+recording_data["p1_data"][recording_reader_p1]+" Index: "+str(recording_reader_p1)+"[/color]")
+				recording_reader_p1+=1
+			else:
+				if Console.recording_parse:
+					Console.console_log("[color=green]PLAYER 1[/color][color=yellow]Frame: "+str(recording_timer)+" Data: [/color][color=red]NONE[/color]")
+		
+		if recording_reader_p2<=recording_data["p2_data"].size()-1:
+			if recording_timer==int((recording_data["p2_data"][recording_reader_p2].split("_"))[0]):
+				get_tree().get_first_node_in_group("Player").word = (recording_data["p2_data"][recording_reader_p2].split("_"))[1]
+				get_tree().get_first_node_in_group("p2_word").text = (recording_data["p2_data"][recording_reader_p2].split("_"))[2]
+				if Console.recording_parse:
+					Console.console_log("[color=green]PLAYER 2[/color][color=yellow]Frame: "+str(recording_timer)+" Data:"+recording_data["p2_data"][recording_reader_p2]+" Index: "+str(recording_reader_p2)+"[/color]")
+				recording_reader_p2+=1
+			else:
+				if Console.recording_parse:
+					Console.console_log("[color=green]PLAYER 2[/color][color=yellow]Frame: "+str(recording_timer)+" Data: [/color][color=red]NONE[/color]")
+		if recording_reader_p1>recording_data["p1_data"].size()-1 && recording_reader_p2>recording_data["p2_data"].size()-1:
+			Console.console_log("[color=red]RECORDING IS OVER[/color]")
+			InputMap.load_from_project_settings()
+			replay = false
+			recording_timer = 0
+			recording_reader_p1 = 0
+			recording_finished = true
+
+func replay_recording():
+	recording = false
+	replay = true
+	recording_timer = 0

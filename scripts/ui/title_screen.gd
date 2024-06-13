@@ -130,6 +130,7 @@ func _physics_process(_delta):
 				title_stage=-1
 				$pressed_start.play()
 				Global.save_slot = selected_file
+				print(Global.save_slot)
 				Global.load_game(selected_file)
 			else:
 				DirAccess.remove_absolute("user://savedata/saveslot"+str(selected_file)+".save")	

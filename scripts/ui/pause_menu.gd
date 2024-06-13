@@ -40,7 +40,7 @@ func _ready():
 
 func _process(delta):
 	piece_frame+=10.0*delta
-	if piece_frame>20:
+	if piece_frame>19:
 		piece_frame=0
 	$main_pausemenu/visible_group/piece.frame_coords.x = round(piece_frame)
 	if $current_menu.get_child_count()==0 && inMenu == true:

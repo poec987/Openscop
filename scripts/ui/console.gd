@@ -7,11 +7,17 @@ extends Window
 ## The [RichTextLabel] to display Console output.
 @export var console_output : RichTextLabel
 
+
+var recording_parse = false
+
 func _ready():
 	visible = false
 	
 func _parse_command(input : Array):
 	match input[0]:
+		"!toggle_parse":
+			recording_parse=!recording_parse
+			console_log("[color=purple]Toggled Print Recording to[/color] [color=yellow]"+str(recording_parse).to_upper()+"[/color]")
 		"!caught":
 			Global.caught()
 			console_log("[color=blue]CAUGHT![/color]")
@@ -27,6 +33,12 @@ func _parse_command(input : Array):
 		"!nifty":
 			Global.nifty()
 			console_log("[color=blue]The Nifty Menu has been opened.[/color]")
+		"!start_recording":
+			Record.start_recording()
+		"!stop_recording":
+			Record.stop_recording()
+		"!replay_recording":
+			Record.replay = true
 		"!save_game_0":
 			Global.save_game(0)
 			console_log("[color=green]Game Data Saved to Slot 1[/color]")

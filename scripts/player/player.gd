@@ -16,12 +16,13 @@ const ACCELERATION = 8
 #ANIMATION PROPERTIES
 var first_frame = false
 const ANIMATION_SPEED = 8
-const ANIMATION_THRESHOLD = 2
+const ANIMATION_THRESHOLD = 1.5
 @export var animation_direction = 0
 var current_frame = 0
 
 #P2TOTALK RELATED VARIABLES AND OBJECTS
-var word = ""
+var prev_text = ""
+@export var word = ""
 var last_press = ""
 var can_submit = true
 @onready var p2_talk = get_node("p2_talk_buttons")
@@ -243,9 +244,13 @@ func _physics_process(delta):
 	else:
 		material.frame_coords = Vector2.ZERO
 
+	if prev_text!=p2_talk.text && p2_talk.text!="":
+		get_node("button_press").play()
+		prev_text=p2_talk.text
+
 #IF PLAYER IS ON P2TOTALK MODE
 	if Global.control_mode==1:
-	#CONVERTS INPUTS TO PHONETICS
+	#CONVERTS INPUTS TO PHONETICS			
 		if Input.is_action_just_pressed("pressed_action"):
 			p2_talk.text+="5"
 			if last_press=="L1":
@@ -259,7 +264,7 @@ func _physics_process(delta):
 			else:
 				word+="AA "
 			last_press = ""
-			get_node("button_press").play()
+			
 		if Input.is_action_just_pressed("pressed_triangle"):
 			p2_talk.text+="8"
 			if last_press=="L1":
@@ -273,7 +278,7 @@ func _physics_process(delta):
 			else:
 				word+="AO "
 			last_press = ""
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_circle"):
 			p2_talk.text+="7"
 			if last_press=="L1":
@@ -287,7 +292,7 @@ func _physics_process(delta):
 			else:
 				word+="AW "
 			last_press = ""
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_square"):
 			p2_talk.text+="6"
 			if last_press=="L1":
@@ -299,7 +304,7 @@ func _physics_process(delta):
 			else:
 				word+="AE "
 			last_press = ""
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_up"):
 			p2_talk.text+="@"
 			if last_press=="L1":
@@ -313,7 +318,7 @@ func _physics_process(delta):
 			else:
 				word+="AY "
 			last_press = ""
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_down"):
 			p2_talk.text+="#"
 			if last_press=="L1":
@@ -327,7 +332,7 @@ func _physics_process(delta):
 			else:
 				word+="AE "
 			last_press = ""
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_left"):
 			p2_talk.text+="9"
 			if last_press=="L1":
@@ -339,7 +344,7 @@ func _physics_process(delta):
 			else:
 				word+="EH "
 			last_press = ""
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_right"):
 			p2_talk.text+="!"
 			if last_press=="L1":
@@ -351,23 +356,23 @@ func _physics_process(delta):
 			else:
 				word+="ER "
 			last_press = ""
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_l1"):
 			p2_talk.text+="4"
 			last_press="L1"
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_l2"):
 			p2_talk.text+="3"
 			last_press="L2"
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_r1"):
 			p2_talk.text+="2"
 			last_press="R1"
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_r2"):
 			p2_talk.text+="1"
 			last_press="R2"
-			get_node("button_press").play()
+
 		if Input.is_action_just_pressed("pressed_start"):
 			p2_talk.text+="$"
 			if last_press=="L1":
@@ -379,12 +384,11 @@ func _physics_process(delta):
 			else:
 				word+="AH "
 			last_press = ""
-			get_node("button_press").play()
+
 
 #PROCESSES INPUTS SUBMITTED, CHECKS TABLE, AND SPAWNS FLOATING WORD
 func create_word():
 	#CREATES OBJECT OF FLOATING WORD
-	print(word)
 	var word_instance = p2_talk_word.instantiate()
 	#CHECKS P2TOTALK TABLE AND SETS THE TEXT OF FLOATING WORD TO VALUE RETURNED
 	#BY FUNCTION

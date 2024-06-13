@@ -48,7 +48,7 @@ func _ready():
 	loaded = true
 func _process(delta):
 	piece_frame+=10.0*delta
-	if piece_frame>20:
+	if piece_frame>19:
 		piece_frame=0
 	$piece.frame_coords.x = round(piece_frame)
 	
@@ -258,7 +258,7 @@ centered = false
 z_index = -2
 position = Vector2(42, 7)
 texture = ExtResource("7_mrxng")
-hframes = 21
+hframes = 20
 
 [node name="caught" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD" groups=["HUD_caught"]]
 z_index = -1
@@ -316,7 +316,7 @@ z_index = -1
 position = Vector2(175, 20)
 texture = ExtResource("7_mrxng")
 centered = false
-hframes = 21
+hframes = 20
 
 [node name="piece_counter" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu/main_pausemenu/visible_group"]
 offset_left = 199.0

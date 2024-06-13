@@ -2,8 +2,7 @@ extends Node
 #GLOBAL GAME VARS
 var debug = false
 var keyboard_RAM=""
-var recording = false
-
+var picked_slot = 0
 #ROOM
 var room_name =""
 var loading_preset = ""
@@ -96,6 +95,8 @@ func _ready():
 		directory.make_dir("savedata")
 	if !directory.dir_exists("screenshots"):
 		directory.make_dir("screenshots")
+	if !directory.dir_exists("recordings"):
+		directory.make_dir("recordings")
 		
 	if not FileAccess.file_exists("user://savedata/global_save.save"):
 		save_global()
@@ -176,11 +177,11 @@ func save_general():
 	return save_general
 
 func save_game(slot):
-	Console.console_log("[color=green]Saving game data to slot "+str(slot)+"...[/color]")
+	Console.console_log("[color=green]Saving Game Data to Slot "+str(slot)+"...[/color]")
 	var save_game = FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.WRITE)
 	var json_data = JSON.stringify(save_data())
 	save_game.store_line(json_data)
-	Console.console_log("[color=blue]Saved game data to slot "+str(slot)+" sucessfully![/color]")
+	Console.console_log("[color=blue]Saved Game Data to Slot "+str(slot)+" sucessfully![/color]")
 	
 func save_global():	
 	var save_global = FileAccess.open("user://savedata/global_save.save",FileAccess.WRITE)
@@ -188,7 +189,7 @@ func save_global():
 	save_global.store_line(json_data)
 
 func load_game(slot):
-	Console.console_log("[color=green]Loading game data from slot "+str(slot)+"...[/color]")
+	Console.console_log("[color=green]Loading Game Data from Slot "+str(slot)+"...[/color]")
 	if not FileAccess.file_exists("user://savedata/saveslot"+str(slot)+".save"):
 		return
 	var save_game = JSON.parse_string((FileAccess.open("user://savedata/saveslot"+str(slot)+".save",FileAccess.READ)).get_as_text())
@@ -203,7 +204,7 @@ func load_game(slot):
 	save_name = save_game["game"]["save_name"]
 	piece_log = save_game["game"]["piece_log"]
 	warp_to(save_game["room"]["current_room"],"evencare")
-	Console.console_log("[color=blue]Loaded game data from slot "+str(slot)+" sucessfully![/color]")
+	Console.console_log("[color=blue]Loaded Game Data from Slot "+str(slot)+" sucessfully![/color]")
 	
 func load_global():
 	if FileAccess.file_exists("user://savedata/global_save.save"):

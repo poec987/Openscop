@@ -29,6 +29,7 @@ Global="*res://scripts/global.gd"
 Console="*res://scenes/objects/menu/console.tscn"
 bg_music="*res://scenes/objects/setup/bg_music.tscn"
 PersistentData="*res://scenes/objects/setup/persistent_data.tscn"
+Record="*res://scenes/objects/setup/record.tscn"
 
 [display]
 

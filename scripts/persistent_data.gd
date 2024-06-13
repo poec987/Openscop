@@ -4,20 +4,13 @@ extends Node
 var fullscreen = false
 var sheets = DirAccess.open("user://sheets")
 
-
-
 #CODES
 var nifty_code = ["pressed_l2","pressed_square","pressed_r1","pressed_triangle","pressed_r2","pressed_up","pressed_r2","pressed_circle","pressed_r2","pressed_circle"]
 var input_counter = 0
 var last_input = ""
 
-#I AM A FUCKING GENIUS
-	#var input_sim = InputEventAction.new()
-	#InputMap.action_erase_events("pressed_left")
-	#input_sim.set_action("pressed_left")
-	#input_sim.set_pressed(true)
-	#Input.parse_input_event(input_sim)
-	
+
+
 func _process(_delta):
 	if Input.is_action_just_pressed("pressed_l2") || Input.is_action_just_pressed("pressed_l1") || Input.is_action_just_pressed("pressed_r2") || Input.is_action_just_pressed("pressed_r1") || Input.is_action_just_pressed("pressed_up") || Input.is_action_just_pressed("pressed_down") || Input.is_action_just_pressed("pressed_left") || Input.is_action_just_pressed("pressed_right") || Input.is_action_just_pressed("pressed_start") || Input.is_action_just_pressed("pressed_select") || Input.is_action_just_pressed("pressed_action") || Input.is_action_just_pressed("pressed_triangle") || Input.is_action_just_pressed("pressed_square") || Input.is_action_just_pressed("pressed_circle"):
 		if Input.is_action_just_pressed(nifty_code[input_counter]):
@@ -25,7 +18,7 @@ func _process(_delta):
 				print(nifty_code[input_counter])
 				input_counter+=1
 			else:
-				if Global.room_name!="garalina":
+				if Global.room_name!="garalina" || Global.room_name!="title":
 					Global.nifty()
 		else:
 			input_counter=0
