@@ -71,8 +71,7 @@ func _ready():
 room_name = "level1-room7"
 background_music_id = 1
 fade_color = Color(1, 1, 1, 1)
-limit_camera_front = true
-front_limit = Vector2(0.1, 0.1)
+allow_front_movement = false
 camera_height = 4.5
 camera_distance = 10.0
 texture_background = true

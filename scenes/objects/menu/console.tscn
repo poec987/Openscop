@@ -21,6 +21,7 @@ process_mode = 3
 title = "Openscop - Developer Menu"
 initial_position = 5
 size = Vector2i(320, 240)
+visible = false
 content_scale_size = Vector2i(320, 240)
 content_scale_mode = 2
 content_scale_aspect = 4
@@ -79,7 +80,7 @@ offset_top = -13.0
 offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.211765, 0.184314, 0.203922, 0.666667)
+color = Color(0.211765, 0.184314, 0.203922, 0.913725)
 
 [node name="Output" type="RichTextLabel" parent="ConsoleContainer/Background"]
 layout_mode = 1
@@ -112,4 +113,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_n2wah")
 placeholder_text = "type a command..."
 caret_blink = true
 
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_submitted" from="ConsoleContainer/Input" to="." method="_on_input_text_submitted"]

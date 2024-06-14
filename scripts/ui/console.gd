@@ -7,11 +7,7 @@ extends Window
 ## The [RichTextLabel] to display Console output.
 @export var console_output : RichTextLabel
 
-
 var recording_parse = false
-
-func _ready():
-	visible = false
 	
 func _parse_command(input : Array):
 	match input[0]:
@@ -39,6 +35,8 @@ func _parse_command(input : Array):
 			Record.stop_recording()
 		"!replay_recording":
 			Record.replay = true
+		"!load_rectest":
+			Record.load_recording("rec_test")
 		"!save_game_0":
 			Global.save_game(0)
 			console_log("[color=green]Game Data Saved to Slot 1[/color]")
@@ -121,7 +119,7 @@ func _parse_command(input : Array):
 			console_log("[color=yellow]PAUL/DEFAULT= 0    BELLE = 1    MARVIN = 2    NULL = ETC.[/color]")
 		"!show_sheets":
 			Global.update_sheets = !Global.update_sheets
-			console_log("[color=blue]Sheet Visibility toggled[/color]")
+			console_log("[color=blue]Sheet Visibility toggled to [/color][color=yellow]"+str(Global.update_sheets)+"[/color]")
 		_:
 			console_log("[color=red]Invalid Command[/color]")
 			
@@ -144,3 +142,30 @@ func _process(_delta):
 		var command_array = console_input.text.split(" ")
 		console_input.text = ""
 		_parse_command(command_array)
+
+
+func _on_focus_entered():
+	InputMap.action_erase_events("pressed_r1")
+	InputMap.action_erase_events("pressed_r2")
+	InputMap.action_erase_events("pressed_l1")
+	InputMap.action_erase_events("pressed_l2")
+	InputMap.action_erase_events("pressed_up")
+	InputMap.action_erase_events("pressed_down")
+	InputMap.action_erase_events("pressed_left")
+	InputMap.action_erase_events("pressed_right")
+	InputMap.action_erase_events("pressed_action")
+	InputMap.action_erase_events("pressed_triangle")
+	InputMap.action_erase_events("pressed_circle")
+	InputMap.action_erase_events("pressed_square")
+	InputMap.action_erase_events("pressed_select")
+	InputMap.action_erase_events("pressed_start")
+
+func _on_focus_exited():
+	InputMap.load_from_project_settings()
+
+
+func _on_visibility_changed():
+	if visible:
+		console_log("\n\n[color=red]Welcome to the [color=purple]Openscop[/color] Console/Developer Menu.\nThis special menu contains a lot of tools that can help you with debugging Openscop's source code, toggle variables without having to edit the code, trigger events, and debug the game. It can also be used as an aid during the process of making your fangame or fan video.\nI'd like to thank Izzint for first implementing this into Openscop![/color]")
+		console_log("\n[color=yellow]For information and commands list, check the Docs![/color]")
+	_on_focus_entered()

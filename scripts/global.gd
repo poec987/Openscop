@@ -18,8 +18,11 @@ var camera_rot = -18
 var camera_dist_hor = 12
 var camera_dist_ver = 4
 var camera_move_x = true
-var camera_move_z = true
 var camera_move_y = true
+var camera_move_z = true
+var camera_freeze_x =  0.0
+var camera_freeze_y = 0.0
+var camera_freeze_z = 0.0
 var camera_root_dist_ver = 0.0
 var cam_move_limit_x = Vector2.ZERO
 var cam_move_limit_y = Vector2.ZERO
@@ -127,19 +130,29 @@ func create_textbox(background,big_textbox,text):
 	if get_tree().get_first_node_in_group("HUD_textboxes").get_child_count()<2:
 		get_tree().get_first_node_in_group("HUD_textboxes").get_child(0).add_child(dialogue_instance)
 
-func warp_to(scene,preset):
+func warp_to(scene,preset: String = "evencare"):
 	if get_tree().get_first_node_in_group("loading_overlay").get_child(0).color.a==0.0:
 		can_pause=false
 		#print(level_data)
-		get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=Color(level_data[preset]["fade_color"][0],level_data[preset]["fade_color"][1],level_data[preset]["fade_color"][2],0.)
+		if preset!="":
+			get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=Color(level_data[preset]["fade_color"][0],level_data[preset]["fade_color"][1],level_data[preset]["fade_color"][2],0.)
+		else:
+			get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=Color(level_data["evencare"]["fade_color"][0],level_data["evencare"]["fade_color"][1],level_data["evencare"]["fade_color"][2],0.)
 		var fade_in = create_tween()
 		fade_in.tween_property(get_tree().get_first_node_in_group("loading_overlay").get_child(0),"color:a",1.0,0.5)
 		await fade_in.finished
 		get_tree().paused=true
-		if level_data[preset]["loading_file"]!=null:
+		if preset!="":
+			if level_data[preset]["loading_file"]!=null:
+				bg_music.stop()
+				get_tree().get_first_node_in_group("loading_overlay").get_child(1).set_texture(load("res://graphics/sprites/ui/loading_screen/"+level_data[preset]["loading_file"]+".png"))
+		else:
 			bg_music.stop()
-			get_tree().get_first_node_in_group("loading_overlay").get_child(1).set_texture(load("res://graphics/sprites/ui/loading_screen/"+level_data[preset]["loading_file"]+".png"))
-		get_tree().get_first_node_in_group("loading_overlay").get_child(2).wait_time =float(level_data[preset]["wait_time"])+randf_range(0.,float(level_data[preset]["wait_time"])/4)
+			get_tree().get_first_node_in_group("loading_overlay").get_child(1).set_texture(load("res://graphics/sprites/ui/loading_screen/"+level_data["evencare"]["loading_file"]+".png"))
+		if preset!="":
+			get_tree().get_first_node_in_group("loading_overlay").get_child(2).wait_time =float(level_data[preset]["wait_time"])+randf_range(0.,float(level_data[preset]["wait_time"])/4)
+		else:
+			get_tree().get_first_node_in_group("loading_overlay").get_child(2).wait_time =float(level_data["evencare"]["wait_time"])+randf_range(0.,float(level_data["evencare"]["wait_time"])/4)
 		get_tree().get_first_node_in_group("loading_overlay").get_child(2).start()
 		await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
 		get_tree().change_scene_to_file(scene)
@@ -203,7 +216,7 @@ func load_game(slot):
 	#current_character = save_game["player"]["character"]
 	save_name = save_game["game"]["save_name"]
 	piece_log = save_game["game"]["piece_log"]
-	warp_to(save_game["room"]["current_room"],"evencare")
+	warp_to(save_game["room"]["current_room"],save_game["room"]["loading_preset"])
 	Console.console_log("[color=blue]Loaded Game Data from Slot "+str(slot)+" sucessfully![/color]")
 	
 func load_global():

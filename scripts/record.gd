@@ -3,6 +3,7 @@ extends Node
 var replay = false
 var replay_setup = false
 var recording = false
+var recording_setup = false
 var recording_timer = 0
 var recording_reader_p1 = 0
 var recording_reader_p2 = 0
@@ -26,12 +27,6 @@ var input_sim_start = null
 
 
 var parsed_input_left = false
-#I AM A FUCKING GENIUS
-	#var input_sim = InputEventAction.new()
-	#InputMap.action_erase_events("pressed_left")
-	#input_sim.set_action("pressed_left")
-	#input_sim.set_pressed(true)
-	#Input.parse_input_event(input_sim)
 
 func start_recording():
 	recording = true
@@ -43,6 +38,7 @@ func stop_recording():
 	var json_data = JSON.stringify(recording_data)
 	save_recording.store_line(json_data)
 	recording_timer = 0
+	recording_setup=false
 	Console.console_log("[color=blue]Recording Stopped.[/color]")
 
 func number_parser(number):
@@ -77,7 +73,32 @@ func check_input_type(key):
 	if !Input.is_action_just_pressed(key) && !Input.is_action_just_released(key):
 		return 0
 
-func _ready():
+func setup_file():
+	recording_data["recording_info"] = {
+		"gen": Global.gen,
+		"character": Global.current_character,
+	}
+	recording_data["save_data"] = {
+		"room": {
+			"room_name":Global.room_name,
+			"loading_preset":Global.loading_preset,
+			"current_room": get_tree().get_current_scene().scene_file_path
+		},
+		"game": {
+			"pets": Global.pets,
+			"retrace_steps":Global.retrace_steps,
+			"save_name": Global.save_name,
+			"corrupted":Global.corrupt,
+			"piece_log":Global.piece_log
+		},
+		"player": {
+			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction],
+			"pieces":Global.pieces_amount,
+			"character":Global.current_character,
+			"control_mode":Global.control_mode,
+			"key":Global.key
+		}
+	}
 	recording_data["p1_data"] = []
 	recording_data["p2_data"] = []
 
@@ -85,27 +106,26 @@ func _ready():
 func _process(_delta):
 	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
 	if recording:
+		if !recording_setup:
+			setup_file()
+			recording_setup=true
 		recording_timer+=1
 		if check_input() && Global.control_mode!=1 || Input.is_action_just_pressed("pressed_select") || Input.is_action_just_released("pressed_select"):
-				recording_data["p1_data"].push_back(str(recording_timer)+"_"+str(check_input_type("pressed_r1"))+"_"+str(check_input_type("pressed_r2"))+"_"+str(check_input_type("pressed_l1"))+"_"+str(check_input_type("pressed_l2"))+"_"+str(check_input_type("pressed_up"))+"_"+str(check_input_type("pressed_down"))+"_"+str(check_input_type("pressed_left"))+"_"+str(check_input_type("pressed_right"))+"_"+str(check_input_type("pressed_action"))+"_"+str(check_input_type("pressed_triangle"))+"_"+str(check_input_type("pressed_circle"))+"_"+str(check_input_type("pressed_square"))+"_"+str(check_input_type("pressed_select"))+"_"+str(check_input_type("pressed_start")))
+				recording_data["p1_data"].push_back(str(recording_timer)+"_"+str(check_input_type("pressed_l1"))+"_"+str(check_input_type("pressed_l2"))+"_"+str(check_input_type("pressed_r1"))+"_"+str(check_input_type("pressed_r2"))+"_"+str(check_input_type("pressed_up"))+"_"+str(check_input_type("pressed_down"))+"_"+str(check_input_type("pressed_left"))+"_"+str(check_input_type("pressed_right"))+"_"+str(check_input_type("pressed_action"))+"_"+str(check_input_type("pressed_triangle"))+"_"+str(check_input_type("pressed_circle"))+"_"+str(check_input_type("pressed_square"))+"_"+str(check_input_type("pressed_select"))+"_"+str(check_input_type("pressed_start")))
 		if check_pressed() && Global.control_mode==1:
 				recording_data["p2_data"].push_back(str(recording_timer)+"_"+get_tree().get_first_node_in_group("Player").word+"_"+get_tree().get_first_node_in_group("p2_word").text)
 
 	if replay:
 		if !replay_setup:
+			stop_recording()
 			recording_finished = false
 			recording = false
 			recording_timer = 0
 			Console.console_log("[color=green]Loading Recording Data...[/color]")
-			if not FileAccess.file_exists("user://recordings/rec_test.rec"):
-				return
-			recording_data = JSON.parse_string((FileAccess.open("user://recordings/rec_test.rec",FileAccess.READ)).get_as_text())
-			input_sim_r1 = InputEventAction.new()
-			InputMap.action_erase_events("pressed_r1")
-			input_sim_r1.set_action("pressed_r1")
-			input_sim_r2 = InputEventAction.new()
-			InputMap.action_erase_events("pressed_r2")
-			input_sim_r2.set_action("pressed_r2")
+			#if recording_data=={}:
+				#if not FileAccess.file_exists("user://recordings/rec_test.rec"):
+					#return
+				#recording_data = JSON.parse_string((FileAccess.open("user://recordings/rec_test.rec",FileAccess.READ)).get_as_text())
 			input_sim_l1 = InputEventAction.new()
 			InputMap.action_erase_events("pressed_l1")
 			input_sim_l1.set_action("pressed_l1")
@@ -113,6 +133,12 @@ func _process(_delta):
 			InputMap.action_erase_events("pressed_l2")
 			input_sim_l2.set_action("pressed_l2")
 			input_sim_up = InputEventAction.new()
+			input_sim_r1 = InputEventAction.new()
+			InputMap.action_erase_events("pressed_r1")
+			input_sim_r1.set_action("pressed_r1")
+			input_sim_r2 = InputEventAction.new()
+			InputMap.action_erase_events("pressed_r2")
+			input_sim_r2.set_action("pressed_r2")
 			InputMap.action_erase_events("pressed_up")
 			input_sim_up.set_action("pressed_up")
 			input_sim_down = InputEventAction.new()
@@ -143,23 +169,24 @@ func _process(_delta):
 			InputMap.action_erase_events("pressed_start")
 			input_sim_start.set_action("pressed_start")
 			replay_setup = true
-		recording_timer+=1
+		if replay_setup:
+			recording_timer+=1
 		
 	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
 		if recording_reader_p1<=recording_data["p1_data"].size()-1:
 			if recording_timer==int((recording_data["p1_data"][recording_reader_p1].split("_"))[0]):
 				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[1])!=0:
-					input_sim_r1.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[1])))
-					Input.parse_input_event(input_sim_r1)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])!=0:
-					input_sim_r2.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])))
-					Input.parse_input_event(input_sim_r2)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[3])!=0:
 					input_sim_l1.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[3])))
 					Input.parse_input_event(input_sim_l1)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[4])!=0:
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])!=0:
 					input_sim_l2.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[4])))
 					Input.parse_input_event(input_sim_l2)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[3])!=0:
+					input_sim_r1.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[1])))
+					Input.parse_input_event(input_sim_r1)
+				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[4])!=0:
+					input_sim_r2.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])))
+					Input.parse_input_event(input_sim_r2)
 				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])!=0:
 					input_sim_up.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])))
 					Input.parse_input_event(input_sim_up)
@@ -211,11 +238,32 @@ func _process(_delta):
 			Console.console_log("[color=red]RECORDING IS OVER[/color]")
 			InputMap.load_from_project_settings()
 			replay = false
+			replay_setup = false
 			recording_timer = 0
 			recording_reader_p1 = 0
 			recording_finished = true
-
-func replay_recording():
-	recording = false
-	replay = true
+			recording_data = {}
+	
+	
+	
+func replay_inputs():
 	recording_timer = 0
+	replay = true
+	
+func load_recording(file, gen: int = 8):
+	recording_timer = 0
+	recording_data = JSON.parse_string((FileAccess.open("user://recordings/"+file+".rec",FileAccess.READ)).get_as_text())
+	Console.console_log("[color=green]Loading Game Data from Recording...[/color]")
+	Global.pets = recording_data["save_data"]["game"]["pets"]
+	Global.retrace_steps = recording_data["save_data"]["game"]["retrace_steps"]
+	Global.corrupt = recording_data["save_data"]["game"]["corrupted"]
+	Global.player_array = Vector4(recording_data["save_data"]["player"]["coords"][0],recording_data["save_data"]["player"]["coords"][1],recording_data["save_data"]["player"]["coords"][2],recording_data["save_data"]["player"]["coords"][3])
+	Global.pieces_amount = recording_data["save_data"]["player"]["pieces"]
+	Global.control_mode = recording_data["save_data"]["player"]["control_mode"]
+	Global.key = recording_data["save_data"]["player"]["key"]
+	Global.current_character = recording_data["recording_info"]["character"]
+	Global.save_name = recording_data["save_data"]["game"]["save_name"]
+	Global.piece_log = recording_data["save_data"]["game"]["piece_log"]
+	Global.warp_to(recording_data["save_data"]["room"]["current_room"],recording_data["save_data"]["room"]["loading_preset"])
+	Console.console_log("[color=blue]Loaded Game Data from Recording sucessfully! Replaying inputs...[/color]")
+	replay=true

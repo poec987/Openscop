@@ -6,6 +6,7 @@ extends Node
 @export var room_name = ""
 @export var loading_preset=""
 @export var background_music_id = 0
+@export var allow_recording = true
 @export var fade_color: Color
 @export_multiline var level_slogan = ""
 @export var school_preset = false
@@ -23,8 +24,11 @@ extends Node
 
 @export_subgroup("Camera_properties")
 @export var allow_horizontal_movement = true
+@export var freeze_horizontal_at = 0.0
 @export var allow_front_movement = true
+@export var freeze_front_at = 0.0
 @export var allow_vertical_movement = true
+@export var freeze_vertical_at = 0.0
 @export var camera_height = 0.
 @export var camera_distance = 0.
 @export var change_camera_angle = false
@@ -57,6 +61,11 @@ extends Node
 func _ready():
 	Global.room_name = room_name
 	Global.loading_preset = loading_preset
+	#if !Global.recording && allow_recording:
+		#Record.start_recording()
+	if !allow_recording:
+		Record.stop_recording()
+	
 	get_tree().paused=false
 	get_tree().get_first_node_in_group("level_slogan").text = level_slogan
 	get_tree().get_first_node_in_group("loading_overlay").get_child(0).color=fade_color
@@ -78,6 +87,15 @@ func _ready():
 		Global.camera_limit_y=vertical_max_limit
 	if Global.camera_limit_z!=front_max_limit && front_max_limit>0.:
 		Global.camera_limit_z=front_max_limit
+	
+
+	if !allow_horizontal_movement:
+		Global.camera_freeze_x = freeze_horizontal_at
+	if !allow_vertical_movement:
+		Global.camera_freeze_y = freeze_vertical_at
+	if !allow_front_movement:
+		Global.camera_freeze_z = freeze_front_at
+	
 	
 	if limit_camera_horizontal:
 		Global.cam_move_limit_x.x=horizontal_limit.x

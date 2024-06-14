@@ -5,7 +5,6 @@ const CAMERA_SPEED = 3.0
 @onready var cam = $cam_anchor/PSXLayer 
 @onready var player = get_node("../player")
 
-#func _ready():
 	
 func _setup():
 	#SETS UP CAMERA ACCORDING TO ROOM, SPECIFIED PROPERTIES
@@ -19,7 +18,13 @@ func _setup():
 			position.z = clamp(position.z,Global.cam_move_limit_z.x,Global.cam_move_limit_z.y)
 		if Global.cam_move_limit_y.x!=0.0 || Global.cam_move_limit_y.y!=0.0:
 			position.y = clamp(position.y,Global.cam_move_limit_y.x,Global.cam_move_limit_y.y)
-
+	if !Global.camera_move_x:
+		position.x = Global.camera_freeze_x
+	if !Global.camera_move_y:
+		position.y = Global.camera_freeze_y
+	if !Global.camera_move_z:
+		position.z = Global.camera_freeze_z
+	
 func _process(delta):
 	_setup()
 	#CAMERA MODE 0 = FOLLOW PLAYER

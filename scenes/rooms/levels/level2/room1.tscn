@@ -22,8 +22,8 @@ shader_parameter/albedoTex = ExtResource("5_hx0pp")
 [node name="level_manipulator" parent="." instance=ExtResource("2_hsaov")]
 room_name = "level2-room1"
 background_music_id = 2
-limit_camera_horizontal = true
-horizontal_limit = Vector2(-0.22, -0.22)
+allow_horizontal_movement = false
+freeze_horizontal_at = -0.22
 allow_front_movement = false
 allow_vertical_movement = false
 camera_height = 4.25
