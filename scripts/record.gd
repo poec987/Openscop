@@ -36,9 +36,10 @@ func start_recording():
 	
 func stop_recording():
 	recording = false
-	var save_recording = FileAccess.open(("user://recordings/auto-"+Global.make_random()+".rec"),FileAccess.WRITE)
-	var json_data = JSON.stringify(recording_data)
-	save_recording.store_line(json_data)
+	if recording_data!={}:
+		var save_recording = FileAccess.open(("user://recordings/auto-"+Global.make_random()+".rec"),FileAccess.WRITE)
+		var json_data = JSON.stringify(recording_data)
+		save_recording.store_line(json_data)
 	recording_timer = 0
 	recording_setup=false
 	Console.console_log("[color=blue]Recording Stopped.[/color]")
