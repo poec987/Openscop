@@ -21,6 +21,7 @@ shader_parameter/albedoTex = ExtResource("5_m03g4")
 
 [node name="level_manipulator" parent="." instance=ExtResource("2_0e0yh")]
 room_name = "extra-elevator"
+allow_recording = false
 footstep_sound = 2
 allow_horizontal_movement = false
 allow_front_movement = false
