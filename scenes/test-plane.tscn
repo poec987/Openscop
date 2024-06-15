@@ -93,6 +93,9 @@ func _ready():
 	origin = symbol_root.position.y
 	if !Engine.is_editor_hint():
 		animate()
+	var geo = create_tween().set_loops()
+	geo.tween_property($geo,\"position:y\",randf_range(0.25,0.5),randf_range(0.5,2.0)).set_delay(randf_range(0.0,1))
+	geo.tween_property($geo,\"position:y\",0.0,1.0).set_delay(randf_range(0.0,1))
 	
 func _process(_delta):
 	if Engine.is_editor_hint():
@@ -345,7 +348,6 @@ environment_darkness = 0.5
 
 [node name="test_plane_specific" type="Node3D" parent="level_manipulator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 260)
-visible = false
 script = SubResource("GDScript_ver1u")
 
 [node name="height_offset" type="Node3D" parent="level_manipulator/test_plane_specific"]
@@ -419,6 +421,18 @@ hframes = 4
 vframes = 4
 frame = 6
 
+[node name="geo" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.195511, 0)
+material_override = SubResource("ShaderMaterial_y0djn")
+offset = Vector2(0, 40)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_8wwrg")
+hframes = 4
+vframes = 4
+frame = 9
+
 [node name="causeofpastas" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 material_override = SubResource("ShaderMaterial_y0djn")
@@ -457,6 +471,12 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="level_manipulator/test_plane_specific/grass/grass"]
 visible = false
 shape = SubResource("BoxShape3D_x1xgp")
+
+[node name="interaction" parent="level_manipulator/test_plane_specific" instance=ExtResource("2_fd03b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+height_offset = 0.6
+dialogue_id = "Hey guys pizza gaming here."
+textbox_background = 1
 
 [node name="player_root" parent="." instance=ExtResource("2_a0geb")]
 
