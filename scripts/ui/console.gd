@@ -145,20 +145,21 @@ func _process(_delta):
 
 
 func _on_focus_entered():
-	InputMap.action_erase_events("pressed_r1")
-	InputMap.action_erase_events("pressed_r2")
-	InputMap.action_erase_events("pressed_l1")
-	InputMap.action_erase_events("pressed_l2")
-	InputMap.action_erase_events("pressed_up")
-	InputMap.action_erase_events("pressed_down")
-	InputMap.action_erase_events("pressed_left")
-	InputMap.action_erase_events("pressed_right")
-	InputMap.action_erase_events("pressed_action")
-	InputMap.action_erase_events("pressed_triangle")
-	InputMap.action_erase_events("pressed_circle")
-	InputMap.action_erase_events("pressed_square")
-	InputMap.action_erase_events("pressed_select")
-	InputMap.action_erase_events("pressed_start")
+	if !Record.replay:
+		InputMap.action_erase_events("pressed_r1")
+		InputMap.action_erase_events("pressed_r2")
+		InputMap.action_erase_events("pressed_l1")
+		InputMap.action_erase_events("pressed_l2")
+		InputMap.action_erase_events("pressed_up")
+		InputMap.action_erase_events("pressed_down")
+		InputMap.action_erase_events("pressed_left")
+		InputMap.action_erase_events("pressed_right")
+		InputMap.action_erase_events("pressed_action")
+		InputMap.action_erase_events("pressed_triangle")
+		InputMap.action_erase_events("pressed_circle")
+		InputMap.action_erase_events("pressed_square")
+		InputMap.action_erase_events("pressed_select")
+		InputMap.action_erase_events("pressed_start")
 
 func _on_focus_exited():
 	InputMap.load_from_project_settings()
@@ -168,4 +169,5 @@ func _on_visibility_changed():
 	if visible:
 		console_log("\n\n[color=red]Welcome to the [color=purple]Openscop[/color] Console/Developer Menu.\nThis special menu contains a lot of tools that can help you with debugging Openscop's source code, toggle variables without having to edit the code, trigger events, and debug the game. It can also be used as an aid during the process of making your fangame or fan video.\nI'd like to thank Izzint for first implementing this into Openscop![/color]")
 		console_log("\n[color=yellow]For information and commands list, check the Docs![/color]")
-	_on_focus_entered()
+		if !Record.replay:
+			_on_focus_entered()

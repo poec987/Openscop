@@ -11,18 +11,22 @@ var random_sound = 0
 func _ready():
 	$piece_sprite.frame_coords.y = Global.pieces[get_parent().get_node(str(self.name)).get_index()]
 	if Global.gen<=2 || Global.current_character==2 || Global.piece_log.has(Global.room_name) && Global.piece_log[Global.room_name].has(get_parent().get_node(str(self.name)).get_index()):
-		queue_free()
+		self.get_child(0).queue_free()
+		visible=false
 
 func _process(delta):
-	current_frame+=ANIM_SPEED*delta
+	if visible:
+		current_frame+=ANIM_SPEED*delta
 	if current_frame>20:
 		current_frame=0
 	$piece_sprite.frame_coords.x=current_frame
 	
 	if collected:
-		position+= Vector3(0.,VER_SPEED*delta,HOR_SPEED*delta)
-	if position.y>10:
-		queue_free()
+		if position.y<10:
+			position+= Vector3(0.,VER_SPEED*delta,HOR_SPEED*delta)
+		else:
+			self.PROCESS_MODE_DISABLED
+			visible=false
 
 
 func _on_piece_area_body_entered(body):

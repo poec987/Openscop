@@ -29,6 +29,8 @@ var input_sim_start = null
 var parsed_input_left = false
 
 func start_recording():
+	setup_file()
+	recording_setup = true
 	recording = true
 	Console.console_log("[color=blue]Recording Started.[/color]")
 	
@@ -40,18 +42,12 @@ func stop_recording():
 	recording_timer = 0
 	recording_setup=false
 	Console.console_log("[color=blue]Recording Stopped.[/color]")
-
+	
 func number_parser(number):
 	if number==1:
 		return true
 	if number==2:
 		return false
-
-#func check_pressed():
-	#if Input.is_action_pressed("pressed_l1") || Input.is_action_pressed("pressed_l2")  || Input.is_action_pressed("pressed_r1")  || Input.is_action_pressed("pressed_r2")  || Input.is_action_pressed("pressed_action") || Input.is_action_pressed("pressed_triangle") || Input.is_action_pressed("pressed_square") || Input.is_action_pressed("pressed_circle") || Input.is_action_pressed("pressed_select") || Input.is_action_pressed("pressed_start")|| Input.is_action_pressed("change_mode") || Input.is_action_pressed("pressed_left") || Input.is_action_pressed("pressed_right") || Input.is_action_pressed("pressed_up") || Input.is_action_pressed("pressed_down"):
-		#return true
-	#else:
-		#return false
 		
 func check_pressed():
 	if Input.is_action_just_pressed("pressed_l1") || Input.is_action_just_pressed("pressed_l2")  || Input.is_action_just_pressed("pressed_r1")  || Input.is_action_just_pressed("pressed_r2")  || Input.is_action_just_pressed("pressed_action") || Input.is_action_just_pressed("pressed_triangle") || Input.is_action_just_pressed("pressed_square") || Input.is_action_just_pressed("pressed_circle") || Input.is_action_just_pressed("pressed_start")|| Input.is_action_just_pressed("pressed_left") || Input.is_action_just_pressed("pressed_right") || Input.is_action_just_pressed("pressed_up") || Input.is_action_just_pressed("pressed_down"):
@@ -85,15 +81,14 @@ func setup_file():
 			"current_room": get_tree().get_current_scene().scene_file_path
 		},
 		"game": {
-			"pets": Global.pets,
+			"pets": Global.pets.duplicate(),
 			"retrace_steps":Global.retrace_steps,
-			"save_name": Global.save_name,
 			"corrupted":Global.corrupt,
-			"piece_log":Global.piece_log
+			"piece_log":Global.piece_log.duplicate()
 		},
 		"player": {
 			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction],
-			"pieces":Global.pieces_amount,
+			"pieces":Global.pieces_amount.duplicate(),
 			"character":Global.current_character,
 			"control_mode":Global.control_mode,
 			"key":Global.key
@@ -106,9 +101,6 @@ func setup_file():
 func _process(_delta):
 	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
 	if recording:
-		if !recording_setup:
-			setup_file()
-			recording_setup=true
 		recording_timer+=1
 		if check_input() && Global.control_mode!=1 || Input.is_action_just_pressed("pressed_select") || Input.is_action_just_released("pressed_select"):
 				recording_data["p1_data"].push_back(str(recording_timer)+"_"+str(check_input_type("pressed_l1"))+"_"+str(check_input_type("pressed_l2"))+"_"+str(check_input_type("pressed_r1"))+"_"+str(check_input_type("pressed_r2"))+"_"+str(check_input_type("pressed_up"))+"_"+str(check_input_type("pressed_down"))+"_"+str(check_input_type("pressed_left"))+"_"+str(check_input_type("pressed_right"))+"_"+str(check_input_type("pressed_action"))+"_"+str(check_input_type("pressed_triangle"))+"_"+str(check_input_type("pressed_circle"))+"_"+str(check_input_type("pressed_square"))+"_"+str(check_input_type("pressed_select"))+"_"+str(check_input_type("pressed_start")))
@@ -122,10 +114,6 @@ func _process(_delta):
 			recording = false
 			recording_timer = 0
 			Console.console_log("[color=green]Loading Recording Data...[/color]")
-			#if recording_data=={}:
-				#if not FileAccess.file_exists("user://recordings/rec_test.rec"):
-					#return
-				#recording_data = JSON.parse_string((FileAccess.open("user://recordings/rec_test.rec",FileAccess.READ)).get_as_text())
 			input_sim_l1 = InputEventAction.new()
 			InputMap.action_erase_events("pressed_l1")
 			input_sim_l1.set_action("pressed_l1")
@@ -258,12 +246,12 @@ func load_recording(file, gen: int = 8):
 	Global.retrace_steps = recording_data["save_data"]["game"]["retrace_steps"]
 	Global.corrupt = recording_data["save_data"]["game"]["corrupted"]
 	Global.player_array = Vector4(recording_data["save_data"]["player"]["coords"][0],recording_data["save_data"]["player"]["coords"][1],recording_data["save_data"]["player"]["coords"][2],recording_data["save_data"]["player"]["coords"][3])
-	Global.pieces_amount = recording_data["save_data"]["player"]["pieces"]
 	Global.control_mode = recording_data["save_data"]["player"]["control_mode"]
 	Global.key = recording_data["save_data"]["player"]["key"]
 	Global.current_character = recording_data["recording_info"]["character"]
-	Global.save_name = recording_data["save_data"]["game"]["save_name"]
 	Global.piece_log = recording_data["save_data"]["game"]["piece_log"]
 	Global.warp_to(recording_data["save_data"]["room"]["current_room"],recording_data["save_data"]["room"]["loading_preset"])
 	Console.console_log("[color=blue]Loaded Game Data from Recording sucessfully! Replaying inputs...[/color]")
+	Global.pieces_amount = recording_data["save_data"]["player"]["pieces"]
+	await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
 	replay=true
