@@ -4,11 +4,19 @@ var replay = false
 var replay_setup = false
 var recording = false
 var recording_setup = false
+var recording_finished = false
+var menu_loading = false
+var title_loading = false
+
 var recording_timer = 0
 var recording_reader_p1 = 0
 var recording_reader_p2 = 0
 var recording_data = {}
-var recording_finished = false
+
+var temporary_data = {}
+
+
+
 
 var input_sim_r1 = null
 var input_sim_r2 = null
@@ -28,6 +36,30 @@ var input_sim_start = null
 
 var parsed_input_left = false
 
+func current_data():
+	var data = {
+		"room": {
+			"room_name":Global.room_name,
+			"loading_preset":Global.loading_preset,
+			"current_room": get_tree().get_current_scene().scene_file_path
+		},
+		"game": {
+			"pets": Global.pets.duplicate(),
+			"retrace_steps":Global.retrace_steps,
+			"save_name": Global.save_name,
+			"corrupted":Global.corrupt,
+			"piece_log":Global.piece_log.duplicate()
+		},
+		"player": {
+			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction],
+			"pieces":Global.pieces_amount.duplicate(),
+			"character":Global.current_character,
+			"control_mode":Global.control_mode,
+			"key":Global.key
+		}
+	}
+	return data
+
 func start_recording():
 	setup_file()
 	recording_setup = true
@@ -35,11 +67,11 @@ func start_recording():
 	Console.console_log("[color=blue]Recording Started.[/color]")
 	
 func stop_recording():
-	recording = false
-	if recording_data!={}:
+	if recording_data!={} && recording:
 		var save_recording = FileAccess.open(("user://recordings/auto-"+Global.make_random()+".rec"),FileAccess.WRITE)
 		var json_data = JSON.stringify(recording_data)
 		save_recording.store_line(json_data)
+	recording = false
 	recording_timer = 0
 	recording_setup=false
 	Console.console_log("[color=blue]Recording Stopped.[/color]")
@@ -73,7 +105,8 @@ func check_input_type(key):
 func setup_file():
 	recording_data["recording_info"] = {
 		"gen": Global.gen,
-		"character": Global.current_character,
+		"memcard": true,
+		"rotation": true,
 	}
 	recording_data["save_data"] = {
 		"room": {
@@ -88,7 +121,7 @@ func setup_file():
 			"piece_log":Global.piece_log.duplicate()
 		},
 		"player": {
-			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction],
+			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction].duplicate(),
 			"pieces":Global.pieces_amount.duplicate(),
 			"character":Global.current_character,
 			"control_mode":Global.control_mode,
@@ -98,7 +131,6 @@ func setup_file():
 	recording_data["p1_data"] = []
 	recording_data["p2_data"] = []
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
 	if recording:
@@ -230,7 +262,26 @@ func _process(_delta):
 			replay_setup = false
 			recording_timer = 0
 			recording_reader_p1 = 0
+			Global.load_global()
+			#if menu_loading:
+				#Global.pets = temporary_data["game"]["pets"]
+				#Global.retrace_steps = temporary_data["game"]["retrace_steps"]
+				#Global.corrupt = temporary_data["game"]["corrupted"]
+				#Global.player_array = Vector4(temporary_data["player"]["coords"][0],temporary_data["player"]["coords"][1],temporary_data["player"]["coords"][2],temporary_data["player"]["coords"][3])
+				#Global.pieces_amount = temporary_data["player"]["pieces"]
+				#Global.control_mode = temporary_data["player"]["control_mode"]
+				#Global.key = temporary_data["player"]["key"]
+				#current_character = save_game["player"]["character"]
+				#Global.save_name = temporary_data["game"]["save_name"]
+				#Global.piece_log = temporary_data["game"]["piece_log"]
+				#warp_to(temporary_data["room"]["current_room"],temporary_data["room"]["loading_preset"])
+				#Console.console_log("[color=blue]Loaded Temporary Game Data sucessfully![/color]")
 			recording_finished = true
+			if title_loading:
+				Global.warp_to("res://scenes/rooms/title/title.tscn","evencare")
+			menu_loading = false
+			title_loading = false
+			temporary_data = {}
 			recording_data = {}
 	
 	
@@ -239,8 +290,13 @@ func replay_inputs():
 	recording_timer = 0
 	replay = true
 	
-func load_recording(file, gen: int = 8):
+func load_recording(file, gen: int = 8, menu: bool = false, title: bool = false):
 	recording_timer = 0
+	menu_loading = menu
+	title_loading = title
+	#if menu_loading:
+		#temporary_data = current_data()
+		#Console.console_log("[color=blue]Saved Temporary Game Data sucessfully![/color]")
 	recording_data = JSON.parse_string((FileAccess.open("user://recordings/"+file+".rec",FileAccess.READ)).get_as_text())
 	Console.console_log("[color=green]Loading Game Data from Recording...[/color]")
 	Global.pets = recording_data["save_data"]["game"]["pets"]
@@ -249,7 +305,7 @@ func load_recording(file, gen: int = 8):
 	Global.player_array = Vector4(recording_data["save_data"]["player"]["coords"][0],recording_data["save_data"]["player"]["coords"][1],recording_data["save_data"]["player"]["coords"][2],recording_data["save_data"]["player"]["coords"][3])
 	Global.control_mode = recording_data["save_data"]["player"]["control_mode"]
 	Global.key = recording_data["save_data"]["player"]["key"]
-	Global.current_character = recording_data["recording_info"]["character"]
+	Global.current_character = recording_data["save_data"]["player"]["character"]
 	Global.piece_log = recording_data["save_data"]["game"]["piece_log"]
 	Global.warp_to(recording_data["save_data"]["room"]["current_room"],recording_data["save_data"]["room"]["loading_preset"])
 	Console.console_log("[color=blue]Loaded Game Data from Recording sucessfully! Replaying inputs...[/color]")

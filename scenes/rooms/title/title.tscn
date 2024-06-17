@@ -696,4 +696,7 @@ volume_db = 2.0
 stream = ExtResource("33_1fxdv")
 volume_db = 2.0
 
+[node name="demo_timer" type="Timer" parent="."]
+
 [connection signal="animation_looped" from="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select" to="." method="_on_select_animation_looped"]
+[connection signal="timeout" from="demo_timer" to="." method="_on_demo_timer_timeout"]

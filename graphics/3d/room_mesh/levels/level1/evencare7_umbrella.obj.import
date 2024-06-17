@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://1ng7c7l2dsyd"
+path="res://.godot/imported/evencare7_umbrella.obj-d84f754ed1fe0e89c33213a4278deb3f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/evencare7_umbrella.obj-d84f754ed1fe0e89c33213a4278deb3f.mesh"]
+
+source_file="res://graphics/3d/room_mesh/levels/level1/evencare7_umbrella.obj"
+dest_files=["res://.godot/imported/evencare7_umbrella.obj-d84f754ed1fe0e89c33213a4278deb3f.mesh", "res://.godot/imported/evencare7_umbrella.obj-d84f754ed1fe0e89c33213a4278deb3f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

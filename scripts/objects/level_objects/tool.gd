@@ -20,18 +20,17 @@ func _process(delta):
 
 	if Global.keyboard_RAM!="":
 		answer_finished = false
-		if $answer_origin.position.y<5:
-			if material.texture.get_path()!= answer:
-				var go_up = create_tween()
-				go_up.tween_property($answer_origin,"position:y",10.0,ANIM_SPEEDS)
-				await go_up.finished
-				material.texture = load(answer)
-				material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-				$answer_wait.start()
-				went_down=false
-		else:
-			answer_processing(Global.keyboard_RAM)
+		if material.texture.get_path()!= answer:
+			var go_up = create_tween()
+			go_up.tween_property($answer_origin,"position:y",10.0,ANIM_SPEEDS)
+			await go_up.finished
+			material.texture = load(answer)
+			material.get_material_override().set_shader_parameter("albedoTex", material.texture)
 			$answer_wait.start()
+			went_down=false
+		#else:
+			#answer_processing(Global.keyboard_RAM)
+			#$answer_wait.start()
 		Global.keyboard_RAM=""
 		
 	if pink:
@@ -41,7 +40,7 @@ func _process(delta):
 
 func answer_processing(keyboard_answer):
 	var question = keyboard_answer.to_lower()
-
+	print(keyboard_answer)
 	if !pink:
 		if question=="where was the windmill":
 			$answer_wait.wait_time = DEFAULT_ANSWER_WAIT

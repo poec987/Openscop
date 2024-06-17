@@ -11,8 +11,8 @@ var fade_color = 0
 
 var selected_file = 0
 var cont_option = true
-
-
+var recording_files = DirAccess.get_files_at("user://recordings/")
+var allowed_recordings = []
 func _ready():
 	bg_music.stop()
 	get_tree().paused = false
@@ -25,6 +25,12 @@ func _ready():
 	if Global.room_name=="garalina":
 		$song.play()
 		Global.room_name=="title"
+	for file in recording_files:
+		if (JSON.parse_string((FileAccess.open(("user://recordings/"+file),FileAccess.READ)).get_as_text()))["recording_info"]["rotation"]:
+			allowed_recordings.append(file)
+	$demo_timer.wait_time = randi_range(60,10800)
+	$demo_timer.start()
+		
 func _physics_process(_delta):
 	
 	timer += 1
@@ -271,3 +277,10 @@ func write_blank_save(slot):
 	var json_data = JSON.stringify(save_data)
 	save_game.store_line(json_data)
 	Console.console_log("[color=blue]Created blank data to slot "+str(slot)+" sucessfully![/color]")
+
+
+func _on_demo_timer_timeout():
+	var picked_recording = allowed_recordings.pick_random()
+	if allowed_recordings!=[]:
+		print(picked_recording)
+		Record.load_recording(picked_recording.trim_suffix(".rec"),JSON.parse_string(FileAccess.open(("user://recordings/"+picked_recording),FileAccess.READ).get_as_text())["recording_info"]["gen"],false,true)

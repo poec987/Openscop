@@ -37,7 +37,8 @@ func _on_piece_area_body_entered(body):
 		if Global.piece_log.has(Global.room_name):
 			Global.piece_log[Global.room_name].push_back(get_parent().get_node(str(self.name)).get_index())
 		else:
-			Global.piece_log[Global.room_name] = [get_parent().get_node(str(self.name)).get_index()]
+			if Global.room_name!="":
+				Global.piece_log[Global.room_name] = [get_parent().get_node(str(self.name)).get_index()]
 		if random_sound==0:
 			$piece_sound1.play()
 		if random_sound==1:
