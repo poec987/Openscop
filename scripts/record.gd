@@ -68,6 +68,7 @@ func start_recording():
 	
 func stop_recording():
 	if recording_data!={} && recording:
+		recording_data["p1_data"].push_back(str(recording_timer)+"_END")
 		var save_recording = FileAccess.open(("user://recordings/auto-"+Global.make_random()+".rec"),FileAccess.WRITE)
 		var json_data = JSON.stringify(recording_data)
 		save_recording.store_line(json_data)
@@ -193,97 +194,100 @@ func _process(_delta):
 		if replay_setup:
 			recording_timer+=1
 		
-	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
-		if recording_reader_p1<=recording_data["p1_data"].size()-1:
-			if recording_timer==int((recording_data["p1_data"][recording_reader_p1].split("_"))[0]):
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[1])!=0:
-					input_sim_l1.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[3])))
-					Input.parse_input_event(input_sim_l1)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])!=0:
-					input_sim_l2.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[4])))
-					Input.parse_input_event(input_sim_l2)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[3])!=0:
-					input_sim_r1.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[1])))
-					Input.parse_input_event(input_sim_r1)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[4])!=0:
-					input_sim_r2.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])))
-					Input.parse_input_event(input_sim_r2)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])!=0:
-					input_sim_up.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])))
-					Input.parse_input_event(input_sim_up)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[6])!=0:
-					input_sim_down.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[6])))
-					Input.parse_input_event(input_sim_down)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[7])!=0:
-					input_sim_left.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[7])))
-					Input.parse_input_event(input_sim_left)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[8])!=0:	
-					input_sim_right.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[8])))
-					Input.parse_input_event(input_sim_right)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[9])!=0:	
-					input_sim_action.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[9])))
-					Input.parse_input_event(input_sim_action)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[10])!=0:	
-					input_sim_triangle.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[10])))
-					Input.parse_input_event(input_sim_triangle)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[11])!=0:	
-					input_sim_circle.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[11])))
-					Input.parse_input_event(input_sim_circle)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[12])!=0:
-					input_sim_square.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[12])))	
-					Input.parse_input_event(input_sim_square)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[13])!=0:	
-					input_sim_select.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[13])))
-					Input.parse_input_event(input_sim_select)
-				if int((recording_data["p1_data"][recording_reader_p1].split("_"))[14])!=0:	
-					input_sim_start.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[14])))
-					Input.parse_input_event(input_sim_start)
-				if Console.recording_parse:
-					Console.console_log("[color=green]PLAYER 1[/color][color=yellow]Frame: "+str(recording_timer)+" Data:"+recording_data["p1_data"][recording_reader_p1]+" Index: "+str(recording_reader_p1)+"[/color]")
-				recording_reader_p1+=1
-			else:
-				if Console.recording_parse:
-					Console.console_log("[color=green]PLAYER 1[/color][color=yellow]Frame: "+str(recording_timer)+" Data: [/color][color=red]NONE[/color]")
+		if recording_data["p1_data"].find(str(recording_timer)+"_END")!=-1:
+			finish_replay()
+		else:	
+			#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta			
+			if recording_reader_p1<=recording_data["p1_data"].size()-1:
+				if recording_timer==int((recording_data["p1_data"][recording_reader_p1].split("_"))[0]):
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[1])!=0:
+						input_sim_l1.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[3])))
+						Input.parse_input_event(input_sim_l1)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])!=0:
+						input_sim_l2.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[4])))
+						Input.parse_input_event(input_sim_l2)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[3])!=0:
+						input_sim_r1.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[1])))
+						Input.parse_input_event(input_sim_r1)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[4])!=0:
+						input_sim_r2.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[2])))
+						Input.parse_input_event(input_sim_r2)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])!=0:
+						input_sim_up.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])))
+						Input.parse_input_event(input_sim_up)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[6])!=0:
+						input_sim_down.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[6])))
+						Input.parse_input_event(input_sim_down)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[7])!=0:
+						input_sim_left.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[7])))
+						Input.parse_input_event(input_sim_left)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[8])!=0:	
+						input_sim_right.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[8])))
+						Input.parse_input_event(input_sim_right)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[9])!=0:	
+						input_sim_action.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[9])))
+						Input.parse_input_event(input_sim_action)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[10])!=0:	
+						input_sim_triangle.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[10])))
+						Input.parse_input_event(input_sim_triangle)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[11])!=0:	
+						input_sim_circle.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[11])))
+						Input.parse_input_event(input_sim_circle)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[12])!=0:
+						input_sim_square.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[12])))	
+						Input.parse_input_event(input_sim_square)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[13])!=0:	
+						input_sim_select.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[13])))
+						Input.parse_input_event(input_sim_select)
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[14])!=0:	
+						input_sim_start.set_pressed(number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[14])))
+						Input.parse_input_event(input_sim_start)
+					if Console.recording_parse:
+						Console.console_log("[color=green]PLAYER 1[/color][color=yellow]Frame: "+str(recording_timer)+" Data:"+recording_data["p1_data"][recording_reader_p1]+" Index: "+str(recording_reader_p1)+"[/color]")
+					recording_reader_p1+=1
+				else:
+					if Console.recording_parse:
+						Console.console_log("[color=green]PLAYER 1[/color][color=yellow]Frame: "+str(recording_timer)+" Data: [/color][color=red]NONE[/color]")
+			
+			if recording_reader_p2<=recording_data["p2_data"].size()-1:
+				if recording_timer==int((recording_data["p2_data"][recording_reader_p2].split("_"))[0]):
+					get_tree().get_first_node_in_group("Player").word = (recording_data["p2_data"][recording_reader_p2].split("_"))[1]
+					get_tree().get_first_node_in_group("p2_word").text = (recording_data["p2_data"][recording_reader_p2].split("_"))[2]
+					if Console.recording_parse:
+						Console.console_log("[color=green]PLAYER 2[/color][color=yellow]Frame: "+str(recording_timer)+" Data:"+recording_data["p2_data"][recording_reader_p2]+" Index: "+str(recording_reader_p2)+"[/color]")
+					recording_reader_p2+=1
+				else:
+					if Console.recording_parse:
+						Console.console_log("[color=green]PLAYER 2[/color][color=yellow]Frame: "+str(recording_timer)+" Data: [/color][color=red]NONE[/color]")		
 		
-		if recording_reader_p2<=recording_data["p2_data"].size()-1:
-			if recording_timer==int((recording_data["p2_data"][recording_reader_p2].split("_"))[0]):
-				get_tree().get_first_node_in_group("Player").word = (recording_data["p2_data"][recording_reader_p2].split("_"))[1]
-				get_tree().get_first_node_in_group("p2_word").text = (recording_data["p2_data"][recording_reader_p2].split("_"))[2]
-				if Console.recording_parse:
-					Console.console_log("[color=green]PLAYER 2[/color][color=yellow]Frame: "+str(recording_timer)+" Data:"+recording_data["p2_data"][recording_reader_p2]+" Index: "+str(recording_reader_p2)+"[/color]")
-				recording_reader_p2+=1
-			else:
-				if Console.recording_parse:
-					Console.console_log("[color=green]PLAYER 2[/color][color=yellow]Frame: "+str(recording_timer)+" Data: [/color][color=red]NONE[/color]")
-		if recording_reader_p1>recording_data["p1_data"].size()-1 && recording_reader_p2>recording_data["p2_data"].size()-1:
-			Console.console_log("[color=red]RECORDING IS OVER[/color]")
-			InputMap.load_from_project_settings()
-			replay = false
-			replay_setup = false
-			recording_timer = 0
-			recording_reader_p1 = 0
-			Global.load_global()
-			#if menu_loading:
-				#Global.pets = temporary_data["game"]["pets"]
-				#Global.retrace_steps = temporary_data["game"]["retrace_steps"]
-				#Global.corrupt = temporary_data["game"]["corrupted"]
-				#Global.player_array = Vector4(temporary_data["player"]["coords"][0],temporary_data["player"]["coords"][1],temporary_data["player"]["coords"][2],temporary_data["player"]["coords"][3])
-				#Global.pieces_amount = temporary_data["player"]["pieces"]
-				#Global.control_mode = temporary_data["player"]["control_mode"]
-				#Global.key = temporary_data["player"]["key"]
-				#current_character = save_game["player"]["character"]
-				#Global.save_name = temporary_data["game"]["save_name"]
-				#Global.piece_log = temporary_data["game"]["piece_log"]
-				#warp_to(temporary_data["room"]["current_room"],temporary_data["room"]["loading_preset"])
-				#Console.console_log("[color=blue]Loaded Temporary Game Data sucessfully![/color]")
-			recording_finished = true
-			if title_loading:
-				Global.warp_to("res://scenes/rooms/title/title.tscn","evencare")
-			menu_loading = false
-			title_loading = false
-			temporary_data = {}
-			recording_data = {}
-	
+func finish_replay():
+	Console.console_log("[color=red]RECORDING IS OVER[/color]")
+	InputMap.load_from_project_settings()
+	replay = false
+	replay_setup = false
+	recording_timer = 0
+	recording_reader_p1 = 0
+	Global.load_global()
+	#if menu_loading:
+		#Global.pets = temporary_data["game"]["pets"]
+		#Global.retrace_steps = temporary_data["game"]["retrace_steps"]
+		#Global.corrupt = temporary_data["game"]["corrupted"]
+		#Global.player_array = Vector4(temporary_data["player"]["coords"][0],temporary_data["player"]["coords"][1],temporary_data["player"]["coords"][2],temporary_data["player"]["coords"][3])
+		#Global.pieces_amount = temporary_data["player"]["pieces"]
+		#Global.control_mode = temporary_data["player"]["control_mode"]
+		#Global.key = temporary_data["player"]["key"]
+		#current_character = save_game["player"]["character"]
+		#Global.save_name = temporary_data["game"]["save_name"]
+		#Global.piece_log = temporary_data["game"]["piece_log"]
+		#warp_to(temporary_data["room"]["current_room"],temporary_data["room"]["loading_preset"])
+		#Console.console_log("[color=blue]Loaded Temporary Game Data sucessfully![/color]")
+	recording_finished = true
+	if title_loading:
+		Global.warp_to("res://scenes/rooms/title/title.tscn","evencare")
+	menu_loading = false
+	title_loading = false
+	temporary_data = {}
+	recording_data = {}
 	
 	
 func replay_inputs():
@@ -310,5 +314,6 @@ func load_recording(file, gen: int = 8, menu: bool = false, title: bool = false)
 	Global.warp_to(recording_data["save_data"]["room"]["current_room"],recording_data["save_data"]["room"]["loading_preset"])
 	Console.console_log("[color=blue]Loaded Game Data from Recording sucessfully! Replaying inputs...[/color]")
 	Global.pieces_amount = recording_data["save_data"]["player"]["pieces"]
+	Global.recording_name = file
 	await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
 	replay=true

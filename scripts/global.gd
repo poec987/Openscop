@@ -40,6 +40,9 @@ var save_slot = 0
 var retrace_steps = false
 var game_paused = false
 var can_pause = true
+var recording_name = ""
+var demo = false
+var recording_header = false
 var save_name = ""
 
 #SAVEDATA

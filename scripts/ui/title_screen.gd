@@ -280,7 +280,7 @@ func write_blank_save(slot):
 
 
 func _on_demo_timer_timeout():
-	var picked_recording = allowed_recordings.pick_random()
 	if allowed_recordings!=[]:
-		print(picked_recording)
+		var picked_recording = allowed_recordings.pick_random()
+		Global.demo = true
 		Record.load_recording(picked_recording.trim_suffix(".rec"),JSON.parse_string(FileAccess.open(("user://recordings/"+picked_recording),FileAccess.READ).get_as_text())["recording_info"]["gen"],false,true)
