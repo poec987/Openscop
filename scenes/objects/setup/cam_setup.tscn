@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ciyscr1kgpgnf"]
+[gd_scene load_steps=49 format=3 uid="uid://ciyscr1kgpgnf"]
 
 [ext_resource type="Script" path="res://scripts/player/cam_setup.gd" id="1_fp4cd"]
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="2_55hn4"]
@@ -30,7 +30,6 @@
 [ext_resource type="Texture2D" uid="uid://btfs4ptkrfxgo" path="res://graphics/sprites/ui/pet_ref.png" id="25_acm8a"]
 [ext_resource type="AudioStream" uid="uid://df3cskqopxqdo" path="res://sfx/draw.wav" id="25_yeaa7"]
 [ext_resource type="Texture2D" uid="uid://bijygukfidioo" path="res://graphics/sprites/ui/DEMO.png" id="29_v5uj1"]
-[ext_resource type="Shader" path="res://scenes/rooms/title/gentext.gdshader" id="30_rjdyd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhksb"]
 shader = ExtResource("2_55hn4")
@@ -184,12 +183,12 @@ func _process(delta):
 		
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jedjm"]
-shader = ExtResource("30_rjdyd")
-shader_parameter/invert = false
+[sub_resource type="LabelSettings" id="LabelSettings_kb8ta"]
+line_spacing = 0.0
+font = ExtResource("5_5sf62")
 
 [sub_resource type="GDScript" id="GDScript_sm4od"]
-script/source = "extends RichTextLabel
+script/source = "extends Label
 
 func _ready():
 	if Global.recording_header:
@@ -197,8 +196,14 @@ func _ready():
 	else:
 		visible=false
 		
-#func _process(_delta):
-	#label_settings.set_font_color(Color(0.0,0.0,0.0,1.0))
+func _process(_delta):
+	var viewport_feed: Viewport =  get_tree().root.get_viewport().get_viewport()
+	var screen_texture: Texture2D = viewport_feed.get_texture()
+	var screen_image: Image = screen_texture.get_image()
+	if screen_image.get_pixel(20,17).get_luminance()>0.5:
+		self.label_settings.set_font_color(Color(0.0,0.0,0.0,1.0))
+	else:
+		self.label_settings.set_font_color(Color(1.0,1.0,1.0,1.0))
 "
 
 [node name="PSXLayer" type="CanvasLayer"]
@@ -530,18 +535,21 @@ offset_bottom = 40.0
 
 [node name="DEMO" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
 visible = false
+z_index = 2
+z_as_relative = false
 position = Vector2(160, 37)
 texture = ExtResource("29_v5uj1")
 script = SubResource("GDScript_u1kql")
 
-[node name="recording_header" type="RichTextLabel" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
-material = SubResource("ShaderMaterial_jedjm")
+[node name="recording_header" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+z_index = 2
+z_as_relative = false
 offset_left = 20.0
 offset_top = 17.0
 offset_right = 340.0
 offset_bottom = 55.0
-theme_override_fonts/normal_font = ExtResource("5_5sf62")
 text = "Name:"
+label_settings = SubResource("LabelSettings_kb8ta")
 script = SubResource("GDScript_sm4od")
 
 [node name="player_camera" type="Camera3D" parent="NTSC/NTSC_viewport/Dither/dither_view"]

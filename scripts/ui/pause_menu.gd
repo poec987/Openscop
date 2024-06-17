@@ -15,6 +15,7 @@ var spawned_menu = false
 var inMenu = false
 var piece_frame = 0
 func get_screen():
+	$"../../recording_header".visible = false
 	var viewport_feed: Viewport =  get_tree().root.get_viewport()
 	var screen_texture: Texture2D = viewport_feed.get_texture()
 	var screen_image: Image = screen_texture.get_image()
@@ -81,6 +82,7 @@ func _process(delta):
 				$main_pausemenu/buttons.visible = true
 			screenshotted = true
 			create_tween().tween_property($screen_sprite,"scale",Vector2(MINI_SCREEN_SIZE,MINI_SCREEN_SIZE),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_SINE)
+			$"../../recording_header".visible = true
 			$main_pausemenu/visible_group/Resume.frame=1
 	else:
 		if $screen_sprite.scale.x<1.:
