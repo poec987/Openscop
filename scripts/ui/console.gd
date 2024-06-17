@@ -155,20 +155,14 @@ func _process(_delta):
 
 func _on_focus_entered():
 	if !Record.replay:
-		InputMap.action_erase_events("pressed_r1")
-		InputMap.action_erase_events("pressed_r2")
-		InputMap.action_erase_events("pressed_l1")
-		InputMap.action_erase_events("pressed_l2")
-		InputMap.action_erase_events("pressed_up")
-		InputMap.action_erase_events("pressed_down")
-		InputMap.action_erase_events("pressed_left")
-		InputMap.action_erase_events("pressed_right")
-		InputMap.action_erase_events("pressed_action")
-		InputMap.action_erase_events("pressed_triangle")
-		InputMap.action_erase_events("pressed_circle")
-		InputMap.action_erase_events("pressed_square")
-		InputMap.action_erase_events("pressed_select")
-		InputMap.action_erase_events("pressed_start")
+		# maybe we should make a recording function to get all the buttons
+		var inputs = ["pressed_r1", "pressed_r2", "pressed_l1",
+		"pressed_l2", "pressed_up", "pressed_down", "pressed_left",
+		"pressed_right", "pressed_action", "pressed_triangle",
+		"pressed_circle", "pressed_square", "pressed_select", "pressed_start"]
+		
+		for button in inputs:
+			InputMap.action_erase_events(button);
 
 func _on_focus_exited():
 	if !Record.replay:
