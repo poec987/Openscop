@@ -14,3 +14,4 @@ dest_files=["res://.godot/imported/p2totalk.fnt-4254942d68fd72b574fc947bda47fa68
 
 fallbacks=[]
 compress=true
+scaling_mode=2

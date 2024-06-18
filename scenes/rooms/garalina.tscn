@@ -9,8 +9,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_syp2d"]
 shader = ExtResource("1_miqdt")
-shader_parameter/effect = null
-shader_parameter/ntsc_enable = null
 
 [node name="garalina" type="Node2D"]
 script = ExtResource("1_nljoc")
