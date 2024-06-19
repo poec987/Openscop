@@ -61,8 +61,8 @@ extends Node
 func _ready():
 	Global.room_name = room_name
 	Global.loading_preset = loading_preset
-	#if !Global.recording && allow_recording:
-		#Record.start_recording()
+	if !Record.recording && allow_recording && Global.autorec:
+		Record.start_recording()
 	if !allow_recording:
 		Record.stop_recording()
 	

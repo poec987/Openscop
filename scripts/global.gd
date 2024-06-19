@@ -91,6 +91,8 @@ var pieces = [0,1,2,3,4,
 #3 = TRIANGLE
 #4 = PINK PIECE
 
+var autorec = true
+
 func _ready():
 	var directory = DirAccess.open("user://")
 	#GAME BOOTUP

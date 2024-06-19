@@ -192,10 +192,14 @@ script/source = "extends Label
 
 func _ready():
 	if Global.recording_header:
-		text=\"Name: \"+Global.recording_name+\"\\nGen: \"+Global.gen
+		text=\"Name: \"+Global.recording_name+\"\\nGen: \"+str(Global.gen)
 	else:
 		visible=false
-		
+
+func disappear():
+	visible=false
+	$invisible.start()
+
 func _process(_delta):
 	var viewport_feed: Viewport =  get_tree().root.get_viewport().get_viewport()
 	var screen_texture: Texture2D = viewport_feed.get_texture()
@@ -551,6 +555,10 @@ offset_bottom = 55.0
 text = "Name:"
 label_settings = SubResource("LabelSettings_kb8ta")
 script = SubResource("GDScript_sm4od")
+
+[node name="invisible" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/recording_header"]
+process_mode = 3
+wait_time = 0.1
 
 [node name="player_camera" type="Camera3D" parent="NTSC/NTSC_viewport/Dither/dither_view"]
 transform = Transform3D(1, 0, 0, 0, 0.951057, 0.309017, 0, -0.309017, 0.951057, 0, 2.629, 8)

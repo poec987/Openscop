@@ -15,7 +15,6 @@ var spawned_menu = false
 var inMenu = false
 var piece_frame = 0
 func get_screen():
-	$"../../recording_header".visible = false
 	var viewport_feed: Viewport =  get_tree().root.get_viewport()
 	var screen_texture: Texture2D = viewport_feed.get_texture()
 	var screen_image: Image = screen_texture.get_image()
@@ -38,6 +37,7 @@ func selection_sound(variable):
 func _ready():
 	$main_pausemenu/visible_group/Select.play()
 	$main_pausemenu/visible_group/Resume.play()
+	$quit_button.visible = !Record.replay
 
 func _process(delta):
 	piece_frame+=10.0*delta
@@ -56,8 +56,9 @@ func _process(delta):
 		if $current_menu.get_child_count()==0 && Global.gen>2:
 			Global.game_paused=!Global.game_paused
 	
-	
 	if Global.game_paused:
+		#$"../../recording_header".disappear()
+		#await $"../../recording_header".get_child(0).timeout
 		get_tree().paused = true
 		$main_pausemenu/visible_group.visible=true
 		$main_pausemenu/visible_group/piece_counter.text=str(Global.pieces_amount[Global.current_character]).pad_zeros(5)
@@ -82,7 +83,6 @@ func _process(delta):
 				$main_pausemenu/buttons.visible = true
 			screenshotted = true
 			create_tween().tween_property($screen_sprite,"scale",Vector2(MINI_SCREEN_SIZE,MINI_SCREEN_SIZE),SCREEN_ANIM_TIME).set_trans(Tween.TRANS_SINE)
-			$"../../recording_header".visible = true
 			$main_pausemenu/visible_group/Resume.frame=1
 	else:
 		if $screen_sprite.scale.x<1.:
@@ -112,14 +112,18 @@ func _process(delta):
 
 	if can_unpause && Global.game_paused && $current_menu.get_child_count()==0 && $main_pausemenu/buttons.visible && !get_tree().get_first_node_in_group("Nifty").visible:
 		if fade==0.0:
-			if Input.is_action_just_pressed("pressed_up") && selected_option!=0:
+			if Input.is_action_just_pressed("pressed_up"):
 				selected_option-=1
-				selection_sound(selected_option)
 				
-			if Input.is_action_just_pressed("pressed_down") && selected_option!=4:
+			if Input.is_action_just_pressed("pressed_down"):
 				selected_option+=1
-				selection_sound(selected_option)
+				
+		if Input.is_action_just_pressed("pressed_down") && selected_option<=4-(int(Record.replay)):
+			selection_sound(selected_option)
+		if Input.is_action_just_pressed("pressed_up") && selected_option!=-1:
+			selection_sound(selected_option)
 		
+		selected_option = clamp(selected_option,0,4-(int(Record.replay)))
 		$overlay.set_modulate(Color(1,1,1,fade))
 		
 		if fade>1.0 && inMenu == false:

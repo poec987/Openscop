@@ -4,6 +4,10 @@ var started = true
 var timer = 0.0
 
 func _ready():
+	if Record.replay:
+		Record.replay = false
+	if Record.recording:
+		Record.stop_recording()
 	Global.room_name="garalina"
 	create_tween().tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/fade_in,"color:a",0.0,1.75)
 	if Global.gen>3 && Global.gen<12:

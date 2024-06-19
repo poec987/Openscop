@@ -38,32 +38,50 @@ func _parse_command(input : Array):
 		#"!load_rectest":
 			#Record.load_recording("rec_test")
 		"!set_slot_1":
-			Global.picked_slot = 0
-			console_log("[color=green]Current Save Slot is now 0[/color]")
+			Global.picked_slot = 1
+			console_log("[color=green]Current Save Slot is now 1[/color]")
 		"!set_slot_2":
-			Global.picked_slot = 0
-			console_log("[color=green]Current Save Slot is now 0[/color]")
+			Global.picked_slot = 2
+			console_log("[color=green]Current Save Slot is now 2[/color]")
 		"!set_slot_3":
-			Global.picked_slot = 0
-			console_log("[color=green]Current Save Slot is now 0[/color]")
+			Global.picked_slot =3
+			console_log("[color=green]Current Save Slot is now 3[/color]")
 		"!save_game_0":
-			Global.save_game(0)
-			console_log("[color=green]Game Data Saved to Slot 1[/color]")
+			if !Record.replay:
+				Global.save_game(0)
+				console_log("[color=green]Game Data Saved to Slot 1[/color]")
+			else:
+				console_log("[color=red]Cannot Save Game during Recording Replay.[/color]")
 		"!save_game_1":
-			Global.save_game(1)
-			console_log("[color=green]Game Data Saved to Slot 2[/color]")
+			if !Record.replay:
+				Global.save_game(1)
+				console_log("[color=green]Game Data Saved to Slot 2[/color]")
+			else:
+				console_log("[color=red]Cannot Save Game during Recording Replay.[/color]")
 		"!save_game_2":
-			Global.save_game(2)
-			console_log("[color=green]Game Data Saved to Slot 3[/color]")
+			if !Record.replay:
+				Global.save_game(2)
+				console_log("[color=green]Game Data Saved to Slot 3[/color]")
+			else:
+				console_log("[color=red]Cannot Save Game during Recording Replay.[/color]")
 		"!load_game_0":
-			Global.load_game(0)
-			console_log("[color=green]Slot 1 Game Data Loaded[/color]")
+			if !Record.replay:
+				Global.load_game(0)
+				console_log("[color=green]Slot 1 Game Data Loaded[/color]")
+			else:
+				console_log("[color=red]Cannot Load Game during Recording Replay.[/color]")
 		"!load_game_1":
-			Global.load_game(1)
-			console_log("[color=green]Slot 2 Game Data Loaded[/color]")
+			if !Record.replay:
+				Global.load_game(1)
+				console_log("[color=green]Slot 2 Game Data Loaded[/color]")
+			else:
+				console_log("[color=red]Cannot Load Game during Recording Replay.[/color]")
 		"!load_game_2":
-			Global.load_game(2)
-			console_log("[color=green]Slot 3 Game Data Loaded[/color]")
+			if !Record.replay:
+				Global.load_game(2)
+				console_log("[color=green]Slot 3 Game Data Loaded[/color]")
+			else:
+				console_log("[color=red]Cannot Load Game during Recording Replay.[/color]")
 		"!set_gen_1":
 			Global.gen = 1
 			console_log("[color=green]Gen set to 1[/color]")
