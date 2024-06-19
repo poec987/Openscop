@@ -205,13 +205,13 @@ func _physics_process(_delta):
 func bounce_file_up(yes: bool = false):
 	var bounce = create_tween()
 	if yes:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-10.0,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-10.0,0.2).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	else:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",10.0,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)	
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",10.0,0.2).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)	
 	if yes:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",10.0,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",10.0,0.2).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	else:
-		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-10.0,0.125).as_relative().set_trans(Tween.TRANS_LINEAR)
+		bounce.tween_property($PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files.get_child(selected_file),"position:y",-10.0,0.2).as_relative().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 func check_files():
 	if FileAccess.file_exists("user://savedata/saveslot0.save"):
