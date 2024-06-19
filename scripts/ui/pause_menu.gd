@@ -37,7 +37,7 @@ func selection_sound(variable):
 func _ready():
 	$main_pausemenu/visible_group/Select.play()
 	$main_pausemenu/visible_group/Resume.play()
-	$quit_button.visible = !Record.replay
+	$main_pausemenu/buttons/quit_button.visible = !Record.replay
 
 func _process(delta):
 	piece_frame+=10.0*delta
