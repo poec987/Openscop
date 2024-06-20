@@ -30,9 +30,15 @@ func _parse_command(input : Array):
 			Global.nifty()
 			console_log("[color=blue]The Nifty Menu has been opened.[/color]")
 		"!start_recording":
-			Record.start_recording()
+			if !Record.replay:
+				Record.start_recording()
+			else:
+				console_log("[color=red]Cannot Record during Replay.[/color]")
 		"!stop_recording":
-			Record.stop_recording()
+			if !Record.replay:
+				Record.stop_recording()
+			else:
+				console_log("[color=red]Cannot stop Recording during Replay.[/color]")
 		#"!replay_recording":
 			#Record.replay = true
 		#"!load_rectest":

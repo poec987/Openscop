@@ -546,7 +546,7 @@ texture = ExtResource("29_v5uj1")
 script = SubResource("GDScript_u1kql")
 
 [node name="recording_header" type="Label" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
-z_index = 2
+z_index = 12
 z_as_relative = false
 offset_left = 20.0
 offset_top = 17.0

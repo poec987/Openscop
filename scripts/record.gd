@@ -143,7 +143,6 @@ func _process(_delta):
 
 	if replay:
 		if !replay_setup:
-			stop_recording()
 			recording_finished = false
 			recording = false
 			recording_timer = 0
@@ -268,7 +267,7 @@ func finish_replay():
 	recording_timer = 0
 	recording_reader_p1 = 0
 	Global.load_global()
-	if menu_loading:
+	if menu_loading && temporary_data!={}:
 		Global.pets = temporary_data["game"]["pets"]
 		Global.retrace_steps = temporary_data["game"]["retrace_steps"]
 		Global.corrupt = temporary_data["game"]["corrupted"]
@@ -291,6 +290,7 @@ func finish_replay():
 	
 	
 func replay_inputs():
+	stop_recording()
 	recording_timer = 0
 	replay = true
 	
@@ -298,11 +298,13 @@ func load_recording(file, gen: int = 8, menu: bool = false, title: bool = false)
 	recording_timer = 0
 	menu_loading = menu
 	title_loading = title
-	if menu_loading:
+	if menu_loading && get_tree().get_first_node_in_group("Player")!=null:
 		temporary_data = current_data()
 		Console.console_log("[color=blue]Saved Temporary Game Data sucessfully![/color]")
+	stop_recording()
 	recording_data = JSON.parse_string((FileAccess.open("user://recordings/"+file+".rec",FileAccess.READ)).get_as_text())
 	Console.console_log("[color=green]Loading Game Data from Recording...[/color]")
+	Global.gen = gen
 	Global.pets = recording_data["save_data"]["game"]["pets"]
 	Global.retrace_steps = recording_data["save_data"]["game"]["retrace_steps"]
 	Global.corrupt = recording_data["save_data"]["game"]["corrupted"]
@@ -315,5 +317,6 @@ func load_recording(file, gen: int = 8, menu: bool = false, title: bool = false)
 	Console.console_log("[color=blue]Loaded Game Data from Recording sucessfully! Replaying inputs...[/color]")
 	Global.pieces_amount = recording_data["save_data"]["player"]["pieces"]
 	Global.recording_name = file
+	Global.recording_header = true
 	await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
 	replay=true
