@@ -268,19 +268,19 @@ func finish_replay():
 	recording_timer = 0
 	recording_reader_p1 = 0
 	Global.load_global()
-	#if menu_loading:
-		#Global.pets = temporary_data["game"]["pets"]
-		#Global.retrace_steps = temporary_data["game"]["retrace_steps"]
-		#Global.corrupt = temporary_data["game"]["corrupted"]
-		#Global.player_array = Vector4(temporary_data["player"]["coords"][0],temporary_data["player"]["coords"][1],temporary_data["player"]["coords"][2],temporary_data["player"]["coords"][3])
-		#Global.pieces_amount = temporary_data["player"]["pieces"]
-		#Global.control_mode = temporary_data["player"]["control_mode"]
-		#Global.key = temporary_data["player"]["key"]
-		#current_character = save_game["player"]["character"]
-		#Global.save_name = temporary_data["game"]["save_name"]
-		#Global.piece_log = temporary_data["game"]["piece_log"]
-		#warp_to(temporary_data["room"]["current_room"],temporary_data["room"]["loading_preset"])
-		#Console.console_log("[color=blue]Loaded Temporary Game Data sucessfully![/color]")
+	if menu_loading:
+		Global.pets = temporary_data["game"]["pets"]
+		Global.retrace_steps = temporary_data["game"]["retrace_steps"]
+		Global.corrupt = temporary_data["game"]["corrupted"]
+		Global.player_array = Vector4(temporary_data["player"]["coords"][0],temporary_data["player"]["coords"][1],temporary_data["player"]["coords"][2],temporary_data["player"]["coords"][3])
+		Global.pieces_amount = temporary_data["player"]["pieces"]
+		Global.control_mode = temporary_data["player"]["control_mode"]
+		Global.key = temporary_data["player"]["key"]
+		Global.current_character = temporary_data["player"]["character"]
+		Global.save_name = temporary_data["game"]["save_name"]
+		Global.piece_log = temporary_data["game"]["piece_log"]
+		Global.warp_to(temporary_data["room"]["current_room"],temporary_data["room"]["loading_preset"])
+		Console.console_log("[color=blue]Loaded Temporary Game Data sucessfully![/color]")
 	recording_finished = true
 	if title_loading:
 		Global.warp_to("res://scenes/rooms/title/title.tscn","evencare")
@@ -298,9 +298,9 @@ func load_recording(file, gen: int = 8, menu: bool = false, title: bool = false)
 	recording_timer = 0
 	menu_loading = menu
 	title_loading = title
-	#if menu_loading:
-		#temporary_data = current_data()
-		#Console.console_log("[color=blue]Saved Temporary Game Data sucessfully![/color]")
+	if menu_loading:
+		temporary_data = current_data()
+		Console.console_log("[color=blue]Saved Temporary Game Data sucessfully![/color]")
 	recording_data = JSON.parse_string((FileAccess.open("user://recordings/"+file+".rec",FileAccess.READ)).get_as_text())
 	Console.console_log("[color=green]Loading Game Data from Recording...[/color]")
 	Global.pets = recording_data["save_data"]["game"]["pets"]

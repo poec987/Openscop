@@ -83,10 +83,10 @@ func _process(delta):
 			$triangle_input_cap.wait_time=2
 			for buttons in get_node(\"pet_buttons\").get_children():
 				if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
-					if buttons.position.x>100:
-						create_tween().tween_property(buttons,\"position:x\",384,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+					if get_node(\"pet_buttons\").get_node(str(buttons.name)).get_index()%2:
+						create_tween().tween_property(buttons,\"position:x\",340,1.0).set_trans(Tween.TRANS_SINE)
 					else:
-						create_tween().tween_property(buttons,\"position:x\",-157,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+						create_tween().tween_property(buttons,\"position:x\",-147,1.0).set_trans(Tween.TRANS_SINE)
 				else:
 					$triangle_input_cap.start()
 					$pet_selected.play()
@@ -118,10 +118,10 @@ func _process(delta):
 				for buttons in get_node(\"pet_buttons\").get_children():
 					if !animated:
 						if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
-							if buttons.position.x>100:
-								create_tween().tween_property(buttons,\"position:x\",-384,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+							if get_node(\"pet_buttons\").get_node(str(buttons.name)).get_index()%2:
+								create_tween().tween_property(buttons,\"position:x\",16.5,1.0).set_trans(Tween.TRANS_SINE)
 							else:
-								create_tween().tween_property(buttons,\"position:x\",157,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+								create_tween().tween_property(buttons,\"position:x\",162,1.0).set_trans(Tween.TRANS_SINE)
 						if get_node(\"pet_buttons\").get_child(selected_option)==buttons:
 							create_tween().tween_property(buttons,\"position\",Vector2(original_button_pos),1.0).set_trans(Tween.TRANS_SINE)
 				$action_input_cap.start()
@@ -142,10 +142,10 @@ func _process(delta):
 			for buttons in get_node(\"pet_buttons\").get_children():
 				if !animated:
 					if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
-						if buttons.position.x>100:
-							create_tween().tween_property(buttons,\"position:x\",-384,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+						if get_node(\"pet_buttons\").get_node(str(buttons.name)).get_index()%2:
+							create_tween().tween_property(buttons,\"position:x\",16.5,1.0).set_trans(Tween.TRANS_SINE)
 						else:
-							create_tween().tween_property(buttons,\"position:x\",157,1.0).set_trans(Tween.TRANS_SINE).as_relative()
+							create_tween().tween_property(buttons,\"position:x\",162,1.0).set_trans(Tween.TRANS_SINE)
 					if get_node(\"pet_buttons\").get_child(selected_option)==buttons:
 						create_tween().tween_property(buttons,\"position\",Vector2(original_button_pos),1.0).set_trans(Tween.TRANS_SINE)
 			$action_input_cap.start()
