@@ -147,47 +147,43 @@ func _process(_delta):
 			recording = false
 			recording_timer = 0
 			Console.console_log("[color=green]Loading Recording Data...[/color]")
+			
+			#SHOUTOUT TO IZZINT!
+			var inputs = ["pressed_r1", "pressed_r2", "pressed_l1",
+		"pressed_l2", "pressed_up", "pressed_down", "pressed_left",
+		"pressed_right", "pressed_action", "pressed_triangle",
+		"pressed_circle", "pressed_square", "pressed_select", "pressed_start"]
+		
+			for button in inputs:
+				InputMap.action_erase_events(button);
+				
 			input_sim_l1 = InputEventAction.new()
-			InputMap.action_erase_events("pressed_l1")
 			input_sim_l1.set_action("pressed_l1")
 			input_sim_l2 = InputEventAction.new()
-			InputMap.action_erase_events("pressed_l2")
 			input_sim_l2.set_action("pressed_l2")
 			input_sim_up = InputEventAction.new()
 			input_sim_r1 = InputEventAction.new()
-			InputMap.action_erase_events("pressed_r1")
 			input_sim_r1.set_action("pressed_r1")
 			input_sim_r2 = InputEventAction.new()
-			InputMap.action_erase_events("pressed_r2")
 			input_sim_r2.set_action("pressed_r2")
-			InputMap.action_erase_events("pressed_up")
 			input_sim_up.set_action("pressed_up")
 			input_sim_down = InputEventAction.new()
-			InputMap.action_erase_events("pressed_down")
 			input_sim_down.set_action("pressed_down")
 			input_sim_left = InputEventAction.new()
-			InputMap.action_erase_events("pressed_left")
 			input_sim_left.set_action("pressed_left")
 			input_sim_right = InputEventAction.new()
-			InputMap.action_erase_events("pressed_right")
 			input_sim_right.set_action("pressed_right")
 			input_sim_action = InputEventAction.new()
-			InputMap.action_erase_events("pressed_action")
 			input_sim_action.set_action("pressed_action")
 			input_sim_triangle = InputEventAction.new()
-			InputMap.action_erase_events("pressed_triangle")
 			input_sim_triangle.set_action("pressed_triangle")
 			input_sim_circle = InputEventAction.new()
-			InputMap.action_erase_events("pressed_circle")
 			input_sim_circle.set_action("pressed_circle")
 			input_sim_square = InputEventAction.new()
-			InputMap.action_erase_events("pressed_square")
 			input_sim_square.set_action("pressed_square")
 			input_sim_select = InputEventAction.new()
-			InputMap.action_erase_events("pressed_select")
 			input_sim_select.set_action("pressed_select")
 			input_sim_start = InputEventAction.new()
-			InputMap.action_erase_events("pressed_start")
 			input_sim_start.set_action("pressed_start")
 			replay_setup = true
 		if replay_setup:

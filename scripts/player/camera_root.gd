@@ -44,4 +44,4 @@ func _process(delta):
 	if Global.control_mode<4:
 		cam.set_cam_pos(cam_anchor.global_position, cam_anchor.global_rotation)
 	elif Global.control_mode>=4 && Global.control_mode<=5:
-			cam.set_cam_pos(Vector3(get_tree().get_first_node_in_group("Player").global_position.x,1,get_tree().get_first_node_in_group("Player").global_position.z), Vector3(0.,-1.5708+get_tree().get_first_node_in_group("Player").rotation.y,0.))
+		cam.set_cam_pos(Vector3(get_tree().get_first_node_in_group("Player").global_position.x,1,get_tree().get_first_node_in_group("Player").global_position.z), Vector3(0.,-1.5708+get_tree().get_first_node_in_group("Player").rotation.y,0.))

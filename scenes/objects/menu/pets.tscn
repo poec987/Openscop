@@ -21,6 +21,10 @@ var animated = false
 
 var original_button_pos = Vector2.ZERO
 
+
+@onready var pet_button_group = $pet_buttons
+@onready var cursor_sound = $cursor_move
+
 func _ready():
 	create_tween().tween_property($pink_fade,\"color:a\",0.0,0.25)
 	pet_dictionary = JSON.parse_string((FileAccess.open(\"res://scripts/pets.json\", FileAccess.READ)).get_as_text())
@@ -34,8 +38,8 @@ func _ready():
 			pet_button_instance.get_child(1).texture = load(\"res://graphics/sprites/ui/pets_menu/locked_name.png\")
 		else:
 			pet_button_instance.get_child(1).texture = load(\"res://graphics/sprites/ui/pets_menu/\"+pet_dictionary[pet_dictionary_keys[button_amount]][\"nameboard_file\"]+\".png\")
-		pet_button_instance.position.x = $pet_buttons.position.x+(button_amount%2)*132
-		pet_button_instance.position.y = $pet_buttons.position.y+(int(str(row)[0]))*56
+		pet_button_instance.position.x = pet_button_group.position.x+(button_amount%2)*132
+		pet_button_instance.position.y = pet_button_group.position.y+(int(str(row)[0]))*56
 		get_child(2).add_child(pet_button_instance)
 		button_amount+=1
 		if button_amount==6:
@@ -45,24 +49,24 @@ func _ready():
 	$buttons_group/SelectPet.play()
 		
 		
-func _process(delta):
+func _process(_delta):
 	if selected_option>5:
-		$pet_buttons.position.y=-267
+		pet_button_group.position.y=-267
 	else:
-		$pet_buttons.position.y=12.5
+		pet_button_group.position.y=12.5
 	if !reading_bio:
 		if Input.is_action_just_pressed(\"pressed_up\") && selected_option>1:
 			selected_option-=2
-			$cursor_move.play()
+			cursor_sound.play()
 		if Input.is_action_just_pressed(\"pressed_down\") && selected_option<pet_dictionary_keys.size()-2:
 			selected_option+=2
-			$cursor_move.play()
+			cursor_sound.play()
 		if Input.is_action_just_pressed(\"pressed_left\") && selected_option!=0:
 			selected_option-=1
-			$cursor_move.play()
+			cursor_sound.play()
 		if Input.is_action_just_pressed(\"pressed_right\") && selected_option!=pet_dictionary_keys.size()-1:
 			selected_option+=1
-			$cursor_move.play()
+			cursor_sound.play()
 	selected_option=clamp(selected_option,0,pet_dictionary_keys.size()-1)
 	for buttons in get_node(\"pet_buttons\").get_children():
 		if get_node(\"pet_buttons\").get_child(selected_option)!=buttons:
@@ -91,7 +95,7 @@ func _process(delta):
 					$triangle_input_cap.start()
 					$pet_selected.play()
 					original_button_pos = buttons.position
-					if $pet_buttons.position.y==12.5:
+					if pet_button_group.position.y==12.5:
 						create_tween().tween_property(buttons,\"position\",Vector2(75.5,16.5),0.5).set_trans(Tween.TRANS_SINE)
 					else:
 						create_tween().tween_property(buttons,\"position\",Vector2(75.5,296.5),0.5).set_trans(Tween.TRANS_SINE)

@@ -163,19 +163,12 @@ func console_log(input):
 
 func _close_requested():
 	visible = false
-
-func _on_input_text_submitted(new_text):
-	pass
-	# Create a command array using the input text 
-	#var command_array = new_text.split(" ")
-	#_parse_command(command_array)
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept") && console_input.text!="":
 		var command_array = console_input.text.split(" ")
 		console_input.text = ""
 		_parse_command(command_array)
-
 
 func _on_focus_entered():
 	if !Record.replay:

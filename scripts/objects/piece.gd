@@ -25,7 +25,7 @@ func _process(delta):
 		if position.y<10:
 			position+= Vector3(0.,VER_SPEED*delta,HOR_SPEED*delta)
 		else:
-			self.PROCESS_MODE_DISABLED
+			self.set_process(PROCESS_MODE_DISABLED)
 			visible=false
 
 
