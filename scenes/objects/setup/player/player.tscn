@@ -92,6 +92,7 @@ stream = ExtResource("5_nm087")
 attenuation_model = 3
 volume_db = -80.0
 panning_strength = 4.0
+bus = &"SFX"
 
 [node name="p2_talk_buttons" type="Label3D" parent="player" groups=["p2_word"]]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.8, 0)
@@ -110,10 +111,12 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
 [node name="button_press" type="AudioStreamPlayer3D" parent="player"]
 stream = ExtResource("7_5mgkc")
 volume_db = 10.0
+bus = &"HUD_SFX"
 
 [node name="mode_change" type="AudioStreamPlayer3D" parent="player"]
 stream = ExtResource("8_tern7")
 volume_db = 10.0
+bus = &"HUD_SFX"
 
 [node name="camera_root" type="Node3D" parent="." groups=["Player_camera"]]
 script = ExtResource("3_eo5w1")

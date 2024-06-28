@@ -95,3 +95,4 @@ color = Color(1, 1, 1, 0)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_cnx4t")
 autoplay = true
+bus = &"Music"

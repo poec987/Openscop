@@ -675,26 +675,32 @@ surface_material_override/0 = SubResource("ShaderMaterial_drlcc")
 
 [node name="song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("28_r2eg8")
+bus = &"Music"
 
 [node name="pressed_start" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("29_2bf6r")
 volume_db = 2.0
+bus = &"HUD_SFX"
 
 [node name="whistle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("30_c5c23")
 volume_db = 2.0
+bus = &"HUD_SFX"
 
 [node name="file" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_2fnn4")
 volume_db = 2.0
+bus = &"HUD_SFX"
 
 [node name="selected" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("32_isfcc")
 volume_db = 2.0
+bus = &"HUD_SFX"
 
 [node name="whoosh" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("33_1fxdv")
 volume_db = 2.0
+bus = &"HUD_SFX"
 
 [node name="demo_timer" type="Timer" parent="."]
 

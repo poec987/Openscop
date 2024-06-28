@@ -317,28 +317,34 @@ z_index = 1
 process_mode = 3
 stream = ExtResource("7_15j72")
 volume_db = 10.0
+bus = &"HUD_SFX"
 
 [node name="pause_sound2" type="AudioStreamPlayer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
 process_mode = 3
 stream = ExtResource("8_olemx")
 volume_db = 10.0
+bus = &"HUD_SFX"
 
 [node name="pause_sound3" type="AudioStreamPlayer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
 process_mode = 3
 stream = ExtResource("9_67xll")
 volume_db = 10.0
+bus = &"HUD_SFX"
 
 [node name="select_up" type="AudioStreamPlayer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
 stream = ExtResource("10_jtm0y")
 volume_db = 10.0
+bus = &"HUD_SFX"
 
 [node name="select_down" type="AudioStreamPlayer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
 stream = ExtResource("11_8ia7v")
 volume_db = 10.0
+bus = &"HUD_SFX"
 
 [node name="selected" type="AudioStreamPlayer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
 stream = ExtResource("14_and1a")
 volume_db = 10.0
+bus = &"HUD_SFX"
 
 [node name="main_pausemenu" type="Node2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/HUD/pause_menu"]
 

@@ -232,10 +232,12 @@ position = Vector2(13.5, 12.5)
 [node name="pet_selected" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_u5cd3")
 volume_db = 5.0
+bus = &"HUD_SFX"
 
 [node name="cursor_move" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_8qcp6")
 volume_db = 5.0
+bus = &"HUD_SFX"
 
 [node name="pet_textbox" type="Node2D" parent="."]
 
