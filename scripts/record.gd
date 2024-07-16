@@ -61,9 +61,10 @@ func current_data():
 	return data
 
 func start_recording():
-	setup_file()
-	recording_setup = true
-	recording = true
+	if recording_data=={}:
+		setup_file()
+		recording_setup = true
+		recording = true
 	Console.console_log("[color=blue]Recording Started.[/color]")
 	
 func stop_recording():
@@ -75,6 +76,7 @@ func stop_recording():
 	recording = false
 	recording_timer = 0
 	recording_setup=false
+	recording_data={}
 	Console.console_log("[color=blue]Recording Stopped.[/color]")
 	
 func number_parser(number):
@@ -264,6 +266,7 @@ func finish_replay():
 	recording_reader_p1 = 0
 	Global.load_global()
 	if menu_loading && temporary_data!={}:
+		print(temporary_data)
 		Global.pets = temporary_data["game"]["pets"]
 		Global.retrace_steps = temporary_data["game"]["retrace_steps"]
 		Global.corrupt = temporary_data["game"]["corrupted"]
@@ -286,7 +289,7 @@ func finish_replay():
 	
 	
 func replay_inputs():
-	stop_recording()
+	#stop_recording()
 	recording_timer = 0
 	replay = true
 	
