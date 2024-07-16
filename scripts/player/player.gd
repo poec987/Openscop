@@ -52,6 +52,7 @@ func change_sound(sound):
 func _ready():
 	return_character()
 	position = Vector3(Global.player_array.x,Global.player_array.y,Global.player_array.z)
+	Global.current_player = Vector4(position.x,position.y,position.z,animation_direction)
 	player_camera.position=position
 	animation_direction = int(Global.player_array.w)
 	if Global.retrace_steps:

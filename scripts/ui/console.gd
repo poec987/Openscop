@@ -29,6 +29,9 @@ func _parse_command(input : Array):
 		"!nifty":
 			Global.nifty()
 			console_log("[color=blue]The Nifty Menu has been opened.[/color]")
+		"!recording_menu":
+			get_tree().change_scene_to_file("res://scenes/objects/menu/secret/recordings.tscn")
+			console_log("[color=blue]The Recordings Menu has been opened.[/color]")
 		"!start_recording":
 			if !Record.replay:
 				Record.start_recording()
@@ -39,10 +42,6 @@ func _parse_command(input : Array):
 				Record.stop_recording()
 			else:
 				console_log("[color=red]Cannot stop Recording during Replay.[/color]")
-		#"!replay_recording":
-			#Record.replay = true
-		#"!load_rectest":
-			#Record.load_recording("rec_test")
 		"!set_slot_1":
 			Global.picked_slot = 1
 			console_log("[color=green]Current Save Slot is now 1[/color]")

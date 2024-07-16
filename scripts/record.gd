@@ -51,7 +51,7 @@ func current_data():
 			"piece_log":Global.piece_log.duplicate()
 		},
 		"player": {
-			"coords":[get_tree().get_first_node_in_group("Player").position.x,get_tree().get_first_node_in_group("Player").position.y,get_tree().get_first_node_in_group("Player").position.z,get_tree().get_first_node_in_group("Player").animation_direction],
+			"coords":[Global.current_player.x,Global.current_player.y,Global.current_player.z,Global.current_player.w],
 			"pieces":Global.pieces_amount.duplicate(),
 			"character":Global.current_character,
 			"control_mode":Global.control_mode,
@@ -136,6 +136,7 @@ func setup_file():
 
 func _process(_delta):
 	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
+	print(temporary_data)
 	if recording:
 		recording_timer+=1
 		if check_input() && Global.control_mode!=1 || Input.is_action_just_pressed("pressed_select") || Input.is_action_just_released("pressed_select"):
@@ -266,7 +267,6 @@ func finish_replay():
 	recording_reader_p1 = 0
 	Global.load_global()
 	if menu_loading && temporary_data!={}:
-		print(temporary_data)
 		Global.pets = temporary_data["game"]["pets"]
 		Global.retrace_steps = temporary_data["game"]["retrace_steps"]
 		Global.corrupt = temporary_data["game"]["corrupted"]
@@ -297,7 +297,7 @@ func load_recording(file, gen: int = 8, menu: bool = false, title: bool = false)
 	recording_timer = 0
 	menu_loading = menu
 	title_loading = title
-	if menu_loading && get_tree().get_first_node_in_group("Player")!=null:
+	if menu_loading:
 		temporary_data = current_data()
 		Console.console_log("[color=blue]Saved Temporary Game Data sucessfully![/color]")
 	stop_recording()

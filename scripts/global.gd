@@ -59,6 +59,8 @@ var piece_log = {
 }
 
 var player_array = Vector4(0.,0.,0.,0)
+var current_player = Vector4.ZERO
+var current_room_path = ""
 var player_brightness = 1.0
 var pets = [true,false,false,false,false,false,false,false,false,false]
 var fog_focus = 0
