@@ -33,3 +33,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 stream = ExtResource("4_0xbfh")
 volume_db = 5.0
 panning_strength = 4.0
+bus = &"SFX"

@@ -110,6 +110,7 @@ func setup_file():
 		"gen": Global.gen,
 		"memcard": true,
 		"rotation": true,
+		"time": Time.get_unix_time_from_system()
 	}
 	recording_data["save_data"] = {
 		"room": {
@@ -136,7 +137,6 @@ func setup_file():
 
 func _process(_delta):
 	#R1,R2,L1,L2,UP,DOWN,LEFT,RIGHT,Crs,Tri,Cir,Squ,Sel,Sta
-	print(temporary_data)
 	if recording:
 		recording_timer+=1
 		if check_input() && Global.control_mode!=1 || Input.is_action_just_pressed("pressed_select") || Input.is_action_just_released("pressed_select"):

@@ -5,8 +5,8 @@
 [sub_resource type="GDScript" id="GDScript_6g10t"]
 script/source = "extends Node2D
 
-#func _ready():
-	#create_tween().tween_property($pink_fade,\"color:a\",0.0,0.25)
+func _ready():
+	create_tween().tween_property($pink_fade,\"color:a\",0.0,0.25)
 "
 
 [node name="options" type="Node2D"]
@@ -22,3 +22,5 @@ stretch_mode = 1
 offset_right = 320.0
 offset_bottom = 240.0
 color = Color(0.996078, 0.847059, 0.996078, 1)
+
+[node name="current_option" type="Node2D" parent="."]
