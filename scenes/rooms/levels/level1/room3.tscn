@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://6yjltkhts0sh"]
+[gd_scene load_steps=25 format=3 uid="uid://6yjltkhts0sh"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_de68c"]
 [ext_resource type="Texture2D" uid="uid://cjwvkldagl3km" path="res://graphics/sprites/ui/backgrounds/level1_1.png" id="2_r30wh"]
@@ -15,6 +15,7 @@
 [ext_resource type="ArrayMesh" uid="uid://78hrl6x7wcqq" path="res://graphics/3d/room_mesh/levels/level1/evencare3_furniture.obj" id="12_sqkw6"]
 [ext_resource type="ArrayMesh" uid="uid://db4j77wfr3lgi" path="res://graphics/3d/room_mesh/levels/level1/evencare3_trophy1.obj" id="13_l6bxg"]
 [ext_resource type="ArrayMesh" uid="uid://4phvvl5ir6l7" path="res://graphics/3d/room_mesh/levels/level1/evencare3_trophy1gen2.obj" id="15_gxtt8"]
+[ext_resource type="PackedScene" uid="uid://s7g4lhq5d4xc" path="res://scenes/objects/level_objects/camera_zone.tscn" id="16_dg0ni"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f1y1m"]
 render_priority = 0
@@ -263,3 +264,16 @@ surface_material_override/0 = SubResource("ShaderMaterial_b54ur")
 
 [node name="Node" type="Node" parent="."]
 script = SubResource("GDScript_qlxmf")
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.950439, 0.310911, 0, -0.310911, 0.950439, 11, 4.4998, -5.5014)
+fov = 35.0
+
+[node name="camera_zone" parent="." instance=ExtResource("16_dg0ni")]
+transform = Transform3D(3.2, 0, 0, 0, 1.4, 0, 0, 0, 4.9368, 11, 0.5, -18.5)
+place_camera = true
+rotate_camera = null
+
+[node name="Camera3D" type="Camera3D" parent="camera_zone"]
+transform = Transform3D(0.3125, 0, 0, 0, 0.678885, 0.222079, 0, -0.0629783, 0.192521, 0, 2.857, 2.633)
+fov = 35.0

@@ -5,7 +5,9 @@ const CAMERA_SPEED = 3.0
 @onready var cam = $cam_anchor/PSXLayer 
 @onready var player = get_node("../player")
 
-	
+@export var pos_argument = Vector3.ZERO
+@export var rot_argument = Vector3.ZERO
+@export var smooth_out: float
 func _setup():
 	#SETS UP CAMERA ACCORDING TO ROOM, SPECIFIED PROPERTIES
 	if Global.camera_mode==0:
@@ -24,10 +26,13 @@ func _setup():
 		position.y = Global.camera_freeze_y
 	if !Global.camera_move_z:
 		position.z = Global.camera_freeze_z
-	
 func _process(delta):
 	_setup()
-	#CAMERA MODE 0 = FOLLOW PLAYER
+	
+	if rot_argument==null:
+		rot_argument = cam_anchor.global_rotation
+	
+	#CAMERA MODE 0 = FOLLOW PLAYER	
 	if Global.camera_mode==0:
 		#EACH OF THESE CHECKS IF THE CAMERA IS TOO FAR FROM PLAYER DEPENDING ON SPECIFIED DISTNACE, AND IF CAMERA IS ALLOWED TO MOVE ON SPECIFIC AXIS.
 		#THEN MOVE CAMERA TOWARDS PLAYER
@@ -41,7 +46,21 @@ func _process(delta):
 		# set the pos and rot of the camera to follow the cam anchor
 	_setup()
 	
-	if Global.control_mode<4:
-		cam.set_cam_pos(cam_anchor.global_position, cam_anchor.global_rotation)
-	elif Global.control_mode>=4 && Global.control_mode<=5:
-		cam.set_cam_pos(Vector3(get_tree().get_first_node_in_group("Player").global_position.x,1,get_tree().get_first_node_in_group("Player").global_position.z), Vector3(0.,-1.5708+get_tree().get_first_node_in_group("Player").rotation.y,0.))
+	if Global.camera_mode==0:
+		if smooth_out==-1.0 || smooth_out==null:
+			if Global.control_mode<4:
+				cam.set_cam_pos(cam_anchor.global_position, cam_anchor.global_rotation)
+			elif Global.control_mode>=4 && Global.control_mode<=5:
+				cam.set_cam_pos(Vector3(get_tree().get_first_node_in_group("Player").global_position.x,1,get_tree().get_first_node_in_group("Player").global_position.z), Vector3(0.,-1.5708+get_tree().get_first_node_in_group("Player").rotation.y,0.))
+		else:
+			cam.set_cam_pos(pos_argument, rot_argument)
+			pos_argument = pos_argument.lerp(cam_anchor.global_position,smooth_out*delta)
+			rot_argument = rot_argument.lerp(cam_anchor.global_rotation,smooth_out*delta)
+			player.rotation.y = rotation.y
+			if cam.get_cam_pos()[0].distance_to(pos_argument)<0.01:
+				smooth_out=-1.0
+				
+				
+	#CAMERA MODE 1 = TRIPOD
+	if Global.camera_mode==1:
+		cam.set_cam_pos(pos_argument, rot_argument)

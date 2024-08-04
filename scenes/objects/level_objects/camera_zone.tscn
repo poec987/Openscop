@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://s7g4lhq5d4xc"]
+
+[ext_resource type="Script" path="res://scripts/objects/camera_zone.gd" id="1_7rk6s"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/solid_0_transparent.gdshader" id="2_sx6xn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_reflm"]
+size = Vector3(3.2, 1.4, 4.9368)
+
+[sub_resource type="BoxMesh" id="BoxMesh_br7qj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shkoy"]
+render_priority = 0
+shader = ExtResource("2_sx6xn")
+shader_parameter/MAIN_COLOR = Color(1, 0, 0, 1)
+
+[node name="camera_zone" type="Node3D"]
+script = ExtResource("1_7rk6s")
+
+[node name="zone_area" type="Area3D" parent="."]
+
+[node name="zone_collision" type="CollisionShape3D" parent="zone_area"]
+shape = SubResource("BoxShape3D_reflm")
+
+[node name="zone_mesh" type="MeshInstance3D" parent="zone_area/zone_collision"]
+mesh = SubResource("BoxMesh_br7qj")
+surface_material_override/0 = SubResource("ShaderMaterial_shkoy")
+
+[connection signal="body_entered" from="zone_area" to="." method="_on_zone_area_body_entered"]
+[connection signal="body_exited" from="zone_area" to="." method="_on_zone_area_body_exited"]
