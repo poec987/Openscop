@@ -130,7 +130,7 @@ func _process(delta):
 			create_tween().tween_property($pink_fade,"color:a",1.0,0.25)
 			if $pink_fade.color.a>0.9 && active_menu[selected_option]==false:
 				if selected_option==1:
-					$current_menu.add_child(preload("res://scenes/objects/menu/options.tscn").instantiate())
+					$current_menu.add_child(preload("res://scenes/objects/menu/secret/recordings.tscn").instantiate())
 					active_menu[selected_option]=true
 					inMenu = true
 				if selected_option==2:

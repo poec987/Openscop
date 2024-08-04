@@ -298,6 +298,7 @@ func load_recording(file, gen: int = 8, menu: bool = false, title: bool = false)
 	menu_loading = menu
 	title_loading = title
 	if menu_loading:
+		Global.game_paused = false
 		temporary_data = current_data()
 		Console.console_log("[color=blue]Saved Temporary Game Data sucessfully![/color]")
 	stop_recording()
