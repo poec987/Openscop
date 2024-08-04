@@ -271,9 +271,10 @@ fov = 35.0
 
 [node name="camera_zone" parent="." instance=ExtResource("16_dg0ni")]
 transform = Transform3D(3.2, 0, 0, 0, 1.4, 0, 0, 0, 4.9368, 11, 0.5, -18.5)
-place_camera = true
-rotate_camera = null
+use_default_smooth = false
+smoothness = 2.0
+use_default_smooth_out = false
+smoothness_out = 2.0
 
-[node name="Camera3D" type="Camera3D" parent="camera_zone"]
-transform = Transform3D(0.3125, 0, 0, 0, 0.678885, 0.222079, 0, -0.0629783, 0.192521, 0, 2.857, 2.633)
-fov = 35.0
+[node name="Camera3D" type="Node3D" parent="camera_zone"]
+transform = Transform3D(0.3125, 0, 0, 0, 0.678885, 0.222079, 0, -0.0629783, 0.192521, 0, -0.357, 1.367)
