@@ -34,16 +34,18 @@ func _process(delta):
 				get_tree().get_first_node_in_group("Player_camera").pos_argument = target_position
 		else:
 			if use_default_smooth_out:
-				smoothness = 1.0
-			if !instant:
-				get_tree().get_first_node_in_group("Player_camera").pos_argument = get_tree().get_first_node_in_group("Player_camera").pos_argument.lerp(get_tree().get_first_node_in_group("Player").global_position, smoothness*delta)
-			else:
-				get_tree().get_first_node_in_group("Player_camera").pos_argument = target_position
-				
+				smoothness_out = 1.0
+
 func _on_zone_area_body_entered(body):
 	if body==get_tree().get_first_node_in_group("Player"):
 		inside = true
 		Global.camera_mode = 1
+
 func _on_zone_area_body_exited(body):
 	if body==get_tree().get_first_node_in_group("Player"):
 		inside = false
+		if !instant:
+			Global.camera_mode = 2
+			get_tree().get_first_node_in_group("Player_camera").smooth_out = smoothness_out
+		else:
+			get_tree().get_first_node_in_group("Player_camera").position = get_tree().get_first_node_in_group("Player_camera").player_root
