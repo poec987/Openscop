@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://wgrqckgh4an2"]
+[gd_scene load_steps=9 format=3 uid="uid://wgrqckgh4an2"]
 
 [ext_resource type="ArrayMesh" uid="uid://dltibstgb03js" path="res://graphics/3d/models/bucket.obj" id="1_2xqt0"]
 [ext_resource type="Script" path="res://scripts/objects/level_objects/bucket.gd" id="1_goka3"]
@@ -20,6 +20,10 @@ size = Vector3(1, 0, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4nuk6"]
 size = Vector3(0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3deya"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ucyo1"]
 
 [node name="bucket" type="CharacterBody3D"]
 script = ExtResource("1_goka3")
@@ -52,3 +56,12 @@ max_results = 1
 shape = SubResource("BoxShape3D_4nuk6")
 target_position = Vector3(-0.5, 0, 0)
 max_results = 1
+
+[node name="bucket_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_3deya")
+
+[node name="collision_area" type="ShapeCast3D" parent="bucket_collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ucyo1")
+target_position = Vector3(0, 0, 0)

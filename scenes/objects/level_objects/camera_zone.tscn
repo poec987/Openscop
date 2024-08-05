@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/spatial shaders/solid_0_transparent.gdshader" id="2_sx6xn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_reflm"]
-size = Vector3(3.2, 1.4, 4.9368)
+size = Vector3(3.5, 1, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_br7qj"]
 

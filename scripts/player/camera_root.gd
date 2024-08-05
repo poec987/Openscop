@@ -50,10 +50,19 @@ func _setup():
 		global_position = pos_argument
 	
 	if Global.camera_mode==2:
-		if position.distance_to(player_root)>0.005:
-			position = pos_argument.lerp(player_root,smooth_out*delta_var)
+		if Global.room_name!="level1-room3":
+			if position.distance_to(player_root)>0.0025:
+				position = pos_argument.lerp(player_root,smooth_out*delta_var)
+			else:
+				Global.camera_mode = 0
 		else:
-			Global.camera_mode = 0
+			if global_position.z<0.0025:
+				if (abs(position.x-player.position.x) > Global.camera_limit_x) && Global.camera_move_x:
+					position.x -= ((((position.x-player.position.x) / abs(position.x-player.position.x)))) * delta_var * abs(player.velocity.x)
+				position.z = lerp(pos_argument.z,player_root.z,smooth_out*delta_var)
+			else:
+				Global.camera_mode = 0
+
 			
 func _process(delta):
 	_setup()
