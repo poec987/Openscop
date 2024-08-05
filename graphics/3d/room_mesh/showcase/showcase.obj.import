@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c0kig6n5ffev8"
+path="res://.godot/imported/showcase.obj-a3ccb58bb05a142b4b111035ce30f95f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/showcase.obj-a3ccb58bb05a142b4b111035ce30f95f.mesh"]
+
+source_file="res://graphics/3d/room_mesh/showcase/showcase.obj"
+dest_files=["res://.godot/imported/showcase.obj-a3ccb58bb05a142b4b111035ce30f95f.mesh", "res://.godot/imported/showcase.obj-a3ccb58bb05a142b4b111035ce30f95f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

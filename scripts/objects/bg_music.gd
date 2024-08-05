@@ -39,3 +39,10 @@ func resume():
 	
 func increase_volume():
 	create_tween().tween_property(self,"volume_db",0.0,1.0)
+	
+	
+func mute():
+	create_tween().tween_property(self,"volume_db",-80.0,1.0)
+	
+func unmute():
+	increase_volume()

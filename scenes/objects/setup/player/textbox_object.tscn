@@ -25,11 +25,13 @@ background = 2
 [node name="dialogue_change" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_xqh1c")
 volume_db = 5.0
+bus = &"HUD_SFX"
 
 [node name="dialogue_typing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xusrt")
 volume_db = -80.0
 autoplay = true
+bus = &"HUD_SFX"
 
 [node name="textbox_background" type="Sprite2D" parent="."]
 z_index = -3

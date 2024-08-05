@@ -48,15 +48,19 @@ script = SubResource("GDScript_smphi")
 [node name="p2paul" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_nu0o6")
 volume_db = 10.0
+bus = &"SFX"
 
 [node name="p2marvin" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_afilo")
 volume_db = 10.0
+bus = &"SFX"
 
 [node name="p2belle" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_vjmod")
 volume_db = 10.0
+bus = &"SFX"
 
 [node name="p2null" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_3npti")
 volume_db = 10.0
+bus = &"SFX"

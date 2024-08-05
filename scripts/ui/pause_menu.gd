@@ -37,10 +37,11 @@ func selection_sound(variable):
 func _ready():
 	$main_pausemenu/visible_group/Select.play()
 	$main_pausemenu/visible_group/Resume.play()
+	$main_pausemenu/buttons/quit_button.visible = !Record.replay
 
 func _process(delta):
 	piece_frame+=10.0*delta
-	if piece_frame>20:
+	if piece_frame>19:
 		piece_frame=0
 	$main_pausemenu/visible_group/piece.frame_coords.x = round(piece_frame)
 	if $current_menu.get_child_count()==0 && inMenu == true:
@@ -55,8 +56,9 @@ func _process(delta):
 		if $current_menu.get_child_count()==0 && Global.gen>2:
 			Global.game_paused=!Global.game_paused
 	
-	
 	if Global.game_paused:
+		#$"../../recording_header".disappear()
+		#await $"../../recording_header".get_child(0).timeout
 		get_tree().paused = true
 		$main_pausemenu/visible_group.visible=true
 		$main_pausemenu/visible_group/piece_counter.text=str(Global.pieces_amount[Global.current_character]).pad_zeros(5)
@@ -110,19 +112,27 @@ func _process(delta):
 
 	if can_unpause && Global.game_paused && $current_menu.get_child_count()==0 && $main_pausemenu/buttons.visible && !get_tree().get_first_node_in_group("Nifty").visible:
 		if fade==0.0:
-			if Input.is_action_just_pressed("pressed_up") && selected_option!=0:
+			if Input.is_action_just_pressed("pressed_up"):
 				selected_option-=1
-				selection_sound(selected_option)
 				
-			if Input.is_action_just_pressed("pressed_down") && selected_option!=4:
+			if Input.is_action_just_pressed("pressed_down"):
 				selected_option+=1
-				selection_sound(selected_option)
+				
+		if Input.is_action_just_pressed("pressed_down") && selected_option<=4-(int(Record.replay)):
+			selection_sound(selected_option)
+		if Input.is_action_just_pressed("pressed_up") && selected_option!=-1:
+			selection_sound(selected_option)
 		
+		selected_option = clamp(selected_option,0,4-(int(Record.replay)))
 		$overlay.set_modulate(Color(1,1,1,fade))
 		
 		if fade>1.0 && inMenu == false:
 			create_tween().tween_property($pink_fade,"color:a",1.0,0.25)
 			if $pink_fade.color.a>0.9 && active_menu[selected_option]==false:
+				if selected_option==1:
+					$current_menu.add_child(preload("res://scenes/objects/menu/secret/recordings.tscn").instantiate())
+					active_menu[selected_option]=true
+					inMenu = true
 				if selected_option==2:
 					$current_menu.add_child(preload("res://scenes/objects/menu/pets.tscn").instantiate())
 					active_menu[selected_option]=true
