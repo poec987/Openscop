@@ -42,10 +42,12 @@ var save_name = ""
 var gen = 8
 var corrupt = false
 var key = 0
-var current_character = 2
+var current_character = 0
 # 0 = guardian
 # 1 = Belle
 # 2 = Marvin
+# 3 = Poe
+# 4 = Mug
 var update_sheets = false
 var pieces_amount = [0,0,0,0,0]
 
