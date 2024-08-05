@@ -8,5 +8,9 @@ func get_cam() -> Camera3D: return camera
 func set_cam_pos(pos, rot):
 	camera.global_position = pos
 	camera.global_rotation = rot
+	
 # this sets the camera as the main one
+func get_cam_pos():
+	return [camera.global_position,camera.global_rotation]
+
 func set_main(): camera.make_current()

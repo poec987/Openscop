@@ -51,6 +51,7 @@ func _process(_delta):
 		if selected_option==1:
 			Global.save_game(Global.save_slot)
 			Global.save_global()
+			Record.stop_recording()
 			$selected.play()
 			$overlay.frame_coords.x=selected_option
 			var fade_out = create_tween()
@@ -123,6 +124,7 @@ func _process(_delta):
 			var fade_out = create_tween()
 			fade_out.tween_property(self,\"fade\",1.0,1.0)
 			await fade_out.finished
+			Record.stop_recording()
 			get_tree().change_scene_to_file(\"res://scenes/rooms/title/title.tscn\")
 "
 

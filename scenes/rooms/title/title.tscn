@@ -184,7 +184,7 @@ func _process(delta):
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6qn5j"]
 render_priority = 0
 shader = ExtResource("10_gu5ww")
-shader_parameter/modulate_color = Color(0.631373, 0.25098, 1, 1)
+shader_parameter/modulate_color = Color(0.658824, 0.321569, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4bov"]
 render_priority = 0
@@ -430,6 +430,7 @@ offset_bottom = 86.0
 text = "Empty Game
 "
 label_settings = SubResource("LabelSettings_3di54")
+horizontal_alignment = 2
 
 [node name="cursor" type="Sprite2D" parent="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/files/file1"]
 material = SubResource("ShaderMaterial_awjvd")
@@ -661,6 +662,10 @@ script = SubResource("GDScript_xt5qy")
 [node name="background" type="CanvasLayer" parent="."]
 layer = -1
 
+[node name="move_permission" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
 [node name="reading_card_timer" type="Timer" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -670,25 +675,34 @@ surface_material_override/0 = SubResource("ShaderMaterial_drlcc")
 
 [node name="song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("28_r2eg8")
+bus = &"Music"
 
 [node name="pressed_start" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("29_2bf6r")
 volume_db = 2.0
+bus = &"HUD_SFX"
 
 [node name="whistle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("30_c5c23")
 volume_db = 2.0
+bus = &"HUD_SFX"
 
 [node name="file" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("31_2fnn4")
 volume_db = 2.0
+bus = &"HUD_SFX"
 
 [node name="selected" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("32_isfcc")
 volume_db = 2.0
+bus = &"HUD_SFX"
 
 [node name="whoosh" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("33_1fxdv")
 volume_db = 2.0
+bus = &"HUD_SFX"
+
+[node name="demo_timer" type="Timer" parent="."]
 
 [connection signal="animation_looped" from="PSXLayer/NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/file_select/buttons_group2/Select" to="." method="_on_select_animation_looped"]
+[connection signal="timeout" from="demo_timer" to="." method="_on_demo_timer_timeout"]

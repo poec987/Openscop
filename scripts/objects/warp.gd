@@ -9,42 +9,47 @@ extends Node3D
 @export_file("*.tscn") var scene
 @export var loading_preset = "nmp_noload"
 @export var coordinate_and_direction = Vector4.ZERO
+
+@onready var sprite = $visual
+@onready var warp_area = $warp_area/warp
+@onready var backup = $backup_warp
+
 func _ready():
 	if !Engine.is_editor_hint():
 		if all_directions:
 			var sphere = SphereShape3D.new()
 			sphere.radius = 0.5
-			$warp_area/warp.set_shape(sphere)
+			warp_area.set_shape(sphere)
 		if Global.gen==1:
 			queue_free()
 		if all_directions:
-			$backup_warp.queue_free()
+			backup.queue_free()
 
 func _process(_delta):
 	
 	if Engine.is_editor_hint():
-		$visual.visible=true
+		sprite.visible=true
 	else:
-		$visual.visible=Global.debug
+		sprite.visible=Global.debug
 
 	if !all_directions:
-		$visual.frame_coords.x=clamp(warp_direction,0,3)
+		sprite.frame_coords.x=clamp(warp_direction,0,3)
 	if all_directions:
-		$visual.frame_coords.x=4
+		sprite.frame_coords.x=4
 	
 	if !all_directions:
 		if warp_direction==0 || warp_direction==3:
-			$warp_area/warp.get_shape().size = Vector3(2.,2.,0.)
+			warp_area.get_shape().size = Vector3(2.,2.,0.)
 			if warp_direction==3:
-				$backup_warp.rotation.y=deg_to_rad(180)
+				backup.rotation.y=deg_to_rad(180)
 			else:
-				$backup_warp.rotation.y=0.0
+				backup.rotation.y=0.0
 		elif warp_direction==1 || warp_direction==2:
-			$warp_area/warp.get_shape().size = Vector3(0.,2.,2.)
+			warp_area.get_shape().size = Vector3(0.,2.,2.)
 			if warp_direction==2:
-				$backup_warp.rotation.y=deg_to_rad(-90)
+				backup.rotation.y=deg_to_rad(-90)
 			else:
-				$backup_warp.rotation.y=deg_to_rad(90)
+				backup.rotation.y=deg_to_rad(90)
 		
 	
 	warp_direction=clamp(warp_direction,0,3)

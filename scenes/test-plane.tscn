@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=53 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -14,6 +14,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cl41u4kw68uyn" path="res://graphics/3d/models/grass.obj" id="8_5e3bn"]
 [ext_resource type="PackedScene" uid="uid://c6lt1e54fh5bh" path="res://scenes/objects/level_objects/tool.tscn" id="8_btoou"]
 [ext_resource type="PackedScene" uid="uid://47e5v5kgyi3b" path="res://scenes/objects/level_objects/slope.tscn" id="8_x40b7"]
+[ext_resource type="Texture2D" uid="uid://jnebev41jmr3" path="res://music/andrewidot.png" id="9_jr2lp"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/fog-shader-opaque.gdshader" id="9_y07kv"]
 [ext_resource type="Texture2D" uid="uid://b1uabhin2r18l" path="res://graphics/3d/tex/nmp/grass.png" id="10_wjd0c"]
 [ext_resource type="Shader" path="res://shaders/spatial shaders/sprite3d_fog.gdshader" id="17_g7lcc"]
@@ -47,7 +48,7 @@ const ROTATION_ANIM_SPEED = 1.5
 const GROW_ANIMATION_SPEED = 0.25
 
 
-var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a screenshot to Cheddar.\",
+var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a screenshot to Cheddar/\\nTechMan06 on discord.\",
 \"You're now entitled to inserting \\na sprite of your own here.\",
 \"I can't imagine how much you \\nmust have walked to find this \\nplace.\",
 \"Anyways...\",
@@ -57,32 +58,31 @@ var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a scre
 \"And now...\",
 \"The [color=#00FF00]MMOscop[/color]/[color=#0000FF]Openscop[/color] Team:\",
 \"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nCheddar, Geometricentric, \\nIzzint, JuanB7...\",
-\"Lewgus, Maxine, Wowzaboi.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint, Mr.Mulch, Wowzaboi.\",
+\"Lewgus, Maxine.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint.\",
 \"[color=#00FFFF]The Level Recreation Team:[/color]\\nCheddar, Geometricentric, \\nIzzint, Lewgus.\",
 \"[color=#00FFFF]The Texture Recreation Team:[/color]\\nCheddar, Betah, Izzint, Lewgus.\",
-\"[color=#00FFFF]The Networking Team:[/color]\\nIzzint, Unnaturalistic.\",
+\"[color=#00FFFF]The Networking Team:[/color]\\nIzzint.\",
 \"[color=#00FFFF]Sound/Music Ripping Team:[/color]\\nCheddar, BrowserTG5, \\nGeometricentric, Lewgus.\",
-\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, Izzint, \\nJerzygorsky, Unnaturalistic, \\nParsley, WestCraft15.\",
-\"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Ronicalter, TL/24,Tom.\",
-\"[color=#47B6FF]Shoutouts to:\\n[/color]PoeDev, ZLD1.\",
+\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, Izzint, \\nJerzygorski, Hyperdeath, \\nWestCraft15.\",
+\"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Mr.Mulch, RonicalterTL/24, Tom, Wowzaboi.\",
+\"[color=#47B6FF]Shoutouts to:\\n[/color]ZLD1.\",
 \"Shoutouts to you all!\\nY'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!\",
 \"Now I'm going to credit every\\nsingle asset we've used here so \\nfar individually:\",
 \"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pause menu buttons, \\ntitle screen UI, pet menu names.\",
 \"[color=#38733c]Anthony Domenico:[/color] Care, bucket, \\nloading screens, music, textbox \\nbackgrounds, SFX.\",
-\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian, p2totalk \\nbuttons, pieces.\",
-\"[color=#38733c]Cheddar:[/color] Care B, bucket, Even \\nCare rooms and tiles, logo, \\nGift Plane room and tiles, Nifty, \\npieces, Sort-Test model...\",
-\"Tool answers.\",
+\"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian, p2totalk \\nbuttons.\",
+\"[color=#38733c]Cheddar:[/color] Care B, bucket, Even \\nCare, logo, \\nGift Plane room and tiles, Nifty, pieces, Sort-Test...\",
+\"Tool answers, showcase room and demo.\",
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
 \"[color=#38733c]Geometricentric:[/color] Amber, Care, \\ncone piece, CAUGHT sprite, Gift \\nPlane loading screen and tiles, \\ngift sprite and icon...\",
-\"Interaction symbol texture, \\nkeyboard, Pen, sprite room, \\nTool answers, waiting room.\",
+\"Interaction symbol texture, \\nkeyboard, Pen, sprite room, \\nTool answers, waiting room, \\nelevator room.\",
 \"[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
 \"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]JuanB7:[/color] Marvin, Paul, Pause \\nmenu.\\n[color=#38733c]Lewgus:[/color] Even Care tiles.\",
 \"[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\\n[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
-\"[color=#38733c]PoeDev:[/color] Even Care \\nconnector room.\",
 \"[color=#38733c]WestCraft15:[/color] Logo animation.\",
 \"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
-\"[color=#80aab3]Osyu:[/color] Keyboard, p2totalk \\nbuttons, file select , pet \\nmenu, pet menu boxes, pets.\",
+\"[color=#80aab3]Osyu:[/color] Keyboard, p2totalk \\nbuttons, file select, loading \\nscreens, pet menu, pet menu boxes, pets.\",
 \"[color=#80aab3]Releskowitz: [/color]Pause menu.\",
 \"[color=#80aab3]The New Orchestra: [/color]Keyboard, \\nfile select, pause menu.\\n[color=#80aab3]Ugng: [/color]Pause menu.\\n[color=#80aab3]Wirelex:[/color] Pause menu, School HUD.\",
 \"If it wasn't for our amazing \\nteam this project would've never \\nbeen possible.\",
@@ -94,13 +94,16 @@ func _ready():
 	origin = symbol_root.position.y
 	if !Engine.is_editor_hint():
 		animate()
+	var geo = create_tween().set_loops()
+	geo.tween_property($geo,\"position:y\",randf_range(0.25,0.5),randf_range(0.5,2.0)).set_delay(randf_range(0.0,1))
+	geo.tween_property($geo,\"position:y\",0.0,1.0).set_delay(randf_range(0.0,1))
 	
 func _process(_delta):
 	if Engine.is_editor_hint():
 		visible=false
 	else:
 		visible=true
-	if global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<2.5:
+	if global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<1.5:
 		if !player_inside_zone:
 			$interaction_sound.play()
 			create_tween().tween_property(interaction_mesh,\"scale\",Vector3(1.,1.,1.),GROW_ANIMATION_SPEED)
@@ -172,12 +175,12 @@ script/source = "extends Sprite3D
 var toggle = false
 var timer_start = false
 func _process(_delta):
-	if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()>0:
+	if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()>0 && global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<2.5:
 		if !timer_start:
 			$Timer.start()
 			timer_start = true
 	else:
-		if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
+		if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0 && global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<2.5:
 			if self.frame_coords.x%2!=0:
 				self.frame_coords.x-=1
 		$Timer.stop()
@@ -197,6 +200,22 @@ func _on_song_finished():
 	bg_music.increase_volume()
 "
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0iw4g"]
+render_priority = 0
+shader = ExtResource("17_g7lcc")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/albedoTex = ExtResource("9_jr2lp")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tqj8j"]
 render_priority = 0
 shader = ExtResource("9_y07kv")
@@ -208,6 +227,106 @@ shader_parameter/albedoTex = ExtResource("10_wjd0c")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x1xgp"]
 size = Vector3(29, 0, 29)
+
+[sub_resource type="GDScript" id="GDScript_kysxo"]
+script/source = "extends Node3D
+
+#CUSTOMIZABLE SETTINGS
+@export_group(\"Display Properties\")
+@export var height_offset = 0.
+@export var min_distance = 2.5
+@export var show_while_interacted = true
+@export var show_after_interacted = true
+@export_group(\"Dialogue Properties\")
+@export var show_dialogue = true
+@export var dialogue_id = \"\"
+@export var textbox_background = 0
+@export var big_textbox = false
+@export_group(\"Misc.\")
+@export var behavior = 0
+
+var dialogue = [\"Man, this sure was a Pet copping session am I right?\",
+\"Haha...\",
+\"...\",
+\"This joke sucks\"]
+#RELATED-NODES
+@onready var interaction_mesh = $height_offset/float_root/interaction_mesh
+@onready var symbol_root = $height_offset/float_root
+
+var origin = 0.0
+
+var player_inside_zone = false
+
+#ANIMATION VARIABLES
+const HEIGHT_LIMIT = 0.65
+const HEIGHT_ANIM_SPEED = 0.65
+const ROTATION_LIMIT = 0.25
+const ROTATION_ANIM_SPEED = 1.5
+const GROW_ANIMATION_SPEED = 0.25
+
+func _ready():
+	interaction_mesh.scale = Vector3.ZERO
+	$height_offset.position.y = height_offset
+	origin = symbol_root.position.y
+	animate()
+	if Global.gen<=2:
+		queue_free()
+	
+func _process(_delta):
+	if global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<min_distance:
+		if !player_inside_zone:
+			$interaction_sound.play()
+			create_tween().tween_property(interaction_mesh,\"scale\",Vector3(1.,1.,1.),GROW_ANIMATION_SPEED)
+		player_inside_zone = true
+		
+		if show_dialogue:
+			if Input.is_action_just_pressed(\"pressed_action\"):
+				if Global.control_mode==0 || Global.control_mode==4:
+					if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
+						Global.create_textbox(2,true, dialogue)
+						interaction_checks()
+	else:
+		create_tween().tween_property(interaction_mesh,\"scale\",Vector3(0.,0.,0.),GROW_ANIMATION_SPEED)
+		if player_inside_zone:
+			$interaction_sound.play()
+		player_inside_zone = false
+		
+func interaction_checks():
+	if !show_while_interacted:
+		$interaction_sound.play()
+		create_tween().tween_property(interaction_mesh,\"scale\",Vector3(0.,0.,0.),GROW_ANIMATION_SPEED)
+	if !show_after_interacted:
+		$interaction_sound.play()
+		var tweener = create_tween()
+		tweener.tween_property(interaction_mesh,\"scale\",Vector3(0.,0.,0.),GROW_ANIMATION_SPEED)
+		await tweener.finished
+		queue_free()
+		
+func delete():
+	queue_free()
+	return true
+
+
+func animate():
+	var tweener_symbol = create_tween().set_loops()
+	tweener_symbol.tween_property(symbol_root, \"position:y\",  origin+randf_range(origin,HEIGHT_LIMIT), HEIGHT_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
+	tweener_symbol.tween_property(symbol_root, \"position:y\", origin-randf_range(origin,HEIGHT_LIMIT), HEIGHT_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
+	
+	var tweener = create_tween().set_loops()
+	tweener.tween_property(interaction_mesh, \"rotation:z\", ROTATION_LIMIT*-1, ROTATION_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
+	tweener.tween_property(interaction_mesh, \"rotation:z\", ROTATION_LIMIT, ROTATION_ANIM_SPEED).set_trans(Tween.TRANS_SINE)
+	
+"
+
+[sub_resource type="QuadMesh" id="QuadMesh_7n2fd"]
+center_offset = Vector3(0, 0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ub2r"]
+render_priority = 0
+shader = ExtResource("4_bnklu")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_uabo5")
 
 [sub_resource type="QuadMesh" id="QuadMesh_8dcwh"]
 size = Vector2(4, 4)
@@ -340,12 +459,13 @@ loading_preset = "evencare_noload"
 
 [node name="level_manipulator" parent="." instance=ExtResource("6_vuu81")]
 loading_preset = "evencare"
+allow_recording = false
 enable_fog = true
 texture = ExtResource("3_uabo5")
 environment_darkness = 0.5
 
 [node name="test_plane_specific" type="Node3D" parent="level_manipulator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2600, 0, 2600)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 260)
 visible = false
 script = SubResource("GDScript_ver1u")
 
@@ -385,16 +505,20 @@ process_callback = 0
 wait_time = 0.125
 
 [node name="andrew" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
-material_override = SubResource("ShaderMaterial_y0djn")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
+material_override = SubResource("ShaderMaterial_0iw4g")
 offset = Vector2(0, 40)
 pixel_size = 0.015
 billboard = 1
 texture_filter = 0
-texture = ExtResource("3_8wwrg")
+texture = ExtResource("9_jr2lp")
 hframes = 4
 vframes = 4
-frame = 4
+script = SubResource("GDScript_jvya2")
+
+[node name="Timer" type="Timer" parent="level_manipulator/test_plane_specific/andrew"]
+process_callback = 0
+wait_time = 0.125
 
 [node name="mrfas" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
@@ -419,6 +543,18 @@ texture = ExtResource("3_8wwrg")
 hframes = 4
 vframes = 4
 frame = 6
+
+[node name="geo" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.207778, 0)
+material_override = SubResource("ShaderMaterial_y0djn")
+offset = Vector2(0, 40)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_8wwrg")
+hframes = 4
+vframes = 4
+frame = 9
 
 [node name="causeofpastas" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
@@ -458,6 +594,34 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="level_manipulator/test_plane_specific/grass/grass"]
 visible = false
 shape = SubResource("BoxShape3D_x1xgp")
+
+[node name="interaction" parent="level_manipulator/test_plane_specific" instance=ExtResource("2_fd03b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+height_offset = 0.6
+dialogue_id = "Hey guys pizza gaming here."
+textbox_background = 1
+
+[node name="interaction2" type="Node3D" parent="level_manipulator/test_plane_specific"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
+script = SubResource("GDScript_kysxo")
+height_offset = 1.0
+min_distance = 1.0
+
+[node name="height_offset" type="Node3D" parent="level_manipulator/test_plane_specific/interaction2"]
+
+[node name="float_root" type="Node3D" parent="level_manipulator/test_plane_specific/interaction2/height_offset"]
+
+[node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/interaction2/height_offset/float_root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("QuadMesh_7n2fd")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_7ub2r")
+
+[node name="interaction_sound" type="AudioStreamPlayer3D" parent="level_manipulator/test_plane_specific/interaction2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+stream = ExtResource("4_usqaa")
+volume_db = 5.0
+panning_strength = 4.0
 
 [node name="player_root" parent="." instance=ExtResource("2_a0geb")]
 
@@ -568,6 +732,7 @@ shape = SubResource("BoxShape3D_liprv")
 [node name="cry" type="AudioStreamPlayer3D" parent="Care B"]
 stream = ExtResource("18_r5enk")
 volume_db = 1.0
+bus = &"SFX"
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3)
@@ -576,7 +741,7 @@ skeleton = NodePath("../StaticBody3D/MeshInstance3D")
 surface_material_override/0 = SubResource("ShaderMaterial_gk7pi")
 
 [node name="bucket" parent="." instance=ExtResource("22_se66f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -596,4 +761,5 @@ dialogue_id = "Openscop cuts off words mid dialogue."
 
 [connection signal="finished" from="level_manipulator/test_plane_specific/song" to="level_manipulator/test_plane_specific/me" method="_on_song_finished"]
 [connection signal="timeout" from="level_manipulator/test_plane_specific/me/Timer" to="level_manipulator/test_plane_specific/me" method="_on_timer_timeout"]
+[connection signal="timeout" from="level_manipulator/test_plane_specific/andrew/Timer" to="level_manipulator/test_plane_specific/andrew" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Care B/Area3D" to="Care B" method="_on_area_3d_body_entered"]
