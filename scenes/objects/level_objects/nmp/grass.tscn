@@ -24,7 +24,6 @@ mesh = ExtResource("1_2v4pc")
 surface_material_override/0 = SubResource("ShaderMaterial_m5h30")
 
 [node name="grass" type="Area3D" parent="."]
-collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="grass"]
 shape = SubResource("BoxShape3D_x1xgp")

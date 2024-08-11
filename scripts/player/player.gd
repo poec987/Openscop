@@ -202,11 +202,6 @@ func _physics_process(delta):
 			Global.control_mode+=1
 		else:
 			Global.control_mode-=1
-	if Input.is_action_just_pressed("pressed_rec"):
-		if !Record.recording:
-			Record.start_recording()
-		else:
-			Record.stop_recording()
 
 		
 		if Global.control_mode==1:

@@ -4,6 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/spatial shaders/solid_0_transparent.gdshader" id="2_sx6xn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_reflm"]
+size = Vector3(3.5, 1, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_br7qj"]
 
@@ -16,7 +17,6 @@ shader_parameter/MAIN_COLOR = Color(1, 0, 0, 1)
 script = ExtResource("1_7rk6s")
 
 [node name="zone_area" type="Area3D" parent="."]
-collision_mask = 5
 
 [node name="zone_collision" type="CollisionShape3D" parent="zone_area"]
 shape = SubResource("BoxShape3D_reflm")
