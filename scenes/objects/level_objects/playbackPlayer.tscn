@@ -1,0 +1,119 @@
+[gd_scene load_steps=11 format=3 uid="uid://cgy4nenx0drl6"]
+
+[ext_resource type="Script" path="res://scripts/objects/level_objects/playbackPlayer.gd" id="1_0yq7l"]
+[ext_resource type="Shader" path="res://shaders/spatial shaders/sprite3d_fog.gdshader" id="2_8lkus"]
+[ext_resource type="Texture2D" uid="uid://xj3h3m7xe531" path="res://graphics/sprites/player/guardian.png" id="3_22eyk"]
+[ext_resource type="Texture2D" uid="uid://tto7x3eghbjr" path="res://graphics/sprites/player/none.png" id="4_hcsh2"]
+[ext_resource type="AudioStream" uid="uid://dvip8isc7rg2n" path="res://sfx/player/ec_steps.wav" id="5_ql1jb"]
+[ext_resource type="AudioStream" uid="uid://bt6ioueosnk6j" path="res://sfx/player/p2talk/p2button.wav" id="6_e5x75"]
+[ext_resource type="FontFile" uid="uid://0p4r1h52icbk" path="res://graphics/sprites/ui/p2totalk.fnt" id="6_xx2en"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s8dso"]
+resource_name = "player_collision"
+size = Vector3(1, 1.4, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fpn34"]
+render_priority = 0
+shader = ExtResource("2_8lkus")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/albedoTex = ExtResource("3_22eyk")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y38ro"]
+render_priority = 0
+shader = ExtResource("2_8lkus")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/transparent_color = Color(1, 0, 1, 1)
+shader_parameter/billboard = true
+shader_parameter/albedoTex = ExtResource("4_hcsh2")
+shader_parameter/is_spritesheet = false
+shader_parameter/spritesheet_size = Vector2i(1, 1)
+shader_parameter/sprite = Vector2i(0, 0)
+shader_parameter/enable_auto_animation_x = false
+shader_parameter/enable_auto_animation_y = false
+shader_parameter/frame_count = 1
+shader_parameter/frame_offset = 0
+shader_parameter/animation_speed = 1.0
+
+[node name="pbplayer_root" type="Node3D"]
+metadata/recordingFile = ""
+metadata/Character = 0
+metadata/manualPosition = false
+metadata/enableSheet = false
+metadata/sheetPath = ""
+metadata/autoReplay = true
+metadata/replayAfterInit = false
+
+[node name="pbplayer" type="CharacterBody3D" parent="." groups=["Player"]]
+transform = Transform3D(-1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, 0)
+collision_layer = 2
+floor_block_on_wall = false
+script = ExtResource("1_0yq7l")
+
+[node name="collision" type="CollisionShape3D" parent="pbplayer"]
+transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 1.42109e-14, 0, 1, 0, 0.7, 0)
+shape = SubResource("BoxShape3D_s8dso")
+
+[node name="sprite" type="Sprite3D" parent="pbplayer" groups=["Player_sprite"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.03, 0)
+material_override = SubResource("ShaderMaterial_fpn34")
+cast_shadow = 0
+offset = Vector2(0, 32)
+pixel_size = 0.015
+billboard = 1
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_22eyk")
+hframes = 5
+vframes = 5
+
+[node name="head" type="Sprite3D" parent="pbplayer/sprite"]
+transform = Transform3D(-1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_y38ro")
+offset = Vector2(0, 35)
+pixel_size = 0.015
+billboard = 1
+texture_filter = 0
+texture = ExtResource("4_hcsh2")
+
+[node name="footstep_controller" type="RayCast3D" parent="pbplayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -0.6, 0)
+hit_from_inside = true
+collide_with_areas = true
+debug_shape_thickness = 5
+
+[node name="footstep" type="AudioStreamPlayer3D" parent="pbplayer"]
+stream = ExtResource("5_ql1jb")
+attenuation_model = 3
+volume_db = -80.0
+panning_strength = 4.0
+bus = &"SFX"
+
+[node name="button_press" type="AudioStreamPlayer3D" parent="pbplayer"]
+stream = ExtResource("6_e5x75")
+volume_db = 10.0
+bus = &"HUD_SFX"
+
+[node name="p2_talk_buttons" type="Label3D" parent="pbplayer" groups=["p2_word"]]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.8, 0)
+offset = Vector2(0, 5)
+billboard = 1
+fixed_size = true
+texture_filter = 0
+font = ExtResource("6_xx2en")
+font_size = 34
+outline_size = 0
+uppercase = true
+
+[node name="P2_talk" type="Node3D" parent="pbplayer/p2_talk_buttons"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)

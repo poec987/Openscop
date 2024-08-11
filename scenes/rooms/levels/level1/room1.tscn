@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6dwob7mppos7"]
+[gd_scene load_steps=17 format=3 uid="uid://b6dwob7mppos7"]
 
 [ext_resource type="PackedScene" uid="uid://cgugeeeg7p1cs" path="res://scenes/objects/setup/level_manipulator.tscn" id="1_mp0t8"]
 [ext_resource type="Texture2D" uid="uid://cjwvkldagl3km" path="res://graphics/sprites/ui/backgrounds/level1_1.png" id="2_66157"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bttaj8jiwmjv6" path="res://scenes/objects/level_objects/interaction_symbol.tscn" id="9_i118c"]
 [ext_resource type="PackedScene" uid="uid://0tdm55supfpn" path="res://scenes/objects/level_objects/warp.tscn" id="10_wep4k"]
 [ext_resource type="ArrayMesh" uid="uid://dtoakehmo8je0" path="res://graphics/3d/room_mesh/levels/level1/evencare1_furniture.obj" id="11_2gjaq"]
+[ext_resource type="PackedScene" uid="uid://cgy4nenx0drl6" path="res://scenes/objects/level_objects/playbackPlayer.tscn" id="12_n3ayb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ayyc"]
 render_priority = 0
@@ -141,3 +142,35 @@ coordinate_and_direction = Vector4(1, 0, 0.1, 1)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("11_2gjaq")
 surface_material_override/0 = SubResource("ShaderMaterial_jsg0l")
+
+[node name="pbplayer_root" parent="." instance=ExtResource("12_n3ayb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0.1)
+metadata/recordingFile = "joshua1"
+metadata/enableSheet = true
+metadata/sheetPath = "C:\\Users\\Cam\\AppData\\Roaming\\Openscop\\sheets\\belle.png"
+metadata/autoReplay = false
+metadata/replayAfterInit = true
+
+[node name="pbplayer_root2" parent="." instance=ExtResource("12_n3ayb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0.1)
+metadata/recordingFile = "matt1"
+metadata/enableSheet = true
+metadata/sheetPath = "C:\\Users\\Cam\\AppData\\Roaming\\Openscop\\sheets\\didgie.png"
+metadata/autoReplay = false
+metadata/replayAfterInit = true
+
+[node name="pbplayer_root3" parent="." instance=ExtResource("12_n3ayb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0.1)
+metadata/recordingFile = "mysterious"
+metadata/enableSheet = true
+metadata/sheetPath = "C:\\Users\\Cam\\AppData\\Roaming\\Openscop\\sheets\\poe.png"
+metadata/autoReplay = false
+metadata/replayAfterInit = true
+
+[node name="pbplayer_root4" parent="." instance=ExtResource("12_n3ayb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0.1)
+metadata/recordingFile = "p2talk-test"
+metadata/enableSheet = true
+metadata/sheetPath = "C:\\Users\\Cam\\AppData\\Roaming\\Openscop\\sheets\\marvin.png"
+metadata/autoReplay = false
+metadata/replayAfterInit = true
