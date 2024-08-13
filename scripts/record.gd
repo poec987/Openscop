@@ -55,6 +55,7 @@ func current_data():
 			"pieces":Global.pieces_amount.duplicate(),
 			"character":Global.current_character,
 			"control_mode":Global.control_mode,
+			"brightness":Global.player_brightness,
 			"key":Global.key
 		}
 	}
@@ -313,6 +314,7 @@ func load_recording(file, gen: int = 8, menu: bool = false, title: bool = false)
 	Global.key = recording_data["save_data"]["player"]["key"]
 	Global.current_character = recording_data["save_data"]["player"]["character"]
 	Global.piece_log = recording_data["save_data"]["game"]["piece_log"]
+	Global.player_brightness = recording_data["save_data"]["player"]["brightness"]
 	Global.warp_to(recording_data["save_data"]["room"]["current_room"],recording_data["save_data"]["room"]["loading_preset"])
 	Console.console_log("[color=blue]Loaded Game Data from Recording sucessfully! Replaying inputs...[/color]")
 	Global.pieces_amount = recording_data["save_data"]["player"]["pieces"]
