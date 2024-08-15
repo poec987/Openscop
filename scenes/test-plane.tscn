@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cwnh2c23sm7dh"]
+[gd_scene load_steps=54 format=3 uid="uid://cwnh2c23sm7dh"]
 
 [ext_resource type="AudioStream" uid="uid://do1oh0451fegy" path="res://music/level2.mp3" id="1_ukff2"]
 [ext_resource type="PackedScene" uid="uid://dng2iqsytyb72" path="res://scenes/objects/setup/player/player.tscn" id="2_a0geb"]
@@ -47,6 +47,7 @@ const ROTATION_LIMIT = 0.25
 const ROTATION_ANIM_SPEED = 1.5
 const GROW_ANIMATION_SPEED = 0.25
 
+@export var textbox_0 = false
 
 var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a screenshot to Cheddar/\\nTechMan06 on discord.\",
 \"You're now entitled to inserting \\na sprite of your own here.\",
@@ -58,12 +59,12 @@ var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a scre
 \"And now...\",
 \"The [color=#00FF00]MMOscop[/color]/[color=#0000FF]Openscop[/color] Team:\",
 \"[color=#00FFFF]The Sprite Recreation Team:[/color]\\nAndrewidot, Betah, \\nCheddar, Geometricentric, \\nIzzint, JuanB7...\",
-\"Lewgus, Maxine.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint.\",
+\"Lewgus, Maxine, PoeDev,\\nScrambledPaper22.\\n[color=#00FFFF]The Model Recreation Team:[/color]\\nBetah, Lewgus, Izzint.\",
 \"[color=#00FFFF]The Level Recreation Team:[/color]\\nCheddar, Geometricentric, \\nIzzint, Lewgus.\",
 \"[color=#00FFFF]The Texture Recreation Team:[/color]\\nCheddar, Betah, Izzint, Lewgus.\",
-\"[color=#00FFFF]The Networking Team:[/color]\\nIzzint.\",
+\"[color=#00FFFF]The Networking Team:[/color]\\nCheddar.\",
 \"[color=#00FFFF]Sound/Music Ripping Team:[/color]\\nCheddar, BrowserTG5, \\nGeometricentric, Lewgus.\",
-\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, Izzint, \\nJerzygorski, Hyperdeath, \\nWestCraft15.\",
+\"[color=#00FFFF]The Programmers:[/color]\\nCheddar, EonOrange, Izzint, \\nJerzygorski, PoeDev,\\nHyperdeath, WestCraft15.\",
 \"[color=#00FFFF]Other Friendly Fellas:[/color]\\nAlgo, Mrfas, Mr.Mulch, RonicalterTL/24, Tom, Wowzaboi.\",
 \"[color=#47B6FF]Shoutouts to:\\n[/color]ZLD1.\",
 \"Shoutouts to you all!\\nY'all are [color=#FF0000]a[/color][color=#FFBF00]w[/color][color=#7FFF00]e[/color][color=#00FF3F]s[/color][color=#00FEFF]o[/color][color=#003FFF]m[/color][color=#7F00FF]e[/color]!\",
@@ -71,8 +72,8 @@ var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a scre
 \"[color=#38733c]Andrewidot:[/color] Amber, Belle, \\nguardian, pause menu buttons, \\ntitle screen UI, pet menu names.\",
 \"[color=#38733c]Anthony Domenico:[/color] Care, bucket, \\nloading screens, music, textbox \\nbackgrounds, SFX.\",
 \"[color=#38733c]Betah:[/color] Belle, CAUGHT sprite,\\noeptos guardian, p2totalk \\nbuttons.\",
-\"[color=#38733c]Cheddar:[/color] Care B, bucket, Even \\nCare, logo, \\nGift Plane room and tiles, Nifty, pieces, Sort-Test...\",
-\"Tool answers, showcase room and demo.\",
+\"[color=#38733c]Cheddar:[/color] Care B, bucket, Even \\nCare, logo, \\nGift Plane room and tiles, Nifty, pieces, Recording\\n\",
+\"Menu buttons, Sort-Test, Tool answers, showcase room\\nand demo.\",
 \"[color=#38733c]CMUdict:[/color] P2totalk dictionary.\\nhttps://github.com/Alexir/CMUdict/blob/master/cmudict.0.6d\",
 \"[color=#38733c]Corpora:[/color] P2totalk dictionary.\\nhttps://github.com/dariusk/corpora\",
 \"[color=#38733c]Geometricentric:[/color] Amber, Care, \\ncone piece, CAUGHT sprite, Gift \\nPlane loading screen and tiles, \\ngift sprite and icon...\",
@@ -80,6 +81,8 @@ var credits = [\"YOU FOUND US!\\nDon't tell anybody, and privately\\nsend a scre
 \"[color=#38733c]Giftscop Website:[/color] PetscopWide \\nFont.\",
 \"[color=#38733c]Izzint:[/color] NMP grass texture.\\n[color=#38733c]JuanB7:[/color] Marvin, Paul, Pause \\nmenu.\\n[color=#38733c]Lewgus:[/color] Even Care tiles.\",
 \"[color=#38733c]Maxine:[/color] P2totalk and pause menu buttons.\\n[color=#38733c]Sam Hayzen:[/color] P2totalk phonetic \\nto button table.\",
+\"[color=#38733c]PoeDev:[/color] Recording Menu buttons.\",
+\"[color=#38733c]ScrambledPaper22:[/color] Care A,\\nCare B, Care NLM, Randice.\",
 \"[color=#38733c]WestCraft15:[/color] Logo animation.\",
 \"[color=#ff71ff]Petscop Megasheet Credits:[/color]\\n[color=#80aab3]Noogai223:[/color] Pause menu.\\n[color=#80aab3]Lad:[/color] Pets.\",
 \"[color=#80aab3]Osyu:[/color] Keyboard, p2totalk \\nbuttons, file select, loading \\nscreens, pet menu, pet menu boxes, pets.\",
@@ -103,30 +106,31 @@ func _process(_delta):
 		visible=false
 	else:
 		visible=true
-	if global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<1.5:
-		if !player_inside_zone:
-			$interaction_sound.play()
-			create_tween().tween_property(interaction_mesh,\"scale\",Vector3(1.,1.,1.),GROW_ANIMATION_SPEED)
-		player_inside_zone = true
-		
-		if Input.is_action_just_pressed(\"pressed_action\"):
-			if Global.control_mode==0 || Global.control_mode==4:
-				if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
-					Global.create_textbox(2,true, credits)
-					if !triggered:
-						bg_music.decrease_volume()
-						$song.play()
-						triggered = true
-						
-		if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
-			if triggered:
-				interacted = true
-				triggered = false
-	else:
-		create_tween().tween_property(interaction_mesh,\"scale\",Vector3(0.,0.,0.),GROW_ANIMATION_SPEED)
-		if player_inside_zone:
-			$interaction_sound.play()
-		player_inside_zone = false
+		if global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<1.5:
+			if !player_inside_zone:
+				$interaction_sound.play()
+				create_tween().tween_property(interaction_mesh,\"scale\",Vector3(1.,1.,1.),GROW_ANIMATION_SPEED)
+			player_inside_zone = true
+			
+			if Input.is_action_just_pressed(\"pressed_action\"):
+				if Global.control_mode==0 || Global.control_mode==4:
+					if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
+						Global.create_textbox(2,true, credits)
+						textbox_0 = true
+						if !triggered:
+							bg_music.decrease_volume()
+							$song.play()
+							triggered = true
+							
+			if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
+				if triggered:
+					interacted = true
+					triggered = false
+		else:
+			create_tween().tween_property(interaction_mesh,\"scale\",Vector3(0.,0.,0.),GROW_ANIMATION_SPEED)
+			if player_inside_zone:
+				$interaction_sound.play()
+			player_inside_zone = false
 		
 func delete():
 	queue_free()
@@ -175,12 +179,13 @@ script/source = "extends Sprite3D
 var toggle = false
 var timer_start = false
 func _process(_delta):
-	if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()>0 && global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<2.5:
+	if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()>0 && get_parent().textbox_0:
 		if !timer_start:
 			$Timer.start()
 			timer_start = true
 	else:
-		if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0 && global_position.distance_to(get_tree().get_first_node_in_group(\"Player\").global_position)<2.5:
+		get_parent().textbox_0 = false
+		if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
 			if self.frame_coords.x%2!=0:
 				self.frame_coords.x-=1
 		$Timer.stop()
@@ -216,6 +221,38 @@ shader_parameter/frame_count = 1
 shader_parameter/frame_offset = 0
 shader_parameter/animation_speed = 1.0
 
+[sub_resource type="GDScript" id="GDScript_k25ln"]
+script/source = "extends Sprite3D
+
+var toggle = false
+var timer_start = false
+func _process(_delta):
+	if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()>0 && get_node(\"../interaction2\").textbox_1:
+		if !timer_start:
+			$Timer.start()
+			timer_start = true
+	else:
+		get_node(\"../interaction2\").textbox_1 = false
+		if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
+			if self.frame_coords.x%2!=0:
+				self.frame_coords.x-=1
+		$Timer.stop()
+		timer_start = false
+	if get_parent().interacted:
+		if self.frame_coords.x==0:
+			self.frame_coords.x=2
+
+func _on_timer_timeout():
+	if self.frame_coords.x%2==0:
+		self.frame_coords.x+=1
+	else:
+		self.frame_coords.x-=1
+
+
+func _on_song_finished():
+	bg_music.increase_volume()
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tqj8j"]
 render_priority = 0
 shader = ExtResource("9_y07kv")
@@ -245,6 +282,7 @@ script/source = "extends Node3D
 @export_group(\"Misc.\")
 @export var behavior = 0
 
+@export var textbox_1 =false
 var dialogue = [\"Man, this sure was a Pet copping session am I right?\",
 \"Haha...\",
 \"...\",
@@ -284,6 +322,7 @@ func _process(_delta):
 				if Global.control_mode==0 || Global.control_mode==4:
 					if get_tree().get_first_node_in_group(\"HUD_textboxes\").get_child(0).get_child_count()==0:
 						Global.create_textbox(2,true, dialogue)
+						textbox_1 = true
 						interaction_checks()
 	else:
 		create_tween().tween_property(interaction_mesh,\"scale\",Vector3(0.,0.,0.),GROW_ANIMATION_SPEED)
@@ -468,6 +507,7 @@ environment_darkness = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, 260)
 visible = false
 script = SubResource("GDScript_ver1u")
+textbox_0 = null
 
 [node name="height_offset" type="Node3D" parent="level_manipulator/test_plane_specific"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
@@ -476,7 +516,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.637193, 0)
 
 [node name="interaction_mesh" type="MeshInstance3D" parent="level_manipulator/test_plane_specific/height_offset/float_root"]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 mesh = SubResource("QuadMesh_pbefp")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_ufk43")
@@ -514,7 +554,7 @@ texture_filter = 0
 texture = ExtResource("9_jr2lp")
 hframes = 4
 vframes = 4
-script = SubResource("GDScript_jvya2")
+script = SubResource("GDScript_k25ln")
 
 [node name="Timer" type="Timer" parent="level_manipulator/test_plane_specific/andrew"]
 process_callback = 0
@@ -545,7 +585,7 @@ vframes = 4
 frame = 6
 
 [node name="geo" type="Sprite3D" parent="level_manipulator/test_plane_specific"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.426526, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.00952691, 0)
 material_override = SubResource("ShaderMaterial_y0djn")
 offset = Vector2(0, 40)
 pixel_size = 0.015
@@ -599,7 +639,7 @@ shape = SubResource("BoxShape3D_x1xgp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 height_offset = 0.6
 dialogue_id = "Hey guys pizza gaming here."
-textbox_background = 1
+textbox_background = 2
 
 [node name="interaction2" type="Node3D" parent="level_manipulator/test_plane_specific"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)

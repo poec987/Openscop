@@ -15,9 +15,6 @@ var recording_data = {}
 
 var temporary_data = {}
 
-
-
-
 var input_sim_r1 = null
 var input_sim_r2 = null
 var input_sim_l1 = null
@@ -130,6 +127,7 @@ func setup_file():
 			"pieces":Global.pieces_amount.duplicate(),
 			"character":Global.current_character,
 			"control_mode":Global.control_mode,
+			"brightness":Global.player_brightness,
 			"key":Global.key
 		}
 	}
@@ -266,6 +264,7 @@ func finish_replay():
 	replay_setup = false
 	recording_timer = 0
 	recording_reader_p1 = 0
+	Global.game_paused = false
 	Global.load_global()
 	if menu_loading && temporary_data!={}:
 		Global.pets = temporary_data["game"]["pets"]
@@ -276,10 +275,12 @@ func finish_replay():
 		Global.control_mode = temporary_data["player"]["control_mode"]
 		Global.key = temporary_data["player"]["key"]
 		Global.current_character = temporary_data["player"]["character"]
+		Global.player_brightness = temporary_data["player"]["brightness"]
 		Global.save_name = temporary_data["game"]["save_name"]
 		Global.piece_log = temporary_data["game"]["piece_log"]
 		Global.warp_to(temporary_data["room"]["current_room"],temporary_data["room"]["loading_preset"])
 		Console.console_log("[color=blue]Loaded Temporary Game Data sucessfully![/color]")
+	Global.recording_header = false
 	recording_finished = true
 	if title_loading:
 		Global.warp_to("res://scenes/rooms/title/title.tscn","evencare")
@@ -318,7 +319,8 @@ func load_recording(file, gen: int = 8, menu: bool = false, title: bool = false)
 	Global.warp_to(recording_data["save_data"]["room"]["current_room"],recording_data["save_data"]["room"]["loading_preset"])
 	Console.console_log("[color=blue]Loaded Game Data from Recording sucessfully! Replaying inputs...[/color]")
 	Global.pieces_amount = recording_data["save_data"]["player"]["pieces"]
-	Global.recording_name = file
-	Global.recording_header = true
+	if menu_loading:
+		Global.recording_name = file
+		Global.recording_header = true
 	await get_tree().get_first_node_in_group("loading_overlay").get_child(2).timeout
 	replay=true

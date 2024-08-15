@@ -32,7 +32,7 @@ func _ready():
 	for file in recording_files:
 		if (JSON.parse_string((FileAccess.open(("user://recordings/"+file),FileAccess.READ)).get_as_text()))["recording_info"]["rotation"]:
 			allowed_recordings.append(file)
-	$demo_timer.wait_time = randi_range(60,10800)
+	#$demo_timer.wait_time = randi_range(60,10800)
 	$demo_timer.start()
 		
 func _physics_process(_delta):

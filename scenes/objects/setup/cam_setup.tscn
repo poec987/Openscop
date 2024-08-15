@@ -544,6 +544,7 @@ offset_bottom = 40.0
 [node name="loading_timer" type="Timer" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view/loading"]
 
 [node name="DEMO" type="Sprite2D" parent="NTSC/NTSC_viewport/Dither/dither_view/no_filter_view/no_filter_view"]
+process_mode = 3
 visible = false
 z_index = 2
 z_as_relative = false

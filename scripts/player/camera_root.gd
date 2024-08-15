@@ -62,6 +62,9 @@ func _setup():
 				position.z = lerp(pos_argument.z,player_root.z,smooth_out*delta_var)
 			else:
 				Global.camera_mode = 0
+				
+			if player.global_position.z>2 or player.global_position.x<5 or player.global_position.x>19:
+				Global.camera_mode = 0
 
 			
 func _process(delta):
