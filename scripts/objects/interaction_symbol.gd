@@ -69,7 +69,10 @@ func _process(_delta):
 		if player_inside_zone:
 			$interaction_sound.play()
 		player_inside_zone = false
-		
+	
+	#if global_position.distance_to(get_tree().get_first_node_in_group("Playback_player").global_position)<min_distance && !show_dialogue:
+
+	
 func interaction_checks():
 	if !show_while_interacted:
 		$interaction_sound.play()

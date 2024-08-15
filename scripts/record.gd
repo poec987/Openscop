@@ -264,6 +264,7 @@ func finish_replay():
 	replay_setup = false
 	recording_timer = 0
 	recording_reader_p1 = 0
+	recording_reader_p2 = 0
 	Global.game_paused = false
 	Global.load_global()
 	if menu_loading && temporary_data!={}:

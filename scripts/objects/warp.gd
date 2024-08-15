@@ -69,3 +69,6 @@ func _on_warp_area_body_entered(body):
 		else:
 			Global.warp_to(scene,loading_preset)
 			Global.player_array=coordinate_and_direction
+			
+	if body==get_tree().get_first_node_in_group("Playback_player"):
+		queue_free()

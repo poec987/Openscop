@@ -1,11 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dci2pq27hyacb"]
 
 [ext_resource type="Shader" path="res://shaders/screen/ntsc.gdshader" id="1_miqdt"]
-[ext_resource type="Script" path="res://scenes/rooms/garalina.gd" id="1_nljoc"]
+[ext_resource type="Script" path="res://scripts/garalina.gd" id="1_nljoc"]
 [ext_resource type="Material" uid="uid://dr52yj2jvqaa7" path="res://post_process/dither-banding_mat.tres" id="2_1eamy"]
 [ext_resource type="Texture2D" uid="uid://dujwlec6naqf5" path="res://graphics/sprites/ui/garalina/gen8.png" id="3_2t5xd"]
 [ext_resource type="Texture2D" uid="uid://s7ehsrwcpto1" path="res://graphics/sprites/ui/garalina/logo.png" id="5_1h4hh"]
 [ext_resource type="AudioStream" uid="uid://d00ryq8iag6r6" path="res://music/garalina.wav" id="5_cnx4t"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_syp2d"]
 shader = ExtResource("1_miqdt")

@@ -1,32 +1,41 @@
 extends CharacterBody3D
 
+#MASSIVE SHOUTOUT TO POEDEV
+
+
 # MOVEMENT VARIABLES
 
-var movement_speed = 5
+var movement_speed = 5.0
 const ACCELERATION = 8
 
-@export_category("Player Playback Properties")
-@export var delay = 0.0
-@export var main_recording_folder = true
+@export_category("Recording Playback Properties")
 @export var recording_file = ""
+@export var delay = 0.0
+@export var destroy_after_end = false
 @export var invisible_until_playback = false
-var retrace_steps = false
+@export var loop = false
+@export var main_recording_folder = true
+@export var use_cue = false
+@export var use_recording_character = false
+@export var use_recording_position = true
+
 var player_array = Vector4()
+var key = false
 #CURRENT PLAYER OBJECT
 @export_category("Character Properties")
-@export var use_recording_character = false
+@export var character = 0
 @export var head_sheet: CompressedTexture2D
 @export var character_sheet: CompressedTexture2D
 @export var marvin_speed = false
-@export var character = 0
+@export var flip_x_input = false
+@export var retrace_steps = false
+@export var animation_direction = 0
 @export_category("Misc. Variables")
 @export var is_walking = false
-@export	var v = 0
-@export	var h = 0
-@export var current_footstep = 0
+var v = 0.0
+var h = 0.0
+var current_footstep = 0
 @export var brightness = 1.0
-#GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP
-#var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #RECORDING VARIABLES:
 var recording_data = {}
@@ -36,17 +45,19 @@ var replay_setup = false
 var recording_finished = false
 var recording_reader_p1 = 0
 var recording_reader_p2 = 0
-var input_sim_action = false
+@export var input_sim_action = false
+var input_sim_select = false
+var recordings = []
 #ANIMATION PROPERTIES
 var first_frame = false
 const ANIMATION_SPEED = 8
 const ANIMATION_THRESHOLD = 1.5
-@export var animation_direction = 0
+
 var current_frame = 0
 
 #P2TOTALK RELATED VARIABLES AND OBJECTS
 var prev_text = ""
-@export var word = ""
+var word = ""
 var last_press = ""
 var can_submit = true
 @onready var p2_talk = get_node("p2_talk_buttons")
@@ -72,20 +83,32 @@ func change_sound(sound):
 #PHYSICS PROCESS
 
 func _ready():
+	if recording_file=="":
+		for file in DirAccess.get_files_at("user://recordings/"):
+			recordings.append(file)
+		if recordings!=[]:
+			recording_file = recordings.pick_random().trim_suffix(".rec")
+	
+	material.frame_coords = Vector2(animation_direction, 0)
+	add_collision_exception_with(get_tree().get_first_node_in_group("Player"))
+	current_footstep = get_tree().get_first_node_in_group("Player").current_footstep
 	recording_timer = 0
-	if main_recording_folder:
-		recording_data = JSON.parse_string((FileAccess.open("user://recordings/"+recording_file+".rec",FileAccess.READ)).get_as_text())
+	
+	if recording_file!="":
+		if main_recording_folder:
+			recording_data = JSON.parse_string((FileAccess.open("user://recordings/"+recording_file+".rec",FileAccess.READ)).get_as_text())
+		else:
+			recording_data = JSON.parse_string((FileAccess.open("user://player_recordings/"+recording_file+".rec",FileAccess.READ)).get_as_text())
+		Console.console_log("[color=green]Loading Player Playback Data from Recording...[/color]")
+		retrace_steps = recording_data["save_data"]["game"]["retrace_steps"]
+		player_array = Vector4(recording_data["save_data"]["player"]["coords"][0],recording_data["save_data"]["player"]["coords"][1],recording_data["save_data"]["player"]["coords"][2],recording_data["save_data"]["player"]["coords"][3])
+		brightness = recording_data["save_data"]["player"]["brightness"]
+		key = recording_data["save_data"]["player"]["key"]
+		if use_recording_character:
+			character = recording_data["save_data"]["player"]["character"]
+		Console.console_log("[color=blue]Loaded Player Playback Data from Recording sucessfully![/color]")
 	else:
-		recording_data = JSON.parse_string((FileAccess.open("user://player_recordings/"+recording_file+".rec",FileAccess.READ)).get_as_text())
-	Console.console_log("[color=green]Loading Player Playback Data from Recording...[/color]")
-	retrace_steps = recording_data["save_data"]["game"]["retrace_steps"]
-	player_array = Vector4(recording_data["save_data"]["player"]["coords"][0],recording_data["save_data"]["player"]["coords"][1],recording_data["save_data"]["player"]["coords"][2],recording_data["save_data"]["player"]["coords"][3])
-	brightness = recording_data["save_data"]["player"]["brightness"]
-	#Global.key = recording_data["save_data"]["player"]["key"]
-	if use_recording_character:
-		character = recording_data["save_data"]["player"]["character"]
-	Console.console_log("[color=blue]Loaded Player Playback Data from Recording sucessfully![/color]")
-	#replay=true
+		queue_free()
 	
 	if !use_recording_character:
 		if head_sheet==null:
@@ -104,16 +127,16 @@ func _ready():
 		else:
 			material.texture = load("res://graphics/sprites/player/headless.png")
 			head.texture = head_sheet
-		
+			head.get_material_override().set_shader_parameter("albedoTex", head.texture)
 		if marvin_speed or character==2:
-			movement_speed = 6
+			movement_speed = 6.0
 		else:
-			movement_speed = 5
+			movement_speed = 5.0
 	
 	material.get_material_override().set_shader_parameter("albedoTex", material.texture)
-	global_position = Vector3(player_array.x,player_array.y,player_array.z)
-	Global.current_player = Vector4(position.x,position.y,position.z,animation_direction)
-	player_camera.position=position
+	if use_recording_position:
+		global_position = Vector3(player_array.x,player_array.y,player_array.z)
+
 	animation_direction = int(player_array.w)
 	if retrace_steps:
 		movement_speed = movement_speed*-1
@@ -124,34 +147,91 @@ func _ready():
 	if Global.gen<=2:
 		set_collision_mask(0)
 
+	if use_cue && invisible_until_playback or invisible_until_playback:
+		visible = false
+	
+	if delay!=0.0:
+		$recording_wait.wait_time = delay
+		$recording_wait.start()
+	else:
+		if !use_cue:
+			replay = true
+
+
 #TO-DO: ORGANIZE PROPERLY
 func _physics_process(delta):
+	if Input.is_action_just_pressed("ui_end"):
+		visible = true
+		replay = true
+	
 	if replay:
 		if !replay_setup:
 			recording_finished = false
 			recording_timer = 0
-			Console.console_log("[color=green]Loading Recording Data...[/color]")
+			Console.console_log("[color=green]Loading Player Recording Data...[/color]")
 			replay_setup = true
 		if replay_setup:
 			recording_timer+=1
 		if recording_data["p1_data"].find(str(recording_timer)+"_END")!=-1:
-			finish_replay()
+			Console.console_log("[color=red]RECORDING IS OVER[/color]")
+			if destroy_after_end:
+				queue_free()
+			replay = false
+			replay_setup = false
+			recording_timer = 0
+			recording_reader_p1 = 0
+			recording_reader_p2 = 0
+			if loop:
+				if delay!=0.0:
+					$recording_wait.start()
+				else:
+					replay = true
 		else:
 			#UP,DOWN,LEFT,RIGHT,Crs
 			if recording_reader_p1<=recording_data["p1_data"].size()-1:
 				if recording_timer==int((recording_data["p1_data"][recording_reader_p1].split("_"))[0]):
 					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[5])!=0:
-						v = 1.0
+						v = 1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[5]))
 					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[6])!=0:
-						v = -1.0
+						v = -1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[6]))
 					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[7])!=0:
-						h = -1.0
+						if flip_x_input:
+							h = 1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[7]))
+						else:
+							h = -1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[7]))
 					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[8])!=0:	
-						h = 1.0
+						if flip_x_input:
+							h = -1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[8]))
+						else:
+							h = 1.0*number_parser(int((recording_data["p1_data"][recording_reader_p1].split("_"))[8]))
 					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[9])!=0:	
+						await get_tree().process_frame
 						input_sim_action = true
+						await get_tree().process_frame
 						input_sim_action = false
-
+					if int((recording_data["p1_data"][recording_reader_p1].split("_"))[13])!=0:	
+						await get_tree().process_frame
+						input_sim_select = true
+						await get_tree().process_frame
+						input_sim_select = false
+					recording_reader_p1+=1
+					if Console.recording_parse:
+						Console.console_log("[color=green]PLAYER NPC CONTROL 1[/color][color=yellow]Frame: "+str(recording_timer)+" Data:"+recording_data["p1_data"][recording_reader_p1]+" Index: "+str(recording_reader_p1)+"[/color]")
+				else:
+					if Console.recording_parse:
+						Console.console_log("[color=green]PLAYER NPC CONTROL 1[/color][color=yellow]Frame: "+str(recording_timer)+" Data: [/color][color=red]NONE/UNUSED[/color]")
+	
+			if recording_reader_p2<=recording_data["p2_data"].size()-1:
+				if recording_timer==int((recording_data["p2_data"][recording_reader_p2].split("_"))[0]):
+					word = (recording_data["p2_data"][recording_reader_p2].split("_"))[1]
+					$p2_talk_buttons.text = (recording_data["p2_data"][recording_reader_p2].split("_"))[2]
+					if Console.recording_parse:
+						Console.console_log("[color=green]PLAYER NPC CONTROL 2[/color][color=yellow]Frame: "+str(recording_timer)+" Data:"+recording_data["p2_data"][recording_reader_p2]+" Index: "+str(recording_reader_p2)+"[/color]")
+					recording_reader_p2+=1
+				else:
+					if Console.recording_parse:
+						Console.console_log("[color=green]PLAYER NPC CONTROL 2[/color][color=yellow]Frame: "+str(recording_timer)+" Data: [/color][color=red]NONE[/color]")
+	
 	#DETECTS IF PLAYER IS WALKING BEFORE ANIMATING AND MAKE FOOTSTEP SOUND
 	if Vector3(velocity.x,0,velocity.z).length()>ANIMATION_THRESHOLD:
 		if material.hframes>1 && material.vframes>1:
@@ -207,17 +287,14 @@ func _physics_process(delta):
 	if magnitude > 1:
 		h /= magnitude
 		v /= magnitude
-	
-	if Global.control_mode==0:
-		#SETS PLAYER VELOCITY ACCORDING TO VECTOR
-		if Global.current_character==2:
-			velocity.x = lerp(velocity.x,h*-1*movement_speed,(delta)*ACCELERATION)
-		else:
-			velocity.x = lerp(velocity.x,h*movement_speed,(delta)*ACCELERATION)
-		velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
+
+	#SETS PLAYER VELOCITY ACCORDING TO VECTOR
+	if character==2:
+		velocity.x = lerp(velocity.x,h*-1*movement_speed,(delta)*ACCELERATION)
 	else:
-		velocity.x = lerp(velocity.x,0.*movement_speed,(delta)*ACCELERATION)
-		velocity.z = lerp(velocity.z,0.*movement_speed,(delta)*ACCELERATION)
+		velocity.x = lerp(velocity.x,h*movement_speed,(delta)*ACCELERATION)
+	velocity.z = lerp(velocity.z,v*movement_speed,(delta)*ACCELERATION)
+
 
 
 	if velocity.x<0.01 && velocity.x>-0.01:
@@ -233,9 +310,9 @@ func _physics_process(delta):
 			animation_direction=3
 
 		if h < 0:
-			animation_direction=2-(int(Global.current_character==2))
+			animation_direction=2-(int(character==2))
 		elif h > 0:
-			animation_direction=1+(int(Global.current_character==2))
+			animation_direction=1+(int(character==2))
 			
 	
 	#DOES HEAD BOPPING
@@ -255,7 +332,7 @@ func _physics_process(delta):
 		#velocity.y -= gravity * delta
 
 #SUBMIT P2TOTALK WORD
-	if Input.is_action_just_pressed("pressed_select") && p2_talk.text!="" && can_submit:
+	if input_sim_select && p2_talk.text!="" && can_submit:
 		if word!="":
 			word = word.erase(word.length()-1,1)
 		create_word()
@@ -266,11 +343,7 @@ func _physics_process(delta):
 
 #MOVES THE PLAYER
 	move_and_slide()
-		
-#GRAVITY WAS REMOVED DUE TO IT NOT EXISTING IN PETSCOP	
-	#if position.y <= 0:
-		#velocity.y = 0
-		#position.y = 0.01
+
 #IF PLAYER IS NOT WALKING
 	if material.hframes>1 && material.vframes>1:
 		if is_walking==false:
@@ -295,143 +368,6 @@ func _physics_process(delta):
 	if prev_text!=p2_talk.text && p2_talk.text!="":
 		get_node("button_press").play()
 		prev_text=p2_talk.text
-
-#IF PLAYER IS ON P2TOTALK MODE
-	if Global.control_mode==1:
-	#CONVERTS INPUTS TO PHONETICS			
-		if Input.is_action_just_pressed("pressed_action"):
-			p2_talk.text+="5"
-			if last_press=="L1":
-				word+="S "
-			elif last_press=="L2":
-				word+="M "
-			elif last_press=="R1":
-				word+="EY "
-			elif last_press=="R2":
-				word+="UW "
-			else:
-				word+="AA "
-			last_press = ""
-			
-		if Input.is_action_just_pressed("pressed_triangle"):
-			p2_talk.text+="8"
-			if last_press=="L1":
-				word+="SH "
-			elif last_press=="L2":
-				word+="L "
-			elif last_press=="R1":
-				word+="IH "
-			elif last_press=="R2":
-				word+="B "
-			else:
-				word+="AO "
-			last_press = ""
-
-		if Input.is_action_just_pressed("pressed_circle"):
-			p2_talk.text+="7"
-			if last_press=="L1":
-				word+="ZH "
-			elif last_press=="L2":
-				word+="R "
-			elif last_press=="R1":
-				word+="IY "
-			elif last_press=="R2":
-				word+="T "
-			else:
-				word+="AW "
-			last_press = ""
-
-		if Input.is_action_just_pressed("pressed_square"):
-			p2_talk.text+="6"
-			if last_press=="L1":
-				word+="Z "
-			elif last_press=="L2":
-				word+="N "
-			elif last_press=="R2":
-				word+="P "
-			else:
-				word+="AE "
-			last_press = ""
-
-		if Input.is_action_just_pressed("pressed_up"):
-			p2_talk.text+="@"
-			if last_press=="L1":
-				word+="JH "
-			elif last_press=="L2":
-				word+="Y "
-			elif last_press=="R1":
-				word+="OW "
-			elif last_press=="R2":
-				word+="F "
-			else:
-				word+="AY "
-			last_press = ""
-
-		if Input.is_action_just_pressed("pressed_down"):
-			p2_talk.text+="#"
-			if last_press=="L1":
-				word+="K "
-			elif last_press=="L2":
-				word+="HH "
-			elif last_press=="R1":
-				word+="OY "
-			elif last_press=="R2":
-				word+="V "
-			else:
-				word+="AE "
-			last_press = ""
-
-		if Input.is_action_just_pressed("pressed_left"):
-			p2_talk.text+="9"
-			if last_press=="L1":
-				word+="NG "
-			elif last_press=="L2":
-				word+="UH "
-			elif last_press=="R2":
-				word+="TH "
-			else:
-				word+="EH "
-			last_press = ""
-
-		if Input.is_action_just_pressed("pressed_right"):
-			p2_talk.text+="!"
-			if last_press=="L1":
-				word+="G "
-			elif last_press=="R1":
-				word+="UH "
-			elif last_press=="R2":
-				word+="DH "
-			else:
-				word+="ER "
-			last_press = ""
-
-		if Input.is_action_just_pressed("pressed_l1"):
-			p2_talk.text+="4"
-			last_press="L1"
-
-		if Input.is_action_just_pressed("pressed_l2"):
-			p2_talk.text+="3"
-			last_press="L2"
-
-		if Input.is_action_just_pressed("pressed_r1"):
-			p2_talk.text+="2"
-			last_press="R1"
-
-		if Input.is_action_just_pressed("pressed_r2"):
-			p2_talk.text+="1"
-			last_press="R2"
-
-		if Input.is_action_just_pressed("pressed_start"):
-			p2_talk.text+="$"
-			if last_press=="L1":
-				word+="CH "
-			elif last_press=="L2":
-				word+="W "
-			elif last_press=="R2":
-				word+="D "
-			else:
-				word+="AH "
-			last_press = ""
 
 
 #PROCESSES INPUTS SUBMITTED, CHECKS TABLE, AND SPAWNS FLOATING WORD
@@ -458,15 +394,10 @@ func create_word():
 		
 func number_parser(number):
 	if number==1:
-		return true
+		return 1.0
 	if number==2:
-		return false
-		
-func finish_replay():
-	Console.console_log("[color=red]RECORDING IS OVER[/color]")
-	replay = false
-	replay_setup = false
-	recording_timer = 0
-	recording_reader_p1 = 0
-	recording_finished = true
-	recording_data = {}
+		return 0.0
+
+func _on_recording_wait_timeout():
+	replay = true
+	visible = true

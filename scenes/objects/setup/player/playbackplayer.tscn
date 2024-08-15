@@ -44,7 +44,7 @@ shader_parameter/frame_count = 1
 shader_parameter/frame_offset = 0
 shader_parameter/animation_speed = 1.0
 
-[node name="player" type="CharacterBody3D" groups=["Player"]]
+[node name="playbackplayer" type="CharacterBody3D" groups=["Playback_player"]]
 transform = Transform3D(-1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, 0)
 floor_block_on_wall = false
 script = ExtResource("1_mw2k8")
@@ -53,7 +53,7 @@ script = ExtResource("1_mw2k8")
 transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 1.42109e-14, 0, 1, 0, 0.7, 0)
 shape = SubResource("BoxShape3D_s8dso")
 
-[node name="sprite" type="Sprite3D" parent="." groups=["Player_sprite"]]
+[node name="sprite" type="Sprite3D" parent="." groups=["Playback_sprite"]]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.03, 0)
 material_override = SubResource("ShaderMaterial_fpn34")
 cast_shadow = 0
@@ -89,7 +89,7 @@ volume_db = -80.0
 panning_strength = 4.0
 bus = &"SFX"
 
-[node name="p2_talk_buttons" type="Label3D" parent="." groups=["p2_word"]]
+[node name="p2_talk_buttons" type="Label3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.8, 0)
 offset = Vector2(0, 5)
 billboard = 1
@@ -107,3 +107,9 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
 stream = ExtResource("7_4uocn")
 volume_db = 10.0
 bus = &"HUD_SFX"
+
+[node name="recording_wait" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[connection signal="timeout" from="recording_wait" to="." method="_on_recording_wait_timeout"]
